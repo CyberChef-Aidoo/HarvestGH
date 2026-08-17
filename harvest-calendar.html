@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harvest Calendar — HarvestGH</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=DM+Mono&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;--gold:#e8a020;--dark:#0f1f14;--gray:#6b7c6e;--cream:#faf7f2;--border:rgba(26,107,60,.12)}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark)}
+a{text-decoration:none;color:inherit} button{cursor:pointer;font-family:'DM Sans',sans-serif}
+
+.nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(250,247,242,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;padding:0 5%;justify-content:space-between}
+.logo{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:var(--g)}.logo span{color:var(--gold)}
+.nav-r{display:flex;gap:9px;align-items:center}
+.nav-link{font-size:.86rem;font-weight:500;color:var(--dark);padding:8px 12px}.nav-link:hover{color:var(--g)}
+.btn-g{background:var(--g);color:#fff;border:none;padding:9px 17px;border-radius:9px;font-size:.84rem;font-weight:600}
+
+.page-header{background:var(--g);padding:96px 5% 44px;color:#fff}
+.page-header h1{font-family:'Fraunces',serif;font-size:clamp(1.9rem,4vw,2.8rem);font-weight:900;color:#fff;margin-bottom:8px}
+.page-header p{color:rgba(255,255,255,.68);font-size:.93rem;max-width:540px}
+
+.content{padding:40px 5% 70px;max-width:1100px;margin:0 auto}
+
+/* LEGEND */
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:32px;padding:16px 20px;background:#fff;border-radius:12px;border:1px solid var(--border)}
+.leg-item{display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:500}
+.leg-dot{width:16px;height:16px;border-radius:4px;flex-shrink:0}
+.leg-peak{background:#1a6b3c} .leg-harvest{background:#86c98e} .leg-plant{background:#fef3cd;border:1px solid #f4d03f}
+.leg-off{background:#f0f0f0;border:1px solid #ddd}
+
+/* CURRENT MONTH HIGHLIGHT */
+.current-badge{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--dark);padding:7px 14px;border-radius:100px;font-size:.8rem;font-weight:700;margin-bottom:20px}
+.pulse-dot{width:8px;height:8px;background:var(--dark);border-radius:50%;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* CROP CARD */
+.crop-section{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:16px;transition:box-shadow .2s}
+.crop-section:hover{box-shadow:0 4px 20px rgba(26,107,60,.08)}
+.crop-header{display:flex;align-items:center;gap:14px;padding:16px 20px;border-bottom:1px solid var(--border);cursor:pointer}
+.crop-header-img{width:48px;height:48px;border-radius:10px;object-fit:cover;flex-shrink:0}
+.crop-header-fb{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:#fff;flex-shrink:0}
+.crop-header-info{flex:1}
+.crop-name{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:700;margin-bottom:2px}
+.crop-note{font-size:.78rem;color:var(--gray)}
+.crop-status{font-size:.76rem;font-weight:700;padding:4px 11px;border-radius:100px;white-space:nowrap}
+.status-peak{background:var(--gp);color:var(--g)}
+.status-harvest{background:#d4edda;color:#155724}
+.status-plant{background:#fef3cd;color:#856404}
+.status-off{background:#f0f0f0;color:var(--gray)}
+.toggle-icon{font-size:.85rem;color:var(--gray);transition:transform .25s;margin-left:8px}
+.crop-section.open .toggle-icon{transform:rotate(180deg)}
+
+.crop-body{display:none;padding:16px 20px}
+.crop-section.open .crop-body{display:block}
+.month-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:4px}
+.month-cell{border-radius:6px;padding:6px 2px;text-align:center;font-size:.62rem;font-weight:700;transition:transform .15s;cursor:default}
+.month-cell:hover{transform:scale(1.08)}
+.month-cell .m-name{display:block;font-size:.58rem;font-weight:500;margin-top:2px;opacity:.75}
+.mc-peak{background:#1a6b3c;color:#fff}
+.mc-harvest{background:#86c98e;color:#0a3d20}
+.mc-plant{background:#fef3cd;color:#856404;border:1px solid #f4d03f}
+.mc-off{background:#f0f4f1;color:#9aac9e}
+.mc-current{box-shadow:0 0 0 2px var(--gold)!important}
+.tips{margin-top:14px;padding:12px 14px;background:#f8faf8;border-radius:9px;font-size:.82rem;color:var(--gray);line-height:1.6;border-left:3px solid var(--g)}
+.tips strong{color:var(--dark)}
+
+/* FILTER */
+.filter-bar{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap;align-items:center}
+.filter-bar select{padding:9px 14px;border:1.5px solid var(--border);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;background:#fff;cursor:pointer}
+.filter-bar select:focus{border-color:var(--g)}
+.filter-bar label{font-size:.85rem;font-weight:500;color:var(--gray)}
+
+/* CTA BOX */
+.cta-box{background:var(--g);border-radius:16px;padding:32px;text-align:center;color:#fff;margin-top:32px}
+.cta-box h3{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;margin-bottom:8px}
+.cta-box p{opacity:.75;font-size:.9rem;margin-bottom:20px}
+.cta-links{display:flex;gap:11px;justify-content:center;flex-wrap:wrap}
+.btn-white{background:#fff;color:var(--g);border:none;padding:11px 22px;border-radius:9px;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s}.btn-white:hover{transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.4);padding:11px 22px;border-radius:9px;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s}.btn-ghost:hover{border-color:#fff}
+
+footer{background:var(--dark);color:#fff;padding:36px 5% 22px;margin-top:0}
+.ft-bottom{display:flex;justify-content:space-between;font-size:.73rem;color:rgba(255,255,255,.28)}
+
+@media(max-width:768px){.month-grid{grid-template-columns:repeat(6,1fr)}.nav-r{gap:6px}.legend{gap:10px}}
+@media(max-width:480px){.month-grid{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="logo">Harvest<span>GH</span></a>
+  <div class="nav-r">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="listings.html" class="nav-link">Marketplace</a>
+    <a href="register-farmer.html"><button class="btn-g">Join HarvestGH</button></a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Ghana Harvest Calendar</h1>
+  <p>Know exactly when each crop is in season — so farmers can plan their listings and buyers can plan their orders ahead of time.</p>
+</div>
+
+<div class="content">
+
+  <div class="current-badge">
+    <span class="pulse-dot"></span>
+    <span id="currentMonthBadge">Showing current month</span>
+  </div>
+
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot leg-peak"></div>Peak Harvest — best time to buy</div>
+    <div class="leg-item"><div class="leg-dot leg-harvest"></div>Harvest Available</div>
+    <div class="leg-item"><div class="leg-dot leg-plant"></div>Planting Season — not yet available</div>
+    <div class="leg-item"><div class="leg-dot leg-off"></div>Off Season</div>
+  </div>
+
+  <div class="filter-bar">
+    <label>Filter:</label>
+    <select id="filterSeason" onchange="renderCalendar()">
+      <option value="all">All crops</option>
+      <option value="peak">Currently peak harvest</option>
+      <option value="harvest">Currently in harvest</option>
+      <option value="plant">Currently planting</option>
+    </select>
+    <select id="filterRegion" onchange="renderCalendar()">
+      <option value="all">All regions</option>
+      <option value="south">Southern Ghana</option>
+      <option value="north">Northern Ghana</option>
+    </select>
+  </div>
+
+  <div id="calendarWrap"></div>
+
+  <div class="cta-box">
+    <h3>Ready to Buy or Sell?</h3>
+    <p>Use this calendar to time your listings perfectly — list before peak season for faster matches.</p>
+    <div class="cta-links">
+      <a href="register-farmer.html"><button class="btn-white">Register as Farmer</button></a>
+      <a href="listings.html"><button class="btn-ghost">Browse Listings</button></a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="ft-bottom">
+    <span>© 2026 HarvestGH · Harvest data based on MoFA Ghana crop calendar</span>
+    <span><a href="index.html" style="color:rgba(255,255,255,.4)">Home</a> · <a href="about.html" style="color:rgba(255,255,255,.4)">About</a></span>
+  </div>
+</footer>
+
+<script>
+// Ghana crop calendar (based on MoFA crop calendar)
+// months array: Jan=0 … Dec=11
+// Values: 'peak' | 'harvest' | 'plant' | 'off'
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+const CROPS = [
+  {
+    name:'Tomato', color:'#c0392b', region:'both',
+    seasons:['harvest','harvest','harvest','off','off','peak','peak','harvest','harvest','harvest','harvest','harvest'],
+    tips:'<strong>South Ghana:</strong> Peak Jan–Mar. Plant Oct–Nov. <strong>North Ghana:</strong> Peak Jun–Aug. Nearly year-round availability across Ghana when combining both regions.',
+    image:'https://images.unsplash.com/photo-1546094096-0df4bcabd337?w=100&fit=crop&q=80'
+  },
+  {
+    name:'Maize', color:'#f39c12', region:'both',
+    seasons:['off','off','plant','plant','harvest','peak','peak','harvest','off','plant','harvest','harvest'],
+    tips:'<strong>Major season:</strong> Plant Mar–Apr, Harvest Jun–Aug. <strong>Minor season:</strong> Plant Sep, Harvest Nov–Dec. Maize is Ghana\'s most widely grown staple crop.',
+    image:'https://images.unsplash.com/photo-1601593346740-925612772716?w=100&fit=crop&q=80'
+  },
+  {
+    name:'Yam', color:'#8b5e3c', region:'north',
+    seasons:['off','plant','plant','plant','off','harvest','harvest','harvest','peak','peak','harvest','off'],
+    tips:'<strong>Planting:</strong> Feb–Apr. <strong>Harvest:</strong> Aug–Nov, peaking in Sep–Oct. Yam is dominant in northern Ghana and parts of Brong-Ahafo. Harvest coincides with the Yam Festival.',
+    image:'https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31?w=100&fit=crop&q=80'
+  },
+  {
+    name:'Cassava', color:'#d4a017', region:'south',
+    seasons:['harvest','harvest','harvest','plant','plant','plant','harvest','harvest','harvest','harvest','harvest','harvest'],
+    tips:'Cassava is nearly year-round with a 9–12 month growing period. It is the most widely consumed crop in Ghana by volume. Best supply is Jan–Mar after the previous year\'s planting.',
+    image:'https://images.unsplash.com/photo-1591990219956-87c86fd7e17f?w=100&fit=crop&q=80'
+  },
+  {
+    name:'Mango', color:'#e67e22', region:'both',
+    seasons:['off','harvest','peak','peak','harvest','off','off','off','off','off','off','off'],
+    tips:'<strong>Peak season:</strong> Mar–May. Ghana\'s best mangoes come from Brong-Ahafo and the Northern Region. The season is short — buyers should plan ahead and farmers should list early in February.',
+    image:'https://images.unsplash.com/photo-1553279768-865429fa0078?w=100&fit=crop&q=80'
+  },
+  {
+    name:'Rice', color:'#7f8c8d', region:'both',
+    seasons:['off','off','plant','plant','plant','harvest','peak','peak','off','plant','harvest','harvest'],
+    tips:'<strong>Major season:</strong> Plant Apr–May, Harvest Jul–Aug. <strong>Minor season:</strong> Plant Oct, Harvest Dec–Jan. Key rice areas: Volta Basin, Kpong, Aveyime, and Northern Region irrigation projects.',
+    image:'https://images.unsplash.com/photo-1536304993881-ff86e59fafb1?w=100&fit=crop&q=80'
+  },
+  {
+    name:'Groundnut', color:'#c8a96e', region:'north',
+    seasons:['off','off','plant','plant','harvest','harvest','peak','peak','harvest','off','plant','off'],
+    tips:'<strong>Major season:</strong> Plant Mar–Apr, Harvest Jul–Aug. Mainly grown in the Northern, Upper East, and Upper West regions. High demand for oil, paste, and direct consumption.',
+    image:'https://images.unsplash.com/photo-1567892320421-55f4dc97f71b?w=100&fit=crop&q=80'
+  },
+  {
+    name:'Plantain', color:'#c8a020', region:'south',
+    seasons:['harvest','harvest','harvest','harvest','peak','peak','peak','harvest','harvest','harvest','peak','peak'],
+    tips:'Plantain is nearly year-round but peaks May–Jul and Nov–Dec. Grown across Ashanti, Brong-Ahafo, Western and Eastern Regions. High demand from restaurants and households.',
+    image:'https://images.unsplash.com/photo-1528825871115-3581a5387919?w=100&fit=crop&q=80'
+  },
+  {
+    name:'Pepper', color:'#e74c3c', region:'both',
+    seasons:['off','off','plant','plant','harvest','harvest','peak','peak','harvest','off','off','off'],
+    tips:'<strong>Main season:</strong> Plant Mar–May, Harvest Jun–Aug, peaking Jul–Aug. Available from major markets in Accra, Kumasi and Techiman. High demand from restaurants and processors.',
+    image:'https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=100&fit=crop&q=80'
+  },
+  {
+    name:'Onion', color:'#9b59b6', region:'north',
+    seasons:['peak','peak','harvest','off','off','off','off','off','off','plant','plant','plant'],
+    tips:'<strong>Mainly Northern Ghana</strong> — Upper East and Upper West. Planting: Oct–Dec. Harvest: Jan–Mar. Ghana imports most of its onion from Niger and Burkina Faso but local onions peak Jan–Mar.',
+    image:'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?w=100&fit=crop&q=80'
+  }
+];
+
+const currentMonth = new Date().getMonth(); // 0-11
+
+// Set badge
+document.getElementById('currentMonthBadge').textContent =
+  `Current month: ${MONTHS[currentMonth]} ${new Date().getFullYear()}`;
+
+function getStatusClass(season) {
+  if (season==='peak')    return 'mc-peak';
+  if (season==='harvest') return 'mc-harvest';
+  if (season==='plant')   return 'mc-plant';
+  return 'mc-off';
+}
+function getStatusLabel(season, monthIndex) {
+  const isCurrent = monthIndex === currentMonth;
+  return `${MONTHS[monthIndex]}${isCurrent?'*':''}`;
+}
+function getShortStatus(season) {
+  if (season==='peak')    return 'Peak';
+  if (season==='harvest') return 'Avail';
+  if (season==='plant')   return 'Plant';
+  return 'Off';
+}
+
+function getCurrentStatus(seasons) {
+  const s = seasons[currentMonth];
+  if (s==='peak')    return ['Peak Harvest Now',   'status-peak'];
+  if (s==='harvest') return ['In Harvest Now',     'status-harvest'];
+  if (s==='plant')   return ['Planting Season Now','status-plant'];
+  return ['Off Season',     'status-off'];
+}
+
+function renderCalendar() {
+  const filterSeason = document.getElementById('filterSeason').value;
+  const filterRegion = document.getElementById('filterRegion').value;
+  const wrap = document.getElementById('calendarWrap');
+  wrap.innerHTML = '';
+
+  const filtered = CROPS.filter(c => {
+    if (filterRegion==='south' && c.region==='north') return false;
+    if (filterRegion==='north' && c.region==='south') return false;
+    if (filterSeason !== 'all' && c.seasons[currentMonth] !== filterSeason) return false;
+    return true;
+  });
+
+  if (!filtered.length) {
+    wrap.innerHTML = '<div style="text-align:center;padding:40px;color:var(--gray)">No crops match this filter right now. Try a different selection.</div>';
+    return;
+  }
+
+  filtered.forEach((crop, idx) => {
+    const [statusText, statusClass] = getCurrentStatus(crop.seasons);
+    const section = document.createElement('div');
+    section.className = 'crop-section';
+    section.innerHTML = `
+      <div class="crop-header" onclick="toggleSection(this)">
+        <img src="${crop.image}" alt="${crop.name}" class="crop-header-img" loading="lazy"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="crop-header-fb" style="background:${crop.color}">${crop.name[0]}</div>
+        <div class="crop-header-info">
+          <div class="crop-name">${crop.name}</div>
+          <div class="crop-note">${crop.region==='north'?'Northern Ghana mainly':crop.region==='south'?'Southern Ghana mainly':'All regions of Ghana'}</div>
+        </div>
+        <span class="crop-status ${statusClass}">${statusText}</span>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="crop-body">
+        <div class="month-grid">
+          ${crop.seasons.map((s,i)=>`
+            <div class="month-cell ${getStatusClass(s)}${i===currentMonth?' mc-current':''}">
+              ${getShortStatus(s)}
+              <span class="m-name">${MONTHS[i]}</span>
+            </div>`).join('')}
+        </div>
+        <div class="tips">${crop.tips}</div>
+        <div style="margin-top:12px;display:flex;gap:9px;flex-wrap:wrap">
+          <a href="listings.html" style="background:var(--g);color:#fff;padding:8px 16px;border-radius:8px;font-size:.8rem;font-weight:600">Buy ${crop.name}</a>
+          <a href="register-farmer.html" style="background:var(--gp);color:var(--g);padding:8px 16px;border-radius:8px;font-size:.8rem;font-weight:600">Sell ${crop.name}</a>
+        </div>
+      </div>`;
+    wrap.appendChild(section);
+    // Auto-open if peak or harvest now
+    if (crop.seasons[currentMonth]==='peak' || crop.seasons[currentMonth]==='harvest') {
+      section.classList.add('open');
+    }
+  });
+}
+
+function toggleSection(header) {
+  header.closest('.crop-section').classList.toggle('open');
+}
+
+renderCalendar();
+</script>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/233544823484" target="_blank" title="Chat on WhatsApp" style="position:fixed;bottom:22px;right:22px;z-index:9000;width:50px;height:50px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(37,211,102,.35);transition:all .25s;text-decoration:none">
+  <svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+
+<script src="chatbot.js"></script>
+</body>
+</html>

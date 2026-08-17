@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — HarvestGH</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;--gold:#e8a020;--dark:#0f1f14;--gray:#6b7c6e;--cream:#faf7f2;--border:rgba(26,107,60,.12);--red:#c0392b}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark)}
+a{color:var(--g);text-decoration:none}a:hover{text-decoration:underline}
+
+.nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(250,247,242,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;padding:0 5%;justify-content:space-between}
+.logo{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:var(--g);text-decoration:none}.logo span{color:var(--gold)}
+.nav-r a{font-size:.86rem;font-weight:500;color:var(--gray);padding:8px 12px}.nav-r a:hover{color:var(--g);text-decoration:none}
+
+.page-header{background:var(--dark);padding:96px 5% 44px}
+.page-header h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#fff;margin-bottom:8px}
+.page-header p{color:rgba(255,255,255,.5);font-size:.87rem}
+
+.layout{display:grid;grid-template-columns:220px 1fr;gap:48px;max-width:960px;margin:0 auto;padding:52px 5% 80px;align-items:start}
+
+.toc{position:sticky;top:84px}
+.toc-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--gray);margin-bottom:12px}
+.toc-links{list-style:none;display:flex;flex-direction:column;gap:3px}
+.toc-links a{font-size:.83rem;color:var(--gray);padding:5px 10px;border-radius:7px;display:block;transition:all .2s;text-decoration:none;border-left:2px solid transparent}
+.toc-links a:hover,.toc-links a.active{color:var(--g);background:var(--gp);border-left-color:var(--g)}
+.toc-links a.active{font-weight:600}
+.toc-back{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--gray);margin-bottom:20px;text-decoration:none}.toc-back:hover{color:var(--g);text-decoration:none}
+
+.doc{max-width:660px}
+.doc h2{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;color:var(--dark);margin-bottom:10px;padding-top:10px}
+.doc h3{font-size:.97rem;font-weight:700;color:var(--dark);margin:18px 0 7px}
+.doc p{font-size:.93rem;color:var(--gray);line-height:1.8;margin-bottom:12px}
+.doc ul,.doc ol{padding-left:18px;margin-bottom:12px}
+.doc ul li,.doc ol li{font-size:.93rem;color:var(--gray);line-height:1.8;margin-bottom:5px}
+.doc ul li strong,.doc ol li strong{color:var(--dark)}
+.section-block{margin-bottom:44px;padding-bottom:44px;border-bottom:1px solid var(--border);scroll-margin-top:84px}
+.section-block:last-child{border-bottom:none}
+
+.summary-box{background:var(--gp);border:1px solid rgba(26,107,60,.15);border-radius:12px;padding:18px 20px;margin-bottom:20px}
+.summary-box h3{font-size:.88rem;font-weight:700;color:var(--g);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em}
+.summary-box ul{padding-left:16px}
+.summary-box ul li{font-size:.85rem;color:var(--g);line-height:1.75;margin-bottom:3px}
+
+.warn-box{background:#fdecea;border:1px solid rgba(192,57,43,.2);border-radius:12px;padding:14px 18px;margin:14px 0}
+.warn-box p{color:var(--red);font-size:.87rem;margin:0}
+
+.fee-table{width:100%;border-collapse:collapse;margin:12px 0 16px;background:#fff;border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+.fee-table th{background:#f0f4f1;padding:10px 14px;text-align:left;font-size:.78rem;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--border)}
+.fee-table td{padding:11px 14px;font-size:.88rem;border-bottom:1px solid var(--border);vertical-align:top}
+.fee-table tr:last-child td{border-bottom:none}
+.fee-table td:first-child{font-weight:600;color:var(--dark);width:40%}
+.fee-table td:last-child{color:var(--gray)}
+
+.updated{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-size:.8rem;color:var(--gray);margin-bottom:28px}
+.updated strong{color:var(--dark)}
+
+@media(max-width:768px){.layout{grid-template-columns:1fr}.toc{display:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="logo">Harvest<span>GH</span></a>
+  <div class="nav-r">
+    <a href="index.html">Home</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Terms of Service</h1>
+  <p>The rules and agreements that govern your use of the HarvestGH platform</p>
+</div>
+
+<div class="layout">
+
+  <!-- TOC -->
+  <div class="toc">
+    <a href="index.html" class="toc-back">← Back to Home</a>
+    <div class="toc-title">On This Page</div>
+    <ul class="toc-links">
+      <li><a href="#acceptance">Acceptance</a></li>
+      <li><a href="#platform">The Platform</a></li>
+      <li><a href="#accounts">User Accounts</a></li>
+      <li><a href="#farmers">Farmer Terms</a></li>
+      <li><a href="#buyers">Buyer Terms</a></li>
+      <li><a href="#fees">Fees & Payments</a></li>
+      <li><a href="#delivery">Delivery</a></li>
+      <li><a href="#prohibited">Prohibited Conduct</a></li>
+      <li><a href="#disputes">Disputes</a></li>
+      <li><a href="#liability">Liability</a></li>
+      <li><a href="#termination">Termination</a></li>
+      <li><a href="#governing">Governing Law</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- DOCUMENT -->
+  <div class="doc">
+
+    <div class="updated">
+      <span>📅</span>
+      <span>Last updated: <strong>January 2026</strong> · Effective immediately</span>
+    </div>
+
+    <div class="summary-box">
+      <h3>Plain English Summary</h3>
+      <ul>
+        <li>HarvestGH connects farmers to buyers — we are a marketplace, not a party to any transaction</li>
+        <li>Registration and listing are free. We charge a 1–2% fee on completed deals</li>
+        <li>You are responsible for the accuracy of your listings</li>
+        <li>Buyers and farmers deal directly with each other — HarvestGH facilitates but does not guarantee any transaction</li>
+        <li>Do not use the platform to deceive, defraud, or harm others</li>
+      </ul>
+    </div>
+
+    <!-- ACCEPTANCE -->
+    <div class="section-block" id="acceptance">
+      <h2>1. Acceptance of Terms</h2>
+      <p>By registering on HarvestGH, using our website, or receiving our SMS services, you ("User") agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, you must not use HarvestGH.</p>
+      <p>These Terms form a legal agreement between you and HarvestGH ("we", "us", "our"), a digital agricultural marketplace operating in Ghana. If you are registering on behalf of a business or organisation, you represent that you have authority to bind that entity to these Terms.</p>
+      <p>We reserve the right to update these Terms at any time. Significant changes will be communicated via SMS to registered users. Continued use of HarvestGH after updates are posted constitutes acceptance of the revised Terms.</p>
+    </div>
+
+    <!-- PLATFORM -->
+    <div class="section-block" id="platform">
+      <h2>2. What HarvestGH Is</h2>
+      <p>HarvestGH is a digital marketplace that connects smallholder farmers with buyers of agricultural produce in Ghana. Our platform allows:</p>
+      <ul>
+        <li>Farmers to list available produce for sale</li>
+        <li>Buyers to register their interest in purchasing specific crops</li>
+        <li>HarvestGH to facilitate matches and notify both parties via SMS</li>
+        <li>Delivery coordination between matched parties</li>
+      </ul>
+      <p><strong>HarvestGH is a marketplace intermediary only.</strong> We are not a party to any transaction between farmers and buyers. We do not buy, sell, or take ownership of any agricultural produce at any time. All transactions are directly between farmers and buyers.</p>
+      <p>HarvestGH does not guarantee that any listing will result in a match, that any match will result in a completed transaction, or that produce will be of a specific quality, quantity, or condition.</p>
+    </div>
+
+    <!-- ACCOUNTS -->
+    <div class="section-block" id="accounts">
+      <h2>3. User Accounts and Registration</h2>
+      <h3>Eligibility</h3>
+      <p>You must be at least 18 years old to register on HarvestGH. By registering, you confirm that you meet this requirement.</p>
+
+      <h3>Accuracy of Information</h3>
+      <p>You agree to provide accurate, current, and complete information when registering. You are responsible for keeping your information up to date. Providing false information — including false crop listings, false quantities, or false contact details — is grounds for immediate removal from the platform.</p>
+
+      <h3>Phone Number Verification</h3>
+      <p>Your phone number is your primary identifier on HarvestGH. You must register with a phone number that you own and control. HarvestGH will use this number to send match notifications and to contact you about your listing. You are responsible for ensuring your number is correct.</p>
+
+      <h3>Managed Accounts</h3>
+      <p>If you choose the "Manage it for me" option at registration, you authorise HarvestGH to create and manage listings on your behalf using the information you have provided. You remain responsible for the accuracy of information you give us.</p>
+    </div>
+
+    <!-- FARMER TERMS -->
+    <div class="section-block" id="farmers">
+      <h2>4. Farmer Terms</h2>
+      <p>As a farmer using HarvestGH, you agree that:</p>
+      <ul>
+        <li>All produce you list is legally yours to sell and is free of any third-party ownership claims</li>
+        <li>The crop type, quantity, price, and condition described in your listing is accurate at the time of listing</li>
+        <li>You will promptly update or remove your listing if the produce is sold through another channel, no longer available, or the details change significantly</li>
+        <li>You will respond to HarvestGH's contact and to matched buyers in a timely manner</li>
+        <li>You will not list produce that is unsafe, rotten, contaminated, or misrepresented</li>
+        <li>You will not list the same produce on multiple platforms with conflicting details</li>
+        <li>You are responsible for ensuring the quantity and quality of produce when it leaves your farm</li>
+      </ul>
+
+      <div class="warn-box">
+        <p>Listing produce you do not have, listing false quantities, or intentionally deceiving buyers will result in permanent removal from HarvestGH and may be reported to relevant authorities.</p>
+      </div>
+    </div>
+
+    <!-- BUYER TERMS -->
+    <div class="section-block" id="buyers">
+      <h2>5. Buyer Terms</h2>
+      <p>As a buyer using HarvestGH, you agree that:</p>
+      <ul>
+        <li>You have a genuine intention to purchase agricultural produce when you register your interest</li>
+        <li>You will respond to match notifications and to matched farmers in a timely manner</li>
+        <li>You will not register false buying interest to gather market information without intent to purchase</li>
+        <li>You will inspect produce before final payment and raise disputes through HarvestGH within 24 hours of receiving goods</li>
+        <li>You will treat farmers with respect and negotiate in good faith</li>
+        <li>You are responsible for arranging or confirming payment to the farmer once a deal is agreed</li>
+      </ul>
+    </div>
+
+    <!-- FEES -->
+    <div class="section-block" id="fees">
+      <h2>6. Fees and Payments</h2>
+
+      <h3>Platform Fees</h3>
+      <table class="fee-table">
+        <thead>
+          <tr><th>Service</th><th>Fee</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Farmer Registration</td><td>Free</td></tr>
+          <tr><td>Buyer Registration</td><td>Free</td></tr>
+          <tr><td>Listing a Crop</td><td>Free</td></tr>
+          <tr><td>Receiving Match Notifications (SMS)</td><td>Free (your carrier's standard SMS charges may apply)</td></tr>
+          <tr><td>Transaction Fee on Completed Deal</td><td>1–2% of the agreed transaction value, charged to the buyer at time of payment</td></tr>
+          <tr><td>Delivery Fee</td><td>Variable by distance and quantity — quoted at time of delivery request</td></tr>
+          <tr><td>Premium Listing (coming soon)</td><td>To be announced</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Transaction Fee Collection</h3>
+      <p>The 1–2% transaction fee is payable upon completion of a deal. HarvestGH will invoice or deduct the fee as agreed with both parties at the time of match confirmation. The exact rate is determined based on the deal value and crop type.</p>
+      <p>HarvestGH reserves the right to adjust its fee structure with 30 days' notice to registered users.</p>
+
+      <h3>Direct Payments Between Parties</h3>
+      <p>Payments between farmers and buyers are made directly between those parties. HarvestGH does not hold, process, or guarantee payment. We strongly recommend that buyers confirm payment before produce leaves the farm, and farmers confirm receipt of payment before releasing goods.</p>
+
+      <div class="warn-box">
+        <p>HarvestGH is not liable for payment disputes between farmers and buyers. See Section 9 for our dispute resolution process.</p>
+      </div>
+    </div>
+
+    <!-- DELIVERY -->
+    <div class="section-block" id="delivery">
+      <h2>7. Delivery Services</h2>
+      <p>HarvestGH offers delivery coordination as an optional add-on service. When you request delivery through our platform:</p>
+      <ul>
+        <li>HarvestGH coordinates with third-party logistics providers or independent drivers to fulfil your delivery request</li>
+        <li>Delivery fees are quoted in advance and are separate from the transaction fee</li>
+        <li>HarvestGH acts as a coordinator only — the logistics provider or driver is responsible for the safe and timely delivery of goods</li>
+        <li>HarvestGH is not liable for loss, damage, or delay of produce during delivery, though we will assist in raising complaints with the delivery provider</li>
+        <li>The farmer is responsible for ensuring produce is properly packaged and ready for pickup at the agreed time</li>
+        <li>The buyer is responsible for being available to receive goods at the agreed delivery location and time</li>
+      </ul>
+    </div>
+
+    <!-- PROHIBITED -->
+    <div class="section-block" id="prohibited">
+      <h2>8. Prohibited Conduct</h2>
+      <p>You must not use HarvestGH to:</p>
+      <ul>
+        <li>Create false, misleading, or fraudulent listings or buyer registrations</li>
+        <li>Impersonate another person or organisation</li>
+        <li>Harass, threaten, or abuse other users or HarvestGH staff</li>
+        <li>List produce that is illegal to sell in Ghana</li>
+        <li>Use our platform for money laundering or other illegal financial activities</li>
+        <li>Scrape, copy, or redistribute user data from our platform</li>
+        <li>Attempt to circumvent or hack our systems</li>
+        <li>Spam other users with unsolicited messages after receiving their contact details through a match</li>
+        <li>Use contact details obtained through HarvestGH for any purpose other than the specific transaction for which they were shared</li>
+      </ul>
+      <p>Violation of these prohibitions will result in immediate removal from the platform and, where applicable, may be reported to the Ghana Police Service or other relevant authorities.</p>
+    </div>
+
+    <!-- DISPUTES -->
+    <div class="section-block" id="disputes">
+      <h2>9. Disputes Between Users</h2>
+      <p>HarvestGH facilitates connections but is not a party to transactions. However, we are committed to helping resolve disputes fairly.</p>
+
+      <h3>How to Raise a Dispute</h3>
+      <ol>
+        <li>Contact HarvestGH within <strong>24 hours</strong> of receiving goods (or of the agreed transaction date if goods were not delivered)</li>
+        <li>Provide your phone number, the match reference, and a description of the issue</li>
+        <li>HarvestGH will contact both parties and attempt to mediate within 48 hours</li>
+      </ol>
+
+      <h3>Common Dispute Types</h3>
+      <ul>
+        <li><strong>Quantity shortfall:</strong> Farmer delivered less than listed. HarvestGH will mediate a price adjustment or partial refund.</li>
+        <li><strong>Quality issue:</strong> Produce was not as described. HarvestGH will assess and mediate.</li>
+        <li><strong>Non-delivery:</strong> Farmer did not fulfil the order. HarvestGH will attempt to source an alternative and may remove the farmer from the platform.</li>
+        <li><strong>Non-payment:</strong> Buyer did not pay. HarvestGH will contact the buyer and may remove them from the platform.</li>
+      </ul>
+
+      <p>HarvestGH's mediation decisions are made in good faith but are not legally binding. For legal disputes, parties are advised to seek resolution through Ghana's courts or the appropriate regulatory body.</p>
+    </div>
+
+    <!-- LIABILITY -->
+    <div class="section-block" id="liability">
+      <h2>10. Limitation of Liability</h2>
+      <p>To the maximum extent permitted by Ghanaian law, HarvestGH shall not be liable for:</p>
+      <ul>
+        <li>Any loss, spoilage, or damage to agricultural produce at any stage of a transaction</li>
+        <li>Payment disputes between farmers and buyers</li>
+        <li>Failure of SMS delivery due to network outages or carrier issues</li>
+        <li>Losses arising from inaccurate listings provided by farmers or buyers</li>
+        <li>Any indirect, incidental, or consequential losses arising from use of the platform</li>
+        <li>Loss of business, income, or profit as a result of a failed match or transaction</li>
+      </ul>
+      <p>Our total liability to any user for any claim arising from use of HarvestGH shall not exceed the transaction fee we received from that specific transaction.</p>
+      <p>HarvestGH provides the platform "as is" and makes no warranties about its availability, accuracy, or fitness for a particular purpose beyond what is explicitly stated in these Terms.</p>
+    </div>
+
+    <!-- TERMINATION -->
+    <div class="section-block" id="termination">
+      <h2>11. Termination</h2>
+      <h3>By You</h3>
+      <p>You may stop using HarvestGH at any time. To remove your account and data, contact us using the details in Section 13. We will deactivate your account and delete your personal data within 14 days of your request.</p>
+
+      <h3>By HarvestGH</h3>
+      <p>We may suspend or terminate your access to HarvestGH at any time, with or without notice, if:</p>
+      <ul>
+        <li>You violate these Terms or our Privacy Policy</li>
+        <li>You engage in prohibited conduct as described in Section 8</li>
+        <li>Your account is involved in fraudulent activity</li>
+        <li>We are required to do so by law</li>
+        <li>We determine, at our sole discretion, that your use is harmful to other users or the platform</li>
+      </ul>
+      <p>Upon termination, your listings will be removed and your data will be retained only as required by law or for legitimate business purposes, then deleted in accordance with our Privacy Policy.</p>
+    </div>
+
+    <!-- GOVERNING LAW -->
+    <div class="section-block" id="governing">
+      <h2>12. Governing Law</h2>
+      <p>These Terms are governed by and construed in accordance with the laws of the Republic of Ghana. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts of Ghana.</p>
+      <p>If any provision of these Terms is found to be invalid or unenforceable under Ghanaian law, that provision will be removed or limited to the minimum extent necessary, and the remaining provisions will continue in full force.</p>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="section-block" id="contact">
+      <h2>13. Questions About These Terms</h2>
+      <p>If you have any questions about these Terms of Service, please contact us:</p>
+      <div style="background:#fff;border-radius:12px;padding:18px 20px;border:1px solid var(--border);margin-top:6px">
+        <div style="font-weight:700;margin-bottom:4px">HarvestGH</div>
+        <div style="font-size:.88rem;color:var(--gray);line-height:1.9">
+          Accra, Ghana<br>
+          Phone / WhatsApp: <a href="tel:0544823484">0544823484</a><br>
+          Contact form: <a href="contact.html">Contact Us</a><br>
+          Privacy Policy: <a href="privacy.html">Read here</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer style="background:var(--dark);color:#fff;padding:28px 5%">
+  <div style="display:flex;justify-content:space-between;font-size:.73rem;color:rgba(255,255,255,.3);flex-wrap:wrap;gap:8px">
+    <span>© 2026 HarvestGH. Built in Ghana 🇬🇭</span>
+    <span>
+      <a href="privacy.html" style="color:rgba(255,255,255,.4)">Privacy Policy</a> ·
+      <a href="contact.html" style="color:rgba(255,255,255,.4)">Contact</a> ·
+      <a href="index.html"   style="color:rgba(255,255,255,.4)">Home</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+const sections = document.querySelectorAll('.section-block');
+const tocLinks = document.querySelectorAll('.toc-links a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      tocLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { rootMargin:'-64px 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/233544823484" target="_blank" title="Chat on WhatsApp" style="position:fixed;bottom:22px;right:22px;z-index:9000;width:50px;height:50px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(37,211,102,.35);transition:all .25s;text-decoration:none">
+  <svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+</body>
+</html>

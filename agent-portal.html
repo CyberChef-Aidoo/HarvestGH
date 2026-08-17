@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Portal — HarvestGH</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;--gold:#e8a020;--goldp:#fef3cd;--dark:#0f1f14;--gray:#6b7c6e;--bg:#f0f4f1;--border:rgba(26,107,60,.12);--red:#c0392b}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--dark)}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:'DM Sans',sans-serif}
+.hidden{display:none!important}
+
+/* NAV */
+.nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(250,247,242,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;padding:0 5%;justify-content:space-between}
+.logo{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:var(--g)}.logo span{color:var(--gold)}
+.nav-tag{background:var(--goldp);color:var(--gold);border:1px solid var(--gold);padding:4px 12px;border-radius:100px;font-size:.74rem;font-weight:700}
+
+/* ── LOGIN SCREEN ── */
+.login-wrap{min-height:100vh;padding-top:64px;display:flex;align-items:center;justify-content:center;padding:84px 5% 40px}
+.login-card{background:#fff;border-radius:20px;padding:38px;max-width:420px;width:100%;box-shadow:0 8px 40px rgba(15,31,20,.1);text-align:center}
+.agent-icon{width:72px;height:72px;border-radius:50%;background:var(--goldp);border:2px solid var(--gold);margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-size:1.8rem}
+.login-card h1{font-family:'Fraunces',serif;font-size:1.65rem;font-weight:900;margin-bottom:8px}
+.login-card p{color:var(--gray);font-size:.88rem;line-height:1.65;margin-bottom:24px}
+.form-group{margin-bottom:14px;text-align:left}
+.form-label{display:block;font-size:.82rem;font-weight:600;margin-bottom:6px;color:var(--dark)}
+.form-control{width:100%;padding:12px 14px;border:1.5px solid rgba(26,107,60,.2);border-radius:10px;font-size:.95rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;text-align:center;letter-spacing:.04em}
+.form-control:focus{border-color:var(--g)}
+.form-control::placeholder{color:#aab4ac;letter-spacing:0}
+.btn-login{width:100%;background:var(--gold);color:var(--dark);border:none;padding:13px;border-radius:10px;font-size:.95rem;font-weight:700;margin-top:4px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-login:hover{background:#d4921c}
+.err{color:var(--red);font-size:.82rem;margin-top:8px;display:none}.err.show{display:block}
+.login-hint{margin-top:16px;font-size:.78rem;color:var(--gray)}
+.login-hint a{color:var(--g);font-weight:600}
+
+/* ── DASHBOARD ── */
+.dash-wrap{padding:84px 5% 60px;max-width:900px;margin:0 auto}
+.dash-header{background:linear-gradient(135deg,var(--gold),#f4a21c);border-radius:16px;padding:24px 26px;color:var(--dark);margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.dh-name{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900}
+.dh-tag{font-size:.8rem;font-weight:600;opacity:.7;margin-top:3px}
+.dh-code{background:rgba(0,0,0,.12);padding:6px 14px;border-radius:8px;font-size:.8rem;font-weight:700;font-family:'DM Mono',monospace}
+.btn-logout{background:rgba(0,0,0,.12);border:none;padding:8px 16px;border-radius:8px;font-size:.82rem;font-weight:600;color:var(--dark);transition:background .2s}
+.btn-logout:hover{background:rgba(0,0,0,.2)}
+
+/* KPI GRID */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px}
+.kpi{background:#fff;border-radius:12px;padding:18px;border:1px solid var(--border)}
+.kpi-val{font-family:'Fraunces',serif;font-size:1.9rem;font-weight:900;color:var(--dark);line-height:1}
+.kpi-lbl{font-size:.76rem;color:var(--gray);margin-top:5px}
+.kpi-val.gold{color:var(--gold)}
+.kpi-val.green{color:var(--g)}
+
+/* SECTIONS */
+.section{background:#fff;border-radius:16px;border:1px solid var(--border);margin-bottom:18px;overflow:hidden}
+.section-hd{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border)}
+.section-hd h2{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:700}
+.section-body{padding:20px}
+
+/* QUICK ADD FORM */
+.quick-form{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end}
+.fl{display:flex;flex-direction:column;gap:5px}
+.fl label{font-size:.76rem;font-weight:600;color:var(--gray)}
+.fl input,.fl select{padding:9px 12px;border:1.5px solid rgba(26,107,60,.2);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:.86rem;outline:none;transition:border-color .2s}
+.fl input:focus,.fl select:focus{border-color:var(--g)}
+.fl input::placeholder{color:#aab4ac}
+.btn-add{background:var(--g);color:#fff;border:none;padding:10px 18px;border-radius:9px;font-size:.84rem;font-weight:700;white-space:nowrap;display:flex;align-items:center;gap:6px;transition:background .2s}
+.btn-add:hover{background:var(--gm)}
+
+/* FARMER TABLE */
+.farmer-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.farmer-table th{padding:8px 12px;text-align:left;font-size:.7rem;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border);background:#f8faf8}
+.farmer-table td{padding:11px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+.farmer-table tr:last-child td{border-bottom:none}
+.farmer-table tr:hover td{background:#f9fbf9}
+.status-badge{display:inline-block;padding:3px 9px;border-radius:100px;font-size:.7rem;font-weight:700}
+.sb-active{background:var(--gp);color:var(--g)}
+.sb-matched{background:var(--goldp);color:#856404}
+.sb-sold{background:#e8f0fe;color:#1a56db}
+
+/* EARNINGS TABLE */
+.earn-table{width:100%;border-collapse:collapse;font-size:.84rem}
+.earn-table th{padding:9px 12px;text-align:left;font-size:.7rem;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--border);background:#f8faf8}
+.earn-table td{padding:11px 12px;border-bottom:1px solid var(--border)}
+.earn-table tr:last-child td{border-bottom:none}
+.earn-amount{font-weight:700;color:var(--g)}
+
+/* SPINNER / TOAST */
+.spinner{width:15px;height:15px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--dark);color:#fff;padding:12px 17px;border-radius:10px;font-size:.83rem;font-weight:500;z-index:9999;max-width:290px;box-shadow:0 6px 24px rgba(0,0,0,.2);transform:translateY(80px);opacity:0;transition:all .3s}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{background:var(--g)}.toast.error{background:var(--red)}
+
+/* EMPTY */
+.empty-state{text-align:center;padding:32px 16px;color:var(--gray);font-size:.88rem}
+.empty-state span{display:block;font-size:2rem;margin-bottom:8px}
+
+@media(max-width:640px){
+  .quick-form{grid-template-columns:1fr 1fr}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:420px){
+  .quick-form{grid-template-columns:1fr}
+  .dash-header{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="logo">Harvest<span>GH</span></a>
+  <div class="nav-tag">🤝 Agent Portal</div>
+</nav>
+
+<!-- ════ LOGIN ════ -->
+<div class="login-wrap" id="loginScreen">
+  <div class="login-card">
+    <div class="agent-icon">🤝</div>
+    <h1>Agent Login</h1>
+    <p>Enter the agent code HarvestGH gave you when you became a registered agent. Your code was sent to your phone by SMS.</p>
+    <div class="form-group">
+      <label class="form-label">Your Agent Code</label>
+      <input type="text" id="agentCode" class="form-control" placeholder="e.g. AGT-2847" maxlength="10" style="text-transform:uppercase" onkeydown="if(event.key==='Enter')agentLogin()">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Your Phone Number</label>
+      <input type="tel" id="agentPhone" class="form-control" placeholder="024 123 4567" oninput="fmtPhone(event)" onkeydown="if(event.key==='Enter')agentLogin()">
+    </div>
+    <div class="err" id="loginErr">Incorrect agent code or phone number. Contact HarvestGH for help.</div>
+    <button class="btn-login" id="loginBtn" onclick="agentLogin()">
+      <span id="loginLabel">Access My Portal</span>
+      <span class="spinner hidden" id="loginSpinner"></span>
+    </button>
+    <div class="login-hint">
+      Not an agent yet? <a href="contact.html">Contact HarvestGH</a> to become one.<br>
+      Need help? Call <a href="tel:0544823484">0544823484</a>
+    </div>
+  </div>
+</div>
+
+<!-- ════ DASHBOARD ════ -->
+<div class="dash-wrap hidden" id="dashScreen">
+
+  <div class="dash-header">
+    <div>
+      <div class="dh-name" id="agentName">Loading…</div>
+      <div class="dh-tag">HarvestGH Agent · <span id="agentRegion">—</span></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <div class="dh-code">Code: <span id="agentCodeDisplay">—</span></div>
+      <button class="btn-logout" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-val" id="kFarmers">—</div>
+      <div class="kpi-lbl">Farmers I Registered</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val green" id="kMatches">—</div>
+      <div class="kpi-lbl">Matches Made</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val" id="kActive">—</div>
+      <div class="kpi-lbl">Active Listings</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val gold" id="kEarnings">GH₵ —</div>
+      <div class="kpi-lbl">Total Commission Earned</div>
+    </div>
+  </div>
+
+  <!-- QUICK ADD FARMER -->
+  <div class="section">
+    <div class="section-hd">
+      <h2>➕ Add a Farmer</h2>
+      <span style="font-size:.78rem;color:var(--gray)">All fields required</span>
+    </div>
+    <div class="section-body">
+      <div class="quick-form">
+        <div class="fl">
+          <label>Farmer Full Name *</label>
+          <input type="text" id="fn_name" placeholder="e.g. Ama Kofi">
+        </div>
+        <div class="fl">
+          <label>Phone Number *</label>
+          <input type="tel" id="fn_phone" placeholder="024 123 4567" oninput="fmtPhone2(event)">
+        </div>
+        <div class="fl">
+          <label>Main Crop *</label>
+          <select id="fn_crop">
+            <option value="">— Select crop —</option>
+          </select>
+        </div>
+        <button class="btn-add" id="addBtn" onclick="addFarmer()">
+          <span id="addLabel">Add Farmer</span>
+          <span class="spinner hidden" id="addSpinner"></span>
+        </button>
+      </div>
+      <div style="margin-top:10px;font-size:.76rem;color:var(--gray)">
+        The farmer will be registered as a <strong>managed account</strong> — HarvestGH handles their listing and calls them when a buyer is found. Their region is set to your agent region automatically.
+      </div>
+    </div>
+  </div>
+
+  <!-- MY FARMERS -->
+  <div class="section">
+    <div class="section-hd">
+      <h2>🧑‍🌾 My Farmers</h2>
+      <button style="background:none;border:none;font-size:.82rem;color:var(--g);font-weight:600;cursor:pointer" onclick="loadDash()">↻ Refresh</button>
+    </div>
+    <div class="section-body" style="padding:0;overflow-x:auto">
+      <table class="farmer-table" id="farmersTable">
+        <thead><tr><th>Name</th><th>Phone</th><th>Crop</th><th>Status</th><th>Registered</th></tr></thead>
+        <tbody id="farmersBody">
+          <tr><td colspan="5" class="empty-state"><span>⏳</span>Loading your farmers…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- EARNINGS -->
+  <div class="section">
+    <div class="section-hd">
+      <h2>💰 My Commissions</h2>
+      <span style="font-size:.78rem;color:var(--gray)">Earned on completed deals</span>
+    </div>
+    <div class="section-body" style="padding:0;overflow-x:auto">
+      <table class="earn-table" id="earningsTable">
+        <thead><tr><th>Farmer</th><th>Crop</th><th>Deal Value</th><th>My Commission (1%)</th><th>Date</th></tr></thead>
+        <tbody id="earningsBody">
+          <tr><td colspan="5" class="empty-state"><span>💰</span>No completed deals yet. Keep registering farmers!</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="padding:14px 20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:.85rem">
+      <span style="color:var(--gray)">Commission rate: 1% of each completed deal (paid from HarvestGH's 2% fee)</span>
+      <span style="font-weight:700;color:var(--g)">Total: <span id="totalCommission">GH₵ 0.00</span></span>
+    </div>
+  </div>
+
+  <!-- HOW EARNINGS WORK -->
+  <div style="background:var(--goldp);border:1px solid var(--gold);border-radius:14px;padding:20px;margin-bottom:18px">
+    <h3 style="font-weight:700;font-size:.92rem;color:#856404;margin-bottom:10px">💡 How Your Commission Works</h3>
+    <div style="font-size:.84rem;color:#856404;line-height:1.7">
+      Every time one of <strong>your registered farmers</strong> completes a deal through HarvestGH, you earn <strong>1% of the deal value</strong>. This is paid from HarvestGH's platform fee — your farmers pay nothing extra.<br><br>
+      <strong>Example:</strong> Your farmer Ama sells 80 bags of tomatoes at GH₵120/bag = GH₵9,600 deal. <strong>You earn GH₵96.</strong><br><br>
+      Commissions are paid to your phone via MoMo within 48 hours of each completed deal.
+    </div>
+  </div>
+
+  <!-- SUPPORT -->
+  <div style="background:#fff;border-radius:14px;padding:18px 20px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <div>
+      <div style="font-weight:700;font-size:.92rem;margin-bottom:3px">Need Help?</div>
+      <div style="font-size:.82rem;color:var(--gray)">Call or WhatsApp Ibrahim directly for any questions about your farmers or commissions.</div>
+    </div>
+    <div style="display:flex;gap:9px;flex-wrap:wrap">
+      <a href="tel:0544823484" style="background:var(--g);color:#fff;padding:10px 18px;border-radius:9px;font-size:.84rem;font-weight:700">📞 Call Ibrahim</a>
+      <a href="https://wa.me/233544823484" style="background:#25d366;color:#fff;padding:10px 18px;border-radius:9px;font-size:.84rem;font-weight:700" target="_blank">💬 WhatsApp</a>
+    </div>
+  </div>
+
+</div><!-- /dash-wrap -->
+
+<div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+// ╔══════════════════════════════════════╗
+// ║  FILL IN YOUR CREDENTIALS HERE      ║
+// ╚══════════════════════════════════════╝
+const SUPABASE_URL  = 'YOUR_SUPABASE_URL_HERE';
+const SUPABASE_ANON = 'YOUR_SUPABASE_ANON_KEY_HERE';
+
+const { createClient } = supabase;
+const db = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+let currentAgent = null;
+let agentCrops   = [];
+
+// ── Phone formatting ──
+function fmtPhone(e){
+  let v=e.target.value.replace(/\D/g,'').slice(0,10);
+  if(v.length>6) v=v.slice(0,3)+' '+v.slice(3,6)+' '+v.slice(6);
+  else if(v.length>3) v=v.slice(0,3)+' '+v.slice(3);
+  e.target.value=v;
+}
+function fmtPhone2(e){ fmtPhone(e); }
+
+// ── LOGIN ──
+async function agentLogin() {
+  const code  = document.getElementById('agentCode').value.trim().toUpperCase();
+  const phone = document.getElementById('agentPhone').value.replace(/\s/g,'');
+  const err   = document.getElementById('loginErr');
+
+  if (!code || phone.length < 9) { err.classList.add('show'); return; }
+  err.classList.remove('show');
+  setBL('loginBtn','loginLabel','loginSpinner',true);
+
+  try {
+    // Look up agent in the agents table using code + phone
+    const localFmt = phone.startsWith('0') ? phone : '0'+phone.slice(-9);
+    const { data, error } = await db
+      .from('agents')
+      .select('*')
+      .eq('agent_code', code)
+      .or(`phone.eq.${localFmt},phone.eq.${phone}`)
+      .single();
+
+    if (error || !data) {
+      err.textContent = 'Incorrect agent code or phone number. Contact HarvestGH for help.';
+      err.classList.add('show');
+      setBL('loginBtn','loginLabel','loginSpinner',false);
+      return;
+    }
+
+    currentAgent = data;
+    enterDash();
+  } catch(e) {
+    // If agents table doesn't exist yet, use demo mode
+    if (code === 'AGT-DEMO') {
+      currentAgent = { id:'demo', full_name:'Demo Agent', region:'Greater Accra', agent_code:'AGT-DEMO', phone:phone, commission_rate:1 };
+      enterDash();
+    } else {
+      err.textContent = 'Could not connect. Please check your internet and try again.';
+      err.classList.add('show');
+    }
+    setBL('loginBtn','loginLabel','loginSpinner',false);
+  }
+}
+
+function enterDash() {
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('dashScreen').classList.remove('hidden');
+  document.getElementById('agentName').textContent      = currentAgent.full_name;
+  document.getElementById('agentRegion').textContent    = currentAgent.region;
+  document.getElementById('agentCodeDisplay').textContent = currentAgent.agent_code;
+  loadDash();
+  loadCrops();
+  setBL('loginBtn','loginLabel','loginSpinner',false);
+}
+
+function logout() {
+  currentAgent = null;
+  document.getElementById('dashScreen').classList.add('hidden');
+  document.getElementById('loginScreen').classList.remove('hidden');
+  document.getElementById('agentCode').value = '';
+  document.getElementById('agentPhone').value = '';
+}
+
+// ── LOAD DASHBOARD ──
+async function loadDash() {
+  if (!currentAgent) return;
+  try {
+    // Load farmers registered by this agent
+    const { data: farmers } = await db
+      .from('farmers')
+      .select('*')
+      .eq('agent_id', currentAgent.id)
+      .order('created_at', { ascending:false });
+
+    const myFarmers = farmers || [];
+    const farmerIds = myFarmers.map(f => f.id);
+
+    // Load matches for these farmers
+    let myMatches = [];
+    if (farmerIds.length > 0) {
+      const { data: matches } = await db
+        .from('matches')
+        .select('*')
+        .in('farmer_id', farmerIds)
+        .order('created_at', { ascending:false });
+      myMatches = matches || [];
+    }
+
+    // Update KPIs
+    const activeListings = myFarmers.filter(f => f.status === 'active').length;
+    const totalCommission = myMatches.reduce((sum, m) => {
+      // Commission = 1% of deal value (estimated from match data if available)
+      return sum + (m.commission_amount || 0);
+    }, 0);
+
+    document.getElementById('kFarmers').textContent = myFarmers.length;
+    document.getElementById('kMatches').textContent = myMatches.length;
+    document.getElementById('kActive').textContent  = activeListings;
+    document.getElementById('kEarnings').textContent = 'GH₵ ' + totalCommission.toFixed(2);
+
+    // Render farmers table
+    renderFarmers(myFarmers);
+    renderEarnings(myMatches);
+
+  } catch(e) {
+    // Demo mode: show empty state
+    document.getElementById('kFarmers').textContent = '0';
+    document.getElementById('kMatches').textContent = '0';
+    document.getElementById('kActive').textContent  = '0';
+    document.getElementById('kEarnings').textContent = 'GH₵ 0.00';
+    renderFarmers([]);
+    renderEarnings([]);
+  }
+}
+
+function fmtDate(d) {
+  return new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+}
+
+function renderFarmers(farmers) {
+  const tbody = document.getElementById('farmersBody');
+  if (!farmers.length) {
+    tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state"><span>🧑‍🌾</span>No farmers registered yet. Add your first farmer above!</div></td></tr>';
+    return;
+  }
+  tbody.innerHTML = farmers.map(f => `
+    <tr>
+      <td><strong>${f.full_name}</strong></td>
+      <td style="font-family:monospace;font-size:.82rem"><a href="tel:${f.phone}" style="color:var(--g)">${f.phone}</a></td>
+      <td>${f.crop_type}</td>
+      <td><span class="status-badge ${f.status==='active'?'sb-active':f.status==='matched'?'sb-matched':'sb-sold'}">${f.status}</span></td>
+      <td>${fmtDate(f.created_at)}</td>
+    </tr>`).join('');
+}
+
+function renderEarnings(matches) {
+  const tbody  = document.getElementById('earningsBody');
+  const totEl  = document.getElementById('totalCommission');
+  const completed = matches.filter(m => m.status === 'completed');
+
+  if (!completed.length) {
+    tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state"><span>💰</span>No completed deals yet. Keep registering farmers!</div></td></tr>';
+    totEl.textContent = 'GH₵ 0.00';
+    return;
+  }
+
+  let total = 0;
+  tbody.innerHTML = completed.map(m => {
+    const commission = m.commission_amount || 0;
+    total += commission;
+    return `
+      <tr>
+        <td><strong>${m.farmer_name}</strong></td>
+        <td>${m.crop_type}</td>
+        <td>GH₵ ${m.quantity || '—'}</td>
+        <td class="earn-amount">GH₵ ${commission.toFixed(2)}</td>
+        <td>${fmtDate(m.created_at)}</td>
+      </tr>`;
+  }).join('');
+  totEl.textContent = 'GH₵ ' + total.toFixed(2);
+}
+
+// ── LOAD CROPS ──
+async function loadCrops() {
+  try {
+    const { data } = await db.from('crops').select('*').eq('active',true).order('sort_order');
+    agentCrops = data || [];
+    const sel = document.getElementById('fn_crop');
+    agentCrops.forEach(c => {
+      const o = document.createElement('option');
+      o.value = o.textContent = c.name;
+      sel.appendChild(o);
+    });
+  } catch(e) {
+    // fallback crops
+    ['Tomato','Maize','Yam','Cassava','Mango','Rice','Groundnut','Plantain','Pepper','Onion'].forEach(c => {
+      const o = document.createElement('option');
+      o.value = o.textContent = c;
+      document.getElementById('fn_crop').appendChild(o);
+    });
+  }
+}
+
+// ── ADD FARMER ──
+async function addFarmer() {
+  const name  = document.getElementById('fn_name').value.trim();
+  const phone = document.getElementById('fn_phone').value.replace(/\s/g,'');
+  const crop  = document.getElementById('fn_crop').value;
+
+  if (!name || phone.length < 9 || !crop) {
+    showToast('Please fill in name, phone and crop.','error'); return;
+  }
+
+  setBL('addBtn','addLabel','addSpinner',true);
+  try {
+    const { error } = await db.from('farmers').insert([{
+      full_name:    name,
+      phone:        phone,
+      region:       currentAgent.region,
+      account_type: 'managed',
+      crop_type:    crop,
+      agent_id:     currentAgent.id,
+      status:       'active'
+    }]);
+    if (error) throw error;
+    document.getElementById('fn_name').value  = '';
+    document.getElementById('fn_phone').value = '';
+    document.getElementById('fn_crop').value  = '';
+    showToast(`${name} registered successfully!`, 'success');
+    loadDash();
+  } catch(e) {
+    console.error(e);
+    showToast('Could not add farmer. Check your connection.','error');
+  } finally {
+    setBL('addBtn','addLabel','addSpinner',false);
+  }
+}
+
+// ── UTILS ──
+function setBL(btnId,labelId,spinnerId,on){
+  document.getElementById(btnId).disabled=on;
+  document.getElementById(labelId).classList.toggle('hidden',on);
+  document.getElementById(spinnerId).classList.toggle('hidden',!on);
+}
+function showToast(msg,type=''){
+  const t=document.getElementById('toast');t.textContent=msg;t.className=`toast ${type} show`;
+  clearTimeout(window._tt);window._tt=setTimeout(()=>t.classList.remove('show'),4000);
+}
+</script>
+
+<script src="chatbot.js"></script>
+<script src="config.js"></script>
+</body>
+</html>
