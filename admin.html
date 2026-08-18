@@ -178,7 +178,40 @@ tr:hover td{background:#f9fbf9}
   .form-row{grid-template-columns:1fr}.kpi-row{grid-template-columns:1fr 1fr}
   .order-detail-grid{grid-template-columns:1fr}
 }
+
+/* ═══════════════════════════════════════════════
+   ADMIN MOBILE RESPONSIVENESS
+═══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .admin-wrap { grid-template-columns: 1fr !important; }
+  .sidebar { display: none !important; }
+  .mob-nav { display: flex !important; }
+  .main-body { padding: 14px 14px 80px !important; }
+  .topbar { padding: 12px 14px !important; }
+  .topbar h1 { font-size: 1.1rem !important; }
+  .kpi-row { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  .kpi { padding: 14px !important; }
+  .kpi-val { font-size: 1.5rem !important; }
+  .products-grid { grid-template-columns: 1fr !important; }
+  .form-row { grid-template-columns: 1fr !important; }
+  .modal { padding: 18px 14px !important; max-width: 100% !important; }
+  .order-detail-grid { grid-template-columns: 1fr !important; }
+  .order-status-row { flex-wrap: wrap !important; }
+  table { font-size: .78rem !important; }
+  th, td { padding: 8px 10px !important; }
+  .section-hd { flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; }
+  .settings-form { max-width: 100% !important; }
+  .btn { font-size: .82rem !important; padding: 8px 14px !important; }
+}
+@media (max-width: 420px) {
+  .kpi-row { grid-template-columns: 1fr 1fr !important; }
+  .mob-nav { padding: 4px 0 !important; }
+  .mob-btn .mi { font-size: 1rem !important; }
+  .mob-btn .ml { font-size: .56rem !important; }
+}
+
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
@@ -463,13 +496,14 @@ tr:hover td{background:#f9fbf9}
 </div>
 
 <div class="toast" id="toast"></div>
+<script src="config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 // ╔══════════════════════════════════════════════════╗
 // ║  HARVESTGH CREDENTIALS — FILL THESE IN          ║
 // ╚══════════════════════════════════════════════════╝
-const SUPABASE_URL  = 'YOUR_SUPABASE_URL_HERE';
-const SUPABASE_ANON = 'YOUR_SUPABASE_ANON_KEY_HERE';
+const SUPABASE_URL  = (window.HARVESTGH && window.HARVESTGH.supabaseUrl) || 'YOUR_SUPABASE_URL_HERE';
+const SUPABASE_ANON = (window.HARVESTGH && window.HARVESTGH.supabaseAnon) || 'YOUR_SUPABASE_ANON_KEY_HERE';
 const HUBTEL_ID     = 'YOUR_HUBTEL_CLIENT_ID';
 const HUBTEL_SECRET = 'YOUR_HUBTEL_CLIENT_SECRET';
 const HUBTEL_FROM   = 'HarvestGH';
@@ -485,15 +519,51 @@ let editProdId=null, activeOrderId=null;
 
 // ══ AUTH ══
 async function doLogin(){
-  const email=document.getElementById('loginEmail').value.trim();
-  const pass=document.getElementById('loginPass').value;
-  if(!email||!pass){showErr('Enter your email and password.');return;}
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass  = document.getElementById('loginPass').value;
+  if(!email||!pass){ showErr('Enter your email and password.'); return; }
+
+  // Check if Supabase is configured
+  if(!SUPABASE_URL || SUPABASE_URL.includes('YOUR_') || !SUPABASE_URL.includes('supabase.co')){
+    showErr('⚠️ Supabase not configured. Open config.js and add your real URL and key, then refresh this page.');
+    return;
+  }
+
   setBL('loginBtn','loginLbl','loginSp',true);
-  const{data,error}=await db.auth.signInWithPassword({email,password:pass});
-  if(error){showErr('Incorrect email or password.');setBL('loginBtn','loginLbl','loginSp',false);return;}
-  enterDash(data.user.email);
+
+  // 12-second timeout so spinner never hangs forever
+  const timeoutId = setTimeout(()=>{
+    setBL('loginBtn','loginLbl','loginSp',false);
+    showErr('⏱ Login timed out. Check your internet connection and try again.');
+  }, 12000);
+
+  try {
+    const { data, error } = await db.auth.signInWithPassword({ email, password: pass });
+    clearTimeout(timeoutId);
+    if(error){
+      setBL('loginBtn','loginLbl','loginSp',false);
+      if(error.message.includes('Invalid login'))
+        showErr('Wrong email or password. Check Supabase → Authentication → Users.');
+      else
+        showErr('Login error: ' + error.message);
+      return;
+    }
+    enterDash(data.user.email);
+  } catch(e) {
+    clearTimeout(timeoutId);
+    setBL('loginBtn','loginLbl','loginSp',false);
+    showErr('Could not connect to Supabase. Check your URL in config.js is correct.');
+  }
 }
-async function checkSession(){const{data:{session}}=await db.auth.getSession();if(session)enterDash(session.user.email);}
+
+async function checkSession(){
+  // Only check session if credentials are actually configured
+  if(!SUPABASE_URL || SUPABASE_URL.includes('YOUR_') || !SUPABASE_URL.includes('supabase.co')) return;
+  try {
+    const { data:{ session } } = await db.auth.getSession();
+    if(session) enterDash(session.user.email);
+  } catch(e){ /* silent - just show login page */ }
+}
 function enterDash(email){
   document.getElementById('loginPage').classList.add('hidden');
   document.getElementById('adminDash').classList.remove('hidden');

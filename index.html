@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- ── FAVICON ── -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231a6b3c'/><text y='.88em' font-size='68' x='14'>🌾</text></svg>">
+<link rel="icon" type="image/png" href="logo.png">
 
 <!-- ── SEO + OPEN GRAPH ── -->
 <title>HarvestGH — Fresh Farm Produce Delivered Across Ghana</title>
@@ -16,7 +16,7 @@
 
 <meta property="og:type"        content="website">
 <meta property="og:site_name"   content="HarvestGH">
-<meta property="og:url"         content="https://harvestgh.netlify.app">
+<meta property="og:url"         content="https://harvestgh.vercel.app">
 <meta property="og:title"       content="HarvestGH — Fresh Farm Produce Delivered Across Ghana">
 <meta property="og:description" content="Order fresh tomatoes, maize, yam, plantain and more directly from verified FBO farmers across Ghana. Secure payment. Nationwide delivery.">
 <meta property="og:image"       content="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&fit=crop&q=80">
@@ -497,7 +497,100 @@ img{display:block}
   .footer-bottom{flex-direction:column;align-items:flex-start}
   .hero-arrow{display:none}
 }
+
+/* ═══════════════════════════════════════════════
+   HARVESTGH GLOBAL MOBILE RESPONSIVENESS
+   Applied to all pages automatically
+═══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Typography scale down */
+  body { font-size: 15px !important; }
+  h1, .sec-h2, .view-title { font-size: clamp(1.4rem, 5vw, 2rem) !important; }
+  h2 { font-size: clamp(1.2rem, 4vw, 1.7rem) !important; }
+
+  /* Nav */
+  .nav { padding: 0 4% !important; height: 58px !important; }
+  .nav-links, .nav-ctas, .nav-r { display: none !important; }
+  .hamburger, .mob-close { display: block !important; }
+
+  /* Hero sections */
+  .hero { min-height: 90vh !important; }
+  .slide-content { padding: 60px 5% 80px !important; }
+  .slide-h1 { font-size: clamp(1.6rem, 6vw, 2.5rem) !important; line-height: 1.15 !important; }
+  .slide-p { font-size: .9rem !important; }
+  .slide-btns { flex-direction: column !important; gap: 10px !important; }
+  .slide-btns a, .slide-btns button { width: 100% !important; justify-content: center !important; }
+
+  /* Grids → single column */
+  .checkout-grid, .mission-grid, .problem-grid,
+  .story-grid, .cta-section, .fbo-grid,
+  .how-grid, .contact-grid, .hero { grid-template-columns: 1fr !important; }
+
+  /* Card grids → 1 or 2 cols */
+  .products-grid, .produce-grid, .feat-grid,
+  .testi-grid, .what-grid { grid-template-columns: 1fr !important; }
+  .kpi-row, .ls-grid, .trust-strip { grid-template-columns: 1fr 1fr !important; }
+  .seasonal-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .mosaic-grid { grid-template-columns: 1fr 1fr !important; grid-template-rows: auto !important; }
+  .mosaic-item.tall { grid-row: span 1 !important; }
+
+  /* Forms */
+  .form-row { grid-template-columns: 1fr !important; }
+  .type-row { grid-template-columns: 1fr !important; }
+  .quick-form { grid-template-columns: 1fr !important; }
+
+  /* Footer */
+  .footer-grid, .ft-grid { grid-template-columns: 1fr !important; gap: 22px !important; }
+  .footer-bottom, .ft-bottom { flex-direction: column !important; gap: 8px !important; }
+  .ft-bottom-links, .ft-bottom-r { flex-wrap: wrap !important; gap: 12px !important; }
+
+  /* Buttons */
+  .btn-hero-g, .btn-hero-out { padding: 12px 20px !important; font-size: .88rem !important; }
+  .cta-btns { flex-direction: column !important; }
+  .cta-btns button, .cta-btns a { width: 100% !important; }
+
+  /* Tables */
+  .tbl-wrap, table { overflow-x: auto !important; display: block !important; }
+  table { min-width: 500px !important; }
+
+  /* Order detail modal */
+  .order-detail-grid { grid-template-columns: 1fr !important; }
+
+  /* Filter bars */
+  .filters-bar, .filters { flex-wrap: wrap !important; }
+  .f-search, .f-sel { min-width: calc(50% - 6px) !important; }
+
+  /* Sections padding */
+  .section, .why-section, .testi-section, .mosaic-section,
+  .how-section, .fbo-section, .cta-section, .story, .mission,
+  .what-section, .about-cta, .seasonal-section { padding: 44px 5% !important; }
+
+  /* Image heights */
+  .mission-img-wrap, .how-img-wrap { height: 220px !important; }
+  .founder-card { position: static !important; }
+  .fbo-card-stack { height: 260px !important; }
+
+  /* Trust strip */
+  .trust-val { font-size: 1.7rem !important; }
+  .trust-lbl { font-size: .68rem !important; }
+
+  /* WA float position */
+  .wa-float { bottom: 16px !important; right: 16px !important; width: 48px !important; height: 48px !important; }
+}
+
+@media (max-width: 480px) {
+  .kpi-row, .trust-strip, .ls-grid { grid-template-columns: 1fr 1fr !important; }
+  .seasonal-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .mosaic-grid { grid-template-columns: 1fr !important; }
+  .hero-arrow { display: none !important; }
+  .slide-h1 { font-size: clamp(1.4rem, 7vw, 2rem) !important; }
+  .img-arrow { display: none !important; }
+  .money-split { grid-template-columns: 1fr !important; }
+  .benefit-grid { grid-template-columns: 1fr !important; }
+}
+
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
@@ -705,7 +798,7 @@ img{display:block}
 
   <div class="how-grid" style="margin-top:40px">
     <div class="how-img-wrap">
-      <img src="images/farmland.jpg" alt="Farmers at work" loading="lazy">
+      <img src="images/farmland" alt="Farmers at work" loading="lazy">
       <div class="how-img-overlay"></div>
       <div class="how-float-badge">🇬🇭 Built for Ghana</div>
     </div>
@@ -791,23 +884,23 @@ img{display:block}
   <h2 class="sec-h2">Real Farms. Real Produce.<br>Real Ghanaian Farmers.</h2>
   <div class="mosaic-grid">
     <div class="mosaic-item tall">
-      <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&fit=crop&q=80" alt="Farm landscape" loading="lazy">
+      <img src="images/farmland.jpg" alt="Farm landscape" loading="lazy">
       <div class="mosaic-caption">🌾 Farmlands across Ghana</div>
     </div>
     <div class="mosaic-item">
-      <img src="https://images.unsplash.com/photo-1546094096-0df4bcabd337?w=600&fit=crop&q=80" alt="Fresh tomatoes" loading="lazy">
+      <img src="images/tomatoes.jpg" alt="Fresh tomatoes" loading="lazy">
       <div class="mosaic-caption">🍅 Fresh Tomatoes — Ashanti Region</div>
     </div>
     <div class="mosaic-item">
-      <img src="https://images.unsplash.com/photo-1528825871115-3581a5387919?w=600&fit=crop&q=80" alt="Plantain" loading="lazy">
+      <img src="images/plantain.jpg" alt="Plantain" loading="lazy">
       <div class="mosaic-caption">🍌 Plantain — Eastern Region</div>
     </div>
     <div class="mosaic-item">
-      <img src="https://images.unsplash.com/photo-1601593346740-925612772716?w=600&fit=crop&q=80" alt="Maize" loading="lazy">
+      <img src="images/maize.jpg" alt="Maize" loading="lazy">
       <div class="mosaic-caption">🌽 White Maize — Brong-Ahafo</div>
     </div>
     <div class="mosaic-item">
-      <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?w=600&fit=crop&q=80" alt="Mango" loading="lazy">
+      <img src="images/mango.jpg" alt="Mango" loading="lazy">
       <div class="mosaic-caption">🥭 Mango — Volta Region</div>
     </div>
   </div>
@@ -840,7 +933,7 @@ img{display:block}
         </div>
       </div>
       <a href="register-farmer.html"><button class="btn-hero-g">Register Your FBO Now →</button></a>
-      <a href="fbo-flyer.html" style="margin-left:12px;font-size:.84rem;color:rgba(255,255,255,.5);font-weight:600">📄 Download FBO Flyer</a>
+      
     </div>
     <div class="fbo-card-stack">
       <div class="fbo-card">
@@ -968,11 +1061,11 @@ img{display:block}
       </div>
       <p class="ft-desc">HarvestGH is Ghana's trusted agricultural marketplace — connecting smallholder FBO farmers directly to verified bulk buyers across the country. Reducing post-harvest loss. Increasing farmer income.</p>
       <div class="ft-socials">
-        <a href="https://wa.me/233544823484" target="_blank" class="ft-social" title="WhatsApp"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
-        <a href="https://instagram.com/harvestgh" target="_blank" class="ft-social" title="Instagram"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-        <a href="https://facebook.com/harvestgh" target="_blank" class="ft-social" title="Facebook"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-        <a href="https://twitter.com/harvestgh" target="_blank" class="ft-social" title="Twitter/X"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-        <a href="https://tiktok.com/@harvestgh" target="_blank" class="ft-social" title="TikTok"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.07 8.07 0 004.77 1.52V6.77a4.85 4.85 0 01-1-.08z"/></svg></a>
+        <a href="https://wa.me/233544823484" target="_blank" class="ft-social" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://instagram.com/harvestgh" target="_blank" class="ft-social" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://facebook.com/harvestgh" target="_blank" class="ft-social" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/harvestgh" target="_blank" class="ft-social" title="Twitter / X"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://tiktok.com/@harvestgh" target="_blank" class="ft-social" title="TikTok"><i class="fab fa-tiktok"></i></a>
       </div>
       <div class="ft-badge">🇬🇭 Proudly Made in Ghana</div>
     </div>
@@ -996,7 +1089,7 @@ img{display:block}
         <li><a href="register-farmer.html">🌾 Register as Supplier</a></li>
         <li><a href="agent-portal.html">🤝 FBO Agent Login</a></li>
         <li><a href="farmer-portal.html">📱 Check My Listing</a></li>
-        <li><a href="fbo-flyer.html">📄 Download FBO Flyer</a></li>
+        <li></li>
         <li><a href="flow-diagram.html">🗺️ Business Flow</a></li>
       </ul>
     </div>
@@ -1034,7 +1127,7 @@ img{display:block}
       </div>
       <div class="ft-contact-item">
         <span class="ft-contact-icon">🌐</span>
-        <div class="ft-contact-text"><strong>Website</strong>harvestgh.netlify.app</div>
+        <div class="ft-contact-text"><strong>Website</strong>harvestgh.vercel.app</div>
       </div>
     </div>
   </div>
@@ -1053,13 +1146,14 @@ img{display:block}
 
 <!-- WHATSAPP FLOAT -->
 <a class="wa-float" id="waFloat" href="https://wa.me/233544823484" target="_blank" title="Chat on WhatsApp">
-  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <i class="fab fa-whatsapp" style="font-size:1.6rem;color:#fff;line-height:1"></i>
 </a>
 
+<script src="config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
-const SUPABASE_URL  = 'YOUR_SUPABASE_URL_HERE';
-const SUPABASE_ANON = 'YOUR_SUPABASE_ANON_KEY_HERE';
+const SUPABASE_URL  = (window.HARVESTGH && window.HARVESTGH.supabaseUrl) || 'YOUR_SUPABASE_URL_HERE';
+const SUPABASE_ANON = (window.HARVESTGH && window.HARVESTGH.supabaseAnon) || 'YOUR_SUPABASE_ANON_KEY_HERE';
 const {createClient} = supabase;
 const db = createClient(SUPABASE_URL, SUPABASE_ANON);
 

@@ -58,7 +58,100 @@ a{color:var(--g);text-decoration:none}a:hover{text-decoration:underline}
 .updated strong{color:var(--dark)}
 
 @media(max-width:768px){.layout{grid-template-columns:1fr}.toc{display:none}}
+
+/* ═══════════════════════════════════════════════
+   HARVESTGH GLOBAL MOBILE RESPONSIVENESS
+   Applied to all pages automatically
+═══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Typography scale down */
+  body { font-size: 15px !important; }
+  h1, .sec-h2, .view-title { font-size: clamp(1.4rem, 5vw, 2rem) !important; }
+  h2 { font-size: clamp(1.2rem, 4vw, 1.7rem) !important; }
+
+  /* Nav */
+  .nav { padding: 0 4% !important; height: 58px !important; }
+  .nav-links, .nav-ctas, .nav-r { display: none !important; }
+  .hamburger, .mob-close { display: block !important; }
+
+  /* Hero sections */
+  .hero { min-height: 90vh !important; }
+  .slide-content { padding: 60px 5% 80px !important; }
+  .slide-h1 { font-size: clamp(1.6rem, 6vw, 2.5rem) !important; line-height: 1.15 !important; }
+  .slide-p { font-size: .9rem !important; }
+  .slide-btns { flex-direction: column !important; gap: 10px !important; }
+  .slide-btns a, .slide-btns button { width: 100% !important; justify-content: center !important; }
+
+  /* Grids → single column */
+  .checkout-grid, .mission-grid, .problem-grid,
+  .story-grid, .cta-section, .fbo-grid,
+  .how-grid, .contact-grid, .hero { grid-template-columns: 1fr !important; }
+
+  /* Card grids → 1 or 2 cols */
+  .products-grid, .produce-grid, .feat-grid,
+  .testi-grid, .what-grid { grid-template-columns: 1fr !important; }
+  .kpi-row, .ls-grid, .trust-strip { grid-template-columns: 1fr 1fr !important; }
+  .seasonal-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .mosaic-grid { grid-template-columns: 1fr 1fr !important; grid-template-rows: auto !important; }
+  .mosaic-item.tall { grid-row: span 1 !important; }
+
+  /* Forms */
+  .form-row { grid-template-columns: 1fr !important; }
+  .type-row { grid-template-columns: 1fr !important; }
+  .quick-form { grid-template-columns: 1fr !important; }
+
+  /* Footer */
+  .footer-grid, .ft-grid { grid-template-columns: 1fr !important; gap: 22px !important; }
+  .footer-bottom, .ft-bottom { flex-direction: column !important; gap: 8px !important; }
+  .ft-bottom-links, .ft-bottom-r { flex-wrap: wrap !important; gap: 12px !important; }
+
+  /* Buttons */
+  .btn-hero-g, .btn-hero-out { padding: 12px 20px !important; font-size: .88rem !important; }
+  .cta-btns { flex-direction: column !important; }
+  .cta-btns button, .cta-btns a { width: 100% !important; }
+
+  /* Tables */
+  .tbl-wrap, table { overflow-x: auto !important; display: block !important; }
+  table { min-width: 500px !important; }
+
+  /* Order detail modal */
+  .order-detail-grid { grid-template-columns: 1fr !important; }
+
+  /* Filter bars */
+  .filters-bar, .filters { flex-wrap: wrap !important; }
+  .f-search, .f-sel { min-width: calc(50% - 6px) !important; }
+
+  /* Sections padding */
+  .section, .why-section, .testi-section, .mosaic-section,
+  .how-section, .fbo-section, .cta-section, .story, .mission,
+  .what-section, .about-cta, .seasonal-section { padding: 44px 5% !important; }
+
+  /* Image heights */
+  .mission-img-wrap, .how-img-wrap { height: 220px !important; }
+  .founder-card { position: static !important; }
+  .fbo-card-stack { height: 260px !important; }
+
+  /* Trust strip */
+  .trust-val { font-size: 1.7rem !important; }
+  .trust-lbl { font-size: .68rem !important; }
+
+  /* WA float position */
+  .wa-float { bottom: 16px !important; right: 16px !important; width: 48px !important; height: 48px !important; }
+}
+
+@media (max-width: 480px) {
+  .kpi-row, .trust-strip, .ls-grid { grid-template-columns: 1fr 1fr !important; }
+  .seasonal-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .mosaic-grid { grid-template-columns: 1fr !important; }
+  .hero-arrow { display: none !important; }
+  .slide-h1 { font-size: clamp(1.4rem, 7vw, 2rem) !important; }
+  .img-arrow { display: none !important; }
+  .money-split { grid-template-columns: 1fr !important; }
+  .benefit-grid { grid-template-columns: 1fr !important; }
+}
+
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
@@ -366,6 +459,6 @@ sections.forEach(s => observer.observe(s));
 <a href="https://wa.me/233544823484" target="_blank" title="Chat on WhatsApp" style="position:fixed;bottom:22px;right:22px;z-index:9000;width:50px;height:50px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(37,211,102,.35);transition:all .25s;text-decoration:none">
   <svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
-
+<script src="config.js"></script>
 </body>
 </html>
