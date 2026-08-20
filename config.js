@@ -6,8 +6,8 @@
 
 // ── SUPABASE ──────────────────────────────────────────────────────
 // Get these from: supabase.com → Your Project → Settings → API
-var SUPABASE_URL  = 'https://ebnztpyonsrccmbfqfuu.supabase.co';   // e.g. https://abcdefghij.supabase.co
-var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVibnp0cHlvbnNyY2NtYmZxZnV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY3NTMwOTQsImV4cCI6MjEwMjMyOTA5NH0.Ck0mxCi8JNOfG3EGfsFTCYI6LELSUC7qyw2Rpfs44uI'; // starts with eyJ...
+var SUPABASE_URL  = 'YOUR_SUPABASE_URL_HERE';   // e.g. https://abcdefghij.supabase.co
+var SUPABASE_ANON = 'YOUR_SUPABASE_ANON_KEY_HERE'; // starts with eyJ...
 
 // ── PAYSTACK ──────────────────────────────────────────────────────
 // Get from: paystack.com → Settings → API Keys

@@ -14,7 +14,7 @@
 <meta property="og:url"         content="https://harvestgh.vercel.app/about.html">
 <meta property="og:title"       content="About HarvestGH — Ghana's Farm Marketplace">
 <meta property="og:description" content="Built by an accounting student who saw a broken system and decided to fix it — one farmer-buyer connection at a time.">
-<meta property="og:image"       content="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&fit=crop&q=80">
+<meta property="og:image"       content="farmland.jpg">
 <meta name="twitter:card"       content="summary_large_image">
 
 <style>
@@ -321,7 +321,7 @@ footer{background:#060e09;color:#fff;padding:44px 6% 0}
   <div class="img-slides" id="imgTrack">
 
     <div class="img-slide active" id="is0">
-      <div class="img-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1600&fit=crop&q=80')"></div>
+      <div class="img-slide-bg" style="background-image:url('farmland.jpg')"></div>
       <div class="img-slide-overlay"></div>
       <div class="img-hero-content">
         <div class="img-hero-text">
@@ -333,7 +333,7 @@ footer{background:#060e09;color:#fff;padding:44px 6% 0}
     </div>
 
     <div class="img-slide" id="is1">
-      <div class="img-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&fit=crop&q=80')"></div>
+      <div class="img-slide-bg" style="background-image:url('farmland.jpg')"></div>
       <div class="img-slide-overlay"></div>
       <div class="img-hero-content">
         <div class="img-hero-text">
@@ -345,7 +345,7 @@ footer{background:#060e09;color:#fff;padding:44px 6% 0}
     </div>
 
     <div class="img-slide" id="is2">
-      <div class="img-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=1600&fit=crop&q=80')"></div>
+      <div class="img-slide-bg" style="background-image:url('farmland.jpg')"></div>
       <div class="img-slide-overlay"></div>
       <div class="img-hero-content">
         <div class="img-hero-text">
@@ -357,7 +357,7 @@ footer{background:#060e09;color:#fff;padding:44px 6% 0}
     </div>
 
     <div class="img-slide" id="is3">
-      <div class="img-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1503267257539-f4c9f30b98b4?w=1600&fit=crop&q=80')"></div>
+      <div class="img-slide-bg" style="background-image:url('farmland.jpg')"></div>
       <div class="img-slide-overlay"></div>
       <div class="img-hero-content">
         <div class="img-hero-text">
@@ -399,7 +399,7 @@ footer{background:#060e09;color:#fff;padding:44px 6% 0}
       </ul>
     </div>
     <div class="mission-img-wrap">
-      <img src="images/farmland.jpg" alt="Ghanaian farmers at work" loading="lazy" onerror="this.style.background='var(--g)'">
+      <img src="farmland.jpg" alt="Ghanaian farmers at work" loading="lazy" onerror="this.style.background='var(--g)'">
       <div class="img-caption">🇬🇭 FBO farmers across Ghana — HarvestGH's backbone</div>
     </div>
   </div>
@@ -609,10 +609,17 @@ function goImgSlide(n){
 }
 function nextImg(){goImgSlide(imgCurrent+1)}
 function prevImg(){goImgSlide(imgCurrent-1)}
-function resetImgAuto(){clearInterval(imgTimer);imgTimer=setInterval(nextImg,6000)}
-let ts2=0;
-document.getElementById('imgHero').addEventListener('touchstart',e=>{ts2=e.touches[0].clientX},{passive:true});
-document.getElementById('imgHero').addEventListener('touchend',e=>{const d=ts2-e.changedTouches[0].clientX;if(Math.abs(d)>50)d>0?nextImg():prevImg()},{passive:true});
+function resetImgAuto(){clearInterval(imgTimer);imgTimer=setInterval(nextImg,5000)}
+let ts2=0, ts2y=0;
+const imgHeroEl = document.getElementById('imgHero');
+if(imgHeroEl){
+  imgHeroEl.addEventListener('touchstart',e=>{ts2=e.touches[0].clientX;ts2y=e.touches[0].clientY},{passive:true});
+  imgHeroEl.addEventListener('touchend',e=>{
+    const dx=ts2-e.changedTouches[0].clientX;
+    const dy=Math.abs(ts2y-e.changedTouches[0].clientY);
+    if(Math.abs(dx)>40&&Math.abs(dx)>dy) dx>0?nextImg():prevImg();
+  },{passive:true});
+}
 resetImgAuto();
 
 /* ── NAV SCROLL ── */
@@ -624,6 +631,5 @@ function closeDrawer(){document.getElementById('mobDrawer').classList.remove('op
 </script>
 
 <script src="chatbot.js"></script>
-<script src="config.js"></script>
 </body>
 </html>

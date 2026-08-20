@@ -257,8 +257,13 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif}
 <script>
 const SUPABASE_URL  = (window.HARVESTGH && window.HARVESTGH.supabaseUrl) || 'YOUR_SUPABASE_URL_HERE';
 const SUPABASE_ANON = (window.HARVESTGH && window.HARVESTGH.supabaseAnon) || 'YOUR_SUPABASE_ANON_KEY_HERE';
-const {createClient} = supabase;
-const db = createClient(SUPABASE_URL, SUPABASE_ANON);
+let db = null;
+try {
+  const {createClient} = supabase;
+  const _u=(window.HARVESTGH&&window.HARVESTGH.supabaseUrl)||SUPABASE_URL;
+  const _k=(window.HARVESTGH&&window.HARVESTGH.supabaseAnon)||SUPABASE_ANON;
+  if(_u&&!_u.includes('YOUR_'))db=createClient(_u,_k);
+}catch(e){console.warn('Supabase:',e.message);}
 
 let supportPhone = '0544823484', waNumber = '233544823484';
 
@@ -437,6 +442,5 @@ init();
 </script>
 
 <script src="chatbot.js"></script>
-<script src="config.js"></script>
 </body>
 </html>

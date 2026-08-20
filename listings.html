@@ -284,8 +284,13 @@ footer{background:var(--dark);color:#fff;padding:32px 5% 20px}
 const SUPABASE_URL  = (window.HARVESTGH && window.HARVESTGH.supabaseUrl) || 'YOUR_SUPABASE_URL_HERE';
 const SUPABASE_ANON = (window.HARVESTGH && window.HARVESTGH.supabaseAnon) || 'YOUR_SUPABASE_ANON_KEY_HERE';
 const REGIONS = ['Greater Accra','Ashanti','Bono / Brong-Ahafo','Northern','Volta','Eastern','Western','Upper East','Upper West','Central','Savannah','North East','Oti','Ahafo','Western North'];
-const {createClient} = supabase;
-const db = createClient(SUPABASE_URL, SUPABASE_ANON);
+let db = null;
+try {
+  const {createClient} = supabase;
+  const _u=(window.HARVESTGH&&window.HARVESTGH.supabaseUrl)||SUPABASE_URL;
+  const _k=(window.HARVESTGH&&window.HARVESTGH.supabaseAnon)||SUPABASE_ANON;
+  if(_u&&!_u.includes('YOUR_'))db=createClient(_u,_k);
+}catch(e){console.warn('Supabase:',e.message);}
 
 let allProducts = [], allCrops = [];
 
@@ -320,12 +325,12 @@ async function loadProducts() {
   } catch(e) {
     // Demo products when Supabase not set up
     allProducts = [
-      {id:'d1',name:'Fresh Tomatoes — Grade A',crop_type:'Tomato',price_per_unit:120,unit:'crate',quantity_available:80,sold_quantity:12,min_order:5,region:'Ashanti',fbo_source:'Ejisu FBO',status:'available',is_preorder:false,image_url:'https://images.unsplash.com/photo-1546094096-0df4bcabd337?w=600&fit=crop&q=80',created_at:new Date().toISOString()},
-      {id:'d2',name:'White Maize — Dried & Bagged',crop_type:'Maize',price_per_unit:85,unit:'bag',quantity_available:200,sold_quantity:40,min_order:10,region:'Brong-Ahafo',fbo_source:'Techiman FBO',status:'available',is_preorder:false,image_url:'https://images.unsplash.com/photo-1601593346740-925612772716?w=600&fit=crop&q=80',created_at:new Date().toISOString()},
-      {id:'d3',name:'Puna Yam — Export Quality',crop_type:'Yam',price_per_unit:220,unit:'bag',quantity_available:45,sold_quantity:5,min_order:3,region:'Northern',fbo_source:'Tamale FBO',status:'available',is_preorder:false,image_url:'https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31?w=600&fit=crop&q=80',created_at:new Date().toISOString()},
-      {id:'d4',name:'Mango — Julie Variety',crop_type:'Mango',price_per_unit:65,unit:'crate',quantity_available:0,sold_quantity:120,min_order:10,region:'Volta',fbo_source:'Ho FBO',status:'out_of_stock',is_preorder:false,image_url:'https://images.unsplash.com/photo-1553279768-865429fa0078?w=600&fit=crop&q=80',created_at:new Date().toISOString()},
-      {id:'d5',name:'Plantain — Apem (Green)',crop_type:'Plantain',price_per_unit:55,unit:'bunch',quantity_available:150,sold_quantity:20,min_order:10,region:'Eastern',fbo_source:'Suhum FBO',status:'available',is_preorder:false,image_url:'https://images.unsplash.com/photo-1528825871115-3581a5387919?w=600&fit=crop&q=80',created_at:new Date().toISOString()},
-      {id:'d6',name:'Rice — Jasmine Variety',crop_type:'Rice',price_per_unit:145,unit:'bag',quantity_available:300,sold_quantity:0,min_order:20,region:'Eastern',fbo_source:'Kpong Irrigation FBO',status:'preorder',is_preorder:true,available_date:'2026-10-15',image_url:'https://images.unsplash.com/photo-1536304993881-ff86e59fafb1?w=600&fit=crop&q=80',created_at:new Date().toISOString()},
+      {id:'d1',name:'Fresh Tomatoes — Grade A',crop_type:'Tomato',price_per_unit:120,unit:'crate',quantity_available:80,sold_quantity:12,min_order:5,region:'Ashanti',fbo_source:'Ejisu FBO',status:'available',is_preorder:false,image_url:'tomato.jpg',created_at:new Date().toISOString()},
+      {id:'d2',name:'White Maize — Dried & Bagged',crop_type:'Maize',price_per_unit:85,unit:'bag',quantity_available:200,sold_quantity:40,min_order:10,region:'Brong-Ahafo',fbo_source:'Techiman FBO',status:'available',is_preorder:false,image_url:'maize.jpg',created_at:new Date().toISOString()},
+      {id:'d3',name:'Puna Yam — Export Quality',crop_type:'Yam',price_per_unit:220,unit:'bag',quantity_available:45,sold_quantity:5,min_order:3,region:'Northern',fbo_source:'Tamale FBO',status:'available',is_preorder:false,image_url:'yam.jpg',created_at:new Date().toISOString()},
+      {id:'d4',name:'Mango — Julie Variety',crop_type:'Mango',price_per_unit:65,unit:'crate',quantity_available:0,sold_quantity:120,min_order:10,region:'Volta',fbo_source:'Ho FBO',status:'out_of_stock',is_preorder:false,image_url:'mango.jpg',created_at:new Date().toISOString()},
+      {id:'d5',name:'Plantain — Apem (Green)',crop_type:'Plantain',price_per_unit:55,unit:'bunch',quantity_available:150,sold_quantity:20,min_order:10,region:'Eastern',fbo_source:'Suhum FBO',status:'available',is_preorder:false,image_url:'plantain.jpg',created_at:new Date().toISOString()},
+      {id:'d6',name:'Rice — Jasmine Variety',crop_type:'Rice',price_per_unit:145,unit:'bag',quantity_available:300,sold_quantity:0,min_order:20,region:'Eastern',fbo_source:'Kpong Irrigation FBO',status:'preorder',is_preorder:true,available_date:'2026-10-15',image_url:'rice.jpg',created_at:new Date().toISOString()},
     ];
   }
   renderProducts(allProducts);
@@ -420,6 +425,5 @@ init();
 </script>
 
 <script src="chatbot.js"></script>
-<script src="config.js"></script>
 </body>
 </html>

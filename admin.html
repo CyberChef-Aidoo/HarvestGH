@@ -511,58 +511,82 @@ const HUBTEL_FROM   = 'HarvestGH';
 const REGIONS = ['Greater Accra','Ashanti','Bono / Brong-Ahafo','Northern','Volta','Eastern','Western','Upper East','Upper West','Central','Savannah','North East','Oti','Ahafo','Western North'];
 const PAGE_TITLES = {dashboard:'Dashboard',orders:'All Orders',products:'Products',crops:'Crop Catalogue',farmers:'Farmers',buyers:'Buyers',agents:'FBO Agents',broadcast:'Broadcast SMS',settings:'Site Settings'};
 
-const {createClient}=supabase;
-const db=createClient(SUPABASE_URL,SUPABASE_ANON);
+let db = null;
+try {
+  const {createClient} = supabase;
+  const _url = (window.HARVESTGH && window.HARVESTGH.supabaseUrl) || SUPABASE_URL;
+  const _key = (window.HARVESTGH && window.HARVESTGH.supabaseAnon) || SUPABASE_ANON;
+  if (_url && !_url.includes('YOUR_') && _url.includes('supabase.co')) {
+    db = createClient(_url, _key);
+  }
+} catch(e) { console.warn('Supabase CDN not loaded:', e.message); }
 
 let allProducts=[],allOrders=[],allFarmers=[],allBuyers=[],allCrops=[],allAgents=[];
 let editProdId=null, activeOrderId=null;
 
 // ══ AUTH ══
 async function doLogin(){
-  const email = document.getElementById('loginEmail').value.trim();
-  const pass  = document.getElementById('loginPass').value;
-  if(!email||!pass){ showErr('Enter your email and password.'); return; }
+  const email = (document.getElementById('loginEmail').value || '').trim();
+  const pass  = (document.getElementById('loginPass').value || '');
+  if(!email || !pass){ showErr('Enter your email and password.'); return; }
 
-  // Check if Supabase is configured
-  if(!SUPABASE_URL || SUPABASE_URL.includes('YOUR_') || !SUPABASE_URL.includes('supabase.co')){
-    showErr('⚠️ Supabase not configured. Open config.js and add your real URL and key, then refresh this page.');
+  // Grab credentials from config.js window object or fallback
+  const url = (window.HARVESTGH && window.HARVESTGH.supabaseUrl) || SUPABASE_URL || '';
+  const key = (window.HARVESTGH && window.HARVESTGH.supabaseAnon) || SUPABASE_ANON || '';
+
+  if(!url || url.includes('YOUR_') || !url.includes('supabase.co')){
+    showErr('⚠️ Open config.js, add your Supabase URL and key, save it, then refresh this page.');
     return;
   }
 
   setBL('loginBtn','loginLbl','loginSp',true);
 
-  // 12-second timeout so spinner never hangs forever
-  const timeoutId = setTimeout(()=>{
+  // Always create a fresh client with current credentials
+  let freshDB;
+  try {
+    const {createClient} = supabase;
+    freshDB = createClient(url, key);
+  } catch(e) {
     setBL('loginBtn','loginLbl','loginSp',false);
-    showErr('⏱ Login timed out. Check your internet connection and try again.');
-  }, 12000);
+    showErr('Supabase library not loaded. Check your internet connection and refresh.');
+    return;
+  }
+
+  // 15-second timeout
+  let timedOut = false;
+  const timeoutId = setTimeout(() => {
+    timedOut = true;
+    setBL('loginBtn','loginLbl','loginSp',false);
+    showErr('⏱ Timed out. Check your internet connection and try again.');
+  }, 15000);
 
   try {
-    const { data, error } = await db.auth.signInWithPassword({ email, password: pass });
+    const { data, error } = await freshDB.auth.signInWithPassword({ email, password: pass });
     clearTimeout(timeoutId);
+    if(timedOut) return;
     if(error){
       setBL('loginBtn','loginLbl','loginSp',false);
-      if(error.message.includes('Invalid login'))
-        showErr('Wrong email or password. Check Supabase → Authentication → Users.');
-      else
-        showErr('Login error: ' + error.message);
+      showErr('Wrong email or password. Go to Supabase → Authentication → Users to check.');
       return;
     }
+    db = freshDB; // update global db for rest of admin session
     enterDash(data.user.email);
   } catch(e) {
     clearTimeout(timeoutId);
-    setBL('loginBtn','loginLbl','loginSp',false);
-    showErr('Could not connect to Supabase. Check your URL in config.js is correct.');
+    if(!timedOut){
+      setBL('loginBtn','loginLbl','loginSp',false);
+      showErr('Connection failed: ' + (e.message || 'Unknown error') + '. Check config.js.');
+    }
   }
 }
 
 async function checkSession(){
-  // Only check session if credentials are actually configured
-  if(!SUPABASE_URL || SUPABASE_URL.includes('YOUR_') || !SUPABASE_URL.includes('supabase.co')) return;
+  const url = (window.HARVESTGH && window.HARVESTGH.supabaseUrl) || SUPABASE_URL || '';
+  if(!url || url.includes('YOUR_') || !url.includes('supabase.co') || !db) return;
   try {
     const { data:{ session } } = await db.auth.getSession();
     if(session) enterDash(session.user.email);
-  } catch(e){ /* silent - just show login page */ }
+  } catch(e){ /* silent */ }
 }
 function enterDash(email){
   document.getElementById('loginPage').classList.add('hidden');
@@ -972,6 +996,5 @@ function setBL(btnId,labelId,spinnerId,on){document.getElementById(btnId).disabl
 
 checkSession();
 </script>
-<script src="config.js"></script>
 </body>
 </html>
