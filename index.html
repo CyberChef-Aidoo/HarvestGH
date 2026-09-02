@@ -882,19 +882,19 @@ img{display:block}
       <div class="mosaic-caption">🌾 Farmlands across Ghana</div>
     </div>
     <div class="mosaic-item">
-      <img src="images/tomatoes.jpg" alt="Fresh tomatoes" loading="lazy">
+      <img src="tomato.jpg" alt="Fresh tomatoes" loading="lazy">
       <div class="mosaic-caption">🍅 Fresh Tomatoes — Ashanti Region</div>
     </div>
     <div class="mosaic-item">
-      <img src="images/plantain.jpg" alt="Plantain" loading="lazy">
+      <img src="plantain.jpg" alt="Plantain" loading="lazy">
       <div class="mosaic-caption">🍌 Plantain — Eastern Region</div>
     </div>
     <div class="mosaic-item">
-      <img src="images/maize.jpg" alt="Maize" loading="lazy">
+      <img src="maize.jpg" alt="Maize" loading="lazy">
       <div class="mosaic-caption">🌽 White Maize — Brong-Ahafo</div>
     </div>
     <div class="mosaic-item">
-      <img src="images/mango.jpg" alt="Mango" loading="lazy">
+      <img src="mango.jpg" alt="Mango" loading="lazy">
       <div class="mosaic-caption">🥭 Mango — Volta Region</div>
     </div>
   </div>
@@ -1142,8 +1142,7 @@ try {
 } catch(e) { console.warn('Supabase not loaded:', e.message); }
 
 /* ══ CAROUSEL ══ */
-let currentSlide = 0, totalSlides = 5, autoTimer;
-/* track and dots initialised in DOMContentLoaded below */
+let currentSlide = 0, totalSlides = 5, autoTimer, dots;
 
 function goSlide(n) {
   const track = document.getElementById('slidesTrack');
@@ -1155,7 +1154,7 @@ function goSlide(n) {
   const nextSlide = document.getElementById('slide' + currentSlide);
   if (nextSlide) nextSlide.classList.add('active');
   track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
-  dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+  if(dots) dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
   resetAuto();
 }
 function nextSlide() { goSlide(currentSlide + 1); }
@@ -1167,6 +1166,7 @@ function resetAuto() {
 
 // Kick off immediately when script loads
 document.addEventListener('DOMContentLoaded', function() {
+  dots = document.querySelectorAll('.dot');
   const firstSlide = document.getElementById('slide0');
   if (firstSlide) firstSlide.classList.add('active');
   resetAuto();
@@ -1191,9 +1191,7 @@ if (heroEl) {
   heroEl.addEventListener('mouseleave', resetAuto);
 }
 
-// Pause on hover
-document.getElementById('hero').addEventListener('mouseenter', () => clearInterval(autoTimer));
-document.getElementById('hero').addEventListener('mouseleave', resetAuto);
+// (hover pause handled in heroEl block above)
 
 resetAuto();
 

@@ -210,6 +210,13 @@ tr:hover td{background:#f9fbf9}
   .mob-btn .ml { font-size: .56rem !important; }
 }
 
+
+/* Password toggle */
+.pass-wrap{position:relative;display:flex;align-items:center}
+.pass-wrap input{flex:1;padding-right:44px}
+.eye-btn{position:absolute;right:12px;background:none;border:none;cursor:pointer;color:#6b7c6e;font-size:1rem;padding:4px;display:flex;align-items:center;transition:color .2s}
+.eye-btn:hover{color:#1a6b3c}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -222,7 +229,15 @@ tr:hover td{background:#f9fbf9}
     <h2>Admin Login</h2>
     <p>Sign in with your Supabase admin credentials</p>
     <div class="fc"><label>Email</label><input type="email" id="loginEmail" placeholder="admin@yourmail.com" onkeydown="if(event.key==='Enter')doLogin()"></div>
-    <div class="fc"><label>Password</label><input type="password" id="loginPass" placeholder="Your password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <div class="fc">
+      <label>Password</label>
+      <div class="pass-wrap">
+        <input type="password" id="loginPass" placeholder="Your password" onkeydown="if(event.key==='Enter')doLogin()" autocomplete="current-password">
+        <button type="button" class="eye-btn" id="eyeBtn" onclick="togglePass()" title="Show/hide password">
+          <i class="far fa-eye" id="eyeIcon"></i>
+        </button>
+      </div>
+    </div>
     <div class="err-msg" id="loginErr">Incorrect email or password.</div>
     <button style="width:100%;background:var(--g);color:#fff;border:none;padding:13px;border-radius:10px;font-size:.95rem;font-weight:700;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px" id="loginBtn" onclick="doLogin()">
       <span id="loginLbl">Sign In</span><span class="spinner hidden" id="loginSp"></span>
@@ -502,8 +517,8 @@ tr:hover td{background:#f9fbf9}
 // ╔══════════════════════════════════════════════════╗
 // ║  HARVESTGH CREDENTIALS — FILL THESE IN          ║
 // ╚══════════════════════════════════════════════════╝
-const SUPABASE_URL  = (window.HARVESTGH && window.HARVESTGH.supabaseUrl) || 'YOUR_SUPABASE_URL_HERE';
-const SUPABASE_ANON = (window.HARVESTGH && window.HARVESTGH.supabaseAnon) || 'YOUR_SUPABASE_ANON_KEY_HERE';
+const SUPABASE_URL  = (window.HARVESTGH && window.HARVESTGH.supabaseUrl) || 'https://ebnztpyonsrccmbfqfuu.supabase.co';
+const SUPABASE_ANON = (window.HARVESTGH && window.HARVESTGH.supabaseAnon) || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVibnp0cHlvbnNyY2NtYmZxZnV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY3NTMwOTQsImV4cCI6MjEwMjMyOTA5NH0.Ck0mxCi8JNOfG3EGfsFTCYI6LELSUC7qyw2Rpfs44uI';
 const HUBTEL_ID     = 'YOUR_HUBTEL_CLIENT_ID';
 const HUBTEL_SECRET = 'YOUR_HUBTEL_CLIENT_SECRET';
 const HUBTEL_FROM   = 'HarvestGH';
@@ -577,6 +592,20 @@ async function doLogin(){
       setBL('loginBtn','loginLbl','loginSp',false);
       showErr('Connection failed: ' + (e.message || 'Unknown error') + '. Check config.js.');
     }
+  }
+}
+
+
+function togglePass() {
+  const inp  = document.getElementById('loginPass');
+  const icon = document.getElementById('eyeIcon');
+  if (!inp) return;
+  if (inp.type === 'password') {
+    inp.type = 'text';
+    icon.className = 'far fa-eye-slash';
+  } else {
+    inp.type = 'password';
+    icon.className = 'far fa-eye';
   }
 }
 
