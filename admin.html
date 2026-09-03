@@ -24,7 +24,7 @@ a{text-decoration:none;color:inherit}
 .fc label{display:block;font-size:.82rem;font-weight:600;margin-bottom:6px}
 .fc input{width:100%;padding:11px 14px;border:1.5px solid rgba(26,107,60,.2);border-radius:10px;font-size:.9rem;outline:none;transition:border-color .2s}
 .fc input:focus{border-color:var(--g)}
-.err-msg{color:var(--red);font-size:.8rem;margin-top:8px;display:none}.err-msg.show{display:block}
+.err-msg{color:var(--red);font-size:.82rem;margin-top:8px;padding:8px 12px;background:#fdecea;border-radius:8px;border:1px solid rgba(192,57,43,.2);display:none;text-align:left}.err-msg.show{display:block}
 
 /* ── LAYOUT ── */
 .admin-wrap{display:grid;grid-template-columns:230px 1fr;min-height:100vh}
@@ -541,57 +541,72 @@ let editProdId=null, activeOrderId=null;
 
 // ══ AUTH ══
 async function doLogin(){
-  const email = (document.getElementById('loginEmail').value || '').trim();
-  const pass  = (document.getElementById('loginPass').value || '');
-  if(!email || !pass){ showErr('Enter your email and password.'); return; }
+  const emailEl = document.getElementById('loginEmail');
+  const passEl  = document.getElementById('loginPass');
+  const errEl   = document.getElementById('loginErr');
+  const btnEl   = document.getElementById('loginBtn');
+  const lblEl   = document.getElementById('loginLbl');
+  const spEl    = document.getElementById('loginSp');
 
-  // Grab credentials from config.js window object or fallback
-  const url = (window.HARVESTGH && window.HARVESTGH.supabaseUrl) || SUPABASE_URL || '';
-  const key = (window.HARVESTGH && window.HARVESTGH.supabaseAnon) || SUPABASE_ANON || '';
+  const email = (emailEl.value||'').trim();
+  const pass  = (passEl.value||'');
 
-  if(!url || url.includes('YOUR_') || !url.includes('supabase.co')){
-    showErr('⚠️ Open config.js, add your Supabase URL and key, save it, then refresh this page.');
+  // Hide error first
+  errEl.style.display='none';
+
+  if(!email||!pass){
+    errEl.textContent='Please enter your email and password.';
+    errEl.style.display='block';
     return;
   }
 
-  setBL('loginBtn','loginLbl','loginSp',true);
+  // Get Supabase credentials
+  const url = (window.HARVESTGH&&window.HARVESTGH.supabaseUrl)||'';
+  const key = (window.HARVESTGH&&window.HARVESTGH.supabaseAnon)||'';
 
-  // Always create a fresh client with current credentials
-  let freshDB;
-  try {
-    const {createClient} = supabase;
-    freshDB = createClient(url, key);
-  } catch(e) {
-    setBL('loginBtn','loginLbl','loginSp',false);
-    showErr('Supabase library not loaded. Check your internet connection and refresh.');
+  if(!url||url.includes('YOUR_')||!url.includes('supabase.co')){
+    errEl.textContent='⚠️ Add your Supabase URL and key to config.js first, then refresh.';
+    errEl.style.display='block';
     return;
   }
 
-  // 15-second timeout
-  let timedOut = false;
-  const timeoutId = setTimeout(() => {
-    timedOut = true;
-    setBL('loginBtn','loginLbl','loginSp',false);
-    showErr('⏱ Timed out. Check your internet connection and try again.');
-  }, 15000);
+  // Disable button, show spinner
+  btnEl.disabled=true;
+  lblEl.style.display='none';
+  spEl.style.display='inline-block';
 
-  try {
-    const { data, error } = await freshDB.auth.signInWithPassword({ email, password: pass });
-    clearTimeout(timeoutId);
-    if(timedOut) return;
+  // Timeout after 15s
+  let done=false;
+  const timer=setTimeout(()=>{
+    if(done)return;
+    done=true;
+    btnEl.disabled=false; lblEl.style.display='inline'; spEl.style.display='none';
+    errEl.textContent='Timed out — check your internet and try again.';
+    errEl.style.display='block';
+  },15000);
+
+  try{
+    const {createClient}=supabase;
+    const client=createClient(url,key);
+    const{data,error}=await client.auth.signInWithPassword({email,password:pass});
+    clearTimeout(timer);
+    if(done)return;
+    done=true;
+    btnEl.disabled=false; lblEl.style.display='inline'; spEl.style.display='none';
     if(error){
-      setBL('loginBtn','loginLbl','loginSp',false);
-      showErr('Wrong email or password. Go to Supabase → Authentication → Users to check.');
+      errEl.textContent='Wrong email or password. Check Supabase → Authentication → Users.';
+      errEl.style.display='block';
       return;
     }
-    db = freshDB; // update global db for rest of admin session
+    db=client;
     enterDash(data.user.email);
-  } catch(e) {
-    clearTimeout(timeoutId);
-    if(!timedOut){
-      setBL('loginBtn','loginLbl','loginSp',false);
-      showErr('Connection failed: ' + (e.message || 'Unknown error') + '. Check config.js.');
-    }
+  }catch(e){
+    clearTimeout(timer);
+    if(done)return;
+    done=true;
+    btnEl.disabled=false; lblEl.style.display='inline'; spEl.style.display='none';
+    errEl.textContent='Connection error: '+e.message;
+    errEl.style.display='block';
   }
 }
 

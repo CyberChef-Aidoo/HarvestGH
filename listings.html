@@ -318,6 +318,9 @@ async function loadCrops() {
 }
 
 async function loadProducts() {
+  // Show demo products immediately (pitch mode)
+  if(typeof renderDemoProducts==='function') renderDemoProducts('productsGrid', null);
+
   try {
     const {data, error} = await db.from('products').select('*').neq('status','hidden').order('created_at', {ascending: false});
     if (error) throw error;
@@ -325,12 +328,12 @@ async function loadProducts() {
   } catch(e) {
     // Demo products when Supabase not set up
     allProducts = [
-      {id:'d1',name:'Fresh Tomatoes — Grade A',crop_type:'Tomato',price_per_unit:120,unit:'crate',quantity_available:80,sold_quantity:12,min_order:5,region:'Ashanti',fbo_source:'Ejisu FBO',status:'available',is_preorder:false,image_url:'tomato.jpg',created_at:new Date().toISOString()},
+      {id:'d1',name:'Fresh Tomatoes — Grade A',crop_type:'Tomato',price_per_unit:120,unit:'crate',quantity_available:80,sold_quantity:12,min_order:5,region:'Ashanti',fbo_source:'Ejisu FBO',status:'available',is_preorder:false,image_url:'tomatoes.jpg',created_at:new Date().toISOString()},
       {id:'d2',name:'White Maize — Dried & Bagged',crop_type:'Maize',price_per_unit:85,unit:'bag',quantity_available:200,sold_quantity:40,min_order:10,region:'Brong-Ahafo',fbo_source:'Techiman FBO',status:'available',is_preorder:false,image_url:'maize.jpg',created_at:new Date().toISOString()},
-      {id:'d3',name:'Puna Yam — Export Quality',crop_type:'Yam',price_per_unit:220,unit:'bag',quantity_available:45,sold_quantity:5,min_order:3,region:'Northern',fbo_source:'Tamale FBO',status:'available',is_preorder:false,image_url:'yam.jpg',created_at:new Date().toISOString()},
+      {id:'d3',name:'Puna Yam — Export Quality',crop_type:'Yam',price_per_unit:220,unit:'bag',quantity_available:45,sold_quantity:5,min_order:3,region:'Northern',fbo_source:'Tamale FBO',status:'available',is_preorder:false,image_url:'market.jpg',created_at:new Date().toISOString()},
       {id:'d4',name:'Mango — Julie Variety',crop_type:'Mango',price_per_unit:65,unit:'crate',quantity_available:0,sold_quantity:120,min_order:10,region:'Volta',fbo_source:'Ho FBO',status:'out_of_stock',is_preorder:false,image_url:'mango.jpg',created_at:new Date().toISOString()},
       {id:'d5',name:'Plantain — Apem (Green)',crop_type:'Plantain',price_per_unit:55,unit:'bunch',quantity_available:150,sold_quantity:20,min_order:10,region:'Eastern',fbo_source:'Suhum FBO',status:'available',is_preorder:false,image_url:'plantain.jpg',created_at:new Date().toISOString()},
-      {id:'d6',name:'Rice — Jasmine Variety',crop_type:'Rice',price_per_unit:145,unit:'bag',quantity_available:300,sold_quantity:0,min_order:20,region:'Eastern',fbo_source:'Kpong Irrigation FBO',status:'preorder',is_preorder:true,available_date:'2026-10-15',image_url:'rice.jpg',created_at:new Date().toISOString()},
+      {id:'d6',name:'Rice — Jasmine Variety',crop_type:'Rice',price_per_unit:145,unit:'bag',quantity_available:300,sold_quantity:0,min_order:20,region:'Eastern',fbo_source:'Kpong Irrigation FBO',status:'preorder',is_preorder:true,available_date:'2026-10-15',image_url:'market.jpg',created_at:new Date().toISOString()},
     ];
   }
   renderProducts(allProducts);
@@ -425,5 +428,128 @@ init();
 </script>
 
 <script src="chatbot.js"></script>
+<script>
+const DEMO_PRODUCTS = [
+  {
+    "id": "demo1",
+    "name": "Fresh Tomatoes \u2014 Grade A",
+    "crop_type": "Tomato",
+    "price_per_unit": 120,
+    "unit": "crate",
+    "quantity_available": 200,
+    "sold_quantity": 45,
+    "region": "Ashanti",
+    "fbo_source": "Ejisu Farmers Cooperative",
+    "status": "available",
+    "is_preorder": false,
+    "image_url": "tomatoes.jpg",
+    "description": "Premium Grade A tomatoes, freshly harvested. Perfect for wholesale and restaurant supply."
+  },
+  {
+    "id": "demo2",
+    "name": "White Maize \u2014 Dried & Bagged",
+    "crop_type": "Maize",
+    "price_per_unit": 85,
+    "unit": "bag",
+    "quantity_available": 500,
+    "sold_quantity": 120,
+    "region": "Brong-Ahafo",
+    "fbo_source": "Techiman FBO Group",
+    "status": "available",
+    "is_preorder": false,
+    "image_url": "maize.jpg",
+    "description": "Certified dried white maize, 100kg bags. Ideal for flour mills, animal feed and trading."
+  },
+  {
+    "id": "demo3",
+    "name": "Sweet Mango \u2014 Kent Variety",
+    "crop_type": "Mango",
+    "price_per_unit": 95,
+    "unit": "box",
+    "quantity_available": 300,
+    "sold_quantity": 80,
+    "region": "Volta",
+    "fbo_source": "Ho Farmers Association",
+    "status": "available",
+    "is_preorder": false,
+    "image_url": "mango.jpg",
+    "description": "Premium Kent mangoes, export quality. Sweet, large and freshly harvested from Volta Region farms."
+  },
+  {
+    "id": "demo4",
+    "name": "Green Plantain \u2014 Apem",
+    "crop_type": "Plantain",
+    "price_per_unit": 55,
+    "unit": "bunch",
+    "quantity_available": 400,
+    "sold_quantity": 95,
+    "region": "Eastern",
+    "fbo_source": "Suhum Plantain Growers FBO",
+    "status": "available",
+    "is_preorder": false,
+    "image_url": "plantain.jpg",
+    "description": "Fresh green Apem plantains. Great for chips, boiling and fufu. Consistent size and quality."
+  },
+  {
+    "id": "demo5",
+    "name": "Mixed Market Vegetables Bundle",
+    "crop_type": "Vegetables",
+    "price_per_unit": 150,
+    "unit": "bundle",
+    "quantity_available": 100,
+    "sold_quantity": 20,
+    "region": "Greater Accra",
+    "fbo_source": "Accra Urban Farmers Coop",
+    "status": "available",
+    "is_preorder": false,
+    "image_url": "market.jpg",
+    "description": "Weekly bundle of fresh market vegetables. Includes seasonal produce sourced directly from farms."
+  },
+  {
+    "id": "demo6",
+    "name": "Maize (Preorder) \u2014 October Harvest",
+    "crop_type": "Maize",
+    "price_per_unit": 80,
+    "unit": "bag",
+    "quantity_available": 1000,
+    "sold_quantity": 200,
+    "region": "Northern",
+    "fbo_source": "Tamale Grain Farmers FBO",
+    "status": "available",
+    "is_preorder": true,
+    "available_date": "2026-10-15",
+    "image_url": "maize.jpg",
+    "description": "Preorder next harvest season's white maize from the Northern Region. Lock in your price today."
+  }
+];
+
+function renderDemoProducts(containerId, limit) {
+  const grid = document.getElementById(containerId);
+  if (!grid) return;
+  const items = limit ? DEMO_PRODUCTS.slice(0, limit) : DEMO_PRODUCTS;
+  grid.innerHTML = items.map(p => {
+    const remaining = p.quantity_available - p.sold_quantity;
+    const isPre = p.is_preorder;
+    return `
+    <div class="prd-card" onclick="window.location.href='checkout.html?id=${p.id}'">
+      <img src="${p.image_url}" class="prd-img" alt="${p.name}"
+        onerror="this.src='market.jpg'" loading="lazy">
+      <div class="prd-tag-wrap">
+        ${isPre ? '<span class="prd-tag prd-tag-gold">📅 Preorder</span>' : '<span class="prd-tag prd-tag-g">✅ In Stock</span>'}
+      </div>
+      <div class="prd-body">
+        <div class="prd-name">${p.name}</div>
+        <div class="prd-src">📍 ${p.region} · ${p.fbo_source}</div>
+        <div class="prd-foot">
+          <div class="prd-price">GH₵${p.price_per_unit.toFixed(2)}<small> / ${p.unit}</small></div>
+          <button class="prd-btn" onclick="event.stopPropagation();window.location.href='checkout.html?id=${p.id}'">
+            ${isPre ? 'Preorder' : 'Order →'}
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+</script>
 </body>
 </html>
