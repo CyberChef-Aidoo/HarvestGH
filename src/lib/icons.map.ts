@@ -1,6 +1,6 @@
 /**
- * Emoji → Lucide-style icon mapping for Agro Bridge.
- * One library only (Lucide outline, stroke 1.5). Decorative emoji with no meaning are removed, not mapped.
+ * Icon name catalog for Agro Bridge (Lucide-style outline set).
+ * Mapping notes use ASCII labels for former pictographs — no emoji in source.
  */
 
 export type IconName =
@@ -24,41 +24,40 @@ export type IconName =
   | "package";
 
 /**
- * Semantic map (comment = original emoji / usage).
- * Used as documentation; runtime uses IconName directly in components.
+ * Semantic map — comment = former pictograph meaning / usage site.
  */
 export const ICON_MAP = {
-  /* ✓ list / form success */ check: "check",
-  /* ✓ completed step */ "check-circle": "check-circle",
-  /* ⚠️ empty / error state */ "alert-triangle": "alert-triangle",
-  /* ← back link */ "arrow-left": "arrow-left",
-  /* ➤ send */ send: "send",
-  /* → chevron / next */ "arrow-right": "arrow-right",
-  /* 🔍 empty search */ search: "search",
-  /* ☰ mobile nav */ menu: "menu",
-  /* ✕ close */ x: "x",
-  /* 💬 chat fab */ "message-circle": "message-circle",
-  /* 🌾 brand / rice */ wheat: "wheat",
-  /* 🌱 / general crop */ sprout: "sprout",
+  /* checkmark — list / form success */ check: "check",
+  /* checkmark in circle — completed step */ "check-circle": "check-circle",
+  /* warning triangle — empty / error state */ "alert-triangle": "alert-triangle",
+  /* left arrow — back link */ "arrow-left": "arrow-left",
+  /* send / paper-plane — chat compose */ send: "send",
+  /* right arrow — next / CTA */ "arrow-right": "arrow-right",
+  /* magnifier — empty search */ search: "search",
+  /* hamburger — mobile nav */ menu: "menu",
+  /* close X */ x: "x",
+  /* chat bubble — chat fab */ "message-circle": "message-circle",
+  /* grain / rice / brand accent */ wheat: "wheat",
+  /* seedling / generic crop */ sprout: "sprout",
   /* leafy crops */ leaf: "leaf",
-  /* 🥚 poultry */ egg: "egg",
-  /* 🌶️ pepper */ flame: "flame",
+  /* poultry / eggs */ egg: "egg",
+  /* pepper / heat */ flame: "flame",
   /* live birds */ bird: "bird",
   /* fruit crops */ apple: "apple",
-  /* 📦 produce listed */ package: "package",
+  /* crate / listing */ package: "package",
 } as const satisfies Record<string, IconName>;
 
-/** Crop calendar: former emoji → icon */
+/** Crop calendar: crop name -> icon (replaces former produce pictographs). */
 export const CROP_ICON_MAP: Record<string, IconName> = {
-  Tomato: "apple", // 🍅 — closest fruit glyph in Lucide set
-  Maize: "wheat", // 🌽
-  Yam: "leaf", // 🍠
-  Cassava: "leaf", // 🥬
-  Plantain: "leaf", // 🍌 — leaf as produce stand-in (no banana in core set)
-  Mango: "apple", // 🥭
-  Rice: "wheat", // 🌾
-  Pepper: "flame", // 🌶️
-  Onion: "sprout", // 🧅
-  Groundnut: "sprout", // 🥜
-  "Poultry / Eggs": "egg", // 🥚
+  Tomato: "apple", // fruit stand-in (no tomato glyph in core set)
+  Maize: "wheat",
+  Yam: "leaf",
+  Cassava: "leaf",
+  Plantain: "leaf", // produce stand-in (no banana in core set)
+  Mango: "apple",
+  Rice: "wheat",
+  Pepper: "flame",
+  Onion: "sprout",
+  Groundnut: "sprout",
+  "Poultry / Eggs": "egg",
 };

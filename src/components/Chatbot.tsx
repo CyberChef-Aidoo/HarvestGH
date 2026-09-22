@@ -147,7 +147,7 @@ export default function Chatbot() {
         }}
         title="Chat with Agro Bridge Assistant"
         aria-label={open ? "Close chat" : "Open chat"}
-        className="fixed bottom-6 left-6 z-[8888] flex h-14 w-14 items-center justify-center rounded-full bg-green text-white shadow-[0_4px_18px_rgba(26,107,60,0.42)] transition-transform hover:scale-110"
+        className="fixed bottom-6 right-6 z-[8888] flex h-14 w-14 items-center justify-center rounded-full bg-green text-white shadow-[0_4px_18px_rgba(26,107,60,0.42)] transition-transform hover:scale-110"
       >
         {open ? <Icon name="x" size="lg" /> : <Icon name="message-circle" size="lg" />}
         {showBadge && (
@@ -158,7 +158,7 @@ export default function Chatbot() {
       </button>
 
       {open && (
-        <div className="fixed bottom-[90px] left-6 z-[8887] flex max-h-[520px] w-[min(340px,calc(100vw-20px))] flex-col overflow-hidden rounded-[18px] border border-line bg-white shadow-[0_12px_48px_rgba(0,0,0,0.18)]">
+        <div className="fixed bottom-[90px] right-6 z-[8887] flex max-h-[520px] w-[min(340px,calc(100vw-20px))] flex-col overflow-hidden rounded-[18px] border border-line bg-white shadow-[0_12px_48px_rgba(0,0,0,0.18)]">
           <div className="flex flex-shrink-0 items-center gap-3 bg-green px-4 py-3.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-[var(--ab-gold,#D9A825)]">
               <Icon name="wheat" size="md" />

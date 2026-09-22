@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Chatbot from "@/components/Chatbot";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
 import PageViewTracker from "@/components/PageViewTracker";
 
 export const metadata: Metadata = {
@@ -39,7 +38,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-body antialiased">
         {children}
         <PageViewTracker />
-        <WhatsAppFloat />
         <Chatbot />
       </body>
     </html>
