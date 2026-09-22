@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans: "Figtree", system-ui, sans-serif;
+    --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5 {
+    @apply font-display tracking-tight;
+  }
+
+  ::selection {
+    background: rgba(26, 107, 60, 0.18);
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto max-w-content px-6;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold
+           transition-all duration-200 ease-out;
+  }
+  .btn-sm {
+    @apply px-4 py-2 text-[0.84rem];
+  }
+  .btn-primary {
+    @apply bg-green text-white hover:bg-green-mid hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(26,107,60,0.25)];
+  }
+  .btn-gold {
+    @apply bg-gold text-dark hover:bg-[#d4a01f] hover:-translate-y-0.5;
+  }
+  .btn-ghost {
+    @apply border-[1.5px] border-line-strong text-ink hover:border-green hover:text-green;
+  }
+  .btn-ghost-light {
+    @apply border-[1.5px] border-white/30 bg-white/10 text-white hover:bg-white/20;
+  }
+
+  .eyebrow {
+    @apply mb-3 inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.12em] text-green;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply block h-0.5 w-[18px] bg-current;
+  }
+  .eyebrow-light {
+    @apply text-white/70;
+  }
+  .eyebrow-gold {
+    @apply text-gold;
+  }
+
+  .section {
+    @apply px-6 py-16 md:py-20;
+  }
+
+  .surface {
+    @apply rounded-xl border border-line bg-white;
+  }
+
+  .field-label {
+    @apply mb-1.5 block text-[0.82rem] font-semibold text-ink;
+  }
+  .field {
+    @apply w-full rounded-[10px] border-[1.5px] border-line-strong bg-white px-3.5 py-3 text-[0.92rem]
+           text-ink outline-none transition
+           placeholder:text-[#a3b0a6] focus:border-green focus:ring-4 focus:ring-green/10;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-soft;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .hero-overlay {
+    background:
+      linear-gradient(105deg, rgba(6,14,9,0.92) 0%, rgba(6,14,9,0.72) 42%, rgba(6,14,9,0.35) 70%, rgba(6,14,9,0.2) 100%),
+      linear-gradient(to top, rgba(6,14,9,0.55) 0%, transparent 45%);
+  }
+  .header-overlay {
+    background:
+      linear-gradient(120deg, rgba(12,26,17,0.88), rgba(26,107,60,0.72));
+  }
+}
+
+/* Custom scrollbar for a more polished feel */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(26, 107, 60, 0.25);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(26, 107, 60, 0.4);
+}
