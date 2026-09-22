@@ -196,7 +196,7 @@ class Command(BaseCommand):
                 subtotal = prod.price_per_unit * qty
                 delivery = Decimal("30.00")
                 Order.objects.create(
-                    order_ref=f"HGH-2026-{1000 + i}",
+                    order_ref=f"AGB-2026-{1000 + i}",
                     product=prod,
                     product_name=prod.name,
                     product_unit=prod.unit,
@@ -217,7 +217,7 @@ class Command(BaseCommand):
                 )
             # auto_now_add ignores created_at on insert in some Django versions — force timestamps
             for i, days_ago in enumerate([6, 3, 1, 0], start=1):
-                Order.objects.filter(order_ref=f"HGH-2026-{1000 + i}").update(
+                Order.objects.filter(order_ref=f"AGB-2026-{1000 + i}").update(
                     created_at=now - timedelta(days=days_ago)
                 )
 

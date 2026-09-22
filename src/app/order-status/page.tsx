@@ -75,7 +75,7 @@ function TrackInner() {
   async function lookupByRef(value: string) {
     const cleaned = value.trim().toUpperCase();
     if (cleaned.length < 6) {
-      setError("Enter a valid order reference (e.g. HGH-2026-4721)");
+      setError("Enter a valid order reference (e.g. AGB-2026-4721)");
       return;
     }
     setError("");
@@ -129,7 +129,7 @@ function TrackInner() {
             className="field text-center font-semibold tracking-wide sm:text-left"
             value={ref}
             onChange={(e) => setRef(e.target.value.toUpperCase())}
-            placeholder="e.g. HGH-2026-4721"
+            placeholder="e.g. AGB-2026-4721"
             maxLength={20}
             onKeyDown={(e) => e.key === "Enter" && lookupByRef(ref)}
           />

@@ -15,7 +15,7 @@ export default function AgentPortalPage() {
       <main className="min-h-screen">
         <PageHeader
           title="FBO agent portal"
-          subtitle="Agent login and commission dashboard will live here. For now, contact agro Bridge to manage your FBO group."
+          subtitle="Agent login and commission dashboard will live here. For now, contact Agro Bridge to manage your FBO group."
         />
         <div className="mx-auto max-w-lg px-5 py-14 text-center sm:px-6">
           <div className="rounded-2xl border border-line bg-white p-8 shadow-soft">

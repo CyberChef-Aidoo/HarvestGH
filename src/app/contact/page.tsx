@@ -10,12 +10,12 @@ import { config, whatsappLink } from "@/lib/config";
 import { createMessage } from "@/lib/api";
 
 const FAQS = [
-  { q: "How do I register as a farmer?", a: "Go to Register as Farmer and fill in your details. You can manage your own account or let agro Bridge manage it for you. Registration is completely free." },
-  { q: "I am elderly and cannot use a phone well. Can I still join?", a: "Yes. When you register, choose \u201cManage it for me.\u201d agro Bridge handles your listing and calls you when a buyer is found. No app or website needed after registering." },
+  { q: "How do I register as a farmer?", a: "Go to Register as Farmer and fill in your details. You can manage your own account or let Agro Bridge manage it for you. Registration is completely free." },
+  { q: "I am elderly and cannot use a phone well. Can I still join?", a: "Yes. When you register, choose \u201cManage it for me.\u201d Agro Bridge handles your listing and calls you when a buyer is found. No app or website needed after registering." },
   { q: "How quickly will I find a buyer?", a: "It depends on the crop, your region, and how many buyers are registered nearby. In peak season, matches can happen within 24–48 hours. You get an SMS immediately when matched." },
-  { q: "Is agro Bridge free to use?", a: "Registration and listing are completely free. agro Bridge earns a small 1–2% fee only when a deal is successfully completed. No upfront costs." },
+  { q: "Is Agro Bridge free to use?", a: "Registration and listing are completely free. Agro Bridge earns a small 1–2% fee only when a deal is successfully completed. No upfront costs." },
   { q: "I registered but have not heard anything. What should I do?", a: "Check your listing status on the Farmer Portal using your phone number. If active, we are still searching for a buyer. You can also call or WhatsApp us for an update." },
-  { q: "Can I partner with agro Bridge as an NGO?", a: "Yes — we welcome partnerships with NGOs, government agencies, and development organizations. Send a message using the form and select \u201cPartnership or collaboration.\u201d" },
+  { q: "Can I partner with Agro Bridge as an NGO?", a: "Yes — we welcome partnerships with NGOs, government agencies, and development organizations. Send a message using the form and select \u201cPartnership or collaboration.\u201d" },
 ];
 
 const SUBJECTS = [
@@ -87,7 +87,7 @@ export default function ContactPage() {
               <h2 className="mb-4 font-display text-[1.4rem] font-bold">Get in touch</h2>
               {[
                 { label: "Phone", val: config.supportPhone, sub: "Call or SMS — Mon to Sat, 7am–8pm", href: `tel:${config.supportPhone}`, cta: "Call now" },
-                { label: "WhatsApp", val: "Chat with us on WhatsApp", sub: "Fastest response — usually within 1 hour", href: whatsappLink("Hi agro Bridge"), cta: "Open WhatsApp", wa: true },
+                { label: "WhatsApp", val: "Chat with us on WhatsApp", sub: "Fastest response — usually within 1 hour", href: whatsappLink("Hi Agro Bridge"), cta: "Open WhatsApp", wa: true },
                 { label: "Location", val: "Accra, Ghana", sub: "Accra Technical University area · Greater Accra" },
               ].map((c) => (
                 <div key={c.label} className="mb-3.5 rounded-xl border border-line bg-white p-5">
@@ -220,7 +220,7 @@ export default function ContactPage() {
                   </button>
                   <p className="mt-3 text-center text-[0.78rem] text-muted">
                     Or reach us on{" "}
-                    <a href={whatsappLink("Hi agro Bridge")} target="_blank" rel="noopener noreferrer" className="font-semibold text-green">
+                    <a href={whatsappLink("Hi Agro Bridge")} target="_blank" rel="noopener noreferrer" className="font-semibold text-green">
                       WhatsApp
                     </a>{" "}
                     for the fastest response.

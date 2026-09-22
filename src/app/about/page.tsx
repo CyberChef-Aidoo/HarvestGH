@@ -4,9 +4,9 @@ import PageShell from "@/components/PageShell";
 import Icon from "@/components/Icon";
 
 export const metadata: Metadata = {
-  title: "About agro Bridge — Ghana's Farm Marketplace",
+  title: "About Agro Bridge — Ghana's Farm Marketplace",
   description:
-    "agro Bridge was built by Ibrahim Mohammed Lotsu to solve Ghana's post-harvest loss crisis by connecting FBO farmers directly to verified bulk buyers.",
+    "Agro Bridge was built by Ibrahim Mohammed Lotsu to solve Ghana's post-harvest loss crisis by connecting FBO farmers directly to verified bulk buyers.",
 };
 
 const WHAT_WE_DO = [
@@ -41,7 +41,7 @@ export default function AboutPage() {
           </h1>
           <p className="mt-4 max-w-[34rem] text-base leading-relaxed text-white/75">
             Ghana loses up to 50% of its harvest every year — not from bad farming, but from a
-            broken market. agro Bridge is the fix.
+            broken market. Agro Bridge is the fix.
           </p>
         </div>
       </header>
@@ -60,7 +60,7 @@ export default function AboutPage() {
               Accra before tomatoes spoil.
             </p>
             <p className="mb-5 leading-relaxed text-muted">
-              agro Bridge is that bridge. We connect smallholder FBO farmers directly to verified bulk
+              Agro Bridge is that bridge. We connect smallholder FBO farmers directly to verified bulk
               buyers — through SMS, the web, and WhatsApp — so every harvest finds a market before
               it rots.
             </p>
@@ -131,7 +131,7 @@ export default function AboutPage() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/ibrahim.jpg"
-              alt="Ibrahim Mohammed Lotsu — Founder, agro Bridge"
+              alt="Ibrahim Mohammed Lotsu — Founder, Agro Bridge"
               className="h-[280px] w-full object-cover object-top"
             />
             <div className="p-6">
@@ -139,7 +139,7 @@ export default function AboutPage() {
                 Ibrahim Mohammed Lotsu
               </div>
               <div className="mt-1 text-[0.78rem] leading-snug text-muted">
-                Founder &amp; CEO, agro Bridge · Accounting Student, Accra Technical University
+                Founder &amp; CEO, Agro Bridge · Accounting Student, Accra Technical University
               </div>
               <blockquote className="mt-3.5 rounded-r-[9px] border-l-[3px] border-green bg-[#f8faf8] px-4 py-3 text-[0.84rem] italic leading-relaxed text-muted">
                 &ldquo;I am not a farmer. I am someone who understood that coordination is a problem
@@ -154,7 +154,7 @@ export default function AboutPage() {
               Built by a student who believed it could be fixed
             </h2>
             <p className="mb-3 leading-relaxed text-muted">
-              agro Bridge was founded by <strong className="text-ink">Ibrahim Mohammed Lotsu</strong>,
+              Agro Bridge was founded by <strong className="text-ink">Ibrahim Mohammed Lotsu</strong>,
               an accounting student at Accra Technical University. He had never grown a crop — but
               studying accounting taught him to see systems, and post-harvest loss was a{" "}
               <em className="text-green">broken system</em> at its core.
@@ -168,11 +168,11 @@ export default function AboutPage() {
             <p className="mb-3 leading-relaxed text-muted">
               The strategy starts with <strong className="text-ink">FBOs</strong> — the groups of
               15–50 farmers already organised by MoFA Ghana. By registering an entire group at once,
-              agro Bridge can go from zero to 50 farmers in a single afternoon, without asking anyone
+              Agro Bridge can go from zero to 50 farmers in a single afternoon, without asking anyone
               to download an app.
             </p>
             <div className="mt-6 rounded-2xl bg-[#eef2ee] p-6">
-              <h3 className="mb-3.5 text-[0.92rem] font-bold">agro Bridge by the numbers</h3>
+              <h3 className="mb-3.5 text-[0.92rem] font-bold">Agro Bridge by the numbers</h3>
               <div className="grid grid-cols-2 gap-3">
                 {NUMBERS.map(([v, l]) => (
                   <div key={l} className="rounded-[10px] bg-white px-3.5 py-3">
@@ -189,7 +189,7 @@ export default function AboutPage() {
       {/* WHAT WE DO */}
       <section className="section bg-white">
         <div className="mx-auto max-w-content">
-          <p className="eyebrow">What agro Bridge does</p>
+          <p className="eyebrow">What Agro Bridge does</p>
           <h2 className="mb-9 text-[clamp(1.8rem,3.5vw,2.5rem)] font-bold leading-tight">
             Four things. Done well.
           </h2>
@@ -213,7 +213,7 @@ export default function AboutPage() {
       {/* CTA */}
       <section className="bg-green px-6 py-[70px] text-center text-white">
         <h2 className="mb-3 text-[clamp(1.8rem,4vw,2.7rem)] font-extrabold text-white">
-          Join agro Bridge — for free
+          Join Agro Bridge — for free
         </h2>
         <p className="mx-auto mb-7 max-w-[30rem] leading-relaxed text-white/70">
           Whether you are a farmer, buyer, FBO leader, or just curious — there is a place for you in

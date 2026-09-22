@@ -94,7 +94,7 @@ export default function RegisterBuyerPage() {
           ) : (
             <div className="rounded-2xl border border-line bg-white p-6 shadow-soft sm:p-8">
               <div className="mb-1 text-center font-display text-[1.3rem] font-extrabold text-green">
-                agro Bridge
+                Agro Bridge
               </div>
               <h1 className="mb-1 text-center text-[1.5rem] font-extrabold">Register as a buyer</h1>
               <p className="mb-7 text-center text-[0.9rem] leading-relaxed text-muted">

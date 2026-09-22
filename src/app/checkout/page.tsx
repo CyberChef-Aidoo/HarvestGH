@@ -155,7 +155,7 @@ function CheckoutInner() {
 
   function startPayment() {
     if (!validate()) return;
-    const ref = "HGH-" + new Date().getFullYear() + "-" + String(Math.floor(Math.random() * 9000) + 1000);
+    const ref = "AGB-" + new Date().getFullYear() + "-" + String(Math.floor(Math.random() * 9000) + 1000);
     const email = form.email.trim() || `${form.phone.replace(/\s/g, "")}@harvestgh.com`;
     setPaying(true);
 

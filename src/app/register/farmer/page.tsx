@@ -28,7 +28,7 @@ const CROPS = [
 const BENEFITS = [
   {
     title: "Reach city buyers",
-    desc: "Your produce listed on agro Bridge — visible to buyers across Ghana.",
+    desc: "Your produce listed on Agro Bridge — visible to buyers across Ghana.",
   },
   {
     title: "Payment before dispatch",
@@ -115,7 +115,7 @@ export default function RegisterFarmerPage() {
       <Navbar variant="solid" />
       <main className="min-h-screen">
         <PageHeader
-          title="Sell your harvest with agro Bridge"
+          title="Sell your harvest with Agro Bridge"
           subtitle="Register your FBO or farm group. We connect your produce to buyers across Ghana — before it spoils."
         />
 

@@ -1,4 +1,4 @@
-# agro Bridge — Next.js
+# Agro Bridge — Next.js
 
 Ghana's agricultural marketplace. **Next.js 14** frontend and **Django** backend (admin + REST API). Connecting farmers to customers.
 
@@ -13,7 +13,8 @@ HarvestGH/
 ├── src/
 │   ├── app/                # App Router pages
 │   │   ├── page.tsx        # Home
-│   │   ├── shop/           # Marketplace
+│   │   ├── api/assistant/  # Server-only Anthropic proxy
+│   │   ├── shop/
 │   │   ├── checkout/
 │   │   ├── about/
 │   │   ├── contact/
@@ -25,7 +26,7 @@ HarvestGH/
 │   │   ├── privacy/ · terms/
 │   │   ├── layout.tsx      # Root layout + next/font
 │   │   └── globals.css     # Tailwind + design tokens
-│   ├── components/         # Shared UI (Navbar, Footer, …)
+│   ├── components/         # Shared UI (Navbar, Footer, Icon, …)
 │   └── lib/                # Config, Django API client, demo data, types
 ├── .env.local              # Local secrets (not committed)
 └── package.json
@@ -33,18 +34,19 @@ HarvestGH/
 
 ## Fonts (uniform site-wide)
 
-Loaded once via `next/font` in `src/app/layout.tsx`:
+Loaded once via `next/font` in `src/app/layout.tsx` (self-hosted by Next):
 
 - **Display:** Bricolage Grotesque (`font-display`) — headings, brand, prices
-- **Body:** Figtree (`font-sans`) — all UI text, forms, nav
+- **Body:** Figtree (`font-body` / `font-sans`) — UI text, forms, nav
 
-Do not import Google Fonts in page CSS. Use `font-display` / `font-sans` Tailwind classes only.
+Do not import Google Fonts in page CSS. Use `font-display` / `font-body` Tailwind classes only.
 
 ## Setup
 
 ```bash
 npm install
-cp .env.example .env.local   # set NEXT_PUBLIC_API_URL=http://127.0.0.1:8000
+cp .env.example .env.local
+# Set NEXT_PUBLIC_API_URL and optional ANTHROPIC_API_KEY (server-only)
 npm run dev                  # http://localhost:3000
 ```
 
@@ -69,8 +71,16 @@ npm start
 
 ## Environment
 
-See `.env.example`. All `NEXT_PUBLIC_*` values are safe for the browser.
+See `.env.example`.
+
+- `NEXT_PUBLIC_*` values are safe for the browser.
+- `ANTHROPIC_API_KEY` is **server-only** (used by `/api/assistant`). Never prefix it with `NEXT_PUBLIC_`.
 
 ## Deploy
 
-Vercel detects Next.js automatically. Set the same env vars in the Vercel project settings.
+Vercel must build the **Next.js** app (not the legacy static HTML). In the Vercel project:
+
+1. Framework preset: Next.js
+2. Root directory: the repo root that contains `package.json` / `src/`
+3. Set env vars from `.env.example` (including server-only `ANTHROPIC_API_KEY` if used)
+4. Redeploy so the Next.js build replaces any prior static output
