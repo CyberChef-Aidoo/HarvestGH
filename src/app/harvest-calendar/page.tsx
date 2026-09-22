@@ -64,7 +64,7 @@ export default function HarvestCalendarPage() {
             </select>
           </div>
 
-          <div className="overflow-x-auto rounded-2xl border border-line bg-white">
+          <div className="overflow-x-auto rounded-[10px] border border-line bg-white">
             <table className="w-full min-w-[720px] border-collapse text-left text-sm">
               <thead>
                 <tr className="border-b border-line bg-cream/80">
@@ -111,8 +111,8 @@ export default function HarvestCalendarPage() {
             </table>
           </div>
 
-          <div className="mt-10 rounded-2xl bg-green px-6 py-10 text-center text-white">
-            <h2 className="mb-2 text-[1.5rem] font-extrabold text-white">Ready to buy or list?</h2>
+          <div className="mt-10 rounded-[10px] bg-green px-6 py-10 text-center text-white">
+            <h2 className="mb-2 text-[1.5rem] font-extrabold text-white">Register your FBO or browse listings</h2>
             <p className="mx-auto mb-6 max-w-md text-[0.95rem] text-white/70">
               Use the calendar to time your orders and harvest listings with the seasons.
             </p>

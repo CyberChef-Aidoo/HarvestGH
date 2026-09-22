@@ -118,7 +118,7 @@ export default function ContactPage() {
             </div>
 
             {/* RIGHT: form */}
-            <div className="rounded-2xl border border-line bg-white p-7 shadow-[0_4px_20px_rgba(15,31,20,0.06)]">
+            <div className="rounded-[10px] border border-line bg-white p-7 shadow-[0_4px_20px_rgba(15,31,20,0.06)]">
               {done ? (
                 <div className="py-6 text-center">
                   <div className="mx-auto mb-4 flex h-[70px] w-[70px] items-center justify-center rounded-full bg-green-pale text-green">

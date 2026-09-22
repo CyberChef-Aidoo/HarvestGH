@@ -78,7 +78,7 @@ export default function RegisterBuyerPage() {
       <main className="flex min-h-screen items-start justify-center bg-cream px-5 pb-16 pt-[calc(68px+32px)] sm:px-6">
         <div className="w-full max-w-lg">
           {done ? (
-            <div className="rounded-2xl border border-line bg-white p-10 text-center shadow-soft">
+            <div className="rounded-[10px] border border-line bg-white p-10 text-center">
               <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-pale text-green">
                 <Icon name="check" size="2xl" />
               </div>
@@ -92,7 +92,7 @@ export default function RegisterBuyerPage() {
               </Link>
             </div>
           ) : (
-            <div className="rounded-2xl border border-line bg-white p-6 shadow-soft sm:p-8">
+            <div className="rounded-[10px] border border-line bg-white p-6 sm:p-8">
               <div className="mb-1 text-center font-display text-[1.3rem] font-extrabold text-green">
                 Agro Bridge
               </div>

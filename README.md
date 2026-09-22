@@ -80,7 +80,21 @@ See `.env.example`.
 
 Vercel must build the **Next.js** app (not the legacy static HTML). In the Vercel project:
 
-1. Framework preset: Next.js
+1. Framework preset: Next.js (`vercel.json` already sets this)
 2. Root directory: the repo root that contains `package.json` / `src/`
 3. Set env vars from `.env.example` (including server-only `ANTHROPIC_API_KEY` if used)
 4. Redeploy so the Next.js build replaces any prior static output
+
+See `DESIGN.md` for the design audit, image assignment, and rationale.
+
+## Do not reintroduce
+
+- Emoji in `src/` (use `src/components/Icon.tsx`)
+- Glassmorphism, backdrop-blur nav, hero zoom / fade-up entrance animations
+- Invented stats (especially “100%”, file counts, database table counts)
+- Unverified social account URLs or letter-tile social icons
+- Reusing `/images/market.jpg` as a section background
+- Gradients as primary section backgrounds; card lift / `translate-y` hover
+- Browser-exposed Anthropic keys (`NEXT_PUBLIC_ANTHROPIC_*`)
+- Brand spelling other than **Agro Bridge**
+- Mixing display fonts (stick to Bricolage Grotesque + Figtree)

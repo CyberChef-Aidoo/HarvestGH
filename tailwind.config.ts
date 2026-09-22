@@ -30,32 +30,26 @@ const config: Config = {
         body: ["var(--font-body)", "system-ui", "-apple-system", "Segoe UI", "sans-serif"],
       },
       borderRadius: {
-        xl: "12px",
-        "2xl": "16px",
+        DEFAULT: "6px",
+        sm: "6px",
+        md: "6px",
+        lg: "10px",
+        xl: "10px",
+        "2xl": "10px",
       },
       boxShadow: {
-        soft: "0 12px 40px rgba(18,53,36,0.08)",
-        card: "0 8px 32px rgba(18,53,36,0.10)",
+        soft: "none",
+        card: "none",
       },
       maxWidth: {
         content: "1120px",
       },
       keyframes: {
-        fadeUp: {
-          "0%": { opacity: "0", transform: "translateY(18px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
-        heroZoom: {
-          "0%": { transform: "scale(1.08)" },
-          "100%": { transform: "scale(1)" },
-        },
         spin: {
           to: { transform: "rotate(360deg)" },
         },
       },
       animation: {
-        fadeUp: "fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both",
-        heroZoom: "heroZoom 12s cubic-bezier(0.22,1,0.36,1) forwards",
         spin: "spin 0.7s linear infinite",
       },
     },

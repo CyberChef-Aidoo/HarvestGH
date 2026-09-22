@@ -5,21 +5,14 @@ interface PageHeaderProps {
   eyebrow?: string;
   title: string;
   subtitle?: string;
-  /** Use a photo background instead of the flat gradient. */
+  /** Ignored — headers are flat green (no photo overlays). Kept for call-site compatibility. */
   photo?: boolean;
 }
 
-/** Standard inner-page header band with the green/gold gradient. */
-export function PageHeader({ eyebrow, title, subtitle, photo = true }: PageHeaderProps) {
+/** Standard inner-page header band — flat green, no gradient or photo. */
+export function PageHeader({ eyebrow, title, subtitle }: PageHeaderProps) {
   return (
-    <header
-      className="px-5 pb-12 pt-[calc(68px+40px)] text-white sm:px-6"
-      style={{
-        background: photo
-          ? "linear-gradient(120deg, rgba(12,26,17,0.88), rgba(26,107,60,0.72)), url('/images/market.jpg') center/cover"
-          : "linear-gradient(120deg, #0f2418, #1a6b3c)",
-      }}
-    >
+    <header className="border-b border-line bg-green px-5 pb-12 pt-[calc(68px+40px)] text-white sm:px-6">
       <div className="mx-auto max-w-content text-left">
         {eyebrow && (
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.12em] text-gold">{eyebrow}</p>

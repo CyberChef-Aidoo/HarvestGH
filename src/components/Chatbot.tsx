@@ -31,12 +31,9 @@ const FAQS: { keys: string[]; ans: string }[] = [
 ];
 
 const QUICK_REPLIES = [
-  { label: "How to Order", msg: "How do I place an order?" },
-  { label: "Delivery Info", msg: "How does delivery work and what are the fees?" },
-  { label: "Our Crops", msg: "What crops do you have available?" },
-  { label: "Payments", msg: "How do I pay for my order?" },
-  { label: "Track Order", msg: "How do I track my order?" },
-  { label: "Become Supplier", msg: "How do I register as a supplier?" },
+  { label: "Order produce", msg: "How do I place an order?" },
+  { label: "Register my FBO", msg: "How do I register as a supplier?" },
+  { label: "Track an order", msg: "How do I track my order?" },
 ];
 
 const now = () =>
@@ -50,7 +47,6 @@ function findFAQ(msg: string): string | null {
 
 export default function Chatbot() {
   const [open, setOpen] = useState(false);
-  const [showBadge, setShowBadge] = useState(true);
   const [showQuick, setShowQuick] = useState(true);
   const [typing, setTyping] = useState(false);
   const [input, setInput] = useState("");
@@ -58,7 +54,7 @@ export default function Chatbot() {
     {
       role: "bot",
       text:
-        "Hello! I am the Agro Bridge Assistant.\n\nI can answer questions about ordering produce, delivery, payments, prices, becoming a supplier, and more.\n\nHow can I help you today?",
+        "Ask Agro Bridge about ordering, FBO registration, delivery fees, or tracking an order.",
       time: now(),
     },
   ]);
@@ -122,37 +118,27 @@ export default function Chatbot() {
   return (
     <>
       <button
-        onClick={() => {
-          setOpen((o) => !o);
-          setShowBadge(false);
-        }}
-        title="Chat with Agro Bridge Assistant"
-        aria-label={open ? "Close chat" : "Open chat"}
-        className="fixed bottom-6 right-6 z-[8888] flex h-14 w-14 items-center justify-center rounded-full bg-green text-white shadow-[0_4px_18px_rgba(26,107,60,0.42)] transition-transform hover:scale-110"
+        onClick={() => setOpen((o) => !o)}
+        title="Ask Agro Bridge"
+        aria-label={open ? "Close chat" : "Ask Agro Bridge"}
+        className="fixed bottom-6 right-6 z-[8888] flex h-14 w-14 items-center justify-center rounded-[6px] bg-green text-white border border-green-mid sm:bottom-6"
+        style={{ marginBottom: "env(safe-area-inset-bottom, 0px)" }}
       >
         {open ? <Icon name="x" size="lg" /> : <Icon name="message-circle" size="lg" />}
-        {showBadge && (
-          <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-white bg-gold text-[0.65rem] font-extrabold text-dark">
-            1
-          </span>
-        )}
       </button>
 
       {open && (
-        <div className="fixed bottom-[90px] right-6 z-[8887] flex max-h-[520px] w-[min(340px,calc(100vw-20px))] flex-col overflow-hidden rounded-[18px] border border-line bg-white shadow-[0_12px_48px_rgba(0,0,0,0.18)]">
+        <div className="fixed bottom-[96px] right-4 z-[8887] flex max-h-[min(520px,70vh)] w-[min(340px,calc(100vw-24px))] flex-col overflow-hidden rounded-[10px] border border-line bg-white sm:right-6">
           <div className="flex flex-shrink-0 items-center gap-3 bg-green px-4 py-3.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-[var(--ab-gold,#D9A825)]">
+            <div className="flex h-9 w-9 items-center justify-center rounded-[6px] border border-white/20 text-[var(--ab-gold,#D9A825)]">
               <Icon name="wheat" size="md" />
             </div>
             <div className="flex-1">
-              <div className="text-[0.9rem] font-bold text-white">Agro Bridge Assistant</div>
-              <div className="mt-0.5 flex items-center gap-1.5 text-[0.72rem] text-white/70">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#4ade80]" /> Online — responds instantly
-              </div>
+              <div className="text-[0.9rem] font-bold text-white">Ask Agro Bridge</div>
             </div>
             <button
               onClick={() => setOpen(false)}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white"
+              className="flex h-10 w-10 items-center justify-center rounded-[6px] bg-white/20 text-white"
               aria-label="Close chat"
             >
               <Icon name="x" size="md" />
@@ -161,23 +147,23 @@ export default function Chatbot() {
 
           <div
             ref={msgsRef}
-            className="flex flex-1 flex-col gap-2 overflow-y-auto bg-[#f8fbf9] px-3 py-3.5"
+            className="flex flex-1 flex-col gap-2 overflow-y-auto bg-cream px-3 py-3.5"
           >
             {messages.map((m, i) => (
               <div
                 key={i}
                 className={[
-                  "max-w-[82%] whitespace-pre-line rounded-xl px-3 py-2 text-[0.84rem] leading-snug",
+                  "max-w-[82%] whitespace-pre-line rounded-[10px] px-3 py-2 text-[0.84rem] leading-snug",
                   m.role === "user"
-                    ? "self-end rounded-br-sm bg-green text-white"
-                    : "self-start rounded-bl-sm border border-line bg-white text-ink shadow-sm",
+                    ? "self-end bg-green text-white"
+                    : "self-start border border-line bg-white text-ink",
                 ].join(" ")}
               >
                 {m.text}
                 <div
                   className={[
                     "mt-1 text-[0.64rem]",
-                    m.role === "user" ? "text-right text-white/60" : "text-[#aaa]",
+                    m.role === "user" ? "text-right text-white/60" : "text-muted",
                   ].join(" ")}
                 >
                   {m.time}
@@ -185,14 +171,8 @@ export default function Chatbot() {
               </div>
             ))}
             {typing && (
-              <div className="flex items-center gap-1 self-start rounded-xl rounded-bl-sm border border-line bg-white px-3 py-2 shadow-sm">
-                {[0, 1, 2].map((d) => (
-                  <span
-                    key={d}
-                    className="h-1.5 w-1.5 animate-bounce rounded-full bg-[#aac8b5]"
-                    style={{ animationDelay: `${d * 0.15}s` }}
-                  />
-                ))}
+              <div className="self-start border border-line bg-white px-3 py-2 text-[0.8rem] text-muted">
+                Typing…
               </div>
             )}
           </div>
@@ -203,7 +183,7 @@ export default function Chatbot() {
                 <button
                   key={q.label}
                   onClick={() => send(q.msg)}
-                  className="whitespace-nowrap rounded-full border border-line bg-green-pale px-2.5 py-1 text-[0.74rem] font-semibold text-green transition hover:bg-green hover:text-white"
+                  className="whitespace-nowrap rounded-[6px] border border-line bg-cream px-2.5 py-1 text-[0.74rem] font-semibold text-green transition hover:border-green"
                 >
                   {q.label}
                 </button>
@@ -221,28 +201,28 @@ export default function Chatbot() {
                   send();
                 }
               }}
-              placeholder="Ask me anything about Agro Bridge…"
+              placeholder="Ask about orders, FBO registration, or tracking…"
               rows={1}
-              className="max-h-20 flex-1 resize-none rounded-[22px] border-[1.5px] border-line-strong px-3.5 py-2 text-[0.85rem] outline-none focus:border-green"
+              className="max-h-20 flex-1 resize-none rounded-[6px] border-[1.5px] border-line-strong px-3.5 py-2 text-[0.85rem] outline-none focus:border-green"
             />
             <button
               onClick={() => send()}
-              className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-green text-white transition hover:bg-green-mid"
+              className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-[6px] bg-green text-white transition hover:bg-green-mid"
               aria-label="Send message"
             >
               <Icon name="send" size="md" />
             </button>
           </div>
 
-          <div className="flex flex-shrink-0 items-center justify-between border-t border-line bg-[#f0f9f2] px-3 py-2">
+          <div className="flex flex-shrink-0 items-center justify-between border-t border-line bg-cream px-3 py-2">
             <span className="text-[0.73rem] text-muted">Need a human?</span>
             <a
               href={whatsappLink("Hi Agro Bridge, I need help.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 rounded-[9px] bg-[#25d366] px-3 py-1.5 text-[0.74rem] font-bold text-white"
+              className="flex items-center gap-1.5 rounded-[6px] bg-[#25d366] px-3 py-1.5 text-[0.74rem] font-bold text-white"
             >
-              WhatsApp Us
+              WhatsApp
             </a>
           </div>
         </div>

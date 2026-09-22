@@ -130,7 +130,7 @@ export default function RegisterFarmerPage() {
 
         <div className="mx-auto max-w-2xl px-5 py-12 sm:px-6">
           {done ? (
-            <div className="rounded-2xl border border-line bg-white p-10 text-center shadow-soft">
+            <div className="rounded-[10px] border border-line bg-white p-10 text-center">
               <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-pale text-green">
                 <Icon name="check" size="2xl" />
               </div>
@@ -149,7 +149,7 @@ export default function RegisterFarmerPage() {
               </div>
             </div>
           ) : (
-            <div className="rounded-2xl border border-line bg-white p-6 shadow-soft sm:p-8">
+            <div className="rounded-[10px] border border-line bg-white p-6 sm:p-8">
               <h2 className="mb-1 text-[1.4rem] font-extrabold">Register as a supplier</h2>
               <p className="mb-8 text-[0.9rem] leading-relaxed text-muted">
                 Fill in your details below. We will contact you within 48 hours.

@@ -84,7 +84,7 @@ function CheckoutInner() {
   if (status === "error" || !product) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center px-6">
-        <div className="w-full max-w-md rounded-2xl border border-line bg-white p-9 text-center">
+        <div className="w-full max-w-md rounded-[10px] border border-line bg-white p-9 text-center">
           <div className="mb-3 flex justify-center text-[var(--ab-gold,#D9A825)]">
             <Icon name="alert-triangle" size="2xl" />
           </div>
@@ -187,7 +187,7 @@ function CheckoutInner() {
   if (status === "success") {
     return (
       <div className="flex min-h-[70vh] items-center justify-center px-6 py-16">
-        <div className="w-full max-w-md rounded-2xl border border-line bg-white p-9 text-center shadow-card">
+        <div className="w-full max-w-md rounded-[10px] border border-line bg-white p-9 text-center">
           <div className="mx-auto mb-4 flex h-[76px] w-[76px] items-center justify-center rounded-full bg-green-pale text-green">
             <Icon name="check" size="2xl" />
           </div>
@@ -224,7 +224,7 @@ function CheckoutInner() {
       </Link>
       <div className="grid items-start gap-6 lg:grid-cols-[1fr_1.3fr]">
         {/* Summary */}
-        <aside className="rounded-2xl border border-line bg-white p-5 lg:sticky lg:top-24">
+        <aside className="rounded-[10px] border border-line bg-white p-5 lg:sticky lg:top-24">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={product.image_url}
@@ -267,7 +267,7 @@ function CheckoutInner() {
         </aside>
 
         {/* Form */}
-        <div className="rounded-2xl border border-line bg-white p-6">
+        <div className="rounded-[10px] border border-line bg-white p-6">
           <h2 className="mb-1 font-display text-[1.2rem] font-bold">
             {isPre ? "Place your preorder" : "Complete your order"}
           </h2>

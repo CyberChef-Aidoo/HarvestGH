@@ -60,7 +60,7 @@ function ShopCard({ p }: { p: Product }) {
   const isLow = !isOut && !isPre && remaining <= min * 3;
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-2xl border border-line bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-soft">
+    <div className="flex flex-col overflow-hidden rounded-[10px] border border-line bg-white transition-colors duration-150">
       <div className="relative h-44 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -177,10 +177,7 @@ function ShopInner() {
 
   return (
     <>
-      <header
-        className="px-[5%] pb-12 pt-[calc(68px+40px)] text-white"
-        style={{ background: "linear-gradient(120deg, rgba(12,26,17,0.88), rgba(26,107,60,0.72)), url('/images/market.jpg') center/cover" }}
-      >
+      <header className="border-b border-line bg-green px-[5%] pb-12 pt-[calc(68px+40px)] text-white">
         <div className="mx-auto max-w-content">
           <p className="text-xs font-bold uppercase tracking-[0.12em] text-gold">Marketplace</p>
           <h1 className="mb-3 mt-3 font-display text-[clamp(1.9rem,4vw,2.7rem)] font-extrabold leading-[1.12] tracking-tight text-white">
@@ -200,7 +197,7 @@ function ShopInner() {
       </header>
 
       {/* Filters */}
-      <div className="sticky top-[68px] z-40 border-b border-line bg-white/95 px-[5%] py-3 backdrop-blur-md">
+      <div className="sticky top-[68px] z-40 border-b border-line bg-white px-[5%] py-3 ">
         <div className="mx-auto flex max-w-content flex-wrap items-center gap-2.5">
           <select value={crop} onChange={(e) => setCrop(e.target.value)} className="field !w-auto !py-2.5">
             <option value="">All crops</option>
