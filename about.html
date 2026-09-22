@@ -18,18 +18,18 @@
 <meta name="twitter:card"       content="summary_large_image">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;--gold:#e8a020;--goldp:#fef3cd;--dark:#0f1f14;--gray:#6b7c6e;--cream:#faf7f2;--white:#fff;--border:rgba(26,107,60,.12)}
+:root{--g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;--gold:#c9921a;--goldp:#fef3cd;--dark:#0f1f14;--gray:#6b7c6e;--bg:#f4f6f3;--white:#fff;--border:rgba(26,107,60,.12)}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden}
+body{font-family:var(--font),'Figtree',system-ui,sans-serif;background:var(--bg,#f4f6f3);color:var(--dark);overflow-x:hidden}
 a{text-decoration:none;color:inherit}
-button{cursor:pointer;font-family:'DM Sans',sans-serif}
+button{cursor:pointer;font-family:var(--font),'Figtree',system-ui,sans-serif}
 
 /* ── NAV ── */
 .nav{position:fixed;top:0;width:100%;z-index:200;background:rgba(10,18,12,.75);backdrop-filter:blur(18px);height:66px;display:flex;align-items:center;padding:0 5%;justify-content:space-between;transition:background .3s}
 .nav.scrolled{background:rgba(250,247,242,.97);box-shadow:0 2px 20px rgba(0,0,0,.07)}
-.logo{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:#fff;transition:color .3s;display:flex;align-items:center;gap:8px}
+.logo{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.5rem;font-weight:900;color:#fff;transition:color .3s;display:flex;align-items:center;gap:8px}
 .logo-leaf{width:30px;height:30px;background:var(--g);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.95rem}
 .logo span{color:var(--gold)}
 .nav.scrolled .logo{color:var(--g)}
@@ -48,7 +48,7 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif}
 .mob-drawer{position:fixed;top:0;left:0;height:100vh;width:290px;background:var(--dark);z-index:300;transform:translateX(-100%);transition:transform .35s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:flex;flex-direction:column}
 .mob-drawer.open{transform:translateX(0)}
 .mob-head{padding:20px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center}
-.mob-logo{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:900;color:#fff}.mob-logo span{color:var(--gold)}
+.mob-logo{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.2rem;font-weight:900;color:#fff}.mob-logo span{color:var(--gold)}
 .mob-x{background:none;border:none;color:rgba(255,255,255,.45);font-size:1.4rem;cursor:pointer}
 .mob-nav{padding:14px 10px;flex:1}
 .mob-link{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:9px;color:rgba(255,255,255,.6);font-size:.9rem;font-weight:500;transition:all .2s;margin-bottom:1px}
@@ -69,7 +69,7 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif}
 .img-hero-content{position:relative;z-index:2;height:100%;display:flex;align-items:center;padding:80px 7%}
 .img-hero-text{max-width:580px}
 .img-eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:14px}
-.img-hero-h1{font-family:'Fraunces',serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:900;color:#fff;line-height:1.12;margin-bottom:12px}
+.img-hero-h1{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:900;color:#fff;line-height:1.12;margin-bottom:12px}
 .img-hero-h1 em{font-style:italic;color:var(--gold)}
 .img-hero-p{font-size:.97rem;color:rgba(255,255,255,.7);line-height:1.75;max-width:480px}
 
@@ -86,7 +86,7 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif}
 .mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
 .sec-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.11em;color:var(--g);margin-bottom:11px}
 .sec-eyebrow::before{content:'';width:20px;height:2px;background:var(--g);display:block}
-.sec-h2{font-family:'Fraunces',serif;font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:900;margin-bottom:14px;line-height:1.18}
+.sec-h2{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:900;margin-bottom:14px;line-height:1.18}
 .body-text{font-size:.95rem;color:var(--gray);line-height:1.82;margin-bottom:14px}
 .mission-values{list-style:none;display:flex;flex-direction:column;gap:11px;margin-top:20px}
 .val-item{display:flex;align-items:flex-start;gap:12px;font-size:.9rem;color:var(--dark);line-height:1.55}
@@ -104,18 +104,18 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif}
 .problem-intro p{color:rgba(255,255,255,.52);font-size:.92rem;line-height:1.75;margin-top:12px}
 .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .stat-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:22px 20px}
-.stat-val{font-family:'Fraunces',serif;font-size:2.4rem;font-weight:900;color:var(--gold);line-height:1;margin-bottom:6px}
+.stat-val{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:2.4rem;font-weight:900;color:var(--gold);line-height:1;margin-bottom:6px}
 .stat-lbl{font-size:.85rem;color:rgba(255,255,255,.52);line-height:1.55}
 .stat-src{font-size:.7rem;color:rgba(255,255,255,.25);margin-top:6px}
 
 /* ══════════════ FOUNDER STORY ══════════════ */
-.story{padding:76px 6%;background:var(--cream)}
+.story{padding:76px 6%;background:var(--bg,#f4f6f3)}
 .story-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:start}
 .founder-card{background:#fff;border-radius:20px;overflow:hidden;border:1px solid var(--border);box-shadow:0 8px 32px rgba(15,31,20,.08);position:sticky;top:90px}
 .founder-img{width:100%;height:280px;object-fit:cover;object-position:top}
 .founder-img-fb{width:100%;height:280px;background:linear-gradient(135deg,var(--g),var(--gm));display:flex;align-items:center;justify-content:center;font-size:3rem;color:rgba(255,255,255,.3)}
 .founder-body{padding:22px}
-.founder-name{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;margin-bottom:3px}
+.founder-name{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.25rem;font-weight:900;margin-bottom:3px}
 .founder-title{font-size:.78rem;color:var(--gray);margin-bottom:14px;line-height:1.55}
 .founder-tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
 .f-tag{background:var(--gp);color:var(--g);padding:4px 10px;border-radius:100px;font-size:.7rem;font-weight:700}
@@ -130,21 +130,21 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif}
 .story-text strong{color:var(--dark);font-weight:700}
 .story-text em{font-style:italic;color:var(--g)}
 .pull-quote{background:var(--gp);border-radius:14px;padding:22px 24px;margin:22px 0;position:relative}
-.pull-quote::before{content:'"';font-family:'Fraunces',serif;font-size:5rem;color:rgba(26,107,60,.12);position:absolute;top:-10px;left:18px;line-height:1}
-.pull-quote p{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:700;color:var(--g);line-height:1.55;position:relative}
+.pull-quote::before{content:'"';font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:5rem;color:rgba(26,107,60,.12);position:absolute;top:-10px;left:18px;line-height:1}
+.pull-quote p{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.15rem;font-weight:700;color:var(--g);line-height:1.55;position:relative}
 
 /* ══════════════ WHAT WE DO ══════════════ */
 .what-section{background:#fff;padding:76px 6%}
 .what-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
-.what-card{background:var(--cream);border-radius:14px;padding:24px;border:1px solid var(--border);transition:all .25s}
+.what-card{background:var(--bg,#f4f6f3);border-radius:14px;padding:24px;border:1px solid var(--border);transition:all .25s}
 .what-card:hover{background:#fff;box-shadow:0 6px 24px rgba(26,107,60,.08);transform:translateY(-3px)}
-.what-num{font-family:'Fraunces',serif;font-size:2.4rem;font-weight:900;color:var(--gp);line-height:1;margin-bottom:10px}
+.what-num{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:2.4rem;font-weight:900;color:var(--gp);line-height:1;margin-bottom:10px}
 .what-title{font-weight:700;font-size:.97rem;margin-bottom:8px}
 .what-desc{font-size:.84rem;color:var(--gray);line-height:1.65}
 
 /* ══════════════ CTA ══════════════ */
 .about-cta{background:var(--g);padding:70px 6%;text-align:center}
-.about-cta h2{font-family:'Fraunces',serif;font-size:clamp(1.8rem,4vw,2.7rem);font-weight:900;color:#fff;margin-bottom:12px}
+.about-cta h2{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:clamp(1.8rem,4vw,2.7rem);font-weight:900;color:#fff;margin-bottom:12px}
 .about-cta p{color:rgba(255,255,255,.7);font-size:.97rem;max-width:480px;margin:0 auto 26px;line-height:1.7}
 .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .btn-white{background:#fff;color:var(--g);border:none;padding:13px 26px;border-radius:11px;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .2s}.btn-white:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.15)}
@@ -153,7 +153,7 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif}
 /* ══════════════ FOOTER ══════════════ */
 footer{background:#060e09;color:#fff;padding:44px 6% 0}
 .ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:36px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.07)}
-.ft-logo{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:900;color:#fff;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+.ft-logo{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.35rem;font-weight:900;color:#fff;margin-bottom:11px;display:flex;align-items:center;gap:8px}
 .ft-logo-leaf{width:30px;height:30px;background:var(--g);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.88rem}
 .ft-logo span{color:var(--gold)}
 .ft-desc{font-size:.81rem;color:rgba(255,255,255,.35);line-height:1.8;max-width:280px;margin-bottom:16px}
@@ -272,6 +272,7 @@ footer{background:#060e09;color:#fff;padding:44px 6% 0}
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -301,7 +302,7 @@ footer{background:#060e09;color:#fff;padding:44px 6% 0}
 </div>
 
 <!-- NAV -->
-<nav class="nav" id="mainNav">
+<nav class="nav nav-hero" id="mainNav">
   <a href="index.html" class="logo">
     <img src="logo.png" alt="HarvestGH" class="logo-img" style="height:34px;width:auto;object-fit:contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="logo-leaf" style="display:none">🌾</div>Harvest<span>GH</span>
   </a>
@@ -309,80 +310,29 @@ footer{background:#060e09;color:#fff;padding:44px 6% 0}
     <a href="index.html" class="nav-link">Home</a>
     <a href="listings.html" class="nav-link">Shop</a>
     <a href="contact.html" class="nav-link">Contact</a>
-    <a href="listings.html"><button class="btn-g">🛒 Order Now</button></a>
+    <a href="listings.html"><button class="btn-g">Order Now</button></a>
   </div>
   <button class="hamburger" onclick="openDrawer()">☰</button>
 </nav>
 
-<!-- ══════════════════════════
-     IMAGE CAROUSEL HERO
-══════════════════════════ -->
+<!-- HERO -->
 <section class="img-hero" id="imgHero">
   <div class="img-slides" id="imgTrack">
-
     <div class="img-slide active" id="is0">
       <div class="img-slide-bg" style="background-image:url('farmland.jpg')"></div>
       <div class="img-slide-overlay"></div>
       <div class="img-hero-content">
         <div class="img-hero-text">
-          <div class="img-eyebrow">🌾 Our Story</div>
-          <h1 class="img-hero-h1">Built to <em>End</em><br>Post-Harvest Loss<br>in Ghana.</h1>
-          <p class="img-hero-p">Ghana loses up to 50% of its harvest every year. Not from bad farming — but from a broken market. HarvestGH is the fix.</p>
+          <div class="img-eyebrow">Our story</div>
+          <h1 class="img-hero-h1">Built to <em>end</em><br>post-harvest loss<br>in Ghana.</h1>
+          <p class="img-hero-p">Ghana loses up to 50% of its harvest every year — not from bad farming, but from a broken market. HarvestGH is the fix.</p>
         </div>
       </div>
     </div>
-
-    <div class="img-slide" id="is1">
-      <div class="img-slide-bg" style="background-image:url('farmland.jpg')"></div>
-      <div class="img-slide-overlay"></div>
-      <div class="img-hero-content">
-        <div class="img-hero-text">
-          <div class="img-eyebrow">🤝 Our Mission</div>
-          <h1 class="img-hero-h1">Every Farmer<br>Deserves a <em>Market.</em></h1>
-          <p class="img-hero-p">From elderly farmers in Tamale to young FBO members in Ashanti — HarvestGH works for all of them, on any phone.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="img-slide" id="is2">
-      <div class="img-slide-bg" style="background-image:url('farmland.jpg')"></div>
-      <div class="img-slide-overlay"></div>
-      <div class="img-hero-content">
-        <div class="img-hero-text">
-          <div class="img-eyebrow">💰 Our Model</div>
-          <h1 class="img-hero-h1">Fair Prices.<br><em>Secure Payments.</em><br>Always.</h1>
-          <p class="img-hero-p">We hold buyer payments in escrow until delivery is confirmed. Farmers get paid. Buyers get fresh produce. HarvestGH earns 1–2%.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="img-slide" id="is3">
-      <div class="img-slide-bg" style="background-image:url('farmland.jpg')"></div>
-      <div class="img-slide-overlay"></div>
-      <div class="img-hero-content">
-        <div class="img-hero-text">
-          <div class="img-eyebrow">📅 Our Vision</div>
-          <h1 class="img-hero-h1">From Accra<br>to Every <em>Region</em><br>in Ghana.</h1>
-          <p class="img-hero-p">Starting in Ashanti and Greater Accra. Then Brong-Ahafo. Then the North. One FBO at a time, until every harvest finds a market.</p>
-        </div>
-      </div>
-    </div>
-
   </div>
-
-  <div class="img-dots" id="imgDots">
-    <button class="img-dot active" onclick="goImgSlide(0)"></button>
-    <button class="img-dot" onclick="goImgSlide(1)"></button>
-    <button class="img-dot" onclick="goImgSlide(2)"></button>
-    <button class="img-dot" onclick="goImgSlide(3)"></button>
-  </div>
-  <button class="img-arrow ia-prev" onclick="prevImg()">‹</button>
-  <button class="img-arrow ia-next" onclick="nextImg()">›</button>
 </section>
 
-<!-- ══════════════════════════
-     MISSION
-══════════════════════════ -->
+<!-- MISSION -->
 <section class="mission">
   <div class="mission-grid">
     <div>
@@ -494,10 +444,10 @@ footer{background:#060e09;color:#fff;padding:44px 6% 0}
       <div style="background:#f0f4f1;border-radius:14px;padding:22px 24px;margin-top:26px">
         <h4 style="font-weight:700;font-size:.92rem;margin-bottom:13px;color:var(--dark)">HarvestGH by the Numbers</h4>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <div style="background:#fff;border-radius:10px;padding:12px 14px"><div style="font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:var(--g)">18</div><div style="font-size:.76rem;color:var(--gray);margin-top:2px">Platform files built from scratch</div></div>
-          <div style="background:#fff;border-radius:10px;padding:12px 14px"><div style="font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:var(--g)">9</div><div style="font-size:.76rem;color:var(--gray);margin-top:2px">Supabase database tables</div></div>
-          <div style="background:#fff;border-radius:10px;padding:12px 14px"><div style="font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:var(--g)">10+</div><div style="font-size:.76rem;color:var(--gray);margin-top:2px">Crops available on marketplace</div></div>
-          <div style="background:#fff;border-radius:10px;padding:12px 14px"><div style="font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:var(--g)">16</div><div style="font-size:.76rem;color:var(--gray);margin-top:2px">Regions covered across Ghana</div></div>
+          <div style="background:#fff;border-radius:10px;padding:12px 14px"><div style="font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.5rem;font-weight:900;color:var(--g)">18</div><div style="font-size:.76rem;color:var(--gray);margin-top:2px">Platform files built from scratch</div></div>
+          <div style="background:#fff;border-radius:10px;padding:12px 14px"><div style="font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.5rem;font-weight:900;color:var(--g)">9</div><div style="font-size:.76rem;color:var(--gray);margin-top:2px">Supabase database tables</div></div>
+          <div style="background:#fff;border-radius:10px;padding:12px 14px"><div style="font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.5rem;font-weight:900;color:var(--g)">10+</div><div style="font-size:.76rem;color:var(--gray);margin-top:2px">Crops available on marketplace</div></div>
+          <div style="background:#fff;border-radius:10px;padding:12px 14px"><div style="font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.5rem;font-weight:900;color:var(--g)">16</div><div style="font-size:.76rem;color:var(--gray);margin-top:2px">Regions covered across Ghana</div></div>
         </div>
       </div>
     </div>
@@ -595,41 +545,12 @@ footer{background:#060e09;color:#fff;padding:44px 6% 0}
 </a>
 
 <script>
-/* ── IMAGE CAROUSEL ── */
-let imgCurrent=0, imgTotal=4, imgTimer;
-const imgTrack=document.getElementById('imgTrack');
-const imgDots=document.querySelectorAll('.img-dot');
-function goImgSlide(n){
-  document.getElementById('is'+imgCurrent).classList.remove('active');
-  imgCurrent=(n+imgTotal)%imgTotal;
-  document.getElementById('is'+imgCurrent).classList.add('active');
-  imgTrack.style.transform=`translateX(-${imgCurrent*100}%)`;
-  imgDots.forEach((d,i)=>d.classList.toggle('active',i===imgCurrent));
-  resetImgAuto();
-}
-function nextImg(){goImgSlide(imgCurrent+1)}
-function prevImg(){goImgSlide(imgCurrent-1)}
-function resetImgAuto(){clearInterval(imgTimer);imgTimer=setInterval(nextImg,5000)}
-let ts2=0, ts2y=0;
-const imgHeroEl = document.getElementById('imgHero');
-if(imgHeroEl){
-  imgHeroEl.addEventListener('touchstart',e=>{ts2=e.touches[0].clientX;ts2y=e.touches[0].clientY},{passive:true});
-  imgHeroEl.addEventListener('touchend',e=>{
-    const dx=ts2-e.changedTouches[0].clientX;
-    const dy=Math.abs(ts2y-e.changedTouches[0].clientY);
-    if(Math.abs(dx)>40&&Math.abs(dx)>dy) dx>0?nextImg():prevImg();
-  },{passive:true});
-}
-resetImgAuto();
-
-/* ── NAV SCROLL ── */
-window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>80));
-
-/* ── DRAWER ── */
-function openDrawer(){document.getElementById('mobDrawer').classList.add('open');document.getElementById('mobBackdrop').classList.add('open');document.body.style.overflow='hidden'}
-function closeDrawer(){document.getElementById('mobDrawer').classList.remove('open');document.getElementById('mobBackdrop').classList.remove('open');document.body.style.overflow=''}
+window.addEventListener('scroll', () => {
+  const n = document.getElementById('mainNav');
+  if (n) n.classList.toggle('scrolled', window.scrollY > 60);
+});
 </script>
-
+<script src="site.js"></script>
 <script src="chatbot.js"></script>
 </body>
 </html>

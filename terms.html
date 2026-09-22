@@ -5,18 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Terms of Service — HarvestGH</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;--gold:#e8a020;--dark:#0f1f14;--gray:#6b7c6e;--cream:#faf7f2;--border:rgba(26,107,60,.12);--red:#c0392b}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark)}
+:root{--g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;--gold:#c9921a;--dark:#0f1f14;--gray:#6b7c6e;--bg:#f4f6f3;--border:rgba(26,107,60,.12);--red:#c0392b}
+body{font-family:var(--font),'Figtree',system-ui,sans-serif;background:var(--bg,#f4f6f3);color:var(--dark)}
 a{color:var(--g);text-decoration:none}a:hover{text-decoration:underline}
 
 .nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(250,247,242,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;padding:0 5%;justify-content:space-between}
-.logo{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:var(--g);text-decoration:none}.logo span{color:var(--gold)}
+.logo{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.5rem;font-weight:900;color:var(--g);text-decoration:none}.logo span{color:var(--gold)}
 .nav-r a{font-size:.86rem;font-weight:500;color:var(--gray);padding:8px 12px}.nav-r a:hover{color:var(--g);text-decoration:none}
 
-.page-header{background:var(--dark);padding:96px 5% 44px}
-.page-header h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#fff;margin-bottom:8px}
+.page-header{
+  background:
+    linear-gradient(120deg,rgba(12,26,17,.92),rgba(15,31,20,.88)),
+    url('images/market.jpg') center/cover;
+  padding:calc(var(--nav-h,68px) + 40px) 5% 48px
+}
+.page-header h1{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#fff;margin-bottom:8px}
 .page-header p{color:rgba(255,255,255,.5);font-size:.87rem}
 
 .layout{display:grid;grid-template-columns:220px 1fr;gap:48px;max-width:960px;margin:0 auto;padding:52px 5% 80px;align-items:start}
@@ -30,7 +35,7 @@ a{color:var(--g);text-decoration:none}a:hover{text-decoration:underline}
 .toc-back{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--gray);margin-bottom:20px;text-decoration:none}.toc-back:hover{color:var(--g);text-decoration:none}
 
 .doc{max-width:660px}
-.doc h2{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;color:var(--dark);margin-bottom:10px;padding-top:10px}
+.doc h2{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.4rem;font-weight:700;color:var(--dark);margin-bottom:10px;padding-top:10px}
 .doc h3{font-size:.97rem;font-weight:700;color:var(--dark);margin:18px 0 7px}
 .doc p{font-size:.93rem;color:var(--gray);line-height:1.8;margin-bottom:12px}
 .doc ul,.doc ol{padding-left:18px;margin-bottom:12px}
@@ -152,10 +157,11 @@ a{color:var(--g);text-decoration:none}a:hover{text-decoration:underline}
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<nav class="nav">
+<nav class="nav nav-solid" id="mainNav">
   <a href="index.html" class="logo">Harvest<span>GH</span></a>
   <div class="nav-r">
     <a href="index.html">Home</a>
@@ -460,5 +466,6 @@ sections.forEach(s => observer.observe(s));
   <svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 <script src="config.js"></script>
+<script src="site.js"></script>
 </body>
 </html>

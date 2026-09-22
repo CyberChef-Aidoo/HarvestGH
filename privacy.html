@@ -5,18 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — HarvestGH</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;--gold:#e8a020;--dark:#0f1f14;--gray:#6b7c6e;--cream:#faf7f2;--border:rgba(26,107,60,.12)}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark)}
+:root{--g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;--gold:#c9921a;--dark:#0f1f14;--gray:#6b7c6e;--bg:#f4f6f3;--border:rgba(26,107,60,.12)}
+body{font-family:var(--font),'Figtree',system-ui,sans-serif;background:var(--bg,#f4f6f3);color:var(--dark)}
 a{color:var(--g);text-decoration:none}a:hover{text-decoration:underline}
 
 .nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(250,247,242,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;padding:0 5%;justify-content:space-between}
-.logo{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:var(--g);text-decoration:none}.logo span{color:var(--gold)}
+.logo{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.5rem;font-weight:900;color:var(--g);text-decoration:none}.logo span{color:var(--gold)}
 .nav-r a{font-size:.86rem;font-weight:500;color:var(--gray);padding:8px 12px}.nav-r a:hover{color:var(--g);text-decoration:none}
 
-.page-header{background:var(--dark);padding:96px 5% 44px}
-.page-header h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#fff;margin-bottom:8px}
+.page-header{
+  background:
+    linear-gradient(120deg,rgba(12,26,17,.92),rgba(15,31,20,.88)),
+    url('images/market.jpg') center/cover;
+  padding:calc(var(--nav-h,68px) + 40px) 5% 48px
+}
+.page-header h1{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#fff;margin-bottom:8px}
 .page-header p{color:rgba(255,255,255,.5);font-size:.87rem}
 
 .layout{display:grid;grid-template-columns:220px 1fr;gap:48px;max-width:960px;margin:0 auto;padding:52px 5% 80px;align-items:start}
@@ -32,7 +37,7 @@ a{color:var(--g);text-decoration:none}a:hover{text-decoration:underline}
 
 /* CONTENT */
 .doc{max-width:660px}
-.doc h2{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;color:var(--dark);margin-bottom:10px;padding-top:10px}
+.doc h2{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.4rem;font-weight:700;color:var(--dark);margin-bottom:10px;padding-top:10px}
 .doc h3{font-size:.97rem;font-weight:700;color:var(--dark);margin:18px 0 7px}
 .doc p{font-size:.93rem;color:var(--gray);line-height:1.8;margin-bottom:12px}
 .doc ul{padding-left:18px;margin-bottom:12px}
@@ -144,10 +149,11 @@ a{color:var(--g);text-decoration:none}a:hover{text-decoration:underline}
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<nav class="nav">
+<nav class="nav nav-solid" id="mainNav">
   <a href="index.html" class="logo">Harvest<span>GH</span></a>
   <div class="nav-r">
     <a href="index.html">Home</a>
@@ -385,5 +391,6 @@ sections.forEach(s => observer.observe(s));
 </a>
 
 <script src="config.js"></script>
+<script src="site.js"></script>
 </body>
 </html>

@@ -5,25 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Become a Supplier — HarvestGH</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,400&family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;--gold:#e8a020;--goldp:#fef3cd;--dark:#0f1f14;--gray:#6b7c6e;--bg:#f0f4f1;--border:rgba(26,107,60,.12);--red:#c0392b}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--dark)}
+:root{--g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;--gold:#c9921a;--goldp:#fef3cd;--dark:#0f1f14;--gray:#6b7c6e;--bg:#f0f4f1;--border:rgba(26,107,60,.12);--red:#c0392b}
+body{font-family:var(--font),'Figtree',system-ui,sans-serif;background:var(--bg);color:var(--dark)}
 a{text-decoration:none;color:inherit}
-button{cursor:pointer;font-family:'DM Sans',sans-serif}
+button{cursor:pointer;font-family:var(--font),'Figtree',system-ui,sans-serif}
 .hidden{display:none!important}
 
 /* NAV */
 .nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(250,247,242,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;padding:0 5%;justify-content:space-between}
-.logo{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:var(--g)}.logo span{color:var(--gold)}
+.logo{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.5rem;font-weight:900;color:var(--g)}.logo span{color:var(--gold)}
 .nav-r{display:flex;gap:9px;align-items:center}
 .nav-link{font-size:.86rem;font-weight:500;color:var(--dark);padding:8px 12px}.nav-link:hover{color:var(--g)}
 .btn-g{background:var(--g);color:#fff;border:none;padding:9px 17px;border-radius:9px;font-size:.84rem;font-weight:600;transition:background .2s}.btn-g:hover{background:var(--gm)}
 
 /* HERO */
-.page-hero{background:linear-gradient(135deg,var(--g),var(--gm));padding:96px 5% 44px;color:#fff}
-.page-hero h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,4vw,2.5rem);font-weight:900;color:#fff;margin-bottom:8px}
-.page-hero p{color:rgba(255,255,255,.72);font-size:.93rem;max-width:520px;line-height:1.65;margin-bottom:18px}
+.page-hero{
+  background:
+    linear-gradient(120deg,rgba(12,26,17,.88),rgba(26,107,60,.72)),
+    url('images/market.jpg') center/cover;
+  padding:calc(var(--nav-h,68px) + 40px) 5% 48px;color:#fff
+}
+.page-hero h1{
+  font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;
+  font-size:clamp(1.9rem,4vw,2.6rem);font-weight:800;letter-spacing:-.02em;
+  color:#fff;margin-bottom:12px;line-height:1.12
+}
+.page-hero p{color:rgba(255,255,255,.72);font-size:1rem;max-width:36rem;line-height:1.7;margin-bottom:0}
 .hero-pills{display:flex;gap:9px;flex-wrap:wrap}
 .hero-pill{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:5px 13px;border-radius:100px;font-size:.78rem;font-weight:600;color:#fff}
 
@@ -39,7 +48,7 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif}
 
 /* FORM CARD */
 .form-card{background:#fff;border-radius:20px;padding:36px;border:1px solid var(--border);box-shadow:0 4px 24px rgba(15,31,20,.07)}
-.form-card h2{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;margin-bottom:5px}
+.form-card h2{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.4rem;font-weight:900;margin-bottom:5px}
 .form-card>p{color:var(--gray);font-size:.88rem;margin-bottom:24px;line-height:1.6}
 
 /* SECTION DIVIDERS */
@@ -52,7 +61,7 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif}
 .form-group{margin-bottom:14px}
 .form-label{display:block;font-size:.82rem;font-weight:600;margin-bottom:6px;color:var(--dark)}
 .req{color:var(--red)}
-.form-control{width:100%;padding:11px 13px;border:1.5px solid rgba(26,107,60,.2);border-radius:10px;font-size:.9rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;color:var(--dark)}
+.form-control{width:100%;padding:11px 13px;border:1.5px solid rgba(26,107,60,.2);border-radius:10px;font-size:.9rem;font-family:var(--font),'Figtree',system-ui,sans-serif;outline:none;transition:border-color .2s;color:var(--dark)}
 .form-control:focus{border-color:var(--g)}.form-control::placeholder{color:#aab4ac}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
 .form-hint{font-size:.74rem;color:var(--gray);margin-top:3px}
@@ -85,7 +94,7 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif}
 /* SUCCESS */
 .success-wrap{text-align:center;padding:10px 0}
 .s-icon{width:76px;height:76px;border-radius:50%;background:var(--gp);margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--g)}
-.success-wrap h2{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:900;margin-bottom:10px}
+.success-wrap h2{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.7rem;font-weight:900;margin-bottom:10px}
 .success-wrap p{color:var(--gray);font-size:.9rem;line-height:1.75;max-width:440px;margin:0 auto 22px}
 .next-steps{background:#f8faf8;border-radius:12px;padding:18px 20px;text-align:left;margin:18px 0}
 .next-steps h4{font-weight:700;font-size:.88rem;margin-bottom:11px;color:var(--dark)}
@@ -196,10 +205,11 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif}
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<nav class="nav">
+<nav class="nav nav-solid" id="mainNav">
   <a href="index.html" class="logo">Harvest<span>GH</span></a>
   <div class="nav-r">
     <a href="listings.html" class="nav-link">Shop</a>
@@ -209,14 +219,8 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif}
 
 <!-- HERO -->
 <div class="page-hero">
-  <h1>Partner With HarvestGH — Sell Your Harvest</h1>
-  <p>Register your FBO or farm group as a HarvestGH supplier. We connect your produce to buyers in Accra, Kumasi, and cities across Ghana — before it spoils.</p>
-  <div class="hero-pills">
-    <div class="hero-pill">✅ Free to Join</div>
-    <div class="hero-pill">💰 Fair Prices</div>
-    <div class="hero-pill">🔒 Guaranteed Payment</div>
-    <div class="hero-pill">📱 Works on Any Phone</div>
-  </div>
+  <h1>Sell your harvest with HarvestGH</h1>
+  <p>Register your FBO or farm group. We connect your produce to buyers across Ghana — before it spoils.</p>
 </div>
 
 <!-- BENEFITS STRIP -->
@@ -550,5 +554,6 @@ loadSettings();
 </script>
 
 <script src="chatbot.js"></script>
+<script src="site.js"></script>
 </body>
 </html>

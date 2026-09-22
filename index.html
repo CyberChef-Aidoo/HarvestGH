@@ -3,626 +3,423 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- ── FAVICON ── -->
 <link rel="icon" type="image/png" href="logo.png">
-
-<!-- ── SEO + OPEN GRAPH ── -->
 <title>HarvestGH — Fresh Farm Produce Delivered Across Ghana</title>
 <meta name="description" content="Order fresh tomatoes, maize, yam, plantain and more directly from verified FBO farmers across Ghana. Secure payment. Nationwide delivery. HarvestGH.">
 <meta name="keywords" content="Ghana farm produce, buy fresh vegetables Ghana, agricultural marketplace Ghana, FBO farmers Ghana, farm to table Ghana">
 <meta name="author" content="Ibrahim Mohammed Lotsu">
 <meta name="robots" content="index, follow">
-
-<meta property="og:type"        content="website">
-<meta property="og:site_name"   content="HarvestGH">
-<meta property="og:url"         content="https://harvestgh.vercel.app">
-<meta property="og:title"       content="HarvestGH — Fresh Farm Produce Delivered Across Ghana">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HarvestGH">
+<meta property="og:url" content="https://harvestgh.vercel.app">
+<meta property="og:title" content="HarvestGH — Fresh Farm Produce Delivered Across Ghana">
 <meta property="og:description" content="Order fresh tomatoes, maize, yam, plantain and more directly from verified FBO farmers across Ghana. Secure payment. Nationwide delivery.">
-<meta property="og:image"       content="images/market.jpg">
-<meta property="og:image:width"  content="1200">
-<meta property="og:image:height" content="630">
-
-<meta name="twitter:card"        content="summary_large_image">
-<meta name="twitter:title"       content="HarvestGH — Fresh Farm Produce Delivered Across Ghana">
-<meta name="twitter:description" content="Order fresh produce directly from verified farms across Ghana.">
-<meta name="twitter:image"       content="images/market.jpg">
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,600;1,700&display=swap');
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;
-  --gold:#e8a020;--goldp:#fef3cd;
-  --dark:#0f1f14;--gray:#6b7c6e;
-  --cream:#faf7f2;--white:#fff;
-  --border:rgba(26,107,60,.12);
-}
-html{scroll-behavior:smooth}
-body{font-family:'Manrope',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden}
-a{text-decoration:none;color:inherit}
-button{cursor:pointer;font-family:'Manrope',sans-serif}
-img{display:block}
-
-/* ══════════════ NAV ══════════════ */
-.nav{
-  position:fixed;top:0;width:100%;z-index:200;
-  background:rgba(10,18,12,.75);backdrop-filter:blur(18px);
-  height:66px;display:flex;align-items:center;
-  padding:0 5%;justify-content:space-between;
-  transition:background .3s;
-}
-.nav.scrolled{background:rgba(250,247,242,.97);box-shadow:0 2px 20px rgba(0,0,0,.07)}
-.nav.scrolled .logo{color:var(--g)}
-.nav.scrolled .nav-link{color:var(--dark)}
-.logo{font-family:'Source Serif 4',serif;font-size:1.55rem;font-weight:700;color:#fff;transition:color .3s;display:flex;align-items:center;gap:8px}
-.logo-leaf{width:32px;height:32px;background:var(--g);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:background .3s}
-.nav.scrolled .logo-leaf{background:var(--g)}
-.logo span{color:var(--gold)}
-.nav-links{display:flex;gap:2px;list-style:none}
-.nav-link{font-size:.86rem;font-weight:500;color:rgba(255,255,255,.85);padding:8px 14px;border-radius:8px;transition:all .2s}
-.nav-link:hover{color:#fff;background:rgba(255,255,255,.1)}
-.nav.scrolled .nav-link:hover{color:var(--g);background:var(--gp)}
-.nav-ctas{display:flex;gap:9px}
-.btn-nav-out{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25);padding:9px 18px;border-radius:9px;font-size:.84rem;font-weight:600;transition:all .2s}
-.btn-nav-out:hover{background:rgba(255,255,255,.2)}
-.btn-nav-g{background:var(--gold);color:var(--dark);border:none;padding:9px 18px;border-radius:9px;font-size:.84rem;font-weight:700;transition:all .2s}
-.btn-nav-g:hover{background:#d4921c}
-.hamburger{display:none;background:none;border:none;color:#fff;font-size:1.4rem;padding:6px;transition:color .3s}
-.nav.scrolled .hamburger{color:var(--dark)}
-
-/* ══════════════ MOBILE DRAWER (LEFT SLIDE) ══════════════ */
-.mob-backdrop{
-  position:fixed;inset:0;background:rgba(0,0,0,.6);
-  z-index:299;opacity:0;pointer-events:none;transition:opacity .35s;
-}
-.mob-backdrop.open{opacity:1;pointer-events:all}
-.mob-drawer{
-  position:fixed;top:0;left:0;height:100vh;width:300px;
-  background:var(--dark);z-index:300;
-  transform:translateX(-100%);transition:transform .35s cubic-bezier(.4,0,.2,1);
-  display:flex;flex-direction:column;overflow-y:auto;
-}
-.mob-drawer.open{transform:translateX(0)}
-.mob-drawer-head{
-  padding:20px 20px 16px;
-  border-bottom:1px solid rgba(255,255,255,.08);
-  display:flex;justify-content:space-between;align-items:center;
-}
-.mob-logo{font-family:'Source Serif 4',serif;font-size:1.3rem;font-weight:700;color:#fff}
-.mob-logo span{color:var(--gold)}
-.mob-close{background:none;border:none;color:rgba(255,255,255,.5);font-size:1.4rem;cursor:pointer;padding:4px}
-.mob-nav{padding:14px 12px;flex:1}
-.mob-sec{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.28);padding:8px 10px 4px;margin-top:6px}
-.mob-link{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:9px;color:rgba(255,255,255,.65);font-size:.9rem;font-weight:500;transition:all .2s;margin-bottom:1px}
-.mob-link:hover{background:rgba(255,255,255,.07);color:#fff}
-.mob-foot{padding:16px;border-top:1px solid rgba(255,255,255,.08)}
-.mob-ctas{display:flex;flex-direction:column;gap:9px}
-.mob-btn-g{background:var(--gold);color:var(--dark);border:none;padding:12px;border-radius:10px;font-size:.9rem;font-weight:700;width:100%;text-align:center;display:block}
-.mob-btn-out{background:rgba(255,255,255,.07);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.12);padding:12px;border-radius:10px;font-size:.9rem;font-weight:600;width:100%;text-align:center;display:block}
-
-/* ══════════════ HERO CAROUSEL ══════════════ */
-.hero{position:relative;height:100vh;min-height:560px;overflow:hidden}
-.slides{display:flex;height:100%;transition:transform .7s cubic-bezier(.4,0,.2,1)}
-.slide{
-  min-width:100%;height:100%;position:relative;flex-shrink:0;
-  display:flex;align-items:center;
-}
-.slide-bg{
-  position:absolute;inset:0;background-size:cover;background-position:center;
-  transition:transform 8s ease;transform:scale(1.06);
-}
-.slide.active .slide-bg{transform:scale(1)}
-.slide-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,18,12,.82) 0%,rgba(10,18,12,.52) 38%,rgba(10,18,12,.16) 75%,rgba(10,18,12,.08) 100%),linear-gradient(180deg,rgba(10,18,12,.18),rgba(10,18,12,.25))}
-.slide-content{
-  position:relative;z-index:2;padding:70px 7% 35px;
-  max-width:720px;text-align:left;
-}
-.slide-h1{
-  font-family:'Source Serif 4',serif;font-size:clamp(2.2rem,5.5vw,4rem);
-  font-weight:700;color:#fff;line-height:1.1;margin-bottom:14px;
-}
-.slide-h1 em{font-style:italic;color:var(--gold)}
-.slide-p{
-  font-size:clamp(.9rem,2vw,1.08rem);color:rgba(255,255,255,.75);
-  line-height:1.75;max-width:520px;margin-bottom:26px;
-}
-.slide-btns{display:flex;gap:11px;flex-wrap:wrap}
-.btn-hero-g{
-  background:var(--gold);color:var(--dark);border:none;
-  padding:14px 28px;border-radius:11px;font-size:.95rem;font-weight:700;
-  transition:all .2s;display:inline-flex;align-items:center;gap:8px;
-}
-.btn-hero-g:hover{background:#d4921c;transform:translateY(-2px)}
-.btn-hero-out{
-  background:rgba(255,255,255,.12);color:#fff;
-  border:1.5px solid rgba(255,255,255,.3);
-  padding:14px 28px;border-radius:11px;font-size:.95rem;font-weight:600;
-  transition:all .2s;display:inline-flex;align-items:center;gap:8px;
-}
-.btn-hero-out:hover{background:rgba(255,255,255,.22)}
-
-/* SLIDE DOTS */
-.hero-dots{
-  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
-  display:flex;gap:8px;z-index:10;
-}
-.dot{
-  width:8px;height:8px;border-radius:50%;
-  background:rgba(255,255,255,.35);border:none;padding:0;
-  transition:all .3s;cursor:pointer;
-}
-.dot.active{background:var(--gold);width:24px;border-radius:100px}
-
-/* SLIDE ARROWS */
-.hero-arrow{
-  position:absolute;top:50%;transform:translateY(-50%);
-  z-index:10;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.25);
-  color:#fff;width:44px;height:44px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
-  cursor:pointer;transition:all .2s;backdrop-filter:blur(8px);
-}
-.hero-arrow:hover{background:rgba(255,255,255,.25)}
-.arrow-prev{left:20px}.arrow-next{right:20px}
-
-/* SCROLL INDICATOR */
-.scroll-hint{
-  position:absolute;bottom:28px;right:5%;z-index:10;
-  display:flex;align-items:center;gap:7px;
-  font-size:.72rem;font-weight:600;color:rgba(255,255,255,.5);
-}
-.scroll-wheel{
-  width:22px;height:34px;border:2px solid rgba(255,255,255,.3);
-  border-radius:100px;display:flex;align-items:flex-start;justify-content:center;
-  padding-top:5px;
-}
-.scroll-ball{
-  width:4px;height:4px;background:rgba(255,255,255,.6);
-  border-radius:50%;animation:scrollb 1.8s infinite;
-}
-@keyframes scrollb{0%{transform:translateY(0);opacity:1}100%{transform:translateY(12px);opacity:0}}
-
-/* ══════════════ TRUST STRIP ══════════════ */
-.trust-strip{
-  background:var(--dark);
-  display:grid;grid-template-columns:repeat(4,1fr);
-}
-.trust-item{
-  padding:22px 16px;text-align:center;
-  border-right:1px solid rgba(255,255,255,.06);
-}
-.trust-item:last-child{border-right:none}
-.trust-val{
-  font-family:'Source Serif 4',serif;font-size:2rem;font-weight:700;
-  color:var(--gold);line-height:1;margin-bottom:4px;
-}
-.trust-lbl{font-size:.74rem;color:rgba(255,255,255,.42);font-weight:500}
-.trust-sub{font-size:.64rem;color:rgba(255,255,255,.22);margin-top:2px}
-
-/* ══════════════ FEATURED PRODUCE ══════════════ */
-.section{padding:72px 6%}
-.sec-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.11em;margin-bottom:11px}
-.sec-eyebrow::before{content:'';width:20px;height:2px;display:block}
-.eyebrow-g{color:var(--g)}.eyebrow-g::before{background:var(--g)}
-.eyebrow-gold{color:var(--gold)}.eyebrow-gold::before{background:var(--gold)}
-.eyebrow-white{color:rgba(255,255,255,.6)}.eyebrow-white::before{background:var(--gold)}
-.sec-h2{font-family:'Source Serif 4',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;margin-bottom:10px;line-height:1.15}
-.sec-p{color:var(--gray);font-size:.97rem;line-height:1.75;max-width:560px;margin-bottom:40px}
-
-/* PRODUCE CARDS */
-.produce-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;margin-bottom:28px}
-.prd-card{
-  background:#fff;border-radius:16px;overflow:hidden;
-  border:1px solid var(--border);transition:all .25s;cursor:pointer;
-  position:relative;
-}
-.prd-card:hover{transform:translateY(-5px);box-shadow:0 14px 40px rgba(26,107,60,.13)}
-.prd-img{width:100%;height:160px;object-fit:cover;transition:transform .4s}
-.prd-card:hover .prd-img{transform:scale(1.06)}
-.prd-img-fb{width:100%;height:160px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95rem;color:#fff}
-.prd-tag-wrap{position:absolute;top:10px;left:10px;display:flex;gap:5px}
-.prd-tag{font-size:.68rem;font-weight:700;padding:4px 9px;border-radius:100px}
-.prd-tag-g{background:var(--gp);color:var(--g)}
-.prd-tag-gold{background:var(--goldp);color:#856404}
-.prd-body{padding:14px}
-.prd-name{font-family:'Source Serif 4',serif;font-size:1rem;font-weight:700;margin-bottom:3px}
-.prd-src{font-size:.74rem;color:var(--gray);margin-bottom:9px;display:flex;align-items:center;gap:4px}
-.prd-foot{display:flex;justify-content:space-between;align-items:center}
-.prd-price{font-family:'Source Serif 4',serif;font-size:1.15rem;font-weight:700;color:var(--g)}
-.prd-price small{font-family:'Manrope';font-size:.7rem;font-weight:400;color:var(--gray)}
-.prd-btn{background:var(--g);color:#fff;border:none;padding:7px 14px;border-radius:8px;font-size:.78rem;font-weight:600;transition:background .2s}
-.prd-btn:hover{background:var(--gm)}
-.view-all-wrap{text-align:center;padding-top:10px}
-.btn-view-all{display:inline-flex;align-items:center;gap:8px;background:var(--g);color:#fff;border:none;padding:13px 28px;border-radius:11px;font-size:.92rem;font-weight:700;transition:all .2s}
-.btn-view-all:hover{background:var(--gm);transform:translateY(-2px)}
-
-/* ══════════════ HOW IT WORKS ══════════════ */
-.how-section{background:var(--dark);padding:72px 6%}
-.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-.how-img-wrap{border-radius:20px;overflow:hidden;height:420px;position:relative}
-.how-img-wrap img{width:100%;height:100%;object-fit:cover}
-.how-img-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(26,107,60,.4),transparent);
-}
-.how-float-badge{
-  position:absolute;bottom:20px;left:20px;
-  background:var(--gold);color:var(--dark);
-  padding:10px 16px;border-radius:11px;
-  font-size:.82rem;font-weight:700;
-}
-.how-steps{display:flex;flex-direction:column;gap:20px}
-.how-step{display:flex;gap:16px;align-items:flex-start}
-.step-icon-wrap{
-  width:50px;height:50px;border-radius:12px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;font-size:1.25rem;
-  border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);
-}
-.step-num-badge{
-  background:var(--g);color:#fff;
-  width:22px;height:22px;border-radius:50%;
-  font-size:.7rem;font-weight:700;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;margin-top:2px;
-}
-.how-step-title{font-weight:700;font-size:.97rem;color:#fff;margin-bottom:5px}
-.how-step-desc{font-size:.83rem;color:rgba(255,255,255,.52);line-height:1.65}
-
-/* ══════════════ WHY HARVESTGH ══════════════ */
-.why-section{padding:72px 6%;background:#fff}
-.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-.feat-card{
-  border:1.5px solid var(--border);border-radius:16px;padding:26px;
-  transition:all .3s;position:relative;overflow:hidden;background:var(--cream);
-}
-.feat-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--g),var(--gm));
-  transform:scaleX(0);transform-origin:left;transition:transform .35s;
-}
-.feat-card:hover{transform:translateY(-4px);box-shadow:0 10px 32px rgba(26,107,60,.1);background:#fff}
-.feat-card:hover::before{transform:scaleX(1)}
-.feat-ico{
-  width:52px;height:52px;border-radius:13px;background:var(--gp);
-  display:flex;align-items:center;justify-content:center;font-size:1.4rem;
-  margin-bottom:15px;transition:background .3s;
-}
-.feat-card:hover .feat-ico{background:var(--g)}
-.feat-title{font-weight:700;font-size:.97rem;margin-bottom:8px;color:var(--dark)}
-.feat-desc{font-size:.84rem;color:var(--gray);line-height:1.7}
-
-/* ══════════════ IMAGE MOSAIC ══════════════ */
-.mosaic-section{padding:72px 6%;background:var(--cream)}
-.mosaic-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  grid-template-rows:240px 240px;
-  gap:14px;
-  margin-top:40px;
-}
-.mosaic-item{border-radius:14px;overflow:hidden;position:relative}
-.mosaic-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-.mosaic-item:hover img{transform:scale(1.06)}
-.mosaic-item.tall{grid-row:span 2}
-.mosaic-caption{
-  position:absolute;bottom:0;left:0;right:0;
-  background:linear-gradient(to top,rgba(0,0,0,.75),transparent);
-  padding:16px;color:#fff;font-size:.78rem;font-weight:600;
-}
-
-/* ══════════════ FOR FARMERS (FBO) ══════════════ */
-.fbo-section{
-  background:linear-gradient(135deg,#0b1a10,#132a1a);
-  padding:80px 6%;position:relative;overflow:hidden;
-}
-.fbo-section::before{
-  content:'';position:absolute;top:-100px;right:-100px;
-  width:400px;height:400px;border-radius:50%;
-  background:rgba(26,107,60,.15);
-}
-.fbo-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center;position:relative}
-.fbo-points{display:flex;flex-direction:column;gap:16px;margin:28px 0}
-.fbo-point{display:flex;align-items:flex-start;gap:13px}
-.fbo-check{
-  width:26px;height:26px;border-radius:50%;background:var(--g);
-  color:#fff;display:flex;align-items:center;justify-content:center;
-  font-size:.78rem;font-weight:700;flex-shrink:0;margin-top:2px;
-}
-.fbo-point-text strong{display:block;font-size:.9rem;color:#fff;font-weight:700;margin-bottom:3px}
-.fbo-point-text span{font-size:.8rem;color:rgba(255,255,255,.52);line-height:1.55}
-.fbo-card-stack{position:relative;height:340px}
-.fbo-card{
-  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
-  border-radius:16px;padding:20px;position:absolute;
-}
-.fbo-card:nth-child(1){width:90%;bottom:0;left:5%;transform:rotate(-2deg)}
-.fbo-card:nth-child(2){width:90%;bottom:30px;left:5%;transform:rotate(1deg);background:rgba(255,255,255,.1)}
-.fbo-card:nth-child(3){width:90%;bottom:60px;left:5%;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.18)}
-.fbo-card-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.fbo-avatar{width:38px;height:38px;border-radius:50%;object-fit:cover}
-.fbo-avatar-fb{width:38px;height:38px;border-radius:50%;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:.85rem;color:#fff;font-weight:700}
-.fbo-card-name{font-weight:700;font-size:.86rem;color:#fff}
-.fbo-card-sub{font-size:.72rem;color:rgba(255,255,255,.45)}
-.fbo-card-body{font-size:.82rem;color:rgba(255,255,255,.7);line-height:1.55}
-.fbo-earn{display:flex;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.1)}
-.fbo-earn-label{font-size:.68rem;color:rgba(255,255,255,.4)}
-.fbo-earn-val{font-family:'Source Serif 4',serif;font-size:1.1rem;font-weight:700;color:var(--gold)}
-
-/* ══════════════ TESTIMONIALS ══════════════ */
-.testi-section{padding:72px 6%;background:var(--cream)}
-.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px}
-.testi-card{
-  background:#fff;border-radius:18px;padding:28px;
-  border:1px solid var(--border);position:relative;
-  transition:all .25s;
-}
-.testi-card:hover{transform:translateY(-3px);box-shadow:0 10px 34px rgba(26,107,60,.1)}
-.testi-quote-mark{
-  font-family:'Source Serif 4',serif;font-size:5rem;line-height:.7;
-  color:var(--gp);position:absolute;top:14px;left:22px;
-}
-.testi-stars{color:var(--gold);font-size:.9rem;margin-bottom:12px;padding-top:18px}
-.testi-text{font-size:.92rem;color:var(--dark);line-height:1.75;margin-bottom:18px;font-style:italic}
-.testi-foot{display:flex;align-items:center;gap:12px}
-.testi-avatar{width:46px;height:46px;border-radius:50%;object-fit:cover}
-.testi-avatar-fb{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:.9rem}
-.testi-name{font-weight:700;font-size:.9rem}
-.testi-role{font-size:.74rem;color:var(--gray);margin-top:2px}
-
-/* ══════════════ SEASONAL STRIP ══════════════ */
-.seasonal-section{background:var(--g);padding:56px 6%}
-.seasonal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:30px}
-.season-card{
-  background:rgba(255,255,255,.1);border-radius:14px;padding:16px 12px;
-  text-align:center;border:1px solid rgba(255,255,255,.12);
-  transition:all .25s;cursor:pointer;
-}
-.season-card:hover{background:rgba(255,255,255,.18);transform:translateY(-3px)}
-.season-img{width:52px;height:52px;border-radius:50%;object-fit:cover;margin:0 auto 10px}
-.season-img-fb{width:52px;height:52px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:var(--dark)}
-.season-name{font-weight:700;font-size:.88rem;color:#fff;margin-bottom:4px}
-.season-status{font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:100px}
-.ss-peak{background:rgba(255,255,255,.2);color:#fff}
-.ss-harvest{background:rgba(255,255,255,.12);color:rgba(255,255,255,.8)}
-.ss-off{background:rgba(0,0,0,.2);color:rgba(255,255,255,.45)}
-
-/* ══════════════ CTA ══════════════ */
-.cta-section{
-  background:var(--cream);padding:80px 6%;
-  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;
-}
-.cta-left h2{font-family:'Source Serif 4',serif;font-size:clamp(2rem,4vw,2.9rem);font-weight:700;margin-bottom:14px;line-height:1.15}
-.cta-left h2 em{font-style:italic;color:var(--g)}
-.cta-left p{color:var(--gray);font-size:.97rem;line-height:1.75;margin-bottom:26px;max-width:440px}
-.cta-cards{display:flex;flex-direction:column;gap:14px}
-.cta-card{
-  background:#fff;border-radius:14px;padding:20px;border:1px solid var(--border);
-  display:flex;gap:14px;align-items:flex-start;transition:all .25s;
-}
-.cta-card:hover{box-shadow:0 6px 24px rgba(26,107,60,.1);transform:translateX(-4px)}
-.cta-card-ico{width:46px;height:46px;border-radius:11px;background:var(--gp);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
-.cta-card-title{font-weight:700;font-size:.93rem;margin-bottom:4px}
-.cta-card-desc{font-size:.81rem;color:var(--gray);line-height:1.55;margin-bottom:9px}
-.cta-card-link{font-size:.8rem;font-weight:700;color:var(--g);display:inline-flex;align-items:center;gap:5px}
-
-/* ══════════════ FOOTER ══════════════ */
-.footer{background:#060e09;color:#fff;padding:64px 6% 0}
-.footer-grid{
-  display:grid;
-  grid-template-columns:2.2fr 1fr 1fr 1fr 1fr;
-  gap:36px;
-  padding-bottom:48px;
-  border-bottom:1px solid rgba(255,255,255,.07);
-}
-.ft-brand{}
-.ft-logo{font-family:'Source Serif 4',serif;font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:12px;display:flex;align-items:center;gap:9px}
-.ft-logo .fl-leaf{width:34px;height:34px;background:var(--g);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem}
-.ft-logo span{color:var(--gold)}
-.ft-desc{font-size:.82rem;color:rgba(255,255,255,.38);line-height:1.8;max-width:280px;margin-bottom:20px}
-.ft-socials{display:flex;gap:10px}
-.ft-social{
-  width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;
-  font-size:.9rem;transition:all .2s;
-}
-.ft-social:hover{background:var(--g);border-color:var(--g);transform:translateY(-2px)}
-.ft-col-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.85);margin-bottom:14px}
-.ft-links{list-style:none;display:flex;flex-direction:column;gap:9px}
-.ft-links a{font-size:.82rem;color:rgba(255,255,255,.35);transition:color .2s;display:flex;align-items:center;gap:6px}
-.ft-links a:hover{color:#fff}
-.ft-links a .ft-link-icon{font-size:.75rem;opacity:.6}
-.ft-contact-item{display:flex;align-items:flex-start;gap:9px;margin-bottom:10px}
-.ft-contact-icon{font-size:.85rem;margin-top:2px;opacity:.6;flex-shrink:0}
-.ft-contact-text{font-size:.82rem;color:rgba(255,255,255,.35);line-height:1.55}
-.ft-contact-text strong{display:block;color:rgba(255,255,255,.7);font-size:.8rem;margin-bottom:1px}
-.ft-badge{
-  display:inline-flex;align-items:center;gap:6px;
-  background:rgba(26,107,60,.25);border:1px solid rgba(26,107,60,.4);
-  padding:5px 12px;border-radius:100px;
-  font-size:.68rem;font-weight:700;color:var(--gm);margin-top:8px;
-}
-.footer-bottom{
-  padding:22px 0;
-  display:flex;justify-content:space-between;align-items:center;
-  font-size:.72rem;color:rgba(255,255,255,.22);flex-wrap:wrap;gap:10px;
-}
-.ft-bottom-links{display:flex;gap:20px}
-.ft-bottom-links a{color:rgba(255,255,255,.22);transition:color .2s}.ft-bottom-links a:hover{color:rgba(255,255,255,.6)}
-
-/* ══════════════ WA FLOAT ══════════════ */
-.wa-float{
-  position:fixed;bottom:24px;right:24px;z-index:90;
-  width:54px;height:54px;background:#25d366;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 18px rgba(37,211,102,.42);transition:all .25s;
-}
-.wa-float:hover{transform:scale(1.1);box-shadow:0 6px 26px rgba(37,211,102,.55)}
-.wa-float svg{width:28px;height:28px}
-
-/* ══════════════ RESPONSIVE ══════════════ */
-@media(max-width:1024px){
-  .footer-grid{grid-template-columns:1fr 1fr;gap:28px}
-  .fbo-grid{grid-template-columns:1fr}
-  .how-grid{grid-template-columns:1fr}
-  .how-img-wrap{height:280px}
-  .cta-section{grid-template-columns:1fr}
-  .trust-strip{grid-template-columns:1fr 1fr}
-  .seasonal-grid{grid-template-columns:repeat(3,1fr)}
-}
-@media(max-width:768px){
-  .nav-links,.nav-ctas{display:none}
-  .hamburger{display:block}
-  .mosaic-grid{grid-template-columns:1fr 1fr;grid-template-rows:180px 180px}
-  .mosaic-item.tall{grid-row:span 1}
-  .trust-strip{grid-template-columns:1fr 1fr}
-  .footer-grid{grid-template-columns:1fr 1fr}
-  .ft-brand{grid-column:1/-1}
-  .testi-grid,.feat-grid{grid-template-columns:1fr}
-  .cta-section{padding:50px 5%}
-}
-@media(max-width:520px){
-  .slide-content{padding:55px 5% 35px}
-  .trust-strip{grid-template-columns:1fr 1fr}
-  .seasonal-grid{grid-template-columns:repeat(2,1fr)}
-  .mosaic-grid{grid-template-columns:1fr;grid-template-rows:auto}
-  .mosaic-item.tall{grid-row:span 1}
-  .footer-grid{grid-template-columns:1fr}
-  .footer-bottom{flex-direction:column;align-items:flex-start}
-  .hero-arrow{display:none}
-}
-
-/* ═══════════════════════════════════════════════
-   HARVESTGH GLOBAL MOBILE RESPONSIVENESS
-   Applied to all pages automatically
-═══════════════════════════════════════════════ */
-@media (max-width: 768px) {
-  /* Typography scale down */
-  body { font-size: 15px !important; }
-  h1, .sec-h2, .view-title { font-size: clamp(1.4rem, 5vw, 2rem) !important; }
-  h2 { font-size: clamp(1.2rem, 4vw, 1.7rem) !important; }
-
-  /* Nav */
-  .nav { padding: 0 4% !important; height: 58px !important; }
-  .nav-links, .nav-ctas, .nav-r { display: none !important; }
-  .hamburger, .mob-close { display: block !important; }
-
-  /* Hero sections */
-  .hero { min-height: 90vh !important; }
-  .slide-content { padding: 60px 5% 35px !important; }
-  .slide-h1 { font-size: clamp(1.6rem, 6vw, 2.5rem) !important; line-height: 1.15 !important; }
-  .slide-p { font-size: .9rem !important; }
-  .slide-btns { flex-direction: column !important; gap: 10px !important; }
-  .slide-btns a, .slide-btns button { width: 100% !important; justify-content: center !important; }
-
-  /* Grids → single column */
-  .checkout-grid, .mission-grid, .problem-grid,
-  .story-grid, .cta-section, .fbo-grid,
-  .how-grid, .contact-grid, .hero { grid-template-columns: 1fr !important; }
-
-  /* Card grids → 1 or 2 cols */
-  .products-grid, .produce-grid, .feat-grid,
-  .testi-grid, .what-grid { grid-template-columns: 1fr !important; }
-  .kpi-row, .ls-grid, .trust-strip { grid-template-columns: 1fr 1fr !important; }
-  .seasonal-grid { grid-template-columns: repeat(2, 1fr) !important; }
-  .mosaic-grid { grid-template-columns: 1fr 1fr !important; grid-template-rows: auto !important; }
-  .mosaic-item.tall { grid-row: span 1 !important; }
-
-  /* Forms */
-  .form-row { grid-template-columns: 1fr !important; }
-  .type-row { grid-template-columns: 1fr !important; }
-  .quick-form { grid-template-columns: 1fr !important; }
-
-  /* Footer */
-  .footer-grid, .ft-grid { grid-template-columns: 1fr !important; gap: 22px !important; }
-  .footer-bottom, .ft-bottom { flex-direction: column !important; gap: 8px !important; }
-  .ft-bottom-links, .ft-bottom-r { flex-wrap: wrap !important; gap: 12px !important; }
-
-  /* Buttons */
-  .btn-hero-g, .btn-hero-out { padding: 12px 20px !important; font-size: .88rem !important; }
-  .cta-btns { flex-direction: column !important; }
-  .cta-btns button, .cta-btns a { width: 100% !important; }
-
-  /* Tables */
-  .tbl-wrap, table { overflow-x: auto !important; display: block !important; }
-  table { min-width: 500px !important; }
-
-  /* Order detail modal */
-  .order-detail-grid { grid-template-columns: 1fr !important; }
-
-  /* Filter bars */
-  .filters-bar, .filters { flex-wrap: wrap !important; }
-  .f-search, .f-sel { min-width: calc(50% - 6px) !important; }
-
-  /* Sections padding */
-  .section, .why-section, .testi-section, .mosaic-section,
-  .how-section, .fbo-section, .cta-section, .story, .mission,
-  .what-section, .about-cta, .seasonal-section { padding: 44px 5% !important; }
-
-  /* Image heights */
-  .mission-img-wrap, .how-img-wrap { height: 220px !important; }
-  .founder-card { position: static !important; }
-  .fbo-card-stack { height: 260px !important; }
-
-  /* Trust strip */
-  .trust-val { font-size: 1.7rem !important; }
-  .trust-lbl { font-size: .68rem !important; }
-
-  /* WA float position */
-  .wa-float { bottom: 16px !important; right: 16px !important; width: 48px !important; height: 48px !important; }
-}
-
-@media (max-width: 480px) {
-  .kpi-row, .trust-strip, .ls-grid { grid-template-columns: 1fr 1fr !important; }
-  .seasonal-grid { grid-template-columns: repeat(2, 1fr) !important; }
-  .mosaic-grid { grid-template-columns: 1fr !important; }
-  .hero-arrow { display: none !important; }
-  .slide-h1 { font-size: clamp(1.4rem, 7vw, 2rem) !important; }
-  .img-arrow { display: none !important; }
-  .money-split { grid-template-columns: 1fr !important; }
-  .benefit-grid { grid-template-columns: 1fr !important; }
-}
-
-</style>
+<meta property="og:image" content="images/market.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* ── Home-specific ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--dark);
+}
+.hero-media {
+  position: absolute; inset: 0;
+  background: url('images/market.jpg') center/cover no-repeat;
+  transform: scale(1.04);
+  animation: heroZoom 12s var(--ease) forwards;
+}
+@keyframes heroZoom {
+  from { transform: scale(1.08); }
+  to { transform: scale(1); }
+}
+.hero-shade {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(105deg, rgba(6, 14, 9, 0.92) 0%, rgba(6, 14, 9, 0.72) 42%, rgba(6, 14, 9, 0.35) 70%, rgba(6, 14, 9, 0.2) 100%),
+    linear-gradient(to top, rgba(6, 14, 9, 0.55) 0%, transparent 45%);
+}
+.hero-inner {
+  position: relative; z-index: 2;
+  width: 100%;
+  padding: calc(var(--nav-h) + 48px) 6% 72px;
+  max-width: 720px;
+}
+.hero-brand {
+  font-family: var(--display);
+  font-size: clamp(2.8rem, 7vw, 4.6rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  margin-bottom: 22px;
+}
+.hero-brand span { color: var(--gold); }
+.hero-line {
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+  max-width: 28ch;
+}
+.hero-sub {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 34rem;
+  margin-bottom: 28px;
+}
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.proof {
+  background: var(--dark);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.proof-item {
+  padding: 28px 20px;
+  text-align: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+.proof-item:last-child { border-right: none; }
+.proof-val {
+  font-family: var(--display);
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: -0.02em;
+}
+.proof-lbl {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.sec-h2 {
+  font-family: var(--display);
+  font-size: clamp(1.75rem, 3.4vw, 2.5rem);
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  line-height: 1.15;
+  color: var(--ink);
+}
+.sec-p { color: var(--gray); font-size: 1rem; line-height: 1.7; max-width: 34rem; margin-bottom: 36px; }
+
+.produce-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+}
+.prd {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s;
+}
+.prd:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.prd-img { width: 100%; height: 168px; object-fit: cover; }
+.prd-img-fb {
+  width: 100%; height: 168px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; color: #fff; background: var(--g);
+}
+.prd-body { padding: 16px; }
+.prd-meta {
+  font-size: 0.7rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--g); margin-bottom: 6px;
+}
+.prd-name {
+  font-family: var(--display);
+  font-size: 1.02rem; font-weight: 700;
+  margin-bottom: 4px; letter-spacing: -0.01em;
+}
+.prd-src { font-size: 0.78rem; color: var(--gray); margin-bottom: 12px; }
+.prd-foot { display: flex; justify-content: space-between; align-items: center; }
+.prd-price {
+  font-family: var(--display);
+  font-size: 1.15rem; font-weight: 800; color: var(--g);
+}
+.prd-price small {
+  font-family: var(--font);
+  font-size: 0.7rem; font-weight: 500; color: var(--gray);
+}
+.prd-btn {
+  background: var(--g); color: #fff; border: none;
+  padding: 8px 14px; border-radius: 8px;
+  font-size: 0.78rem; font-weight: 700;
+}
+.center { text-align: center; }
+
+.how { background: var(--dark); color: #fff; }
+.how .sec-h2 { color: #fff; }
+.how-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 48px;
+  align-items: center;
+  margin-top: 8px;
+}
+.how-visual {
+  border-radius: 16px;
+  overflow: hidden;
+  height: 420px;
+  position: relative;
+}
+.how-visual img { width: 100%; height: 100%; object-fit: cover; }
+.how-steps { display: flex; flex-direction: column; gap: 0; }
+.how-step {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.how-step:last-child { border-bottom: none; }
+.how-num {
+  font-family: var(--display);
+  font-size: 1.4rem; font-weight: 800;
+  color: var(--gold);
+  letter-spacing: -0.02em;
+}
+.how-step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; color: #fff; }
+.how-step p { font-size: 0.88rem; color: rgba(255, 255, 255, 0.55); line-height: 1.65; }
+
+.why { background: #fff; }
+.why-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+.why-item {
+  padding: 28px 24px 28px 0;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+.why-item:nth-child(3n) { border-right: none; padding-right: 0; }
+.why-item:nth-child(n+4) { border-bottom: none; }
+.why-item h3 {
+  font-family: var(--display);
+  font-size: 1.05rem; font-weight: 700;
+  margin-bottom: 8px; letter-spacing: -0.01em;
+}
+.why-item p { font-size: 0.88rem; color: var(--gray); line-height: 1.7; }
+
+.gallery {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-rows: 220px 220px;
+  gap: 12px;
+  margin-top: 36px;
+}
+.gal-item {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+.gal-item.tall { grid-row: span 2; }
+.gal-item img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+.gal-item:hover img { transform: scale(1.05); }
+.gal-cap {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 16px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  color: #fff; font-size: 0.8rem; font-weight: 600;
+}
+
+.fbo {
+  background: linear-gradient(145deg, #0a1610, #14301f);
+  color: #fff;
+  padding: 80px 6%;
+}
+.fbo-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 48px;
+  align-items: center;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.fbo .sec-h2 { color: #fff; }
+.fbo .sec-h2 em { font-style: normal; color: var(--gold); }
+.fbo-points { margin: 28px 0; display: flex; flex-direction: column; gap: 18px; }
+.fbo-point strong { display: block; font-size: 0.95rem; margin-bottom: 4px; }
+.fbo-point span { font-size: 0.86rem; color: rgba(255, 255, 255, 0.55); line-height: 1.6; }
+.fbo-aside {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 28px;
+}
+.fbo-aside h3 {
+  font-family: var(--display);
+  font-size: 1.2rem; font-weight: 750;
+  margin-bottom: 10px;
+}
+.fbo-aside p { font-size: 0.9rem; color: rgba(255, 255, 255, 0.55); line-height: 1.65; margin-bottom: 20px; }
+.fbo-stat {
+  display: flex; justify-content: space-between;
+  padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.fbo-stat span { font-size: 0.78rem; color: rgba(255, 255, 255, 0.4); }
+.fbo-stat strong {
+  font-family: var(--display);
+  font-size: 1.4rem; color: var(--gold); font-weight: 800;
+}
+
+.quotes { background: var(--bg); }
+.quote-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.quote {
+  padding: 8px 0;
+  border-top: 2px solid var(--g);
+}
+.quote p {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: var(--ink);
+  margin: 18px 0 20px;
+  font-style: italic;
+}
+.quote-who { font-weight: 700; font-size: 0.9rem; }
+.quote-role { font-size: 0.78rem; color: var(--gray); margin-top: 2px; }
+
+.season {
+  background: var(--g);
+  color: #fff;
+  padding: 64px 6%;
+}
+.season .sec-h2 { color: #fff; margin-bottom: 8px; }
+.season-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-top: 28px;
+}
+.season-item {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 18px 12px;
+  text-align: center;
+  transition: background 0.2s;
+}
+.season-item:hover { background: rgba(255, 255, 255, 0.16); }
+.season-item img {
+  width: 48px; height: 48px; border-radius: 50%;
+  object-fit: cover; margin: 0 auto 10px;
+}
+.season-name { font-weight: 700; font-size: 0.9rem; margin-bottom: 6px; }
+.season-status {
+  font-size: 0.7rem; font-weight: 600;
+  opacity: 0.85;
+}
+
+.cta-band {
+  padding: 88px 6%;
+  background:
+    linear-gradient(120deg, rgba(12, 26, 17, 0.88), rgba(26, 107, 60, 0.78)),
+    url('images/market.jpg') center/cover;
+  color: #fff;
+  text-align: center;
+}
+.cta-band h2 {
+  font-family: var(--display);
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  max-width: 18ch;
+  margin: 0 auto 14px;
+  line-height: 1.15;
+}
+.cta-band p {
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 34rem;
+  margin: 0 auto 28px;
+  line-height: 1.7;
+}
+.cta-band .hero-ctas { justify-content: center; }
+
+@media (max-width: 1024px) {
+  .how-grid, .fbo-grid { grid-template-columns: 1fr; }
+  .how-visual { height: 260px; }
+  .why-list { grid-template-columns: 1fr 1fr; }
+  .why-item:nth-child(3n) { border-right: 1px solid var(--border); padding-right: 24px; }
+  .why-item:nth-child(2n) { border-right: none; padding-right: 0; }
+  .why-item:nth-child(n+4) { border-bottom: 1px solid var(--border); }
+  .why-item:nth-child(n+5) { border-bottom: none; }
+  .quote-grid { grid-template-columns: 1fr; }
+  .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .gal-item.tall { grid-row: span 1; height: 240px; }
+  .gal-item { height: 200px; }
+  .proof { grid-template-columns: 1fr 1fr; }
+  .season-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .hero-inner { padding: calc(var(--nav-h) + 40px) 5% 56px; }
+  .why-list { grid-template-columns: 1fr; }
+  .why-item { border-right: none !important; padding-right: 0; border-bottom: 1px solid var(--border); }
+  .gallery { grid-template-columns: 1fr; }
+  .season-grid { grid-template-columns: 1fr 1fr; }
+  .hero-ctas { flex-direction: column; }
+  .hero-ctas .btn { width: 100%; }
+}
+@media (max-width: 480px) {
+  .proof { grid-template-columns: 1fr 1fr; }
+}
+</style>
 </head>
 <body>
 
-<!-- ══════════════════════════════
-     BACKDROP + LEFT DRAWER
-══════════════════════════════ -->
 <div class="mob-backdrop" id="mobBackdrop" onclick="closeDrawer()"></div>
 <div class="mob-drawer" id="mobDrawer">
   <div class="mob-drawer-head">
     <div class="mob-logo">Harvest<span>GH</span></div>
-    <button class="mob-close" onclick="closeDrawer()">✕</button>
+    <button class="mob-close" onclick="closeDrawer()" aria-label="Close menu">✕</button>
   </div>
   <nav class="mob-nav">
     <div class="mob-sec">Explore</div>
-    <a href="index.html" class="mob-link" onclick="closeDrawer()">🏡 Home</a>
-    <a href="listings.html" class="mob-link" onclick="closeDrawer()">🛒 Shop Produce</a>
-    <a href="harvest-calendar.html" class="mob-link" onclick="closeDrawer()">📅 Harvest Calendar</a>
-    <a href="order-status.html" class="mob-link" onclick="closeDrawer()">📦 Track My Order</a>
+    <a href="index.html" class="mob-link" onclick="closeDrawer()">Home</a>
+    <a href="listings.html" class="mob-link" onclick="closeDrawer()">Shop Produce</a>
+    <a href="harvest-calendar.html" class="mob-link" onclick="closeDrawer()">Harvest Calendar</a>
+    <a href="order-status.html" class="mob-link" onclick="closeDrawer()">Track My Order</a>
     <div class="mob-sec">About</div>
-    <a href="about.html" class="mob-link" onclick="closeDrawer()">🌾 About HarvestGH</a>
-    <a href="contact.html" class="mob-link" onclick="closeDrawer()">💬 Contact Us</a>
+    <a href="about.html" class="mob-link" onclick="closeDrawer()">About HarvestGH</a>
+    <a href="contact.html" class="mob-link" onclick="closeDrawer()">Contact Us</a>
     <div class="mob-sec">Partners</div>
-    <a href="register-farmer.html" class="mob-link" onclick="closeDrawer()">🤝 Become a Supplier</a>
-    <a href="farmer-portal.html" class="mob-link" onclick="closeDrawer()">📱 Check My Listing</a>
+    <a href="register-farmer.html" class="mob-link" onclick="closeDrawer()">Become a Supplier</a>
+    <a href="farmer-portal.html" class="mob-link" onclick="closeDrawer()">Check My Listing</a>
   </nav>
   <div class="mob-foot">
-    <div class="mob-ctas">
-      <a href="register-buyer.html" class="mob-btn-g" onclick="closeDrawer()">🛒 Start Buying</a>
-      <a href="register-farmer.html" class="mob-btn-out" onclick="closeDrawer()">🌾 Become a Supplier</a>
-    </div>
+    <a href="listings.html" class="mob-btn-g" onclick="closeDrawer()">Shop Produce</a>
+    <a href="register-farmer.html" class="mob-btn-out" onclick="closeDrawer()">Become a Supplier</a>
   </div>
 </div>
 
-<!-- ══════════════════════════════
-     NAVIGATION
-══════════════════════════════ -->
-<nav class="nav" id="mainNav">
+<nav class="nav nav-hero" id="mainNav">
   <a href="index.html" class="logo">
-    <img src="logo.png" alt="HarvestGH" class="logo-img" style="height:34px;width:auto;object-fit:contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="logo-leaf" style="display:none">🌾</div>
+    <img src="logo.png" alt="" class="logo-img" onerror="this.style.display='none'">
     Harvest<span>GH</span>
   </a>
   <ul class="nav-links">
@@ -633,744 +430,391 @@ img{display:block}
     <li><a href="contact.html" class="nav-link">Contact</a></li>
   </ul>
   <div class="nav-ctas">
-    <a href="register-farmer.html"><button class="btn-nav-out">Become a Supplier</button></a>
-    <a href="listings.html"><button class="btn-nav-g">🛒 Order Now</button></a>
+    <a href="register-farmer.html" class="btn btn-ghost-light btn-sm">Become a Supplier</a>
+    <a href="listings.html" class="btn btn-gold btn-sm">Order Now</a>
   </div>
-  <button class="hamburger" id="hamburger" onclick="openDrawer()">☰</button>
+  <button class="hamburger" onclick="openDrawer()" aria-label="Open menu">☰</button>
 </nav>
 
-<!-- ══════════════════════════════
-     HERO CAROUSEL
-══════════════════════════════ -->
 <section class="hero" id="hero">
-  <div class="slides" id="slidesTrack">
-
-    <!-- SLIDE 1 -->
-    <div class="slide active" id="slide0">
-      <div class="slide-bg" style="background-image:url('images/market.jpg')"></div>
-      <div class="slide-overlay"></div>
-      <div class="slide-content">
-        <h1 class="slide-h1">Stop Losing Your Harvest.<br><em>Find Buyers in Days.</em></h1>
-        <p class="slide-p">Ghana loses 30–50% of its harvest every year — not because of poor farming, but because farmers and buyers cannot find each other in time. HarvestGH fixes that.</p>
-        <div class="slide-btns">
-          <a href="listings.html"><button class="btn-hero-g">🛒 Shop Fresh Produce</button></a>
-          <a href="register-farmer.html"><button class="btn-hero-out">Become a Supplier →</button></a>
-        </div>
-      </div>
+  <div class="hero-media" aria-hidden="true"></div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <h1 class="hero-brand reveal">Harvest<span>GH</span></h1>
+    <p class="hero-line reveal reveal-delay-1">Fresh farm produce, delivered across Ghana.</p>
+    <p class="hero-sub reveal reveal-delay-2">Buy directly from verified FBO farmers — with secure escrow payment and nationwide delivery.</p>
+    <div class="hero-ctas reveal reveal-delay-3">
+      <a href="listings.html" class="btn btn-gold">Shop Fresh Produce</a>
+      <a href="register-farmer.html" class="btn btn-ghost-light">Become a Supplier</a>
     </div>
-
-    <!-- SLIDE 2 -->
-    <div class="slide" id="slide1">
-      <div class="slide-bg" style="background-image:url('images/market.jpg')"></div>
-      <div class="slide-overlay"></div>
-      <div class="slide-content">
-        <h1 class="slide-h1">Farm Fresh.<br><em>Delivered to Your Door.</em></h1>
-        <p class="slide-p">Order tomatoes, maize, yam, plantain, and more — directly from verified FBO farmers. Your produce arrives fresh, your payment is always secure.</p>
-        <div class="slide-btns">
-          <a href="listings.html"><button class="btn-hero-g">Browse Available Produce</button></a>
-          <a href="register-buyer.html"><button class="btn-hero-out">Register as Buyer</button></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- SLIDE 3 -->
-    <div class="slide" id="slide2">
-      <div class="slide-bg" style="background-image:url('images/market.jpg')"></div>
-      <div class="slide-overlay"></div>
-      <div class="slide-content">
-        <h1 class="slide-h1">Your Money.<br><em>Protected. Always.</em></h1>
-        <p class="slide-p">Buyers pay into HarvestGH's secure escrow before produce leaves the farm. Farmers receive payment only after delivery is confirmed. No more cheating. No more risk.</p>
-        <div class="slide-btns">
-          <a href="listings.html"><button class="btn-hero-g">Order with Confidence</button></a>
-          <a href="about.html"><button class="btn-hero-out">Learn How It Works</button></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- SLIDE 4 -->
-    <div class="slide" id="slide3">
-      <div class="slide-bg" style="background-image:url('images/market.jpg')"></div>
-      <div class="slide-overlay"></div>
-      <div class="slide-content">
-        <h1 class="slide-h1">Register Your FBO.<br><em>Sell More. Waste Less.</em></h1>
-        <p class="slide-p">Are you an FBO leader? Partner with HarvestGH to list your group's produce, access city buyers, and earn a 1% commission on every deal your members complete.</p>
-        <div class="slide-btns">
-          <a href="register-farmer.html"><button class="btn-hero-g">Register Your FBO</button></a>
-          <a href="agent-portal.html"><button class="btn-hero-out">Agent Login →</button></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- SLIDE 5 -->
-    <div class="slide" id="slide4">
-      <div class="slide-bg" style="background-image:url('images/market.jpg')"></div>
-      <div class="slide-overlay"></div>
-      <div class="slide-content">
-        <h1 class="slide-h1">Plan Ahead.<br><em>Lock Your Supply Today.</em></h1>
-        <p class="slide-p">School feeding contractors, restaurants, and supermarkets — preorder next season's harvest before it is even ready. Lock your price and supply months in advance.</p>
-        <div class="slide-btns">
-          <a href="listings.html?type=preorder"><button class="btn-hero-g">View Preorders Available</button></a>
-          <a href="contact.html"><button class="btn-hero-out">Talk to Us First</button></a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- DOTS -->
-  <div class="hero-dots" id="heroDots">
-    <button class="dot active" onclick="goSlide(0)"></button>
-    <button class="dot" onclick="goSlide(1)"></button>
-    <button class="dot" onclick="goSlide(2)"></button>
-    <button class="dot" onclick="goSlide(3)"></button>
-    <button class="dot" onclick="goSlide(4)"></button>
-  </div>
-
-  <!-- ARROWS -->
-  <button class="hero-arrow arrow-prev" onclick="prevSlide()">‹</button>
-  <button class="hero-arrow arrow-next" onclick="nextSlide()">›</button>
-
-  <div class="scroll-hint">
-    Scroll to explore
-    <div class="scroll-wheel"><div class="scroll-ball"></div></div>
   </div>
 </section>
 
-<div class="trust-lbl">Registered Farmers</div>
-    <div class="trust-sub">and growing daily</div>
+<div class="proof">
+  <div class="proof-item">
+    <div class="proof-val" id="ts1">50+</div>
+    <div class="proof-lbl">Registered farmers</div>
   </div>
-  <div class="trust-item">
-    <div class="trust-val" id="ts2">10+</div>
-    <div class="trust-lbl">Crop Types Available</div>
-    <div class="trust-sub">from farms across Ghana</div>
+  <div class="proof-item">
+    <div class="proof-val" id="ts2">10+</div>
+    <div class="proof-lbl">Crop types</div>
   </div>
-  <div class="trust-item">
-    <div class="trust-val" id="ts3">16</div>
-    <div class="trust-lbl">Regions Covered</div>
-    <div class="trust-sub">nationwide delivery</div>
+  <div class="proof-item">
+    <div class="proof-val" id="ts3">16</div>
+    <div class="proof-lbl">Regions covered</div>
   </div>
-  <div class="trust-item">
-    <div class="trust-val" id="ts4">100%</div>
-    <div class="trust-lbl">Secure Payment</div>
-    <div class="trust-sub">escrow protected</div>
+  <div class="proof-item">
+    <div class="proof-val" id="ts4">100%</div>
+    <div class="proof-lbl">Escrow protected</div>
   </div>
 </div>
 
-<!-- ══════════════════════════════
-     FEATURED PRODUCE
-══════════════════════════════ -->
 <section class="section" style="background:#fff">
-  <div class="sec-eyebrow eyebrow-g">Fresh This Week</div>
-  <h2 class="sec-h2">Available Produce — Order Now</h2>
-  <p class="sec-p">Every listing comes from a verified FBO farmer. What you see is exactly what is available today. Order before stock runs out.</p>
-  <div class="produce-grid" id="featuredGrid">
-    <!-- Loaded from Supabase or demo -->
-  </div>
-  <div class="view-all-wrap">
-    <a href="listings.html"><button class="btn-view-all">View All Available Produce →</button></a>
+  <div class="eyebrow">Fresh this week</div>
+  <h2 class="sec-h2">Available produce</h2>
+  <p class="sec-p">Every listing comes from a verified FBO farmer. Order before stock runs out.</p>
+  <div class="produce-grid" id="featuredGrid"></div>
+  <div class="center">
+    <a href="listings.html" class="btn btn-primary">View all produce</a>
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     HOW IT WORKS
-══════════════════════════════ -->
-<section class="how-section">
-  <div class="sec-eyebrow eyebrow-white">How It Works</div>
-  <h2 class="sec-h2" style="color:#fff">Simple Enough for Any Phone.<br>Powerful Enough for Any Farm.</h2>
-
-  <div class="how-grid" style="margin-top:40px">
-    <div class="how-img-wrap">
-      <img src="images/market.jpg" alt="Farmers at work" loading="lazy">
-      <div class="how-img-overlay"></div>
-      <div class="how-float-badge">🇬🇭 Built for Ghana</div>
+<section class="section how">
+  <div class="eyebrow eyebrow-light">How it works</div>
+  <h2 class="sec-h2">Four steps from farm to buyer</h2>
+  <div class="how-grid">
+    <div class="how-visual">
+      <img src="images/market.jpg" alt="Farm produce at market" loading="lazy">
     </div>
     <div class="how-steps">
       <div class="how-step">
-        <div class="step-icon-wrap">🤝</div>
+        <div class="how-num">01</div>
         <div>
-          <div class="how-step-title">1. FBO Leader Partners With HarvestGH</div>
-          <div class="how-step-desc">Ibrahim meets with the FBO group leader. The leader registers their entire member group in one session — 15 to 50 farmers at once.</div>
+          <h3>FBO partners with HarvestGH</h3>
+          <p>An FBO leader registers their group — often 15 to 50 farmers — in a single session.</p>
         </div>
       </div>
       <div class="how-step">
-        <div class="step-icon-wrap">📦</div>
+        <div class="how-num">02</div>
         <div>
-          <div class="how-step-title">2. Produce Listed on the Marketplace</div>
-          <div class="how-step-desc">HarvestGH uploads the FBO's crops with photos, prices, and quantities. Buyers across Ghana can immediately see and order.</div>
+          <h3>Produce is listed</h3>
+          <p>Crops go live with photos, prices, and quantities so buyers can order immediately.</p>
         </div>
       </div>
       <div class="how-step">
-        <div class="step-icon-wrap">💰</div>
+        <div class="how-num">03</div>
         <div>
-          <div class="how-step-title">3. Buyer Orders and Pays Securely</div>
-          <div class="how-step-desc">A buyer places an order and pays via Paystack or MoMo. The money is held in escrow until delivery is confirmed.</div>
+          <h3>Buyer pays into escrow</h3>
+          <p>Payment via Paystack or MoMo is held securely until delivery is confirmed.</p>
         </div>
       </div>
       <div class="how-step">
-        <div class="step-icon-wrap">🚚</div>
+        <div class="how-num">04</div>
         <div>
-          <div class="how-step-title">4. Delivery Arranged — Everyone Gets Paid</div>
-          <div class="how-step-desc">Produce is picked up from the farm and delivered. When the buyer confirms receipt, the farmer is paid. HarvestGH earns a small 1–2% platform fee.</div>
+          <h3>Delivery and payout</h3>
+          <p>Produce is picked up and delivered. The farmer is paid when the buyer confirms receipt.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     WHY HARVESTGH
-══════════════════════════════ -->
-<section class="why-section">
-  <div class="sec-eyebrow eyebrow-g">Why HarvestGH</div>
-  <h2 class="sec-h2">Built Specifically for Ghana.<br>Unlike Anything Else.</h2>
-  <p class="sec-p">HarvestGH is not a generic marketplace. Every feature was designed for the realities of farming and buying in Ghana.</p>
-  <div class="feat-grid">
-    <div class="feat-card">
-      <div class="feat-ico">🔒</div>
-      <div class="feat-title">Escrow Payment Protection</div>
-      <div class="feat-desc">Buyer pays before produce leaves the farm. Farmer receives payment after delivery is confirmed. Both sides are 100% protected from fraud.</div>
+<section class="section why">
+  <div class="eyebrow">Why HarvestGH</div>
+  <h2 class="sec-h2">Built for how Ghana farms and buys</h2>
+  <p class="sec-p">Every feature is designed for real farm and wholesale conditions — not a generic marketplace.</p>
+  <div class="why-list">
+    <div class="why-item">
+      <h3>Escrow protection</h3>
+      <p>Buyers pay before produce leaves the farm. Farmers are paid after delivery is confirmed.</p>
     </div>
-    <div class="feat-card">
-      <div class="feat-ico">📱</div>
-      <div class="feat-title">No Smartphone Required</div>
-      <div class="feat-desc">Elderly farmers, non-literate farmers — all welcome. HarvestGH manages their listing. They only need to be reachable by phone call.</div>
+    <div class="why-item">
+      <h3>No smartphone required</h3>
+      <p>We manage listings for farmers who only need to be reachable by phone.</p>
     </div>
-    <div class="feat-card">
-      <div class="feat-ico">🤝</div>
-      <div class="feat-title">FBO Group Aggregation</div>
-      <div class="feat-desc">We combine produce from multiple FBO farmers into one large, reliable listing — giving buyers the volume they need and farmers better bargaining power.</div>
+    <div class="why-item">
+      <h3>FBO group aggregation</h3>
+      <p>Combine produce across members into reliable volume listings buyers can trust.</p>
     </div>
-    <div class="feat-card">
-      <div class="feat-ico">📅</div>
-      <div class="feat-title">Preorder Future Harvests</div>
-      <div class="feat-desc">Restaurants, schools, and supermarkets can preorder next season's harvest months in advance — locking price and supply before anyone else.</div>
+    <div class="why-item">
+      <h3>Preorder future harvests</h3>
+      <p>Schools, restaurants, and traders lock supply and price months ahead.</p>
     </div>
-    <div class="feat-card">
-      <div class="feat-ico">🚚</div>
-      <div class="feat-title">Coordinated Delivery</div>
-      <div class="feat-desc">HarvestGH arranges pickup from any farm in any region and delivers to buyers in Accra, Kumasi, and other cities — without the buyer or farmer doing anything extra.</div>
+    <div class="why-item">
+      <h3>Coordinated delivery</h3>
+      <p>Pickup from farms nationwide with delivery into Accra, Kumasi, and beyond.</p>
     </div>
-    <div class="feat-card">
-      <div class="feat-ico">💬</div>
-      <div class="feat-title">WhatsApp + SMS Alerts</div>
-      <div class="feat-desc">Both farmers and buyers receive instant SMS notifications the moment a match is confirmed. No app download. No internet needed by the farmer.</div>
+    <div class="why-item">
+      <h3>SMS and WhatsApp alerts</h3>
+      <p>Instant notifications when a match is confirmed — no app download required.</p>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     PHOTO MOSAIC
-══════════════════════════════ -->
-<section class="mosaic-section">
-  <div class="sec-eyebrow eyebrow-g">From Farm to Your Door</div>
-  <h2 class="sec-h2">Real Farms. Real Produce.<br>Real Ghanaian Farmers.</h2>
-  <div class="mosaic-grid">
-    <div class="mosaic-item tall">
+<section class="section" style="background:var(--bg)">
+  <div class="eyebrow">From farm to door</div>
+  <h2 class="sec-h2">Real farms. Real produce.</h2>
+  <div class="gallery">
+    <div class="gal-item tall">
       <img src="images/market.jpg" alt="Farm landscape" loading="lazy">
-      <div class="mosaic-caption">🌾 Farmlands across Ghana</div>
+      <div class="gal-cap">Farmlands across Ghana</div>
     </div>
-    <div class="mosaic-item">
+    <div class="gal-item">
       <img src="tomatoes.jpg" alt="Fresh tomatoes" loading="lazy">
-      <div class="mosaic-caption">🍅 Fresh Tomatoes — Ashanti Region</div>
+      <div class="gal-cap">Tomatoes — Ashanti</div>
     </div>
-    <div class="mosaic-item">
+    <div class="gal-item">
       <img src="plantain.jpg" alt="Plantain" loading="lazy">
-      <div class="mosaic-caption">🍌 Plantain — Eastern Region</div>
+      <div class="gal-cap">Plantain — Eastern</div>
     </div>
-    <div class="mosaic-item">
+    <div class="gal-item">
       <img src="maize.jpg" alt="Maize" loading="lazy">
-      <div class="mosaic-caption">🌽 White Maize — Brong-Ahafo</div>
+      <div class="gal-cap">Maize — Brong-Ahafo</div>
     </div>
-    <div class="mosaic-item">
+    <div class="gal-item">
       <img src="mango.jpg" alt="Mango" loading="lazy">
-      <div class="mosaic-caption">🥭 Mango — Volta Region</div>
+      <div class="gal-cap">Mango — Volta</div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     FOR FBO FARMERS
-══════════════════════════════ -->
-<section class="fbo-section">
+<section class="fbo">
   <div class="fbo-grid">
     <div>
-      <div class="sec-eyebrow eyebrow-white">For FBO Farmers & Leaders</div>
-      <h2 class="sec-h2" style="color:#fff">Your Harvest Has a Buyer.<br><em style="color:var(--gold)">You Just Haven't Met Them Yet.</em></h2>
+      <div class="eyebrow eyebrow-light">For FBO farmers &amp; leaders</div>
+      <h2 class="sec-h2">Your harvest has a buyer.<br><em>We help you find them.</em></h2>
       <div class="fbo-points">
         <div class="fbo-point">
-          <div class="fbo-check">✓</div>
-          <div class="fbo-point-text"><strong>Register Your Entire Group at Once</strong><span>One meeting. Your whole FBO is on HarvestGH. No forms, no smartphones needed.</span></div>
+          <strong>Register your entire group at once</strong>
+          <span>One meeting puts your FBO on HarvestGH — no complex forms required.</span>
         </div>
         <div class="fbo-point">
-          <div class="fbo-check">✓</div>
-          <div class="fbo-point-text"><strong>Payment Before Produce Leaves Your Farm</strong><span>We hold the buyer's money in escrow. You get paid when delivery is confirmed — no risk.</span></div>
+          <strong>Payment before produce leaves the farm</strong>
+          <span>Buyer funds sit in escrow until delivery is confirmed.</span>
         </div>
         <div class="fbo-point">
-          <div class="fbo-check">✓</div>
-          <div class="fbo-point-text"><strong>FBO Leaders Earn Commission</strong><span>1% of every deal your members complete goes directly to you. Monthly MoMo payment.</span></div>
+          <strong>Leaders earn commission</strong>
+          <span>1% of every completed deal for your members — paid monthly via MoMo.</span>
         </div>
         <div class="fbo-point">
-          <div class="fbo-check">✓</div>
-          <div class="fbo-point-text"><strong>We Call You — No App Needed</strong><span>When a buyer is found for your crop, we call your registered phone. That's all you need to do.</span></div>
+          <strong>We call you when there is a match</strong>
+          <span>No app needed. A phone call is enough.</span>
         </div>
       </div>
-      <a href="register-farmer.html"><button class="btn-hero-g">Register Your FBO Now →</button></a>
-      
+      <a href="register-farmer.html" class="btn btn-gold">Register your FBO</a>
     </div>
-    
+    <aside class="fbo-aside">
+      <h3>Built for FBO leaders</h3>
+      <p>Partner once, list continuously, and earn as your members sell through HarvestGH.</p>
+      <div class="fbo-stat">
+        <span>Leader commission</span>
+        <strong>1%</strong>
+      </div>
+    </aside>
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     TESTIMONIALS
-══════════════════════════════ -->
-<section class="testi-section">
-  <div class="sec-eyebrow eyebrow-g">Success Stories</div>
-  <h2 class="sec-h2">Farmers and Buyers. Real Results.</h2>
-  <p class="sec-p" style="margin-bottom:36px">Here is what people across Ghana are saying after using HarvestGH for the first time.</p>
-  <div class="testi-grid">
-    <div class="testi-card">
-      <div class="testi-quote-mark">"</div>
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">I used to lose 40% of my tomatoes every season because I couldn't find buyers fast enough. HarvestGH connected me to a buyer in Accra within 2 days. Now I sell everything I grow.</p>
-      <div class="testi-foot">
-        <img src="images/market.jpg" class="testi-avatar" alt="Ama" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="testi-avatar-fb" style="background:#c0392b;display:none">AK</div>
-        <div><div class="testi-name">Ama Kofi</div><div class="testi-role">Tomato Farmer · Kumasi, Ashanti</div></div>
-      </div>
-    </div>
-    <div class="testi-card">
-      <div class="testi-quote-mark">"</div>
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">Before HarvestGH, I drove to three different villages every week looking for maize. Now I log in, see who has stock, and we agree on price in one call. It has saved me fuel money and 2 days of my week.</p>
-      <div class="testi-foot">
-        <img src="images/market.jpg" class="testi-avatar" alt="Kwame" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="testi-avatar-fb" style="background:#1a56db;display:none">KA</div>
-        <div><div class="testi-name">Kwame Asante</div><div class="testi-role">Grain Trader · Accra</div></div>
-      </div>
-    </div>
-    <div class="testi-card">
-      <div class="testi-quote-mark">"</div>
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">I am elderly and cannot use a phone well. A HarvestGH agent came to my farm, registered me, and three days later I received a call saying my yams had a buyer. I did not have to do anything.</p>
-      <div class="testi-foot">
-        <img src="images/market.jpg" class="testi-avatar" alt="Kofi" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="testi-avatar-fb" style="background:#8b5e3c;display:none">KM</div>
-        <div><div class="testi-name">Kofi Mensah</div><div class="testi-role">Yam Farmer · Tamale, Northern</div></div>
-      </div>
-    </div>
+<section class="section quotes">
+  <div class="eyebrow">Success stories</div>
+  <h2 class="sec-h2">Farmers and buyers, real results</h2>
+  <div class="quote-grid" style="margin-top:36px">
+    <blockquote class="quote">
+      <p>“I used to lose 40% of my tomatoes every season. HarvestGH connected me to a buyer in Accra within two days.”</p>
+      <div class="quote-who">Ama Kofi</div>
+      <div class="quote-role">Tomato farmer · Kumasi, Ashanti</div>
+    </blockquote>
+    <blockquote class="quote">
+      <p>“I used to drive to three villages every week for maize. Now I see who has stock and agree on price in one call.”</p>
+      <div class="quote-who">Kwame Asante</div>
+      <div class="quote-role">Grain trader · Accra</div>
+    </blockquote>
+    <blockquote class="quote">
+      <p>“An agent registered me, and three days later I got a call that my yams had a buyer. I did not have to do anything.”</p>
+      <div class="quote-who">Kofi Mensah</div>
+      <div class="quote-role">Yam farmer · Tamale, Northern</div>
+    </blockquote>
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     SEASONAL CROPS
-══════════════════════════════ -->
-<section class="seasonal-section">
-  <div class="sec-eyebrow eyebrow-white">Ghana Crop Seasons</div>
-  <h2 class="sec-h2" style="color:#fff;margin-bottom:8px">What Is In Season Right Now</h2>
-  <p style="color:rgba(255,255,255,.65);font-size:.9rem;margin-bottom:0">Harvest seasons vary by region. <a href="harvest-calendar.html" style="color:var(--gold);font-weight:600">View the full calendar →</a></p>
-  <div class="seasonal-grid" id="seasonalGrid">
-    <!-- Populated by JS -->
+<section class="season">
+  <div class="eyebrow eyebrow-light">Ghana crop seasons</div>
+  <h2 class="sec-h2">What is in season now</h2>
+  <p style="color:rgba(255,255,255,.65);font-size:.95rem;max-width:36rem">
+    Seasons vary by region.
+    <a href="harvest-calendar.html" style="color:var(--gold);font-weight:700">View the full calendar</a>
+  </p>
+  <div class="season-grid" id="seasonalGrid"></div>
+</section>
+
+<section class="cta-band">
+  <h2>Ready to buy or sell?</h2>
+  <p>Whether you grow food or need it in bulk — HarvestGH connects both sides faster and more safely.</p>
+  <div class="hero-ctas">
+    <a href="listings.html" class="btn btn-gold">Start buying</a>
+    <a href="register-farmer.html" class="btn btn-ghost-light">Become a supplier</a>
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     CTA
-══════════════════════════════ -->
-<section class="cta-section">
-  <div class="cta-left">
-    <div class="sec-eyebrow eyebrow-g">Get Started Today</div>
-    <h2>Join <em>HarvestGH</em> and Change How Ghana Eats.</h2>
-    <p>Whether you grow food or need food — HarvestGH connects you to the other side of the transaction faster and more safely than anything else in Ghana.</p>
-    <div style="display:flex;gap:11px;flex-wrap:wrap">
-      <a href="listings.html"><button style="background:var(--g);color:#fff;border:none;padding:13px 26px;border-radius:11px;font-size:.95rem;font-weight:700;transition:all .2s">🛒 Start Buying</button></a>
-      <a href="register-farmer.html"><button style="background:transparent;color:var(--dark);border:1.5px solid var(--border);padding:13px 26px;border-radius:11px;font-size:.95rem;font-weight:600;transition:all .2s">🌾 Become a Supplier</button></a>
-    </div>
-  </div>
-  <div class="cta-cards">
-    <a href="register-buyer.html"><div class="cta-card">
-      <div class="cta-card-ico">🛒</div>
-      <div>
-        <div class="cta-card-title">I Want to Buy Fresh Produce</div>
-        <div class="cta-card-desc">Register as a buyer and get matched to verified farms across Ghana. Order in bulk with secure payment.</div>
-        <span class="cta-card-link">Register as Buyer →</span>
-      </div>
-    </div></a>
-    <a href="register-farmer.html"><div class="cta-card">
-      <div class="cta-card-ico">🌾</div>
-      <div>
-        <div class="cta-card-title">I Want to Sell My Harvest</div>
-        <div class="cta-card-desc">Register your FBO or farm. We list your produce and call you when a buyer is confirmed.</div>
-        <span class="cta-card-link">Become a Supplier →</span>
-      </div>
-    </div></a>
-    <a href="contact.html"><div class="cta-card">
-      <div class="cta-card-ico">💬</div>
-      <div>
-        <div class="cta-card-title">I Have Questions First</div>
-        <div class="cta-card-desc">Call, WhatsApp, or message us. We respond within 1 hour on business days.</div>
-        <span class="cta-card-link">Contact Ibrahim →</span>
-      </div>
-    </div></a>
-  </div>
-</section>
-
-<!-- ══════════════════════════════
-     FULL FOOTER
-══════════════════════════════ -->
 <footer class="footer">
   <div class="footer-grid">
-    <!-- BRAND -->
     <div class="ft-brand">
-      <div class="ft-logo">
-        <div class="fl-leaf">🌾</div>
-        Harvest<span>GH</span>
-      </div>
-      <p class="ft-desc">HarvestGH is Ghana's trusted agricultural marketplace — connecting smallholder FBO farmers directly to verified bulk buyers across the country. Reducing post-harvest loss. Increasing farmer income.</p>
+      <div class="ft-logo">Harvest<span>GH</span></div>
+      <p class="ft-desc">Ghana’s agricultural marketplace connecting smallholder FBO farmers to verified bulk buyers — reducing post-harvest loss and raising farmer income.</p>
       <div class="ft-socials">
-        <a href="https://wa.me/233544823484" target="_blank" class="ft-social" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://instagram.com/harvestgh" target="_blank" class="ft-social" title="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://facebook.com/harvestgh" target="_blank" class="ft-social" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://twitter.com/harvestgh" target="_blank" class="ft-social" title="Twitter / X"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://tiktok.com/@harvestgh" target="_blank" class="ft-social" title="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="https://wa.me/233544823484" target="_blank" class="ft-social" title="WhatsApp" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://instagram.com/harvestgh" target="_blank" class="ft-social" title="Instagram" rel="noopener"><i class="fab fa-instagram"></i></a>
+        <a href="https://facebook.com/harvestgh" target="_blank" class="ft-social" title="Facebook" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/harvestgh" target="_blank" class="ft-social" title="X" rel="noopener"><i class="fab fa-x-twitter"></i></a>
       </div>
-      <div class="ft-badge">🇬🇭 Proudly Made in Ghana</div>
     </div>
-
-    <!-- SHOP -->
     <div>
       <div class="ft-col-title">Marketplace</div>
       <ul class="ft-links">
-        <li><a href="listings.html">🛒 Shop All Produce</a></li>
-        <li><a href="listings.html?type=preorder">📅 Preorder Items</a></li>
-        <li><a href="harvest-calendar.html">📆 Crop Calendar</a></li>
-        <li><a href="order-status.html">📦 Track My Order</a></li>
-        <li><a href="checkout.html">💳 Checkout</a></li>
+        <li><a href="listings.html">Shop all produce</a></li>
+        <li><a href="listings.html?type=preorder">Preorder items</a></li>
+        <li><a href="harvest-calendar.html">Crop calendar</a></li>
+        <li><a href="order-status.html">Track my order</a></li>
       </ul>
     </div>
-
-    <!-- SUPPLIERS -->
     <div>
       <div class="ft-col-title">Suppliers</div>
       <ul class="ft-links">
-        <li><a href="register-farmer.html">🌾 Register as Supplier</a></li>
-        <li><a href="agent-portal.html">🤝 FBO Agent Login</a></li>
-        <li><a href="farmer-portal.html">📱 Check My Listing</a></li>
-        <li></li>
-        <li><a href="flow-diagram.html">🗺️ Business Flow</a></li>
+        <li><a href="register-farmer.html">Register as supplier</a></li>
+        <li><a href="farmer-portal.html">Check my listing</a></li>
+        <li><a href="agent-portal.html">FBO agent login</a></li>
       </ul>
     </div>
-
-    <!-- COMPANY -->
     <div>
       <div class="ft-col-title">Company</div>
       <ul class="ft-links">
-        <li><a href="about.html">🌱 About HarvestGH</a></li>
-        <li><a href="contact.html">💬 Contact Us</a></li>
-        <li><a href="register-buyer.html">👤 Register as Buyer</a></li>
-        <li><a href="privacy.html">🔒 Privacy Policy</a></li>
-        <li><a href="terms.html">📋 Terms of Service</a></li>
+        <li><a href="about.html">About HarvestGH</a></li>
+        <li><a href="contact.html">Contact us</a></li>
+        <li><a href="register-buyer.html">Register as buyer</a></li>
+        <li><a href="privacy.html">Privacy policy</a></li>
+        <li><a href="terms.html">Terms of service</a></li>
       </ul>
     </div>
-
-    <!-- CONTACT -->
     <div>
       <div class="ft-col-title">Contact</div>
       <div class="ft-contact-item">
-        <span class="ft-contact-icon">📞</span>
-        <div class="ft-contact-text"><strong>Phone / WhatsApp</strong><a href="tel:0544823484" id="ftPhone" style="color:rgba(255,255,255,.35)">0544 823 484</a></div>
+        <div class="ft-contact-text"><strong>Phone / WhatsApp</strong><a href="tel:0544823484" id="ftPhone">0544 823 484</a></div>
       </div>
       <div class="ft-contact-item">
-        <span class="ft-contact-icon">💬</span>
-        <div class="ft-contact-text"><strong>WhatsApp</strong><a href="https://wa.me/233544823484" target="_blank" style="color:rgba(255,255,255,.35)">Chat with us</a></div>
+        <div class="ft-contact-text"><strong>Location</strong>Accra, Ghana</div>
       </div>
       <div class="ft-contact-item">
-        <span class="ft-contact-icon">📍</span>
-        <div class="ft-contact-text"><strong>Location</strong>Accra, Ghana<br>Greater Accra Region</div>
-      </div>
-      <div class="ft-contact-item">
-        <span class="ft-contact-icon">🕐</span>
-        <div class="ft-contact-text"><strong>Support Hours</strong>Mon–Fri: 7am–8pm<br>Saturday: 8am–6pm</div>
-      </div>
-      <div class="ft-contact-item">
-        <span class="ft-contact-icon">🌐</span>
-        <div class="ft-contact-text"><strong>Website</strong>harvestgh.vercel.app</div>
+        <div class="ft-contact-text"><strong>Support</strong>Mon–Fri 7am–8pm · Sat 8am–6pm</div>
       </div>
     </div>
   </div>
-
-  <!-- BOTTOM BAR -->
   <div class="footer-bottom">
-    <span>© 2026 HarvestGH · Built with ❤️ in Accra, Ghana 🇬🇭 · Founder: Ibrahim Mohammed Lotsu · ATU Accra</span>
+    <span>© 2026 HarvestGH · Accra, Ghana · Founder: Ibrahim Mohammed Lotsu</span>
     <div class="ft-bottom-links">
       <a href="privacy.html">Privacy</a>
       <a href="terms.html">Terms</a>
-      <a href="sitemap.html">Sitemap</a>
       <a href="contact.html">Contact</a>
     </div>
   </div>
 </footer>
 
-<!-- WHATSAPP FLOAT -->
-<a class="wa-float" id="waFloat" href="https://wa.me/233544823484" target="_blank" title="Chat on WhatsApp">
-  <i class="fab fa-whatsapp" style="font-size:1.6rem;color:#fff;line-height:1"></i>
+<a class="wa-float" id="waFloat" href="https://wa.me/233544823484" target="_blank" title="Chat on WhatsApp" rel="noopener">
+  <i class="fab fa-whatsapp"></i>
 </a>
 
 <script src="config.js"></script>
+<script src="site.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 const SUPABASE_URL  = (window.HARVESTGH && window.HARVESTGH.supabaseUrl) || 'YOUR_SUPABASE_URL_HERE';
 const SUPABASE_ANON = (window.HARVESTGH && window.HARVESTGH.supabaseAnon) || 'YOUR_SUPABASE_ANON_KEY_HERE';
 let db = null;
 try {
-  const {createClient} = supabase;
+  const { createClient } = supabase;
   const _url = (window.HARVESTGH && window.HARVESTGH.supabaseUrl) || SUPABASE_URL;
   const _key = (window.HARVESTGH && window.HARVESTGH.supabaseAnon) || SUPABASE_ANON;
   if (_url && !_url.includes('YOUR_')) db = createClient(_url, _key);
-} catch(e) { console.warn('Supabase not loaded:', e.message); }
+} catch (e) { console.warn('Supabase not loaded:', e.message); }
 
-/* ══ CAROUSEL ══ */
-let currentSlide = 0, totalSlides = 5, autoTimer, dots;
-
-function goSlide(n) {
-  const track = document.getElementById('slidesTrack');
-  const dots  = document.querySelectorAll('.dot');
-  if (!track) return;
-  const prevSlide = document.getElementById('slide' + currentSlide);
-  if (prevSlide) prevSlide.classList.remove('active');
-  currentSlide = (n + totalSlides) % totalSlides;
-  const nextSlide = document.getElementById('slide' + currentSlide);
-  if (nextSlide) nextSlide.classList.add('active');
-  track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
-  if(dots) dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
-  resetAuto();
-}
-function nextSlide() { goSlide(currentSlide + 1); }
-function prevSlide() { goSlide(currentSlide - 1); }
-function resetAuto() {
-  clearInterval(autoTimer);
-  autoTimer = setInterval(nextSlide, 5000); // 5 seconds
-}
-
-// Kick off immediately when script loads
-document.addEventListener('DOMContentLoaded', function() {
-  dots = document.querySelectorAll('.dot');
-  const firstSlide = document.getElementById('slide0');
-  if (firstSlide) firstSlide.classList.add('active');
-  resetAuto();
-});
-
-// Touch / swipe — works on mobile
-let touchStartX = 0, touchStartY = 0;
-const heroEl = document.getElementById('hero');
-if (heroEl) {
-  heroEl.addEventListener('touchstart', e => {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-  }, {passive:true});
-  heroEl.addEventListener('touchend', e => {
-    const dx = touchStartX - e.changedTouches[0].clientX;
-    const dy = Math.abs(touchStartY - e.changedTouches[0].clientY);
-    if (Math.abs(dx) > 40 && Math.abs(dx) > dy) {
-      dx > 0 ? nextSlide() : prevSlide();
-    }
-  }, {passive:true});
-  heroEl.addEventListener('mouseenter', () => clearInterval(autoTimer));
-  heroEl.addEventListener('mouseleave', resetAuto);
-}
-
-// (hover pause handled in heroEl block above)
-
-resetAuto();
-
-/* ══ NAV SCROLL ══ */
-window.addEventListener('scroll', () => {
-  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 80);
-});
-
-/* ══ DRAWER ══ */
-function openDrawer() {
-  try {
-    document.getElementById('mobDrawer').classList.add('open');
-    document.getElementById('mobBackdrop').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  } catch(e) {}
-}
-function closeDrawer() {
-  try {
-    document.getElementById('mobDrawer').classList.remove('open');
-    document.getElementById('mobBackdrop').classList.remove('open');
-    document.body.style.overflow = '';
-  } catch(e) {}
-}
-
-/* ══ SUPABASE: LOAD SETTINGS ══ */
-async function loadSettings() {
-  try {
-    const {data} = await db.from('site_settings').select('*');
-    const m = {}; (data||[]).forEach(s => m[s.key]=s.value);
-    if (m.contact_phone) { const el=document.getElementById('ftPhone'); if(el){el.textContent=m.contact_phone;el.href='tel:'+m.contact_phone;} }
-    if (m.whatsapp)      { const wa=document.getElementById('waFloat'); if(wa) wa.href='https://wa.me/'+m.whatsapp; }
-  } catch(e) {}
-}
-
-/* ══ LOAD FEATURED PRODUCTS ══ */
-async function loadFeatured() {
-  const grid = document.getElementById('featuredGrid');
-  if (!grid) return;
-  // Show demo products immediately for fast load
-  if (typeof DEMO_PRODUCTS !== 'undefined') {
-    grid.innerHTML = DEMO_PRODUCTS.slice(0,6).map(p => {
-      const isPre = p.is_preorder;
-      return `<div class="prd-card" onclick="window.location.href='checkout.html?id=${p.id}'">
-        <img src="${p.image_url}" class="prd-img" alt="${p.name}" onerror="this.src='images/market.jpg'" loading="lazy">
-        <div class="prd-tag-wrap">${isPre?'<span class="prd-tag prd-tag-gold">📅 Preorder</span>':'<span class="prd-tag prd-tag-g">✅ In Stock</span>'}</div>
-        <div class="prd-body">
-          <div class="prd-name">${p.name}</div>
-          <div class="prd-src">📍 ${p.region} · ${p.fbo_source}</div>
-          <div class="prd-foot">
-            <div class="prd-price">GH₵${p.price_per_unit.toFixed(2)}<small> / ${p.unit}</small></div>
-            <button class="prd-btn">Order →</button>
-          </div>
-        </div>
-      </div>`;
-    }).join('');
-  }
-  // Try to load live data from Supabase too
-  try {
-    if(db) {
-      const {data} = await db.from('products').select('*').eq('status','available').order('created_at',{ascending:false}).limit(6);
-      if(data && data.length) { renderProducts(data); }
-    }
-  } catch(e) { /* use demo data shown above */ }
-}
-loadFeatured();
-buildSeasonal();
-</script>
-
-<script src="chatbot.js"></script>
-<script>
 const DEMO_PRODUCTS = [
-  {
-    "id": "demo1",
-    "name": "Fresh Tomatoes \u2014 Grade A",
-    "crop_type": "Tomato",
-    "price_per_unit": 120,
-    "unit": "crate",
-    "quantity_available": 200,
-    "sold_quantity": 45,
-    "region": "Ashanti",
-    "fbo_source": "Ejisu Farmers Cooperative",
-    "status": "available",
-    "is_preorder": false,
-    "image_url": "tomatoes.jpg",
-    "description": "Premium Grade A tomatoes, freshly harvested. Perfect for wholesale and restaurant supply."
-  },
-  {
-    "id": "demo2",
-    "name": "White Maize \u2014 Dried & Bagged",
-    "crop_type": "Maize",
-    "price_per_unit": 85,
-    "unit": "bag",
-    "quantity_available": 500,
-    "sold_quantity": 120,
-    "region": "Brong-Ahafo",
-    "fbo_source": "Techiman FBO Group",
-    "status": "available",
-    "is_preorder": false,
-    "image_url": "maize.jpg",
-    "description": "Certified dried white maize, 100kg bags. Ideal for flour mills, animal feed and trading."
-  },
-  {
-    "id": "demo3",
-    "name": "Sweet Mango \u2014 Kent Variety",
-    "crop_type": "Mango",
-    "price_per_unit": 95,
-    "unit": "box",
-    "quantity_available": 300,
-    "sold_quantity": 80,
-    "region": "Volta",
-    "fbo_source": "Ho Farmers Association",
-    "status": "available",
-    "is_preorder": false,
-    "image_url": "mango.jpg",
-    "description": "Premium Kent mangoes, export quality. Sweet, large and freshly harvested from Volta Region farms."
-  },
-  {
-    "id": "demo4",
-    "name": "Green Plantain \u2014 Apem",
-    "crop_type": "Plantain",
-    "price_per_unit": 55,
-    "unit": "bunch",
-    "quantity_available": 400,
-    "sold_quantity": 95,
-    "region": "Eastern",
-    "fbo_source": "Suhum Plantain Growers FBO",
-    "status": "available",
-    "is_preorder": false,
-    "image_url": "plantain.jpg",
-    "description": "Fresh green Apem plantains. Great for chips, boiling and fufu. Consistent size and quality."
-  },
-  {
-    "id": "demo5",
-    "name": "Mixed Market Vegetables Bundle",
-    "crop_type": "Vegetables",
-    "price_per_unit": 150,
-    "unit": "bundle",
-    "quantity_available": 100,
-    "sold_quantity": 20,
-    "region": "Greater Accra",
-    "fbo_source": "Accra Urban Farmers Coop",
-    "status": "available",
-    "is_preorder": false,
-    "image_url": "images/market.jpg",
-    "description": "Weekly bundle of fresh market vegetables. Includes seasonal produce sourced directly from farms."
-  },
-  {
-    "id": "demo6",
-    "name": "Maize (Preorder) \u2014 October Harvest",
-    "crop_type": "Maize",
-    "price_per_unit": 80,
-    "unit": "bag",
-    "quantity_available": 1000,
-    "sold_quantity": 200,
-    "region": "Northern",
-    "fbo_source": "Tamale Grain Farmers FBO",
-    "status": "available",
-    "is_preorder": true,
-    "available_date": "2026-10-15",
-    "image_url": "maize.jpg",
-    "description": "Preorder next harvest season's white maize from the Northern Region. Lock in your price today."
-  }
+  { id: 'demo1', name: 'Fresh Tomatoes — Grade A', crop_type: 'Tomato', price_per_unit: 120, unit: 'crate', quantity_available: 200, sold_quantity: 45, region: 'Ashanti', fbo_source: 'Ejisu Farmers Cooperative', status: 'available', is_preorder: false, image_url: 'tomatoes.jpg' },
+  { id: 'demo2', name: 'White Maize — Dried & Bagged', crop_type: 'Maize', price_per_unit: 85, unit: 'bag', quantity_available: 500, sold_quantity: 120, region: 'Brong-Ahafo', fbo_source: 'Techiman FBO Group', status: 'available', is_preorder: false, image_url: 'maize.jpg' },
+  { id: 'demo3', name: 'Sweet Mango — Kent Variety', crop_type: 'Mango', price_per_unit: 95, unit: 'box', quantity_available: 300, sold_quantity: 80, region: 'Volta', fbo_source: 'Ho Farmers Association', status: 'available', is_preorder: false, image_url: 'mango.jpg' },
+  { id: 'demo4', name: 'Green Plantain — Apem', crop_type: 'Plantain', price_per_unit: 55, unit: 'bunch', quantity_available: 400, sold_quantity: 95, region: 'Eastern', fbo_source: 'Suhum Plantain Growers FBO', status: 'available', is_preorder: false, image_url: 'plantain.jpg' },
+  { id: 'demo5', name: 'Mixed Market Vegetables Bundle', crop_type: 'Vegetables', price_per_unit: 150, unit: 'bundle', quantity_available: 100, sold_quantity: 20, region: 'Greater Accra', fbo_source: 'Accra Urban Farmers Coop', status: 'available', is_preorder: false, image_url: 'images/market.jpg' },
+  { id: 'demo6', name: 'Maize (Preorder) — October Harvest', crop_type: 'Maize', price_per_unit: 80, unit: 'bag', quantity_available: 1000, sold_quantity: 200, region: 'Northern', fbo_source: 'Tamale Grain Farmers FBO', status: 'available', is_preorder: true, image_url: 'maize.jpg' }
 ];
 
-function renderDemoProducts(containerId, limit) {
-  const grid = document.getElementById(containerId);
-  if (!grid) return;
-  const items = limit ? DEMO_PRODUCTS.slice(0, limit) : DEMO_PRODUCTS;
-  grid.innerHTML = items.map(p => {
-    const remaining = p.quantity_available - p.sold_quantity;
-    const isPre = p.is_preorder;
-    return `
-    <div class="prd-card" onclick="window.location.href='checkout.html?id=${p.id}'">
-      <img src="${p.image_url}" class="prd-img" alt="${p.name}"
-        onerror="this.src='images/market.jpg'" loading="lazy">
-      <div class="prd-tag-wrap">
-        ${isPre ? '<span class="prd-tag prd-tag-gold">📅 Preorder</span>' : '<span class="prd-tag prd-tag-g">✅ In Stock</span>'}
+function productCard(p) {
+  const isPre = p.is_preorder;
+  return `<div class="prd" onclick="location.href='checkout.html?id=${p.id}'">
+    <img src="${p.image_url}" class="prd-img" alt="${p.name}" onerror="this.src='images/market.jpg'" loading="lazy">
+    <div class="prd-body">
+      <div class="prd-meta">${isPre ? 'Preorder' : 'In stock'} · ${p.region || ''}</div>
+      <div class="prd-name">${p.name}</div>
+      <div class="prd-src">${p.fbo_source || ''}</div>
+      <div class="prd-foot">
+        <div class="prd-price">GH₵${Number(p.price_per_unit).toFixed(2)}<small> / ${p.unit}</small></div>
+        <button class="prd-btn" onclick="event.stopPropagation();location.href='checkout.html?id=${p.id}'">${isPre ? 'Preorder' : 'Order'}</button>
       </div>
-      <div class="prd-body">
-        <div class="prd-name">${p.name}</div>
-        <div class="prd-src">📍 ${p.region} · ${p.fbo_source}</div>
-        <div class="prd-foot">
-          <div class="prd-price">GH₵${p.price_per_unit.toFixed(2)}<small> / ${p.unit}</small></div>
-          <button class="prd-btn" onclick="event.stopPropagation();window.location.href='checkout.html?id=${p.id}'">
-            ${isPre ? 'Preorder' : 'Order →'}
-          </button>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
+    </div>
+  </div>`;
 }
+
+function renderProducts(list) {
+  const grid = document.getElementById('featuredGrid');
+  if (!grid || !list || !list.length) return;
+  grid.innerHTML = list.slice(0, 6).map(productCard).join('');
+}
+
+async function loadFeatured() {
+  renderProducts(DEMO_PRODUCTS);
+  try {
+    if (db) {
+      const { data } = await db.from('products').select('*').eq('status', 'available').order('created_at', { ascending: false }).limit(6);
+      if (data && data.length) renderProducts(data);
+    }
+  } catch (e) {}
+}
+
+function buildSeasonal() {
+  const grid = document.getElementById('seasonalGrid');
+  if (!grid) return;
+  const items = [
+    { name: 'Tomato', status: 'Peak season', img: 'tomatoes.jpg' },
+    { name: 'Maize', status: 'Harvesting', img: 'maize.jpg' },
+    { name: 'Plantain', status: 'Available', img: 'plantain.jpg' },
+    { name: 'Mango', status: 'In season', img: 'mango.jpg' },
+    { name: 'Market mix', status: 'Weekly', img: 'images/market.jpg' }
+  ];
+  grid.innerHTML = items.map(i => `
+    <a href="listings.html" class="season-item">
+      <img src="${i.img}" alt="${i.name}" onerror="this.src='images/market.jpg'" loading="lazy">
+      <div class="season-name">${i.name}</div>
+      <div class="season-status">${i.status}</div>
+    </a>`).join('');
+}
+
+async function loadSettings() {
+  try {
+    if (!db) return;
+    const { data } = await db.from('site_settings').select('*');
+    const m = {};
+    (data || []).forEach(s => { m[s.key] = s.value; });
+    if (m.contact_phone) {
+      const el = document.getElementById('ftPhone');
+      if (el) { el.textContent = m.contact_phone; el.href = 'tel:' + m.contact_phone; }
+    }
+    if (m.whatsapp) {
+      const wa = document.getElementById('waFloat');
+      if (wa) wa.href = 'https://wa.me/' + m.whatsapp;
+    }
+  } catch (e) {}
+}
+
+loadFeatured();
+buildSeasonal();
+loadSettings();
 </script>
+<script src="chatbot.js"></script>
 </body>
 </html>

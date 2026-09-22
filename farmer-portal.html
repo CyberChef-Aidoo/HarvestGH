@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Check My Listing — HarvestGH</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;--gold:#e8a020;--dark:#0f1f14;--gray:#6b7c6e;--bg:#f0f4f1;--border:rgba(26,107,60,.12);--red:#c0392b}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--dark)}
-a{text-decoration:none;color:inherit} button{cursor:pointer;font-family:'DM Sans',sans-serif}
+:root{--g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;--gold:#c9921a;--dark:#0f1f14;--gray:#6b7c6e;--bg:#f0f4f1;--border:rgba(26,107,60,.12);--red:#c0392b}
+body{font-family:var(--font),'Figtree',system-ui,sans-serif;background:var(--bg);color:var(--dark)}
+a{text-decoration:none;color:inherit} button{cursor:pointer;font-family:var(--font),'Figtree',system-ui,sans-serif}
 .hidden{display:none!important}
 
 .nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(250,247,242,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;padding:0 5%;justify-content:space-between}
-.logo{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:var(--g)}.logo span{color:var(--gold)}
+.logo{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.5rem;font-weight:900;color:var(--g)}.logo span{color:var(--gold)}
 .nav-r{display:flex;gap:9px;align-items:center}
 .nav-link{font-size:.86rem;font-weight:500;color:var(--dark);padding:8px 12px}.nav-link:hover{color:var(--g)}
 .btn-g{background:var(--g);color:#fff;border:none;padding:9px 17px;border-radius:9px;font-size:.84rem;font-weight:600}
@@ -24,10 +24,10 @@ a{text-decoration:none;color:inherit} button{cursor:pointer;font-family:'DM Sans
 /* LOOKUP CARD */
 .lookup-card{background:#fff;border-radius:20px;padding:38px;box-shadow:0 8px 40px rgba(15,31,20,.1);text-align:center}
 .lookup-icon{width:70px;height:70px;border-radius:50%;background:var(--gp);margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-size:1.8rem}
-.lookup-card h1{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:900;margin-bottom:7px}
+.lookup-card h1{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.7rem;font-weight:900;margin-bottom:7px}
 .lookup-card p{color:var(--gray);font-size:.9rem;line-height:1.6;margin-bottom:26px}
 .phone-input-wrap{display:flex;gap:10px;margin-bottom:10px}
-.phone-input{flex:1;padding:13px 16px;border:1.5px solid rgba(26,107,60,.2);border-radius:12px;font-size:1rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;text-align:center;letter-spacing:.05em}
+.phone-input{flex:1;padding:13px 16px;border:1.5px solid rgba(26,107,60,.2);border-radius:12px;font-size:1rem;font-family:var(--font),'Figtree',system-ui,sans-serif;outline:none;transition:border-color .2s;text-align:center;letter-spacing:.05em}
 .phone-input:focus{border-color:var(--g)}
 .phone-input::placeholder{color:#aab4ac;letter-spacing:0}
 .btn-lookup{background:var(--g);color:#fff;border:none;padding:13px 22px;border-radius:12px;font-size:.92rem;font-weight:700;display:flex;align-items:center;gap:7px;white-space:nowrap;transition:background .2s}
@@ -39,7 +39,7 @@ a{text-decoration:none;color:inherit} button{cursor:pointer;font-family:'DM Sans
 .results-section{margin-top:20px}
 .result-card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(15,31,20,.08);margin-bottom:14px;border:1px solid var(--border)}
 .rc-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px}
-.rc-title{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:700}
+.rc-title{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.15rem;font-weight:700}
 .rc-sub{font-size:.8rem;color:var(--gray);margin-top:3px}
 .badge{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:.75rem;font-weight:700;white-space:nowrap}
 .b-available{background:var(--gp);color:var(--g)}
@@ -54,7 +54,7 @@ a{text-decoration:none;color:inherit} button{cursor:pointer;font-family:'DM Sans
 
 /* MATCH FOUND BOX */
 .match-found{background:linear-gradient(135deg,#1a6b3c,#2d9b5a);border-radius:12px;padding:20px;color:#fff;margin-bottom:14px}
-.match-found h3{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.match-found h3{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.1rem;font-weight:900;margin-bottom:4px;display:flex;align-items:center;gap:8px}
 .match-found p{font-size:.85rem;opacity:.85;line-height:1.6;margin-bottom:14px}
 .match-contact{background:rgba(255,255,255,.15);border-radius:9px;padding:13px 16px;font-size:.88rem}
 .mc-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;opacity:.7;margin-bottom:5px}
@@ -80,7 +80,7 @@ a{text-decoration:none;color:inherit} button{cursor:pointer;font-family:'DM Sans
 
 /* NO RESULTS */
 .no-results{text-align:center;padding:28px;background:#fff;border-radius:16px;border:1px solid var(--border)}
-.no-results h3{font-family:'Fraunces',serif;font-size:1.2rem;margin-bottom:8px}
+.no-results h3{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.2rem;margin-bottom:8px}
 .no-results p{color:var(--gray);font-size:.87rem;line-height:1.7}
 
 /* SPINNER */
@@ -187,10 +187,11 @@ a{text-decoration:none;color:inherit} button{cursor:pointer;font-family:'DM Sans
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<nav class="nav">
+<nav class="nav nav-solid" id="mainNav">
   <a href="index.html" class="logo">Harvest<span>GH</span></a>
   <div class="nav-r">
     <a href="listings.html" class="nav-link">Marketplace</a>
@@ -456,5 +457,6 @@ loadSettings();
 
 
 <script src="chatbot.js"></script>
+<script src="site.js"></script>
 </body>
 </html>

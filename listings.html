@@ -5,33 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shop — HarvestGH</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;--gold:#e8a020;--goldp:#fef3cd;--dark:#0f1f14;--gray:#6b7c6e;--cream:#faf7f2;--border:rgba(26,107,60,.12);--red:#c0392b}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark)}
+:root{--g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;--gold:#c9921a;--goldp:#fef3cd;--dark:#0f1f14;--gray:#6b7c6e;--bg:#f4f6f3;--border:rgba(26,107,60,.12);--red:#c0392b}
+body{font-family:var(--font),'Figtree',system-ui,sans-serif;background:var(--bg,#f4f6f3);color:var(--dark)}
 a{text-decoration:none;color:inherit}
-button{cursor:pointer;font-family:'DM Sans',sans-serif}
+button{cursor:pointer;font-family:var(--font),'Figtree',system-ui,sans-serif}
 
 /* NAV */
 .nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(250,247,242,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;padding:0 5%;justify-content:space-between}
-.logo{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:var(--g)}.logo span{color:var(--gold)}
+.logo{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.5rem;font-weight:900;color:var(--g)}.logo span{color:var(--gold)}
 .nav-r{display:flex;gap:9px;align-items:center}
 .nav-link{font-size:.86rem;font-weight:500;color:var(--dark);padding:8px 12px}.nav-link:hover{color:var(--g)}
 .btn-g{background:var(--g);color:#fff;border:none;padding:9px 17px;border-radius:9px;font-size:.84rem;font-weight:600;transition:background .2s}.btn-g:hover{background:var(--gm)}
 .btn-out{background:transparent;color:var(--dark);border:1.5px solid var(--border);padding:9px 17px;border-radius:9px;font-size:.84rem;font-weight:600;transition:all .2s}.btn-out:hover{border-color:var(--g);color:var(--g)}
 
 /* HERO BANNER */
-.shop-banner{background:linear-gradient(135deg,var(--g),var(--gm));padding:96px 5% 40px;color:#fff}
-.shop-banner h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#fff;margin-bottom:8px}
-.shop-banner p{color:rgba(255,255,255,.72);font-size:.95rem;max-width:520px;line-height:1.65;margin-bottom:20px}
-.trust-pills{display:flex;gap:10px;flex-wrap:wrap}
-.trust-pill{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:6px 14px;border-radius:100px;font-size:.78rem;font-weight:600;color:#fff}
+.shop-banner{
+  background:
+    linear-gradient(120deg,rgba(12,26,17,.88),rgba(26,107,60,.72)),
+    url('images/market.jpg') center/cover;
+  padding:calc(var(--nav-h,68px) + 40px) 5% 48px;color:#fff
+}
+.shop-kicker{
+  font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:12px
+}
+.shop-banner h1{
+  font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;
+  font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;letter-spacing:-.02em;
+  color:#fff;margin-bottom:12px;line-height:1.12
+}
+.shop-banner p{color:rgba(255,255,255,.72);font-size:1rem;max-width:36rem;line-height:1.7;margin-bottom:14px}
+.shop-phone{font-size:.9rem;font-weight:600;color:rgba(255,255,255,.9)!important;margin-bottom:0!important}
+.shop-phone a{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+.filters-bar{top:var(--nav-h,68px)!important}
 
 /* FILTERS */
 .filters-bar{background:#fff;border-bottom:1px solid var(--border);padding:12px 5%;display:flex;gap:10px;flex-wrap:wrap;align-items:center;position:sticky;top:64px;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.04)}
-.f-sel{padding:9px 14px;border:1.5px solid rgba(26,107,60,.15);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:.84rem;background:#fff;outline:none;cursor:pointer;transition:border-color .2s}
+.f-sel{padding:9px 14px;border:1.5px solid rgba(26,107,60,.15);border-radius:9px;font-family:var(--font),'Figtree',system-ui,sans-serif;font-size:.84rem;background:#fff;outline:none;cursor:pointer;transition:border-color .2s}
 .f-sel:focus{border-color:var(--g)}
-.f-search{flex:1;min-width:180px;padding:9px 14px;border:1.5px solid rgba(26,107,60,.15);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:.84rem;outline:none;transition:border-color .2s}
+.f-search{flex:1;min-width:180px;padding:9px 14px;border:1.5px solid rgba(26,107,60,.15);border-radius:9px;font-family:var(--font),'Figtree',system-ui,sans-serif;font-size:.84rem;outline:none;transition:border-color .2s}
 .f-search:focus{border-color:var(--g)}.f-search::placeholder{color:#aab4ac}
 .f-count{font-size:.78rem;color:var(--gray);white-space:nowrap;margin-left:auto;font-weight:500}
 
@@ -56,11 +70,12 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif}
 .b-dark{background:var(--dark);color:#fff}
 .prod-body{padding:16px;flex:1;display:flex;flex-direction:column}
 .prod-crop-tag{font-size:.72rem;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
-.prod-name{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:700;margin-bottom:4px;line-height:1.25}
+.prod-name{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:4px;line-height:1.25;letter-spacing:-.01em}
+.prod-card{transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s}
 .prod-source{font-size:.76rem;color:var(--gray);margin-bottom:10px;display:flex;align-items:center;gap:5px}
 .prod-price-row{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:10px}
-.prod-price{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:var(--g);line-height:1}
-.prod-price small{font-family:'DM Sans';font-size:.72rem;font-weight:500;color:var(--gray);display:block;margin-top:2px}
+.prod-price{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.5rem;font-weight:900;color:var(--g);line-height:1}
+.prod-price small{font-family:var(--font);font-size:.72rem;font-weight:500;color:var(--gray);display:block;margin-top:2px}
 .prod-qty{text-align:right}
 .prod-qty-val{font-weight:700;font-size:.9rem;color:var(--dark)}
 .prod-qty-lbl{font-size:.7rem;color:var(--gray)}
@@ -77,7 +92,7 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif}
 /* EMPTY / LOADING */
 .state-box{text-align:center;padding:60px 20px;grid-column:1/-1}
 .state-box .s-icon{font-size:2.8rem;margin-bottom:12px}
-.state-box h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;margin-bottom:8px}
+.state-box h3{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:8px}
 .state-box p{color:var(--gray);font-size:.88rem;max-width:320px;margin:0 auto 18px}
 .spinner{width:32px;height:32px;border:3px solid rgba(26,107,60,.15);border-top-color:var(--g);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -86,7 +101,7 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif}
 .how-strip{background:var(--dark);padding:44px 5%;margin-top:0}
 .how-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .how-step{text-align:center;padding:8px}
-.how-num{font-family:'Fraunces',serif;font-size:2rem;font-weight:900;color:rgba(255,255,255,.1);line-height:1;margin-bottom:8px}
+.how-num{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:2rem;font-weight:900;color:rgba(255,255,255,.1);line-height:1;margin-bottom:8px}
 .how-title{font-weight:700;color:#fff;font-size:.9rem;margin-bottom:6px}
 .how-desc{font-size:.78rem;color:rgba(255,255,255,.48);line-height:1.6}
 
@@ -212,29 +227,50 @@ footer{background:var(--dark);color:#fff;padding:32px 5% 20px}
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<nav class="nav">
-  <a href="index.html" class="logo">Harvest<span>GH</span></a>
+<nav class="nav nav-solid" id="mainNav">
+  <a href="index.html" class="logo">
+    <img src="logo.png" alt="" class="logo-img" onerror="this.style.display='none'">
+    Harvest<span>GH</span>
+  </a>
   <div class="nav-r">
     <a href="index.html" class="nav-link">Home</a>
     <a href="harvest-calendar.html" class="nav-link">Crop Calendar</a>
     <a href="order-status.html" class="nav-link">Track Order</a>
-    <a href="register-buyer.html"><button class="btn-g">Order Now</button></a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="listings.html" class="btn btn-primary btn-sm">Shop</a>
   </div>
+  <button class="hamburger" onclick="openDrawer()" aria-label="Open menu">☰</button>
 </nav>
+
+<div class="mob-backdrop" id="mobBackdrop" onclick="closeDrawer()"></div>
+<div class="mob-drawer" id="mobDrawer">
+  <div class="mob-drawer-head">
+    <div class="mob-logo">Harvest<span>GH</span></div>
+    <button class="mob-close" onclick="closeDrawer()" aria-label="Close">✕</button>
+  </div>
+  <nav class="mob-nav">
+    <a href="index.html" class="mob-link" onclick="closeDrawer()">Home</a>
+    <a href="listings.html" class="mob-link" onclick="closeDrawer()">Shop</a>
+    <a href="harvest-calendar.html" class="mob-link" onclick="closeDrawer()">Crop Calendar</a>
+    <a href="order-status.html" class="mob-link" onclick="closeDrawer()">Track Order</a>
+    <a href="about.html" class="mob-link" onclick="closeDrawer()">About</a>
+    <a href="contact.html" class="mob-link" onclick="closeDrawer()">Contact</a>
+  </nav>
+  <div class="mob-foot">
+    <a href="register-buyer.html" class="mob-btn-g" onclick="closeDrawer()">Register as buyer</a>
+  </div>
+</div>
 
 <!-- BANNER -->
 <div class="shop-banner">
-  <h1>Fresh Farm Produce — Order Direct</h1>
-  <p>Browse verified crops sourced from FBO farmers across Ghana. Order now for delivery or preorder what is coming next season.</p>
-  <div class="trust-pills">
-    <div class="trust-pill">✅ Verified Sources</div>
-    <div class="trust-pill">🔒 Secure Payment</div>
-    <div class="trust-pill">🚚 Nationwide Delivery</div>
-    <div class="trust-pill">📱 Order by Phone: <span id="bannerPhone">0544823484</span></div>
-  </div>
+  <p class="shop-kicker">Marketplace</p>
+  <h1>Fresh farm produce</h1>
+  <p>Browse verified crops from FBO farmers across Ghana. Order for delivery or preorder next season’s harvest.</p>
+  <p class="shop-phone">Order by phone: <a href="tel:0544823484" id="bannerPhone">0544 823 484</a></p>
 </div>
 
 <!-- FILTERS -->
@@ -551,5 +587,6 @@ function renderDemoProducts(containerId, limit) {
   }).join('');
 }
 </script>
+<script src="site.js"></script>
 </body>
 </html>

@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Track Your Order — HarvestGH</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;--gold:#e8a020;--goldp:#fef3cd;--dark:#0f1f14;--gray:#6b7c6e;--bg:#f0f4f1;--border:rgba(26,107,60,.12);--red:#c0392b;--blue:#1a56db;--orange:#c05621}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--dark)}
+:root{--g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;--gold:#c9921a;--goldp:#fef3cd;--dark:#0f1f14;--gray:#6b7c6e;--bg:#f0f4f1;--border:rgba(26,107,60,.12);--red:#c0392b;--blue:#1a56db;--orange:#c05621}
+body{font-family:var(--font),'Figtree',system-ui,sans-serif;background:var(--bg);color:var(--dark)}
 a{text-decoration:none;color:inherit}
-button{cursor:pointer;font-family:'DM Sans',sans-serif}
+button{cursor:pointer;font-family:var(--font),'Figtree',system-ui,sans-serif}
 .hidden{display:none!important}
 
 .nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(250,247,242,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;padding:0 5%;justify-content:space-between}
-.logo{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:var(--g)}.logo span{color:var(--gold)}
+.logo{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.5rem;font-weight:900;color:var(--g)}.logo span{color:var(--gold)}
 .nav-r a{font-size:.86rem;font-weight:500;color:var(--dark);padding:8px 12px}.nav-r a:hover{color:var(--g)}
 
 .page{padding:84px 5% 60px;min-height:100vh;display:flex;flex-direction:column;align-items:center}
@@ -23,10 +23,10 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif}
 /* ── LOOKUP ── */
 .lookup-card{background:#fff;border-radius:20px;padding:36px;border:1px solid var(--border);box-shadow:0 4px 24px rgba(15,31,20,.08);text-align:center;margin-bottom:20px}
 .lookup-icon{width:66px;height:66px;border-radius:50%;background:var(--gp);border:2px solid rgba(26,107,60,.15);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:1.7rem}
-.lookup-card h1{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;margin-bottom:7px}
+.lookup-card h1{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.6rem;font-weight:900;margin-bottom:7px}
 .lookup-card p{color:var(--gray);font-size:.88rem;line-height:1.65;margin-bottom:22px}
 .input-row{display:flex;gap:10px;margin-bottom:8px}
-.ref-input{flex:1;padding:12px 16px;border:1.5px solid rgba(26,107,60,.2);border-radius:11px;font-size:.95rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;text-transform:uppercase;letter-spacing:.04em}
+.ref-input{flex:1;padding:12px 16px;border:1.5px solid rgba(26,107,60,.2);border-radius:11px;font-size:.95rem;font-family:var(--font),'Figtree',system-ui,sans-serif;outline:none;transition:border-color .2s;text-transform:uppercase;letter-spacing:.04em}
 .ref-input:focus{border-color:var(--g)}
 .ref-input::placeholder{text-transform:none;letter-spacing:0;color:#aab4ac}
 .btn-track{background:var(--g);color:#fff;border:none;padding:12px 20px;border-radius:11px;font-size:.9rem;font-weight:700;white-space:nowrap;display:flex;align-items:center;gap:7px;transition:background .2s;flex-shrink:0}
@@ -89,7 +89,7 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif}
 .price-row .val{font-weight:600}
 .price-row.total{padding-top:8px;border-top:1px solid var(--border)}
 .price-row.total .lbl{font-weight:700;font-size:.95rem}
-.price-row.total .val{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:900;color:var(--g)}
+.price-row.total .val{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.15rem;font-weight:900;color:var(--g)}
 
 /* ── ACTION BUTTONS ── */
 .order-actions{padding:14px 22px 18px;display:flex;gap:9px;flex-wrap:wrap;border-top:1px solid var(--border)}
@@ -102,7 +102,7 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif}
 
 /* ── NOT FOUND ── */
 .not-found{background:#fff;border-radius:16px;padding:32px;border:1px solid var(--border);text-align:center}
-.not-found h3{font-family:'Fraunces',serif;font-size:1.2rem;margin-bottom:8px}
+.not-found h3{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.2rem;margin-bottom:8px}
 .not-found p{color:var(--gray);font-size:.87rem;line-height:1.7;margin-bottom:18px}
 
 /* WA FLOAT */
@@ -205,10 +205,11 @@ button{cursor:pointer;font-family:'DM Sans',sans-serif}
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<nav class="nav">
+<nav class="nav nav-solid" id="mainNav">
   <a href="index.html" class="logo">Harvest<span>GH</span></a>
   <div class="nav-r">
     <a href="listings.html">Shop</a>
@@ -442,5 +443,6 @@ init();
 </script>
 
 <script src="chatbot.js"></script>
+<script src="site.js"></script>
 </body>
 </html>

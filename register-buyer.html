@@ -5,20 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Register as Buyer — HarvestGH</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;--gold:#e8a020;--dark:#0f1f14;--gray:#6b7c6e;--bg:#f0f4f1;--border:rgba(26,107,60,.12);--red:#c0392b}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--dark)}
-a{text-decoration:none;color:inherit} button{cursor:pointer;font-family:'DM Sans',sans-serif}
+:root{--g:#1a6b3c;--gm:#2d9b5a;--gp:#e8f5ee;--gold:#c9921a;--dark:#0f1f14;--gray:#6b7c6e;--bg:#f0f4f1;--border:rgba(26,107,60,.12);--red:#c0392b}
+body{font-family:var(--font),'Figtree',system-ui,sans-serif;background:var(--bg);color:var(--dark)}
+a{text-decoration:none;color:inherit} button{cursor:pointer;font-family:var(--font),'Figtree',system-ui,sans-serif}
 .hidden{display:none!important}
 .nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(250,247,242,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;padding:0 5%;justify-content:space-between}
-.logo{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:var(--g)}.logo span{color:var(--gold)}
+.logo{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.5rem;font-weight:900;color:var(--g)}.logo span{color:var(--gold)}
 .nav-r{display:flex;gap:9px;align-items:center}
 .nav-link{font-size:.86rem;font-weight:500;color:var(--dark);padding:8px 12px}.nav-link:hover{color:var(--g)}
 .btn-g{background:var(--g);color:#fff;border:none;padding:9px 17px;border-radius:9px;font-size:.84rem;font-weight:600}.btn-g:hover{background:var(--gm)}
 .wrapper{min-height:100vh;padding:84px 5% 60px;display:flex;align-items:flex-start;justify-content:center}
 .card{background:#fff;border-radius:20px;padding:38px;max-width:560px;width:100%;box-shadow:0 8px 40px rgba(15,31,20,.1)}
-.card-logo{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:900;color:var(--g);margin-bottom:6px}.card-logo span{color:var(--gold)}
+.card-logo{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.3rem;font-weight:900;color:var(--g);margin-bottom:6px}.card-logo span{color:var(--gold)}
 .top-img{width:100%;height:144px;border-radius:12px;object-fit:cover;margin:13px 0 21px}
 .draft-notice{background:#fef3cd;border:1px solid #f4d03f;border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:.83rem;display:flex;align-items:center;justify-content:space-between;gap:10px}
 .draft-notice span{color:#856404}.draft-clear{background:none;border:none;color:#856404;font-size:.78rem;font-weight:700;cursor:pointer;text-decoration:underline}
@@ -33,7 +33,7 @@ a{text-decoration:none;color:inherit} button{cursor:pointer;font-family:'DM Sans
 .form-group{margin-bottom:15px}
 .form-label{display:block;font-size:.82rem;font-weight:600;color:var(--dark);margin-bottom:6px}
 .req{color:var(--red);margin-left:2px}
-.form-control{width:100%;padding:11px 13px;border:1.5px solid rgba(26,107,60,.2);border-radius:10px;font-size:.9rem;color:var(--dark);background:#fff;outline:none;transition:border-color .2s;font-family:'DM Sans',sans-serif}
+.form-control{width:100%;padding:11px 13px;border:1.5px solid rgba(26,107,60,.2);border-radius:10px;font-size:.9rem;color:var(--dark);background:#fff;outline:none;transition:border-color .2s;font-family:var(--font),'Figtree',system-ui,sans-serif}
 .form-control:focus{border-color:var(--g)}.form-control::placeholder{color:#aab4ac}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
 .form-hint{font-size:.74rem;color:var(--gray);margin-top:3px}
@@ -44,7 +44,7 @@ a{text-decoration:none;color:inherit} button{cursor:pointer;font-family:'DM Sans
 @keyframes spin{to{transform:rotate(360deg)}}
 .success-wrap{text-align:center;padding:14px 0}
 .s-icon{width:74px;height:74px;border-radius:50%;background:var(--gp);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:1.9rem;color:var(--g)}
-.success-wrap h2{font-family:'Fraunces',serif;font-size:1.65rem;font-weight:900;margin-bottom:9px}
+.success-wrap h2{font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.65rem;font-weight:900;margin-bottom:9px}
 .success-wrap p{color:var(--gray);font-size:.9rem;line-height:1.7;margin-bottom:20px}
 .toast{position:fixed;bottom:20px;right:20px;background:var(--dark);color:#fff;padding:12px 17px;border-radius:10px;font-size:.83rem;font-weight:500;z-index:9999;max-width:290px;box-shadow:0 6px 24px rgba(0,0,0,.2);transform:translateY(80px);opacity:0;transition:all .3s}
 .toast.show{transform:translateY(0);opacity:1}.toast.error{background:var(--red)}
@@ -143,9 +143,10 @@ a{text-decoration:none;color:inherit} button{cursor:pointer;font-family:'DM Sans
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<nav class="nav">
+<nav class="nav nav-solid" id="mainNav">
   <a href="index.html" class="logo">Harvest<span>GH</span></a>
   <div class="nav-r">
     <a href="listings.html" class="nav-link">Marketplace</a>
@@ -156,7 +157,7 @@ a{text-decoration:none;color:inherit} button{cursor:pointer;font-family:'DM Sans
   <div class="card">
     <div id="formSection">
       <div class="card-logo">Harvest<span>GH</span></div>
-      <h2 style="font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;margin-top:6px;margin-bottom:5px">Register as a Buyer</h2>
+      <h2 style="font-family:var(--display),'Bricolage Grotesque',system-ui,sans-serif;font-size:1.5rem;font-weight:900;margin-top:6px;margin-bottom:5px">Register as a Buyer</h2>
       <p style="color:var(--gray);font-size:.86rem">Tell us what you need and we will connect you to verified farmers across Ghana.</p>
       <img src="farmland.jpg" alt="Fresh produce" class="top-img" loading="lazy" onerror="this.style.display='none'">
 
@@ -345,5 +346,6 @@ loadCrops(); loadSettings(); restoreDraft();
 
 
 <script src="chatbot.js"></script>
+<script src="site.js"></script>
 </body>
 </html>
