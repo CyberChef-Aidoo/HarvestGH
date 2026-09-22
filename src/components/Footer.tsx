@@ -22,7 +22,7 @@ const columns = [
   {
     title: "Company",
     links: [
-      { href: "/about", label: "About HarvestGH" },
+      { href: "/about", label: "About Agro Bridge" },
       { href: "/contact", label: "Contact us" },
       { href: "/register/buyer", label: "Register as buyer" },
       { href: "/privacy", label: "Privacy policy" },
@@ -32,23 +32,26 @@ const columns = [
 ];
 
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="bg-[#060e09] px-6 pt-16 text-white">
+    <footer className="bg-[#0a1a12] px-6 pt-16 text-white">
       <div className="mx-auto grid max-w-content gap-9 border-b border-white/[0.07] pb-12 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_1.2fr]">
         <div>
-          <div className="mb-3 font-display text-[1.35rem] font-extrabold">
-            Harvest<span className="text-gold">GH</span>
+          <div className="mb-3 inline-block rounded-lg bg-white px-2.5 py-1.5">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt="Agro Bridge" className="h-9 w-auto object-contain" />
           </div>
-          <p className="mb-4 max-w-[280px] text-[0.84rem] leading-relaxed text-white/40">
-            Ghana&apos;s agricultural marketplace connecting smallholder FBO farmers to verified
-            bulk buyers — reducing post-harvest loss and raising farmer income.
+          <p className="mb-4 max-w-[280px] caption leading-relaxed text-white/55">
+            Connecting farmers to customers — verified FBO produce and poultry for households,
+            restaurants, and retailers.
           </p>
           <div className="flex gap-2">
             {[
               { href: whatsappLink(), label: "WhatsApp" },
-              { href: "https://instagram.com/harvestgh", label: "Instagram" },
-              { href: "https://facebook.com/harvestgh", label: "Facebook" },
-              { href: "https://twitter.com/harvestgh", label: "X" },
+              { href: "https://instagram.com/agrobridge", label: "Instagram" },
+              { href: "https://facebook.com/agrobridge", label: "Facebook" },
+              { href: "https://twitter.com/agrobridge", label: "X" },
             ].map((s) => (
               <a
                 key={s.label}
@@ -56,7 +59,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 title={s.label}
-                className="flex h-9 w-9 items-center justify-center rounded-[9px] border border-white/10 bg-white/[0.06] text-xs transition hover:-translate-y-0.5 hover:border-green hover:bg-green"
+                className="flex h-9 w-9 items-center justify-center rounded-[9px] border border-white/10 bg-white/[0.06] text-xs transition hover:-translate-y-0.5 hover:border-gold hover:bg-green"
               >
                 {s.label[0]}
               </a>
@@ -66,7 +69,7 @@ export default function Footer() {
 
         {columns.map((col) => (
           <div key={col.title}>
-            <div className="mb-3.5 text-xs font-bold uppercase tracking-[0.1em] text-white/85">
+            <div className="mb-3.5 text-xs font-semibold uppercase tracking-[0.1em] text-white/85">
               {col.title}
             </div>
             <ul className="flex list-none flex-col gap-2.5">
@@ -74,7 +77,7 @@ export default function Footer() {
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="text-[0.84rem] text-white/40 transition-colors hover:text-white"
+                    className="caption text-white/45 transition-colors hover:text-white"
                   >
                     {l.label}
                   </Link>
@@ -85,34 +88,46 @@ export default function Footer() {
         ))}
 
         <div>
-          <div className="mb-3.5 text-xs font-bold uppercase tracking-[0.1em] text-white/85">
+          <div className="mb-3.5 text-xs font-semibold uppercase tracking-[0.1em] text-white/85">
             Contact
           </div>
-          <div className="mb-3 text-[0.84rem] leading-snug text-white/40">
+          <div className="mb-3 caption leading-snug text-white/45">
             <strong className="mb-0.5 block text-[0.78rem] text-white/70">Phone / WhatsApp</strong>
-            <a href={`tel:${config.supportPhone}`}>{config.supportPhone}</a>
+            <a href={`tel:${config.supportPhone}`} className="tabular">
+              {config.supportPhone}
+            </a>
           </div>
-          <div className="mb-3 text-[0.84rem] leading-snug text-white/40">
+          <div className="mb-3 caption leading-snug text-white/45">
+            <strong className="mb-0.5 block text-[0.78rem] text-white/70">Email</strong>
+            <a href={`mailto:${config.supportEmail}`}>{config.supportEmail}</a>
+          </div>
+          <div className="caption leading-snug text-white/45">
             <strong className="mb-0.5 block text-[0.78rem] text-white/70">Location</strong>
-            Accra, Ghana
-          </div>
-          <div className="text-[0.84rem] leading-snug text-white/40">
-            <strong className="mb-0.5 block text-[0.78rem] text-white/70">Support</strong>
-            Mon–Fri 7am–8pm · Sat 8am–6pm
+            {config.supportCity}, Ghana
           </div>
         </div>
       </div>
 
-      <div className="mx-auto flex max-w-content flex-wrap items-center justify-between gap-2.5 py-5 text-[0.74rem] text-white/28">
-        <span>© 2026 HarvestGH · Accra, Ghana · Founder: Ibrahim Mohammed Lotsu</span>
-        <div className="flex gap-4">
-          <Link href="/privacy" className="transition-colors hover:text-white/60">
+      <div className="mx-auto max-w-content py-5">
+        <p className="m-0 max-w-none caption leading-relaxed text-white/40">
+          © {year} Agro Bridge. Verified farmers · Secure escrow · Nationwide delivery.{" "}
+          <a href={`mailto:${config.supportEmail}`} className="hover:text-white/70">
+            {config.supportEmail}
+          </a>{" "}
+          ·{" "}
+          <a href={`tel:${config.supportPhone}`} className="tabular hover:text-white/70">
+            {config.supportPhone}
+          </a>{" "}
+          · {config.supportCity}, Ghana
+        </p>
+        <div className="mt-3 flex gap-4">
+          <Link href="/privacy" className="caption text-white/40 transition-colors hover:text-white/60">
             Privacy
           </Link>
-          <Link href="/terms" className="transition-colors hover:text-white/60">
+          <Link href="/terms" className="caption text-white/40 transition-colors hover:text-white/60">
             Terms
           </Link>
-          <Link href="/contact" className="transition-colors hover:text-white/60">
+          <Link href="/contact" className="caption text-white/40 transition-colors hover:text-white/60">
             Contact
           </Link>
         </div>

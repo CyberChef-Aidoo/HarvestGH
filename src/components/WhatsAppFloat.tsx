@@ -3,7 +3,7 @@ import { whatsappLink } from "@/lib/config";
 export default function WhatsAppFloat() {
   return (
     <a
-      href={whatsappLink("Hi HarvestGH, I need help.")}
+      href={whatsappLink("Hi agro Bridge, I need help.")}
       target="_blank"
       rel="noopener noreferrer"
       title="Chat on WhatsApp"

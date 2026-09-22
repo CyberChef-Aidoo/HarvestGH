@@ -3,19 +3,23 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { NAV_LINKS } from "@/lib/data";
+import { BrandLink, BrandWordmark } from "@/components/BrandMark";
+import Icon from "@/components/Icon";
 
 interface NavbarProps {
-  /** "hero" is transparent over a dark hero and turns solid on scroll. "solid" is always solid. */
+  /** "hero" starts solid white, then glassmorphic on scroll. "solid" is always opaque. */
   variant?: "hero" | "solid";
+  /** Hide the header "Become a Supplier" CTA (homepage — CTA lives in hero). */
+  hideSupplierCta?: boolean;
 }
 
-export default function Navbar({ variant = "solid" }: NavbarProps) {
+export default function Navbar({ variant = "solid", hideSupplierCta = false }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (variant !== "hero") return;
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -28,45 +32,26 @@ export default function Navbar({ variant = "solid" }: NavbarProps) {
     };
   }, [open]);
 
-  const transparent = variant === "hero" && !scrolled;
+  const glass = variant === "hero" && scrolled;
 
   return (
     <>
       <nav
         className={[
           "fixed inset-x-0 top-0 z-[200] flex h-[68px] items-center justify-between px-[5%] transition-all duration-300",
-          transparent
-            ? "bg-transparent"
-            : "border-b border-line bg-cream/95 backdrop-blur-md shadow-[0_4px_24px_rgba(12,26,17,0.05)]",
+          glass
+            ? "border-b border-white/40 bg-white/55 shadow-[0_8px_32px_rgba(12,26,17,0.08)] backdrop-blur-xl backdrop-saturate-150"
+            : "border-b border-line bg-white",
         ].join(" ")}
       >
-        <Link
-          href="/"
-          className={[
-            "flex items-center gap-2.5 font-display text-[1.35rem] font-extrabold tracking-tight",
-            transparent ? "text-white" : "text-green",
-          ].join(" ")}
-        >
-          <img
-            src="/logo.png"
-            alt=""
-            className="h-8 w-auto"
-            onError={(e) => ((e.target as HTMLImageElement).style.display = "none")}
-          />
-          Harvest<span className="text-gold">GH</span>
-        </Link>
+        <BrandLink size="md" withText />
 
         <ul className="hidden list-none items-center gap-0.5 md:flex">
           {NAV_LINKS.map((l) => (
             <li key={l.href}>
               <Link
                 href={l.href}
-                className={[
-                  "rounded-lg px-3.5 py-2 text-[0.88rem] font-medium transition-colors",
-                  transparent
-                    ? "text-white/90 hover:bg-white/10 hover:text-white"
-                    : "text-ink hover:bg-green-pale hover:text-green",
-                ].join(" ")}
+                className="nav-link rounded-lg px-3.5 py-2 text-ink transition-colors hover:bg-green-pale hover:text-green"
               >
                 {l.label}
               </Link>
@@ -75,27 +60,25 @@ export default function Navbar({ variant = "solid" }: NavbarProps) {
         </ul>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Link
-            href="/register/farmer"
-            className={["btn btn-sm", transparent ? "btn-ghost-light" : "btn-ghost"].join(" ")}
-          >
-            Become a Supplier
-          </Link>
+          {!hideSupplierCta && (
+            <Link href="/register/farmer" className="btn btn-sm btn-ghost">
+              Become a Supplier
+            </Link>
+          )}
           <Link href="/shop" className="btn btn-sm btn-gold">
             Order Now
           </Link>
         </div>
 
         <button
-          className={["p-1.5 text-2xl md:hidden", transparent ? "text-white" : "text-ink"].join(" ")}
+          className="flex h-10 w-10 items-center justify-center text-ink md:hidden"
           onClick={() => setOpen(true)}
           aria-label="Open menu"
         >
-          ☰
+          <Icon name="menu" size="lg" />
         </button>
       </nav>
 
-      {/* Mobile drawer */}
       <div
         className={[
           "fixed inset-0 z-[299] bg-black/55 transition-opacity duration-300 md:hidden",
@@ -110,27 +93,38 @@ export default function Navbar({ variant = "solid" }: NavbarProps) {
         ].join(" ")}
       >
         <div className="flex items-center justify-between border-b border-white/10 p-5">
-          <span className="font-display text-xl font-extrabold text-white">
-            Harvest<span className="text-gold">GH</span>
-          </span>
+          <BrandWordmark light className="text-xl" />
           <button
-            className="text-2xl text-white/50"
+            className="flex h-10 w-10 items-center justify-center text-white/50"
             onClick={() => setOpen(false)}
             aria-label="Close menu"
           >
-            ✕
+            <Icon name="x" size="lg" />
           </button>
         </div>
-        <nav className="flex-1 p-3">
-          <Link href="/" className="mob-link" onClick={() => setOpen(false)}>
+        <nav className="flex flex-1 flex-col gap-0.5 p-3">
+          <Link
+            href="/"
+            className="rounded-[9px] px-3 py-3 text-[0.92rem] font-medium text-white/70 transition hover:bg-white/[0.07] hover:text-white"
+            onClick={() => setOpen(false)}
+          >
             Home
           </Link>
           {NAV_LINKS.map((l) => (
-            <Link key={l.href} href={l.href} className="mob-link" onClick={() => setOpen(false)}>
+            <Link
+              key={l.href}
+              href={l.href}
+              className="rounded-[9px] px-3 py-3 text-[0.92rem] font-medium text-white/70 transition hover:bg-white/[0.07] hover:text-white"
+              onClick={() => setOpen(false)}
+            >
               {l.label}
             </Link>
           ))}
-          <Link href="/farmer-portal" className="mob-link" onClick={() => setOpen(false)}>
+          <Link
+            href="/farmer-portal"
+            className="rounded-[9px] px-3 py-3 text-[0.92rem] font-medium text-white/70 transition hover:bg-white/[0.07] hover:text-white"
+            onClick={() => setOpen(false)}
+          >
             Check My Listing
           </Link>
         </nav>
@@ -144,31 +138,16 @@ export default function Navbar({ variant = "solid" }: NavbarProps) {
           </Link>
           <Link
             href="/register/farmer"
-            className="rounded-[10px] border border-white/12 bg-white/[0.07] py-3 text-center text-sm font-semibold text-white/80"
+            className={[
+              "rounded-[10px] border border-white/12 bg-white/[0.07] py-3 text-center text-sm font-semibold text-white/80",
+              hideSupplierCta ? "hidden" : "",
+            ].join(" ")}
             onClick={() => setOpen(false)}
           >
             Become a Supplier
           </Link>
         </div>
       </aside>
-
-      <style jsx>{`
-        .mob-link {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding: 12px;
-          border-radius: 9px;
-          color: rgba(255, 255, 255, 0.7);
-          font-size: 0.92rem;
-          font-weight: 500;
-          transition: background 0.2s, color 0.2s;
-        }
-        .mob-link:hover {
-          background: rgba(255, 255, 255, 0.07);
-          color: #fff;
-        }
-      `}</style>
     </>
   );
 }

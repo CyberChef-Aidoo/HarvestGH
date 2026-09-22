@@ -1,45 +1,33 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Figtree } from "next/font/google";
 import "./globals.css";
 import Chatbot from "@/components/Chatbot";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
-
-const display = Bricolage_Grotesque({
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const sans = Figtree({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-sans",
-  display: "swap",
-});
+import PageViewTracker from "@/components/PageViewTracker";
 
 export const metadata: Metadata = {
   title: {
-    default: "HarvestGH — Fresh Farm Produce Delivered Across Ghana",
-    template: "%s — HarvestGH",
+    default: "Agro Bridge — Connecting Farmers to Customers",
+    template: "%s — Agro Bridge",
   },
   description:
-    "Order fresh tomatoes, maize, yam, plantain and more directly from verified FBO farmers across Ghana. Secure escrow payment. Nationwide delivery.",
+    "Order fresh produce and poultry directly from verified FBO farmers across Ghana. Secure escrow payment. Nationwide delivery.",
   keywords: [
     "Ghana farm produce",
+    "poultry Ghana",
     "buy fresh vegetables Ghana",
     "agricultural marketplace Ghana",
     "FBO farmers Ghana",
+    "Agro Bridge",
     "farm to table Ghana",
   ],
   authors: [{ name: "Ibrahim Mohammed Lotsu" }],
   metadataBase: new URL("https://harvestgh.vercel.app"),
   openGraph: {
     type: "website",
-    siteName: "HarvestGH",
-    title: "HarvestGH — Fresh Farm Produce Delivered Across Ghana",
+    siteName: "Agro Bridge",
+    title: "Agro Bridge — Connecting Farmers to Customers",
     description:
-      "Order fresh produce directly from verified farms across Ghana. Secure payment. Nationwide delivery.",
+      "Order fresh produce and poultry directly from verified farms across Ghana. Secure payment. Nationwide delivery.",
     images: ["/images/market.jpg"],
   },
   icons: { icon: "/logo.png" },
@@ -47,9 +35,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable}`}>
-      <body>
+    <html lang="en">
+      <body className="font-body antialiased">
         {children}
+        <PageViewTracker />
         <WhatsAppFloat />
         <Chatbot />
       </body>

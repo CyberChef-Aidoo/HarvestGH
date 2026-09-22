@@ -1,42 +1,41 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       colors: {
-        // HarvestGH green + gold identity
         green: {
-          DEFAULT: "#1a6b3c",
-          mid: "#248a4d",
-          pale: "#e6f3eb",
+          DEFAULT: "#123524",
+          mid: "#1a4a32",
+          pale: "#e8f0eb",
         },
         gold: {
-          DEFAULT: "#c9921a",
-          deep: "#a67612",
+          DEFAULT: "#D4A017",
+          deep: "#a67c12",
           pale: "#f8efd6",
         },
-        dark: "#0c1a11",
-        ink: "#142019",
-        muted: "#5c6d60",
-        faint: "#8a9a8e",
-        cream: "#f4f6f3",
-        line: "rgba(26,107,60,0.12)",
-        "line-strong": "rgba(26,107,60,0.22)",
+        dark: "#123524",
+        charcoal: "#1F1F1F",
+        ink: "#1F1F1F",
+        muted: "#5a5a5a",
+        faint: "#6b6b6b",
+        cream: "#FAF8F3",
+        line: "rgba(18,53,36,0.12)",
+        "line-strong": "rgba(18,53,36,0.22)",
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         display: ["var(--font-display)", "system-ui", "sans-serif"],
+        sans: ["var(--font-body)", "system-ui", "-apple-system", "Segoe UI", "sans-serif"],
+        body: ["var(--font-body)", "system-ui", "-apple-system", "Segoe UI", "sans-serif"],
       },
       borderRadius: {
         xl: "12px",
         "2xl": "16px",
       },
       boxShadow: {
-        soft: "0 12px 40px rgba(12,26,17,0.08)",
-        card: "0 8px 32px rgba(26,107,60,0.10)",
+        soft: "0 12px 40px rgba(18,53,36,0.08)",
+        card: "0 8px 32px rgba(18,53,36,0.10)",
       },
       maxWidth: {
         content: "1120px",

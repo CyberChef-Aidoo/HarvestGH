@@ -1,0 +1,40 @@
+{% extends "admin/index.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="hg-banner">
+  <div>
+    <strong>Analytics</strong>
+    <p>Revenue, units sold, top products, and site traffic.</p>
+  </div>
+  <a class="hg-btn" href="{{ analytics_url|default:'analytics/' }}">Open analytics</a>
+</div>
+{{ block.super }}
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+<style>
+  .hg-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: #0c1a11;
+    color: #fff;
+    padding: 18px 20px;
+    border-radius: 12px;
+    margin-bottom: 22px;
+  }
+  .hg-banner p { margin: 4px 0 0; color: rgba(255,255,255,.65); font-size: 13px; }
+  .hg-btn {
+    background: #c9921a;
+    color: #0c1a11 !important;
+    font-weight: 700;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none !important;
+    white-space: nowrap;
+  }
+</style>
+{% endblock %}

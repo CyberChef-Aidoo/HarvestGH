@@ -21,6 +21,17 @@ yarn-error.log*
 
 # local env files
 .env*.local
+backend/.env
+backend/.venv/
+backend/db.sqlite3
+backend/media/
+backend/staticfiles/
+
+# python
+__pycache__/
+*.py[cod]
+.Python
+*.egg-info/
 
 # typescript
 *.tsbuildinfo

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { config, whatsappLink } from "@/lib/config";
+import Icon from "@/components/Icon";
 
 interface Msg {
   role: "user" | "bot";
@@ -18,14 +19,14 @@ const FAQS: { keys: string[]; ans: string }[] = [
   { keys: ["preorder", "pre-order", "future", "next season", "reserve", "coming soon"], ans: "Yes! You can preorder produce before it is harvested — perfect for restaurants, schools, and bulk buyers who want to lock in price and supply early. Look for the Preorder badge on our Shop page." },
   { keys: ["price", "cost", "how much", "rate", "ghc", "cedi", "cheap", "expensive"], ans: "Prices vary by crop and season. Examples:\nTomatoes — GH₵120/crate\nMaize — GH₵85/bag\nYam — GH₵220/bag\nPlantain — GH₵55/bunch\n\nVisit our Shop page for live prices." },
   { keys: ["crop", "what do you have", "available", "sell", "tomato", "maize", "yam", "cassava", "mango", "rice", "plantain", "pepper", "onion", "groundnut"], ans: "We currently stock: Tomatoes · Maize · Yam · Cassava · Mango · Rice · Groundnut · Plantain · Pepper · Onion\n\nAll sourced from verified FBO farmers across Ghana. Visit our Shop page to see what is available today!" },
-  { keys: ["farmer", "supplier", "fbo", "sell my", "list my crop", "register farm", "become a supplier", "supply"], ans: 'To sell your produce on HarvestGH:\n1. Visit our "Become a Supplier" page\n2. Fill in your farm / FBO details\n3. Ibrahim will call you within 48 hours\n\nRegistration is FREE.' },
+  { keys: ["farmer", "supplier", "fbo", "sell my", "list my crop", "register farm", "become a supplier", "supply"], ans: 'To sell your produce on agro Bridge:\n1. Visit our "Become a Supplier" page\n2. Fill in your farm / FBO details\n3. Ibrahim will call you within 48 hours\n\nRegistration is FREE.' },
   { keys: ["buyer", "register", "create account", "sign up", "join", "new account"], ans: "To join as a buyer:\n1. Visit our Register as Buyer page\n2. Fill in your details (takes 2 minutes)\n3. Browse and order immediately\n\nRegistration is completely FREE." },
-  { keys: ["agent", "commission", "earn", "fbo leader", "1%", "referral", "make money"], ans: "FBO leaders can become HarvestGH Agents and earn 1% commission on every deal their members complete through the platform.\n\nTo become an agent, WhatsApp Ibrahim directly: 0544823484" },
-  { keys: ["safe", "secure", "trust", "scam", "fake", "legit", "real"], ans: "HarvestGH is a legitimate Ghanaian platform:\nEscrow payment — money held until delivery confirmed\nVerified FBO suppliers only\nSMS tracking every step\nDispute resolution within 48 hours\n\nFounded by Ibrahim Mohammed Lotsu, ATU Accra." },
-  { keys: ["contact", "phone", "call", "whatsapp", "reach", "email", "talk"], ans: "You can reach HarvestGH:\nPhone: 0544823484\nWhatsApp: 0544823484\nHours: Mon–Fri 7am–8pm · Sat 8am–6pm\nBased in Accra, Ghana" },
-  { keys: ["hours", "open", "when", "support", "available", "respond"], ans: "HarvestGH Support Hours:\nMonday–Friday: 7:00 AM – 8:00 PM\nSaturday: 8:00 AM – 6:00 PM\nSunday: Messages answered Monday AM" },
-  { keys: ["hello", "hi", "hey", "morning", "afternoon", "evening", "good day", "greet"], ans: "Hello! Welcome to HarvestGH.\n\nI can help you with ordering produce, becoming a supplier or FBO agent, tracking your order, prices, and delivery info. What would you like to know?" },
-  { keys: ["who are you", "what is harvestgh", "tell me about", "what do you do", "about"], ans: "HarvestGH is Ghana's agricultural marketplace. We connect FBO farmers across all 16 regions directly to bulk buyers — traders, restaurants, schools, supermarkets, and individuals. Founded by Ibrahim Mohammed Lotsu, ATU Accra." },
+  { keys: ["agent", "commission", "earn", "fbo leader", "1%", "referral", "make money"], ans: "FBO leaders can become agro Bridge Agents and earn 1% commission on every deal their members complete through the platform.\n\nTo become an agent, WhatsApp Ibrahim directly: 0544823484" },
+  { keys: ["safe", "secure", "trust", "scam", "fake", "legit", "real"], ans: "agro Bridge is a legitimate Ghanaian platform:\nEscrow payment — money held until delivery confirmed\nVerified FBO suppliers only\nSMS tracking every step\nDispute resolution within 48 hours\n\nFounded by Ibrahim Mohammed Lotsu, ATU Accra." },
+  { keys: ["contact", "phone", "call", "whatsapp", "reach", "email", "talk"], ans: "You can reach agro Bridge:\nPhone: 0544823484\nWhatsApp: 0544823484\nHours: Mon–Fri 7am–8pm · Sat 8am–6pm\nBased in Accra, Ghana" },
+  { keys: ["hours", "open", "when", "support", "available", "respond"], ans: "agro Bridge Support Hours:\nMonday–Friday: 7:00 AM – 8:00 PM\nSaturday: 8:00 AM – 6:00 PM\nSunday: Messages answered Monday AM" },
+  { keys: ["hello", "hi", "hey", "morning", "afternoon", "evening", "good day", "greet"], ans: "Hello! Welcome to agro Bridge.\n\nI can help you with ordering produce, becoming a supplier or FBO agent, tracking your order, prices, and delivery info. What would you like to know?" },
+  { keys: ["who are you", "what is harvestgh", "what is agro", "agro bridge", "tell me about", "what do you do", "about"], ans: "agro Bridge is Ghana's agricultural marketplace. We connect FBO farmers across all 16 regions directly to bulk buyers — traders, restaurants, schools, supermarkets, and individuals. Founded by Ibrahim Mohammed Lotsu, ATU Accra." },
   { keys: ["thank", "thanks", "ok great", "perfect", "nice", "awesome", "wonderful", "good"], ans: "You are welcome! Is there anything else I can help you with? You can also reach us anytime on WhatsApp at 0544823484." },
 ];
 
@@ -57,7 +58,7 @@ export default function Chatbot() {
     {
       role: "bot",
       text:
-        "Hello! I am the HarvestGH Assistant.\n\nI can answer questions about ordering produce, delivery, payments, prices, becoming a supplier, and more.\n\nHow can I help you today?",
+        "Hello! I am the agro Bridge Assistant.\n\nI can answer questions about ordering produce, delivery, payments, prices, becoming a supplier, and more.\n\nHow can I help you today?",
       time: now(),
     },
   ]);
@@ -95,7 +96,7 @@ export default function Chatbot() {
           model: "claude-haiku-4-5-20251001",
           max_tokens: 300,
           system:
-            "You are HarvestGH Assistant, a friendly support chatbot for HarvestGH, Ghana's agricultural marketplace. Keep replies short (3-5 sentences). Phone/WhatsApp 0544823484. Delivery: Greater Accra GH₵30, Ashanti GH₵50, other GH₵70. Payment via Paystack escrow. Never invent prices — direct to the Shop page.",
+            "You are agro Bridge Assistant, a friendly support chatbot for agro Bridge, Ghana's agricultural marketplace. Keep replies short (3-5 sentences). Phone/WhatsApp 0544823484. Delivery: Greater Accra GH₵30, Ashanti GH₵50, other GH₵70. Payment via Paystack escrow. Never invent prices — direct to the Shop page.",
           messages: historyRef.current.slice(-6),
         }),
       });
@@ -144,10 +145,11 @@ export default function Chatbot() {
           setOpen((o) => !o);
           setShowBadge(false);
         }}
-        title="Chat with HarvestGH Assistant"
-        className="fixed bottom-6 left-6 z-[8888] flex h-14 w-14 items-center justify-center rounded-full bg-green text-2xl shadow-[0_4px_18px_rgba(26,107,60,0.42)] transition-transform hover:scale-110"
+        title="Chat with Agro Bridge Assistant"
+        aria-label={open ? "Close chat" : "Open chat"}
+        className="fixed bottom-6 left-6 z-[8888] flex h-14 w-14 items-center justify-center rounded-full bg-green text-white shadow-[0_4px_18px_rgba(26,107,60,0.42)] transition-transform hover:scale-110"
       >
-        {open ? "✕" : "💬"}
+        {open ? <Icon name="x" size="lg" /> : <Icon name="message-circle" size="lg" />}
         {showBadge && (
           <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-white bg-gold text-[0.65rem] font-extrabold text-dark">
             1
@@ -158,20 +160,21 @@ export default function Chatbot() {
       {open && (
         <div className="fixed bottom-[90px] left-6 z-[8887] flex max-h-[520px] w-[min(340px,calc(100vw-20px))] flex-col overflow-hidden rounded-[18px] border border-line bg-white shadow-[0_12px_48px_rgba(0,0,0,0.18)]">
           <div className="flex flex-shrink-0 items-center gap-3 bg-green px-4 py-3.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-xl">
-              🌾
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-[var(--ab-gold,#D9A825)]">
+              <Icon name="wheat" size="md" />
             </div>
             <div className="flex-1">
-              <div className="text-[0.9rem] font-bold text-white">HarvestGH Assistant</div>
+              <div className="text-[0.9rem] font-bold text-white">agro Bridge Assistant</div>
               <div className="mt-0.5 flex items-center gap-1.5 text-[0.72rem] text-white/70">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#4ade80]" /> Online — responds instantly
               </div>
             </div>
             <button
               onClick={() => setOpen(false)}
-              className="flex h-7 w-7 items-center justify-center rounded-full bg-white/20 text-white"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white"
+              aria-label="Close chat"
             >
-              ✕
+              <Icon name="x" size="md" />
             </button>
           </div>
 
@@ -237,22 +240,23 @@ export default function Chatbot() {
                   send();
                 }
               }}
-              placeholder="Ask me anything about HarvestGH…"
+              placeholder="Ask me anything about agro Bridge…"
               rows={1}
               className="max-h-20 flex-1 resize-none rounded-[22px] border-[1.5px] border-line-strong px-3.5 py-2 text-[0.85rem] outline-none focus:border-green"
             />
             <button
               onClick={() => send()}
-              className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-green text-white transition hover:bg-green-mid"
+              className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-green text-white transition hover:bg-green-mid"
+              aria-label="Send message"
             >
-              ➤
+              <Icon name="send" size="md" />
             </button>
           </div>
 
           <div className="flex flex-shrink-0 items-center justify-between border-t border-line bg-[#f0f9f2] px-3 py-2">
             <span className="text-[0.73rem] text-muted">Need a human?</span>
             <a
-              href={whatsappLink("Hi HarvestGH, I need help.")}
+              href={whatsappLink("Hi agro Bridge, I need help.")}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 rounded-[9px] bg-[#25d366] px-3 py-1.5 text-[0.74rem] font-bold text-white"

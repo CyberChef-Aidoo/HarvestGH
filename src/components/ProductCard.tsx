@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import type { Product } from "@/lib/types";
 
@@ -34,12 +36,12 @@ export default function ProductCard({ product }: { product: Product }) {
         <div className="mb-1.5 text-[0.7rem] font-bold uppercase tracking-[0.06em] text-green">
           {product.crop_type} · {product.region}
         </div>
-        <h3 className="mb-1 font-display text-[1.02rem] font-bold leading-tight">{product.name}</h3>
+        <h3 className="mb-1 leading-tight">{product.name}</h3>
         <div className="mb-3 text-[0.78rem] text-muted">{product.fbo_source}</div>
         <div className="mt-auto flex items-center justify-between">
-          <div className="font-display text-[1.15rem] font-extrabold text-green">
+          <div className="font-display text-[1.15rem] font-extrabold tabular text-green price">
             GH₵{Number(product.price_per_unit).toFixed(2)}
-            <span className="font-sans text-[0.7rem] font-medium text-muted"> / {product.unit}</span>
+            <span className="font-body text-[0.7rem] font-medium text-muted"> / {product.unit}</span>
           </div>
           <span className="btn btn-sm btn-primary">{isPre ? "Preorder" : "Order"}</span>
         </div>

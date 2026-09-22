@@ -43,7 +43,7 @@ export interface Testimonial {
 export const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      "I used to lose 40% of my tomatoes every season. HarvestGH connected me to a buyer in Accra within two days.",
+      "I used to lose 40% of my tomatoes every season. Agro Bridge connected me to a buyer in Accra within two days.",
     name: "Ama Kofi",
     role: "Tomato farmer · Kumasi, Ashanti",
   },
@@ -70,7 +70,7 @@ export interface HowStep {
 export const HOW_STEPS: HowStep[] = [
   {
     num: "01",
-    title: "FBO partners with HarvestGH",
+    title: "FBO partners with Agro Bridge",
     desc: "An FBO leader registers their group — often 15 to 50 farmers — in a single session.",
   },
   {
@@ -109,21 +109,23 @@ export type SeasonStatus = "peak" | "harvest" | "plant" | "off";
 
 export interface CropCalendar {
   name: string;
-  emoji: string;
+  /** Lucide-style icon key (replaces former emoji) */
+  icon: import("./icons.map").IconName;
   months: SeasonStatus[]; // 12 entries, Jan..Dec
 }
 
 export const CROP_CALENDAR: CropCalendar[] = [
-  { name: "Tomato", emoji: "🍅", months: ["harvest","peak","peak","harvest","off","off","off","off","harvest","peak","peak","harvest"] },
-  { name: "Maize", emoji: "🌽", months: ["off","off","plant","plant","harvest","peak","peak","harvest","plant","peak","peak","harvest"] },
-  { name: "Yam", emoji: "🍠", months: ["harvest","harvest","off","off","plant","plant","off","off","harvest","peak","peak","peak"] },
-  { name: "Cassava", emoji: "🥬", months: ["harvest","harvest","harvest","harvest","harvest","harvest","harvest","harvest","harvest","harvest","harvest","harvest"] },
-  { name: "Plantain", emoji: "🍌", months: ["harvest","harvest","peak","peak","harvest","harvest","harvest","peak","peak","harvest","harvest","harvest"] },
-  { name: "Mango", emoji: "🥭", months: ["off","off","harvest","peak","peak","harvest","off","off","off","off","harvest","harvest"] },
-  { name: "Rice", emoji: "🌾", months: ["off","off","off","plant","plant","harvest","peak","peak","harvest","harvest","off","off"] },
-  { name: "Pepper", emoji: "🌶️", months: ["peak","harvest","harvest","off","off","plant","plant","harvest","peak","peak","harvest","harvest"] },
-  { name: "Onion", emoji: "🧅", months: ["peak","peak","harvest","off","off","off","plant","plant","harvest","harvest","peak","peak"] },
-  { name: "Groundnut", emoji: "🥜", months: ["off","off","plant","plant","off","harvest","peak","peak","harvest","harvest","off","off"] },
+  { name: "Tomato", icon: "apple", months: ["harvest","peak","peak","harvest","off","off","off","off","harvest","peak","peak","harvest"] },
+  { name: "Maize", icon: "wheat", months: ["off","off","plant","plant","harvest","peak","peak","harvest","plant","peak","peak","harvest"] },
+  { name: "Yam", icon: "leaf", months: ["harvest","harvest","off","off","plant","plant","off","off","harvest","peak","peak","peak"] },
+  { name: "Cassava", icon: "leaf", months: ["harvest","harvest","harvest","harvest","harvest","harvest","harvest","harvest","harvest","harvest","harvest","harvest"] },
+  { name: "Plantain", icon: "leaf", months: ["harvest","harvest","peak","peak","harvest","harvest","harvest","peak","peak","harvest","harvest","harvest"] },
+  { name: "Mango", icon: "apple", months: ["off","off","harvest","peak","peak","harvest","off","off","off","off","harvest","harvest"] },
+  { name: "Rice", icon: "wheat", months: ["off","off","off","plant","plant","harvest","peak","peak","harvest","harvest","off","off"] },
+  { name: "Pepper", icon: "flame", months: ["peak","harvest","harvest","off","off","plant","plant","harvest","peak","peak","harvest","harvest"] },
+  { name: "Onion", icon: "sprout", months: ["peak","peak","harvest","off","off","off","plant","plant","harvest","harvest","peak","peak"] },
+  { name: "Groundnut", icon: "sprout", months: ["off","off","plant","plant","off","harvest","peak","peak","harvest","harvest","off","off"] },
+  { name: "Poultry / Eggs", icon: "egg", months: ["harvest","harvest","harvest","harvest","harvest","harvest","harvest","harvest","harvest","harvest","harvest","harvest"] },
 ];
 
 export const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
