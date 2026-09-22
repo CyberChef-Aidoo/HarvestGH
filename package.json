@@ -1,0 +1,11 @@
+{
+  "name": "harvestgh",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "serve ."
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}
