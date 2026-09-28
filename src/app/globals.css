@@ -2,8 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fonts: Bricolage Grotesque + Figtree via next/font (--font-display, --font-body on <html>) */
+/* ── Self-hosted fonts (WOFF2) ── */
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/fonts/plus-jakarta-sans-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/fonts/plus-jakarta-sans-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/fonts/plus-jakarta-sans-800.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --cream: #faf8f3;
   --green-deep: #123524;
   --gold: #d4a017;
@@ -86,8 +132,8 @@
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-[6px] px-6 py-3
-           text-center leading-none transition-colors duration-150 ease-out;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3
+           text-center leading-none transition-all duration-200 ease-out;
     font-family: var(--font-body);
     font-weight: 600;
     font-size: 1rem;
@@ -98,10 +144,11 @@
     font-size: 0.9375rem;
   }
   .btn-primary {
-    @apply bg-green text-white hover:bg-green-mid;
+    @apply bg-green text-white hover:bg-green-mid hover:-translate-y-0.5
+           hover:shadow-[0_8px_24px_rgba(18,53,36,0.25)];
   }
   .btn-gold {
-    @apply bg-gold text-charcoal hover:bg-[#c49214];
+    @apply bg-gold text-charcoal hover:bg-[#c49214] hover:-translate-y-0.5;
   }
   .btn-ghost {
     @apply border-[1.5px] border-line-strong text-ink hover:border-green hover:text-green;
@@ -142,7 +189,7 @@
   }
 
   .surface {
-    @apply rounded-[10px] border border-line bg-white;
+    @apply rounded-xl border border-line bg-white;
   }
 
   .field-label {
@@ -163,7 +210,7 @@
   }
 
   .card-hover {
-    @apply transition-colors duration-150 ease-out hover:border-green;
+    @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-soft;
   }
 
   .req {
@@ -209,7 +256,7 @@
   }
 
   .lookup-card {
-    @apply rounded-[10px] border border-line bg-white p-8 text-center;
+    @apply rounded-2xl border border-line bg-white p-8 text-center shadow-soft;
   }
 
   .lookup-card h1 {
@@ -492,10 +539,15 @@
     font-family: var(--font-body);
   }
   .hero-overlay {
-    background: rgba(18, 53, 36, 0.85);
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.72) 0%,
+      rgba(0, 0, 0, 0.35) 60%,
+      transparent 100%
+    );
   }
   .header-overlay {
-    background: #123524;
+    background: linear-gradient(120deg, rgba(18, 53, 36, 0.9), rgba(18, 53, 36, 0.65));
   }
 }
 

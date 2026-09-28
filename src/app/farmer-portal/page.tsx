@@ -112,7 +112,7 @@ export default function FarmerPortalPage() {
           </div>
 
           {results && results.length === 0 && (
-            <div className="mt-5 rounded-[10px] border border-line bg-white p-8 text-center">
+            <div className="mt-5 rounded-2xl border border-line bg-white p-8 text-center">
               <h3 className="mb-2 text-[1.2rem] font-extrabold">No listings found</h3>
               <p className="mb-4 text-[0.9rem] text-muted">
                 We could not find a listing for that number. Register as a supplier or contact us.
@@ -139,7 +139,7 @@ export default function FarmerPortalPage() {
             return (
               <div
                 key={r.id || title}
-                className="mt-4 rounded-[10px] border border-line bg-white p-6 text-left"
+                className="mt-4 rounded-2xl border border-line bg-white p-6 text-left shadow-soft"
               >
                 <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
                   <div>

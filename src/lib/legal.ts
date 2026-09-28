@@ -5,9 +5,9 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     id: "overview",
     title: "1. Overview",
     blocks: [
-      { type: "p", text: "Agro Bridge (\u201cwe\u201d, \u201cus\u201d, \u201cour\u201d) operates as a digital agricultural marketplace connecting smallholder farmers to verified buyers across Ghana. This Privacy Policy explains what personal information we collect from farmers, buyers, and visitors who use our website and services." },
-      { type: "p", text: "By registering on Agro Bridge or using our platform, you agree to the practices described in this policy. If you do not agree, please do not use our services." },
-      { type: "p", text: "This policy applies to all information collected through our website pages, SMS services, and any related services offered by Agro Bridge." },
+      { type: "p", text: "agro Bridge (\u201cwe\u201d, \u201cus\u201d, \u201cour\u201d) operates as a digital agricultural marketplace connecting smallholder farmers to verified buyers across Ghana. This Privacy Policy explains what personal information we collect from farmers, buyers, and visitors who use our website and services." },
+      { type: "p", text: "By registering on agro Bridge or using our platform, you agree to the practices described in this policy. If you do not agree, please do not use our services." },
+      { type: "p", text: "This policy applies to all information collected through our website pages, SMS services, and any related services offered by agro Bridge." },
     ],
   },
   {
@@ -15,7 +15,7 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     title: "2. What We Collect",
     blocks: [
       { type: "h3", text: "When you register as a farmer" },
-      { type: "ul", items: ["Full name — to identify you on the platform", "Phone number — to send SMS match notifications and contact you when a buyer is found", "Region — to match you with buyers in or near your area", "Crop type — to match you with buyers looking for your produce", "Quantity and price — to display your listing accurately", "Pickup location — to help buyers plan logistics", "Account type — whether you self-manage or let Agro Bridge manage your listing"] },
+      { type: "ul", items: ["Full name — to identify you on the platform", "Phone number — to send SMS match notifications and contact you when a buyer is found", "Region — to match you with buyers in or near your area", "Crop type — to match you with buyers looking for your produce", "Quantity and price — to display your listing accurately", "Pickup location — to help buyers plan logistics", "Account type — whether you self-manage or let agro Bridge manage your listing"] },
       { type: "h3", text: "When you register as a buyer" },
       { type: "ul", items: ["Full name and phone number", "Business name (optional)", "Region", "Crop needed and quantity"] },
       { type: "h3", text: "When you contact us" },
@@ -68,15 +68,15 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     id: "sms",
     title: "7. SMS Communications",
     blocks: [
-      { type: "p", text: "By providing your phone number, you consent to receiving SMS messages from Agro Bridge, including match notifications, listing confirmations, and infrequent seasonal announcements." },
-      { type: "p", text: "To opt out, reply \u201cSTOP\u201d to any Agro Bridge SMS or contact us directly. Opting out means you will need to check your listing status manually on the Farmer Portal." },
+      { type: "p", text: "By providing your phone number, you consent to receiving SMS messages from agro Bridge, including match notifications, listing confirmations, and infrequent seasonal announcements." },
+      { type: "p", text: "To opt out, reply \u201cSTOP\u201d to any agro Bridge SMS or contact us directly. Opting out means you will need to check your listing status manually on the Farmer Portal." },
     ],
   },
   {
     id: "children",
     title: "8. Children",
     blocks: [
-      { type: "p", text: "Agro Bridge is not intended for use by persons under 18. We do not knowingly collect information from minors. If you believe a minor has registered, contact us and we will remove the account." },
+      { type: "p", text: "agro Bridge is not intended for use by persons under 18. We do not knowingly collect information from minors. If you believe a minor has registered, contact us and we will remove the account." },
     ],
   },
   {
@@ -90,7 +90,7 @@ export const PRIVACY_SECTIONS: LegalSection[] = [
     id: "contact",
     title: "10. Contact Us",
     blocks: [
-      { type: "p", text: "Questions about this Privacy Policy? Contact Agro Bridge in Accra, Ghana — phone 0544823484, or via the contact form. We resolve privacy concerns promptly and transparently." },
+      { type: "p", text: "Questions about this Privacy Policy? Contact agro Bridge in Accra, Ghana — phone 0544823484, or via the contact form. We resolve privacy concerns promptly and transparently." },
     ],
   },
 ];
@@ -100,8 +100,8 @@ export const TERMS_SECTIONS: LegalSection[] = [
     id: "acceptance",
     title: "1. Acceptance",
     blocks: [
-      { type: "p", text: "By registering on Agro Bridge, using our website, or receiving our SMS services, you (\u201cUser\u201d) agree to be bound by these Terms of Service. If you do not agree, you must not use Agro Bridge." },
-      { type: "p", text: "These Terms form a legal agreement between you and Agro Bridge. If registering on behalf of a business, you represent that you have authority to bind that entity." },
+      { type: "p", text: "By registering on agro Bridge, using our website, or receiving our SMS services, you (\u201cUser\u201d) agree to be bound by these Terms of Service. If you do not agree, you must not use agro Bridge." },
+      { type: "p", text: "These Terms form a legal agreement between you and agro Bridge. If registering on behalf of a business, you represent that you have authority to bind that entity." },
       { type: "p", text: "We may update these Terms at any time. Significant changes are communicated via SMS. Continued use constitutes acceptance." },
     ],
   },
@@ -109,8 +109,8 @@ export const TERMS_SECTIONS: LegalSection[] = [
     id: "platform",
     title: "2. The Platform",
     blocks: [
-      { type: "p", text: "Agro Bridge is a digital marketplace connecting smallholder farmers with buyers of agricultural produce in Ghana. The platform allows farmers to list produce, buyers to register interest, Agro Bridge to facilitate matches, and delivery coordination between matched parties." },
-      { type: "note", text: "Agro Bridge is a marketplace intermediary only. We are not a party to any transaction and never take ownership of produce. All transactions are directly between farmers and buyers." },
+      { type: "p", text: "agro Bridge is a digital marketplace connecting smallholder farmers with buyers of agricultural produce in Ghana. The platform allows farmers to list produce, buyers to register interest, agro Bridge to facilitate matches, and delivery coordination between matched parties." },
+      { type: "note", text: "agro Bridge is a marketplace intermediary only. We are not a party to any transaction and never take ownership of produce. All transactions are directly between farmers and buyers." },
       { type: "p", text: "We do not guarantee that a listing results in a match, that a match results in a completed transaction, or that produce will be of a specific quality, quantity, or condition." },
     ],
   },
@@ -130,8 +130,8 @@ export const TERMS_SECTIONS: LegalSection[] = [
     id: "farmers",
     title: "4. Farmer Terms",
     blocks: [
-      { type: "p", text: "As a farmer using Agro Bridge, you agree that:" },
-      { type: "ul", items: ["All produce you list is legally yours to sell", "Crop type, quantity, price, and condition are accurate at listing time", "You will promptly update or remove listings when details change", "You will respond to Agro Bridge and matched buyers in a timely manner", "You will not list unsafe, rotten, or misrepresented produce", "You are responsible for quantity and quality when produce leaves your farm"] },
+      { type: "p", text: "As a farmer using agro Bridge, you agree that:" },
+      { type: "ul", items: ["All produce you list is legally yours to sell", "Crop type, quantity, price, and condition are accurate at listing time", "You will promptly update or remove listings when details change", "You will respond to agro Bridge and matched buyers in a timely manner", "You will not list unsafe, rotten, or misrepresented produce", "You are responsible for quantity and quality when produce leaves your farm"] },
       { type: "note", text: "Listing produce you do not have, false quantities, or deceiving buyers results in permanent removal and may be reported to authorities." },
     ],
   },
@@ -139,7 +139,7 @@ export const TERMS_SECTIONS: LegalSection[] = [
     id: "buyers",
     title: "5. Buyer Terms",
     blocks: [
-      { type: "p", text: "As a buyer using Agro Bridge, you agree that:" },
+      { type: "p", text: "As a buyer using agro Bridge, you agree that:" },
       { type: "ul", items: ["You have a genuine intention to purchase when you register interest", "You will respond to match notifications in a timely manner", "You will not register false interest to gather market information", "You will inspect produce before final payment and raise disputes within 24 hours", "You will treat farmers with respect and negotiate in good faith", "You are responsible for confirming payment once a deal is agreed"] },
     ],
   },
@@ -160,23 +160,23 @@ export const TERMS_SECTIONS: LegalSection[] = [
           ["Delivery fee", "Variable by distance and quantity"],
         ],
       },
-      { type: "p", text: "The 1–2% fee is payable upon completion of a deal. Agro Bridge reserves the right to adjust its fee structure with 30 days' notice." },
-      { type: "note", text: "Payments between farmers and buyers are made directly. Agro Bridge does not hold, process, or guarantee payment, and is not liable for payment disputes." },
+      { type: "p", text: "The 1–2% fee is payable upon completion of a deal. agro Bridge reserves the right to adjust its fee structure with 30 days' notice." },
+      { type: "note", text: "Payments between farmers and buyers are made directly. agro Bridge does not hold, process, or guarantee payment, and is not liable for payment disputes." },
     ],
   },
   {
     id: "delivery",
     title: "7. Delivery",
     blocks: [
-      { type: "p", text: "Agro Bridge offers delivery coordination as an optional add-on service. When you request delivery:" },
-      { type: "ul", items: ["We coordinate with third-party logistics providers or drivers", "Delivery fees are quoted in advance, separate from the transaction fee", "Agro Bridge acts as a coordinator only; the provider is responsible for safe, timely delivery", "The farmer must package produce and have it ready for pickup", "The buyer must be available to receive goods at the agreed time"] },
+      { type: "p", text: "agro Bridge offers delivery coordination as an optional add-on service. When you request delivery:" },
+      { type: "ul", items: ["We coordinate with third-party logistics providers or drivers", "Delivery fees are quoted in advance, separate from the transaction fee", "agro Bridge acts as a coordinator only; the provider is responsible for safe, timely delivery", "The farmer must package produce and have it ready for pickup", "The buyer must be available to receive goods at the agreed time"] },
     ],
   },
   {
     id: "prohibited",
     title: "8. Prohibited Conduct",
     blocks: [
-      { type: "p", text: "You must not use Agro Bridge to:" },
+      { type: "p", text: "You must not use agro Bridge to:" },
       { type: "ul", items: ["Create false, misleading, or fraudulent listings or registrations", "Impersonate another person or organisation", "Harass, threaten, or abuse other users or staff", "List produce illegal to sell in Ghana", "Use the platform for money laundering or illegal activity", "Scrape, copy, or redistribute user data", "Spam users after receiving their contact details through a match"] },
       { type: "p", text: "Violations result in immediate removal and, where applicable, may be reported to relevant authorities." },
     ],
@@ -185,9 +185,9 @@ export const TERMS_SECTIONS: LegalSection[] = [
     id: "disputes",
     title: "9. Disputes",
     blocks: [
-      { type: "p", text: "Agro Bridge facilitates connections but is not a party to transactions. We are committed to helping resolve disputes fairly." },
+      { type: "p", text: "agro Bridge facilitates connections but is not a party to transactions. We are committed to helping resolve disputes fairly." },
       { type: "h3", text: "How to raise a dispute" },
-      { type: "ol", items: ["Contact Agro Bridge within 24 hours of receiving goods", "Provide your phone number, match reference, and a description", "Agro Bridge will contact both parties and mediate within 48 hours"] },
+      { type: "ol", items: ["Contact agro Bridge within 24 hours of receiving goods", "Provide your phone number, match reference, and a description", "agro Bridge will contact both parties and mediate within 48 hours"] },
       { type: "p", text: "Mediation decisions are made in good faith but are not legally binding. For legal disputes, seek resolution through Ghana's courts or the appropriate regulatory body." },
     ],
   },
@@ -195,7 +195,7 @@ export const TERMS_SECTIONS: LegalSection[] = [
     id: "liability",
     title: "10. Liability",
     blocks: [
-      { type: "p", text: "To the maximum extent permitted by Ghanaian law, Agro Bridge shall not be liable for loss or damage to produce, payment disputes, failed SMS delivery, losses from inaccurate listings, or indirect/consequential losses." },
+      { type: "p", text: "To the maximum extent permitted by Ghanaian law, agro Bridge shall not be liable for loss or damage to produce, payment disputes, failed SMS delivery, losses from inaccurate listings, or indirect/consequential losses." },
       { type: "p", text: "Our total liability for any claim shall not exceed the transaction fee we received from that specific transaction. The platform is provided \u201cas is\u201d." },
     ],
   },
@@ -204,8 +204,8 @@ export const TERMS_SECTIONS: LegalSection[] = [
     title: "11. Termination",
     blocks: [
       { type: "h3", text: "By you" },
-      { type: "p", text: "You may stop using Agro Bridge at any time. To remove your account and data, contact us; we deactivate and delete personal data within 14 days." },
-      { type: "h3", text: "By Agro Bridge" },
+      { type: "p", text: "You may stop using agro Bridge at any time. To remove your account and data, contact us; we deactivate and delete personal data within 14 days." },
+      { type: "h3", text: "By agro Bridge" },
       { type: "p", text: "We may suspend or terminate access if you violate these Terms, engage in prohibited conduct, are involved in fraud, or where required by law." },
     ],
   },
@@ -221,7 +221,7 @@ export const TERMS_SECTIONS: LegalSection[] = [
     id: "contact",
     title: "13. Contact",
     blocks: [
-      { type: "p", text: "Questions about these Terms? Contact Agro Bridge in Accra, Ghana — phone / WhatsApp 0544823484, or via the contact form." },
+      { type: "p", text: "Questions about these Terms? Contact agro Bridge in Accra, Ghana — phone / WhatsApp 0544823484, or via the contact form." },
     ],
   },
 ];

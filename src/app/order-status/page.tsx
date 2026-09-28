@@ -75,7 +75,7 @@ function TrackInner() {
   async function lookupByRef(value: string) {
     const cleaned = value.trim().toUpperCase();
     if (cleaned.length < 6) {
-      setError("Enter a valid order reference (e.g. AGB-2026-4721)");
+      setError("Enter a valid order reference (e.g. HGH-2026-4721)");
       return;
     }
     setError("");
@@ -129,7 +129,7 @@ function TrackInner() {
             className="field text-center font-semibold tracking-wide sm:text-left"
             value={ref}
             onChange={(e) => setRef(e.target.value.toUpperCase())}
-            placeholder="e.g. AGB-2026-4721"
+            placeholder="e.g. HGH-2026-4721"
             maxLength={20}
             onKeyDown={(e) => e.key === "Enter" && lookupByRef(ref)}
           />
@@ -173,7 +173,7 @@ function TrackInner() {
       </div>
 
       {orders && orders.length === 0 && (
-        <div className="mt-5 rounded-[10px] border border-line bg-white p-8 text-center">
+        <div className="mt-5 rounded-2xl border border-line bg-white p-8 text-center">
           <h3 className="mb-2 text-[1.2rem] font-extrabold">No order found</h3>
           <p className="mb-4 text-[0.9rem] text-muted">
             Double-check the reference, or message us on WhatsApp with your phone number.
@@ -189,7 +189,7 @@ function TrackInner() {
           const idx = statusIndex(o.status);
           const cancelled = o.status === "cancelled";
           return (
-            <div key={o.id || o.order_ref} className="mt-5 rounded-[10px] border border-line bg-white p-6 text-left">
+            <div key={o.id || o.order_ref} className="mt-5 rounded-2xl border border-line bg-white p-6 text-left shadow-soft">
               <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <div className="text-[0.72rem] font-bold uppercase tracking-wide text-muted">

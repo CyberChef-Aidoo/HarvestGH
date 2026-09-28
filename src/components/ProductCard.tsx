@@ -10,14 +10,14 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={href}
-      className="card-hover group flex flex-col overflow-hidden rounded-[10px] border border-line bg-white"
+      className="card-hover group flex flex-col overflow-hidden rounded-2xl border border-line bg-white"
     >
       <div className="relative h-44 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={product.image_url}
           alt={product.name}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           onError={(e) => ((e.target as HTMLImageElement).src = "/images/market.jpg")}
           loading="lazy"
         />

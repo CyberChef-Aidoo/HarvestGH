@@ -109,7 +109,10 @@ export default function LegalDoc({ title, subtitle, updated, intro, sections }: 
     <>
       <Navbar variant="solid" />
       <main className="min-h-screen">
-        <header className="border-b border-line bg-green px-[5%] pb-12 pt-[calc(68px+40px)] text-white">
+        <header
+          className="px-[5%] pb-12 pt-[calc(68px+40px)] text-white"
+          style={{ background: "linear-gradient(120deg, rgba(12,26,17,0.92), rgba(15,31,20,0.88)), url('/images/market.jpg') center/cover" }}
+        >
           <div className="mx-auto max-w-content">
             <h1 className="mb-2.5 font-display text-[clamp(1.8rem,4vw,2.6rem)] font-extrabold tracking-tight text-white">
               {title}

@@ -3,7 +3,13 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import HowItWorks from "@/components/HowItWorks";
-import { DELIVERY_FEES } from "@/lib/data";
+
+const PROOF = [
+  { val: "50+", label: "Farmers" },
+  { val: "10+", label: "Crops & poultry" },
+  { val: "16", label: "Regions" },
+  { val: "100%", label: "Escrow" },
+];
 
 const TRUST = [
   "Every farmer is verified on-site before listing.",
@@ -14,49 +20,52 @@ const TRUST = [
 export default function HomePage() {
   return (
     <div>
-      <Navbar hideSupplierCta />
+      <Navbar variant="hero" hideSupplierCta={true} />
 
-      {/* Editorial split hero — no overlay, no motion */}
-      <section className="grid min-h-[72svh] border-b border-line bg-cream pt-[68px] lg:grid-cols-2">
-        <div className="flex flex-col justify-center px-5 py-12 sm:px-8 lg:px-12 xl:px-16">
-          <h1 className="mb-4 max-w-[16ch] text-charcoal">
-            Escrow-backed produce from Ghanaian FBO farms.
+      <section className="relative flex min-h-[72svh] items-end overflow-hidden bg-charcoal md:min-h-[68svh]">
+        <div
+          className="absolute inset-0 animate-heroZoom bg-cover bg-center"
+          style={{ backgroundImage: "url('/images/market.jpg')" }}
+          aria-hidden
+        />
+        <div className="absolute inset-0 hero-overlay" aria-hidden />
+        <div className="relative z-10 w-full max-w-[640px] px-[6%] pb-12 pt-[calc(68px+36px)] md:pb-14">
+          <h1 className="mb-3 max-w-[18ch] animate-fadeUp text-white">
+            Fresh farm produce, delivered across Ghana.
           </h1>
-          <p className="mb-8 max-w-[34rem] text-[1.05rem] font-medium leading-[1.55] text-muted">
-            Buy from verified farmer groups. Pay with Paystack or MoMo — funds stay in escrow until
-            you confirm delivery. Register an FBO of 15–50 farmers in one session.
+          <p className="hero-sub mb-7 max-w-[34rem] animate-fadeUp font-body text-[1.05rem] font-medium leading-[1.55] text-[#F3F1EC] [animation-delay:0.12s]">
+            Buy directly from verified farmer groups across Ghana. Payments held in escrow until
+            your order arrives.
           </p>
-          <div className="flex flex-col gap-2.5 sm:flex-row">
+          <div className="flex animate-fadeUp flex-col gap-2.5 [animation-delay:0.24s] sm:flex-row">
             <Link href="/shop" className="btn btn-gold">
-              Browse this week&apos;s listings
+              Shop Fresh Produce
             </Link>
-            <Link href="/register/farmer" className="btn btn-ghost">
-              Register your FBO
+            <Link href="/register/farmer" className="btn btn-ghost-light">
+              Become a Supplier
             </Link>
           </div>
         </div>
-        <div className="relative min-h-[280px] lg:min-h-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/tomatoes.jpg"
-            alt="Fresh tomatoes from a Ghanaian farm"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-        </div>
       </section>
 
-      {/* Verifiable facts — no invented percentages */}
-      <div className="border-b border-line bg-white px-5 py-4 sm:px-6">
-        <p className="mx-auto m-0 max-w-content text-center text-[0.9rem] text-muted sm:text-left">
-          Delivery: Greater Accra GH₵{DELIVERY_FEES.accra} · Ashanti GH₵{DELIVERY_FEES.ashanti} ·
-          other regions GH₵{DELIVERY_FEES.other}. Platform fee 1–2% on completed deals only.
-          Listings free.
-        </p>
+      <div className="grid grid-cols-2 border-t border-white/[0.06] bg-green md:grid-cols-4">
+        {PROOF.map((p, i) => (
+          <div
+            key={p.label}
+            className={[
+              "px-4 py-6 text-center",
+              i < PROOF.length - 1 ? "md:border-r md:border-white/[0.08]" : "",
+            ].join(" ")}
+          >
+            <div className="stat-number">{p.val}</div>
+            <div className="mt-1.5 caption text-white/70">{p.label}</div>
+          </div>
+        ))}
       </div>
 
-      <section className="border-b border-line bg-cream px-5 py-14 sm:px-6">
+      <section className="border-b border-line bg-cream px-5 py-12 sm:px-6 md:py-14">
         <div className="mx-auto max-w-content">
-          <h2 className="mb-8">How Agro Bridge protects your order</h2>
+          <h2 className="mb-8">How Agro Bridge Protects Your Order</h2>
           <div className="grid gap-6 md:grid-cols-3">
             {TRUST.map((t) => (
               <div key={t} className="border-t-2 border-gold pt-4">
@@ -67,58 +76,56 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="px-5 py-14 sm:px-6">
+      <section className="px-5 py-12 sm:px-6 md:py-14">
         <div className="mx-auto max-w-content">
-          <p className="eyebrow">Listings</p>
-          <h2 className="mb-2">This week&apos;s produce and poultry</h2>
+          <p className="eyebrow">Fresh this week</p>
+          <h2 className="mb-2">Available produce &amp; poultry</h2>
           <p className="mb-6 max-w-[34rem] text-muted">
-            Prices and stock from verified FBO farmers. Payment held until delivery is confirmed.
+            Crops and poultry from verified FBO farmers  -  order before stock runs out.
           </p>
           <FeaturedProducts />
-          <div className="mt-6">
+          <div className="mt-6 text-center">
             <Link href="/shop" className="btn btn-primary">
-              View all listings
+              View all produce
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Narrow text-only */}
-      <section className="border-y border-line bg-white px-5 py-14 sm:px-6">
-        <div className="mx-auto max-w-[65ch]">
-          <h2 className="mb-4">FBO registration, escrow, and regional delivery</h2>
-          <p className="m-0 text-muted">
-            Agro Bridge registers farmer-based organisations (typically 15–50 members) and lists
-            their produce for households, restaurants, and retailers. Buyers pay via Paystack or
-            MoMo into escrow. Delivery is priced by region. The platform charges 1–2% only when a
-            deal completes.
+      <section className="bg-white px-5 py-12 sm:px-6 md:py-14">
+        <div className="mx-auto max-w-content">
+          <h2 className="mb-4">Built for Ghana&apos;s Farmers and Buyers</h2>
+          <p className="m-0 max-w-[65ch] text-muted">
+            Agro Bridge connects farmer-based organizations in all 16 regions with households,
+            restaurants, and retailers  -  cutting out middlemen so farmers earn more and buyers pay
+            fair prices for fresher produce.
           </p>
           <Link href="/about" className="mt-6 inline-flex font-semibold text-green hover:underline">
-            How the operation works
+            Learn more about us
           </Link>
         </div>
       </section>
 
       <HowItWorks />
 
-      {/* Flat colour CTA — no reused photo */}
-      <section className="bg-green px-5 py-14 text-white sm:px-6">
-        <div className="mx-auto grid max-w-content gap-8 md:grid-cols-2 md:items-center">
-          <div>
-            <h2 className="mb-3 text-white">Register your FBO or browse listings</h2>
-            <p className="m-0 max-w-[34rem] text-white/75">
-              Leaders list the group once. Buyers order with escrow. Delivery fees are published by
-              region before you pay.
-            </p>
-          </div>
-          <div className="flex flex-col gap-2.5 sm:flex-row md:justify-end">
-            <Link href="/register/farmer" className="btn btn-gold">
-              Register your FBO
-            </Link>
-            <Link href="/shop" className="btn btn-ghost-light">
-              Browse this week&apos;s listings
-            </Link>
-          </div>
+      <section
+        className="px-5 py-14 text-center text-white sm:px-6"
+        style={{
+          background:
+            "linear-gradient(120deg, rgba(18,53,36,0.92), rgba(18,53,36,0.72)), url('/images/market.jpg') center/cover",
+        }}
+      >
+        <h2 className="mx-auto mb-2.5 max-w-[16ch] text-white">Ready to buy or sell?</h2>
+        <p className="mx-auto mb-6 max-w-[34rem] text-[#F3F1EC]">
+          Agro Bridge connects farmers and buyers  -  faster and safer.
+        </p>
+        <div className="flex flex-col justify-center gap-2.5 sm:flex-row">
+          <Link href="/shop" className="btn btn-gold">
+            Start buying
+          </Link>
+          <Link href="/register/farmer" className="btn btn-ghost-light">
+            Become a supplier
+          </Link>
         </div>
       </section>
 

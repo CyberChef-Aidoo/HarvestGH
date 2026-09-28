@@ -6,6 +6,7 @@ export const config = {
   supportWhatsApp: process.env.NEXT_PUBLIC_SUPPORT_WHATSAPP || "233544823484",
   supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL || "hello@agrobridge.gh",
   supportCity: process.env.NEXT_PUBLIC_SUPPORT_CITY || "Accra",
+  anthropicKey: process.env.NEXT_PUBLIC_ANTHROPIC_KEY || "",
 };
 
 export const whatsappLink = (text?: string) =>
