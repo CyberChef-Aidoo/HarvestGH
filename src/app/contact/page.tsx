@@ -10,22 +10,40 @@ import { config, whatsappLink } from "@/lib/config";
 import { createMessage } from "@/lib/api";
 
 const FAQS = [
-  { q: "How do I register as a farmer?", a: "Go to Register as Farmer and fill in your details. You can manage your own account or let agro Bridge manage it for you. Registration is completely free." },
-  { q: "I am elderly and cannot use a phone well. Can I still join?", a: "Yes. When you register, choose \u201cManage it for me.\u201d agro Bridge handles your listing and calls you when a buyer is found. No app or website needed after registering." },
-  { q: "How quickly will I find a buyer?", a: "It depends on the crop, your region, and how many buyers are registered nearby. In peak season, matches can happen within 24–48 hours. You get an SMS immediately when matched." },
-  { q: "Is agro Bridge free to use?", a: "Registration and listing are completely free. agro Bridge earns a small 1–2% fee only when a deal is successfully completed. No upfront costs." },
-  { q: "I registered but have not heard anything. What should I do?", a: "Check your listing status on the Farmer Portal using your phone number. If active, we are still searching for a buyer. You can also call or WhatsApp us for an update." },
-  { q: "Can I partner with agro Bridge as an NGO?", a: "Yes — we welcome partnerships with NGOs, government agencies, and development organizations. Send a message using the form and select \u201cPartnership or collaboration.\u201d" },
+  {
+    q: "How do I register an FBO or farmer group?",
+    a: "An Agrobridge agent visits your FBO leader in person to register all members and crops in one session. You can also start the registration online or call 054 411 4198.",
+  },
+  {
+    q: "Do farmers need a smartphone to use Agrobridge?",
+    a: "No. Farmers without smartphones use SMS, WhatsApp, or a phone call. The FBO leader is the point of contact for the group.",
+  },
+  {
+    q: "Where is the pilot?",
+    a: "Every listing and delivery is in the Eastern Region. The pilot starts with 2–3 farmer groups and 5–10 verified buyers. Crops, beef, goat meat, and chicken meat use the same flow.",
+  },
+  {
+    q: "What are the platform fees?",
+    a: "Joining is free. Agrobridge charges a 2% buyer fee only when a trade clears — GHS 500 on a GHS 25,000 order. The FBO leader is paid 1% on qualifying group volume.",
+  },
+  {
+    q: "How does escrow payment work?",
+    a: "The buyer pays by bank or Mobile Money. Funds stay in escrow until delivery is confirmed, then the farmer is paid.",
+  },
+  {
+    q: "Who can buy?",
+    a: "Verified bulk buyers: hotels, shops, and processors. Households can also order from listed lots. The pilot starts with buyers who can commit to grade, quantity, and a delivery date.",
+  },
 ];
 
 const SUBJECTS = [
-  "I need help with my registration",
-  "I cannot find a buyer for my crop",
-  "I want to buy produce in bulk",
-  "Delivery / logistics question",
+  "I am an FBO leader registering my group",
+  "I want to pre-order bulk supply",
+  "Delivery and logistics question",
+  "Escrow or payment question",
   "Partnership or collaboration",
-  "Media / press inquiry",
-  "Technical issue with the website",
+  "Media inquiry",
+  "Technical issue with website",
   "Other question",
 ];
 
@@ -86,9 +104,10 @@ export default function ContactPage() {
             <div>
               <h2 className="mb-4 font-display text-[1.4rem] font-bold">Get in touch</h2>
               {[
-                { label: "Phone", val: config.supportPhone, sub: "Call or SMS — Mon to Sat, 7am–8pm", href: `tel:${config.supportPhone}`, cta: "Call now" },
-                { label: "WhatsApp", val: "Chat with us on WhatsApp", sub: "Fastest response — usually within 1 hour", href: whatsappLink("Hi agro Bridge"), cta: "Open WhatsApp", wa: true },
-                { label: "Location", val: "Accra, Ghana", sub: "Accra Technical University area · Greater Accra" },
+                { label: "Phone", val: config.supportPhone, sub: "Call or SMS — Hours: [TBD]", href: config.supportPhoneHref, cta: "Call now" }, // TODO confirm support hours
+                { label: "WhatsApp", val: "Chat with us on WhatsApp", sub: "Fastest response — 054 411 4198", href: whatsappLink("Hi Agrobridge"), cta: "Open WhatsApp", wa: true },
+                { label: "MoMo", val: "[TBD]", sub: "Payment via MTN MoMo — // TODO confirm MoMo merchant number" },
+                { label: "Location", val: "Eastern Region", sub: "Pilot area · Office / Ghana Post GPS: [TBD]" },
               ].map((c) => (
                 <div key={c.label} className="mb-3.5 rounded-xl border border-line bg-white p-5">
                   <div className="text-[0.74rem] font-bold uppercase tracking-[0.06em] text-muted">
@@ -103,7 +122,7 @@ export default function ContactPage() {
                       rel={c.wa ? "noopener noreferrer" : undefined}
                       className={[
                         "mt-2.5 inline-flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-[0.8rem] font-semibold text-white transition",
-                        c.wa ? "bg-[#25d366] hover:bg-[#1db954]" : "bg-green hover:bg-green-mid",
+                        c.wa ? "bg-[#25d366] hover:bg-[#1db954]" : "bg-brand hover:bg-brand-deep",
                       ].join(" ")}
                     >
                       {c.cta}
@@ -111,24 +130,24 @@ export default function ContactPage() {
                   )}
                 </div>
               ))}
-              <div className="mt-2 flex items-center gap-2.5 rounded-[10px] border border-line bg-green-pale px-4 py-3 text-[0.83rem] text-green">
-                <span className="h-2 w-2 animate-pulse rounded-full bg-green-mid" />
-                We typically respond within 1 hour during support hours.
+              <div className="mt-2 flex items-center gap-2.5 rounded-[10px] border border-line bg-brand-pale px-4 py-3 text-[0.83rem] text-brand">
+                <span className="h-2 w-2 animate-pulse rounded-full bg-brand-deep" />
+                We respond quickly during support hours ([TBD]). {/* TODO confirm support hours */}
               </div>
             </div>
 
             {/* RIGHT: form */}
-            <div className="rounded-2xl border border-line bg-white p-7 shadow-[0_4px_20px_rgba(15,31,20,0.06)]">
+            <div className="rounded-2xl border border-line bg-white p-7 shadow-[0_4px_20px_rgba(28,26,23,0.06)]">
               {done ? (
                 <div className="py-6 text-center">
-                  <div className="mx-auto mb-4 flex h-[70px] w-[70px] items-center justify-center rounded-full bg-green-pale text-green">
+                  <div className="mx-auto mb-4 flex h-[70px] w-[70px] items-center justify-center rounded-full bg-leaf-pale text-leaf">
                     <Icon name="check" size="2xl" />
                   </div>
-                  <h3 className="mb-2 font-display text-[1.4rem] font-extrabold">Message sent!</h3>
+                  <h3 className="mb-2 font-display text-[1.4rem] font-extrabold">Message sent</h3>
                   <p className="leading-relaxed text-muted">
-                    Thank you for reaching out. We will get back to you within a few hours. For
+                    Thank you for reaching out. We will get back to you shortly. For
                     urgent help, call{" "}
-                    <a href={`tel:${config.supportPhone}`} className="font-bold text-green">
+                    <a href={config.supportPhoneHref} className="font-bold text-brand">
                       {config.supportPhone}
                     </a>
                     .
@@ -154,7 +173,7 @@ export default function ContactPage() {
                         onChange={(e) => set("name", e.target.value)}
                         placeholder="e.g. Kofi Mensah"
                       />
-                      {errors.name && <p className="mt-1 text-[0.74rem] text-[#c0392b]">Enter your name.</p>}
+                      {errors.name && <p className="mt-1 text-[0.74rem] text-accent">Enter your name.</p>}
                     </div>
                     <div>
                       <label className="field-label">
@@ -166,7 +185,7 @@ export default function ContactPage() {
                         onChange={(e) => set("phone", e.target.value)}
                         placeholder="024 123 4567"
                       />
-                      {errors.phone && <p className="mt-1 text-[0.74rem] text-[#c0392b]">Enter a valid phone.</p>}
+                      {errors.phone && <p className="mt-1 text-[0.74rem] text-accent">Enter a valid phone.</p>}
                     </div>
                   </div>
 
@@ -174,7 +193,7 @@ export default function ContactPage() {
                     <label className="field-label">I am a</label>
                     <select className="field" value={form.role} onChange={(e) => set("role", e.target.value)}>
                       <option value="">— Select —</option>
-                      {["Farmer", "Buyer / Trader", "Driver / Logistics Provider", "NGO / Development Partner", "Journalist / Researcher", "Other"].map((r) => (
+                      {["FBO Leader", "Farmer", "Buyer / Trader", "Driver / Logistics", "NGO / Partner", "Other"].map((r) => (
                         <option key={r}>{r}</option>
                       ))}
                     </select>
@@ -190,7 +209,7 @@ export default function ContactPage() {
                         <option key={s}>{s}</option>
                       ))}
                     </select>
-                    {errors.subject && <p className="mt-1 text-[0.74rem] text-[#c0392b]">Please select a subject.</p>}
+                    {errors.subject && <p className="mt-1 text-[0.74rem] text-accent">Please select a subject.</p>}
                   </div>
 
                   <div className="mt-3">
@@ -203,12 +222,12 @@ export default function ContactPage() {
                       maxLength={500}
                       value={form.message}
                       onChange={(e) => set("message", e.target.value)}
-                      placeholder="Tell us more about your question or how we can help…"
+                      placeholder="Tell us more about your question or how we can help..."
                     />
                     <div className="mt-1 text-right text-[0.72rem] text-muted">
                       {form.message.length} / 500
                     </div>
-                    {errors.message && <p className="text-[0.74rem] text-[#c0392b]">Please write a message.</p>}
+                    {errors.message && <p className="text-[0.74rem] text-accent">Please write a message.</p>}
                   </div>
 
                   <button
@@ -220,7 +239,7 @@ export default function ContactPage() {
                   </button>
                   <p className="mt-3 text-center text-[0.78rem] text-muted">
                     Or reach us on{" "}
-                    <a href={whatsappLink("Hi agro Bridge")} target="_blank" rel="noopener noreferrer" className="font-semibold text-green">
+                    <a href={whatsappLink("Hi Agrobridge")} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand">
                       WhatsApp
                     </a>{" "}
                     for the fastest response.
@@ -241,7 +260,7 @@ export default function ContactPage() {
               {FAQS.map((f, i) => (
                 <div key={f.q} className="overflow-hidden rounded-xl border border-line bg-white">
                   <button
-                    className="flex w-full items-center justify-between px-5 py-4 text-left text-[0.93rem] font-semibold transition hover:bg-[#f8faf8]"
+                    className="flex w-full items-center justify-between px-5 py-4 text-left text-[0.93rem] font-semibold transition hover:bg-surface"
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   >
                     {f.q}

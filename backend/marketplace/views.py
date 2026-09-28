@@ -3,7 +3,22 @@ from django.utils import timezone
 from rest_framework import mixins, status, viewsets
 from rest_framework.response import Response
 
-from .models import Buyer, ContactMessage, FarmerRegistration, Order, PageView, Product
+from .models import (
+    Buyer,
+    ContactMessage,
+    Crop,
+    FAQ,
+    FarmerRegistration,
+    Order,
+    PageView,
+    Partner,
+    Post,
+    Product,
+    RoadmapStage,
+    TeamMember,
+    Testimonial,
+    TractionCounter,
+)
 from .serializers import (
     BuyerSerializer,
     ContactMessageSerializer,
@@ -11,7 +26,66 @@ from .serializers import (
     OrderSerializer,
     PageViewSerializer,
     ProductSerializer,
+    CropSerializer,
+    FAQSerializer,
+    PartnerSerializer,
+    PostSerializer,
+    RoadmapStageSerializer,
+    TeamMemberSerializer,
+    TestimonialSerializer,
+    TractionCounterSerializer,
 )
+
+
+class ReadOnlyContentViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+    def get_queryset(self):
+        return self.queryset.all()
+
+
+class TractionCounterViewSet(ReadOnlyContentViewSet):
+    queryset = TractionCounter.objects.all()
+    serializer_class = TractionCounterSerializer
+
+
+class PartnerViewSet(ReadOnlyContentViewSet):
+    queryset = Partner.objects.all()
+    serializer_class = PartnerSerializer
+
+
+class TestimonialViewSet(ReadOnlyContentViewSet):
+    queryset = Testimonial.objects.all()
+    serializer_class = TestimonialSerializer
+
+
+class PostViewSet(ReadOnlyContentViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+
+class CropViewSet(ReadOnlyContentViewSet):
+    queryset = Crop.objects.all()
+    serializer_class = CropSerializer
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        if self.request.query_params.get("pilot") in {"1", "true", "yes"}:
+            qs = qs.filter(pilot=True)
+        return qs
+
+
+class TeamMemberViewSet(ReadOnlyContentViewSet):
+    queryset = TeamMember.objects.all()
+    serializer_class = TeamMemberSerializer
+
+
+class FAQViewSet(ReadOnlyContentViewSet):
+    queryset = FAQ.objects.all()
+    serializer_class = FAQSerializer
+
+
+class RoadmapStageViewSet(ReadOnlyContentViewSet):
+    queryset = RoadmapStage.objects.all()
+    serializer_class = RoadmapStageSerializer
 
 
 class ProductViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):

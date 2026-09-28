@@ -7,7 +7,6 @@ export const metadata = {
   title: "FBO Agent Portal",
 };
 
-/** Lightweight placeholder — full agent dashboard can be added later. */
 export default function AgentPortalPage() {
   return (
     <>
@@ -19,10 +18,10 @@ export default function AgentPortalPage() {
         />
         <div className="mx-auto max-w-lg px-5 py-14 text-center sm:px-6">
           <div className="rounded-2xl border border-line bg-white p-8 shadow-soft">
-            <h2 className="mb-2 text-[1.35rem] font-extrabold">Coming soon in Next.js</h2>
+            <h2 className="mb-2 text-[1.35rem] font-extrabold">Manage your FBO partnership</h2>
             <p className="mb-6 text-[0.95rem] leading-relaxed text-muted">
-              The agent dashboard is being migrated. WhatsApp Ibrahim to manage listings and
-              commissions in the meantime.
+              Contact the Agro Bridge team to manage listings, check commissions, and get support
+              for your farmer group.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
               <Link href="/register/farmer" className="btn btn-primary">

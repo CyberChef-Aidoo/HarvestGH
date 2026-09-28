@@ -22,7 +22,7 @@ const columns = [
   {
     title: "Company",
     links: [
-      { href: "/about", label: "About Agro Bridge" },
+      { href: "/about", label: "About Agrobridge" },
       { href: "/contact", label: "Contact us" },
       { href: "/register/buyer", label: "Register as buyer" },
       { href: "/privacy", label: "Privacy policy" },
@@ -35,16 +35,16 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#0a1a12] px-6 pt-16 text-white">
+    <footer className="bg-[#2A1A14] px-6 pt-16 text-white">
       <div className="mx-auto grid max-w-content gap-9 border-b border-white/[0.07] pb-12 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_1.2fr]">
         <div>
           <div className="mb-3 inline-block rounded-lg bg-white px-2.5 py-1.5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.png" alt="Agro Bridge" className="h-9 w-auto object-contain" />
+            <img src="/images/logo.jpeg" alt="Agrobridge" className="h-9 w-auto object-contain" />
           </div>
           <p className="mb-4 max-w-[280px] caption leading-relaxed text-white/55">
-            Connecting farmers to customers — verified FBO produce and poultry for households,
-            restaurants, and retailers.
+            Connecting farmer groups to verified bulk buyers. Match the harvest before it is
+            picked. Escrow until delivery. Pilot in the Eastern Region.
           </p>
           <div className="flex gap-2">
             {[
@@ -59,7 +59,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 title={s.label}
-                className="flex h-9 w-9 items-center justify-center rounded-[9px] border border-white/10 bg-white/[0.06] text-xs transition hover:-translate-y-0.5 hover:border-gold hover:bg-green"
+                className="flex h-9 w-9 items-center justify-center rounded-[9px] border border-white/10 bg-white/[0.06] text-xs transition hover:-translate-y-0.5 hover:border-accent hover:bg-brand"
               >
                 {s.label[0]}
               </a>
@@ -93,7 +93,7 @@ export default function Footer() {
           </div>
           <div className="mb-3 caption leading-snug text-white/45">
             <strong className="mb-0.5 block text-[0.78rem] text-white/70">Phone / WhatsApp</strong>
-            <a href={`tel:${config.supportPhone}`} className="tabular">
+            <a href={config.supportPhoneHref} className="tabular">
               {config.supportPhone}
             </a>
           </div>
@@ -103,22 +103,15 @@ export default function Footer() {
           </div>
           <div className="caption leading-snug text-white/45">
             <strong className="mb-0.5 block text-[0.78rem] text-white/70">Location</strong>
-            {config.supportCity}, Ghana
+            Eastern Region, Ghana
           </div>
         </div>
       </div>
 
       <div className="mx-auto max-w-content py-5">
         <p className="m-0 max-w-none caption leading-relaxed text-white/40">
-          © {year} Agro Bridge. Verified farmers · Secure escrow · Nationwide delivery.{" "}
-          <a href={`mailto:${config.supportEmail}`} className="hover:text-white/70">
-            {config.supportEmail}
-          </a>{" "}
-          ·{" "}
-          <a href={`tel:${config.supportPhone}`} className="tabular hover:text-white/70">
-            {config.supportPhone}
-          </a>{" "}
-          · {config.supportCity}, Ghana
+          © {year} Agrobridge · Eastern Region pilot · Call or WhatsApp 054 411 4198 · GPS [TBD]{" "}
+          {/* TODO: add verified Ghana Post GPS address */}
         </p>
         <div className="mt-3 flex gap-4">
           <Link href="/privacy" className="caption text-white/40 transition-colors hover:text-white/60">

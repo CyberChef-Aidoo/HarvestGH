@@ -131,6 +131,6 @@ REST_FRAMEWORK = {
     ],
 }
 
-ADMIN_SITE_HEADER = "HarvestGH Admin"
-ADMIN_SITE_TITLE = "HarvestGH"
+ADMIN_SITE_HEADER = "AgroBridge Admin"
+ADMIN_SITE_TITLE = "AgroBridge"
 ADMIN_INDEX_TITLE = "Marketplace operations"

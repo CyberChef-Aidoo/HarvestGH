@@ -1,5 +1,5 @@
 /**
- * Icon name catalog for Agro Bridge (Lucide-style outline set).
+ * Icon name catalog for Agrobridge (Lucide-style outline set).
  * Mapping notes use ASCII labels for former pictographs — no emoji in source.
  */
 
@@ -48,12 +48,12 @@ export const ICON_MAP = {
 } as const satisfies Record<string, IconName>;
 
 /** Crop calendar: crop name -> icon (replaces former produce pictographs). */
-export const CROP_ICON_MAP: Record<string, IconName> = {
-  Tomato: "apple", // fruit stand-in (no tomato glyph in core set)
+export const CROP_ICONS: Record<string, IconName> = {
+  Tomato: "apple",
   Maize: "wheat",
   Yam: "leaf",
   Cassava: "leaf",
-  Plantain: "leaf", // produce stand-in (no banana in core set)
+  Plantain: "leaf",
   Mango: "apple",
   Rice: "wheat",
   Pepper: "flame",

@@ -36,7 +36,7 @@ function BlockView({ block }: { block: Block }) {
       return <h3 className="mb-2 mt-5 font-display text-[1.05rem] font-bold text-ink">{block.text}</h3>;
     case "ul":
       return (
-        <ul className="mb-3 flex list-disc flex-col gap-2 pl-5 leading-relaxed text-muted marker:text-green">
+        <ul className="mb-3 flex list-disc flex-col gap-2 pl-5 leading-relaxed text-muted marker:text-brand">
           {block.items.map((it, i) => (
             <li key={i}>{it}</li>
           ))}
@@ -44,7 +44,7 @@ function BlockView({ block }: { block: Block }) {
       );
     case "ol":
       return (
-        <ol className="mb-3 flex list-decimal flex-col gap-2 pl-5 leading-relaxed text-muted marker:font-bold marker:text-green">
+        <ol className="mb-3 flex list-decimal flex-col gap-2 pl-5 leading-relaxed text-muted marker:font-bold marker:text-brand">
           {block.items.map((it, i) => (
             <li key={i}>{it}</li>
           ))}
@@ -52,7 +52,7 @@ function BlockView({ block }: { block: Block }) {
       );
     case "note":
       return (
-        <div className="my-4 rounded-xl border border-gold/40 bg-gold-pale px-5 py-3.5 text-[0.9rem] font-medium leading-relaxed text-gold-deep">
+        <div className="my-4 rounded-xl border border-accent/40 bg-accent-pale px-5 py-3.5 text-[0.9rem] font-medium leading-relaxed text-accent-deep">
           {block.text}
         </div>
       );
@@ -63,7 +63,7 @@ function BlockView({ block }: { block: Block }) {
             <thead>
               <tr>
                 {block.head.map((h) => (
-                  <th key={h} className="border-b border-line bg-green-pale px-3.5 py-2.5 font-bold text-green">
+                  <th key={h} className="border-b border-line bg-brand-pale px-3.5 py-2.5 font-bold text-brand">
                     {h}
                   </th>
                 ))}
@@ -111,7 +111,7 @@ export default function LegalDoc({ title, subtitle, updated, intro, sections }: 
       <main className="min-h-screen">
         <header
           className="px-[5%] pb-12 pt-[calc(68px+40px)] text-white"
-          style={{ background: "linear-gradient(120deg, rgba(12,26,17,0.92), rgba(15,31,20,0.88)), url('/images/market.jpg') center/cover" }}
+          style={{ background: "linear-gradient(120deg, rgba(42,26,20,0.92), rgba(92,46,32,0.78)), url('/images/shop-header.jpg') center/cover" }}
         >
           <div className="mx-auto max-w-content">
             <h1 className="mb-2.5 font-display text-[clamp(1.8rem,4vw,2.6rem)] font-extrabold tracking-tight text-white">
@@ -125,7 +125,7 @@ export default function LegalDoc({ title, subtitle, updated, intro, sections }: 
           {/* TOC */}
           <aside className="hidden lg:block">
             <div className="sticky top-24">
-              <Link href="/" className="mb-4 inline-flex items-center gap-2 text-[0.82rem] font-semibold text-green">
+              <Link href="/" className="mb-4 inline-flex items-center gap-2 text-[0.82rem] font-semibold text-brand">
                 <Icon name="arrow-left" size="sm" />
                 Back to home
               </Link>
@@ -140,7 +140,7 @@ export default function LegalDoc({ title, subtitle, updated, intro, sections }: 
                       className={[
                         "-ml-px block border-l-2 py-1 pl-3 text-[0.83rem] transition-colors",
                         active === s.id
-                          ? "border-green font-semibold text-green"
+                          ? "border-brand font-semibold text-brand"
                           : "border-transparent text-muted hover:text-ink",
                       ].join(" ")}
                     >
@@ -154,7 +154,7 @@ export default function LegalDoc({ title, subtitle, updated, intro, sections }: 
 
           {/* DOCUMENT */}
           <article className="min-w-0">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-lg bg-green-pale px-4 py-2 text-[0.82rem] font-medium text-green">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-lg bg-brand-pale px-4 py-2 text-[0.82rem] font-medium text-brand">
               Last updated: {updated}
             </div>
             <div className="mb-6 rounded-xl border border-line bg-white px-5 py-4 text-[0.95rem] leading-relaxed text-ink">

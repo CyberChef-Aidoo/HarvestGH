@@ -3,12 +3,27 @@ from django.urls import path
 from django.utils.html import format_html
 
 from .admin_views import analytics_view
-from .models import Buyer, ContactMessage, FarmerRegistration, Order, PageView, Product
+from .models import (
+    Buyer,
+    ContactMessage,
+    Crop,
+    FAQ,
+    FarmerRegistration,
+    Order,
+    PageView,
+    Partner,
+    Post,
+    Product,
+    RoadmapStage,
+    TeamMember,
+    Testimonial,
+    TractionCounter,
+)
 
 
 class HarvestAdminSite(admin.AdminSite):
-    site_header = "HarvestGH Admin"
-    site_title = "HarvestGH"
+    site_header = "AgroBridge Admin"
+    site_title = "AgroBridge"
     index_title = "Marketplace operations"
 
     def get_urls(self):
@@ -165,3 +180,61 @@ class PageViewAdmin(admin.ModelAdmin):
     list_filter = ("viewed_on",)
     search_fields = ("path",)
     date_hierarchy = "viewed_on"
+
+
+@admin.register(TractionCounter, site=harvest_admin)
+class TractionCounterAdmin(admin.ModelAdmin):
+    list_display = ("label", "value", "updated_at")
+    search_fields = ("label", "value")
+
+
+@admin.register(Partner, site=harvest_admin)
+class PartnerAdmin(admin.ModelAdmin):
+    list_display = ("name", "category", "order")
+    list_filter = ("category",)
+    search_fields = ("name",)
+    list_editable = ("order",)
+
+
+@admin.register(Testimonial, site=harvest_admin)
+class TestimonialAdmin(admin.ModelAdmin):
+    list_display = ("name", "organisation", "audience", "location")
+    list_filter = ("audience",)
+    search_fields = ("name", "organisation", "quote")
+
+
+@admin.register(Post, site=harvest_admin)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ("title", "category", "date", "author")
+    list_filter = ("category", "date")
+    search_fields = ("title", "excerpt", "body", "author")
+    prepopulated_fields = {"slug": ("title",)}
+
+
+@admin.register(Crop, site=harvest_admin)
+class CropAdmin(admin.ModelAdmin):
+    list_display = ("name", "availability_window_start", "availability_window_end", "pilot")
+    list_filter = ("pilot",)
+    search_fields = ("name", "grade_notes")
+
+
+@admin.register(TeamMember, site=harvest_admin)
+class TeamMemberAdmin(admin.ModelAdmin):
+    list_display = ("name", "role", "order")
+    search_fields = ("name", "role", "background")
+    list_editable = ("order",)
+
+
+@admin.register(FAQ, site=harvest_admin)
+class FAQAdmin(admin.ModelAdmin):
+    list_display = ("question", "order")
+    search_fields = ("question", "answer")
+    list_editable = ("order",)
+
+
+@admin.register(RoadmapStage, site=harvest_admin)
+class RoadmapStageAdmin(admin.ModelAdmin):
+    list_display = ("label", "period", "is_current", "order")
+    list_filter = ("is_current",)
+    search_fields = ("label", "period")
+    list_editable = ("is_current", "order")

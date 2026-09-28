@@ -8,9 +8,9 @@ import type { Product } from "@/lib/types";
 
 export default function FeaturedProducts() {
   const [products, setProducts] = useState<Product[]>(() => {
-    const crops = DEMO_PRODUCTS.filter((p) => p.crop_type !== "Poultry").slice(0, 4);
-    const poultry = DEMO_PRODUCTS.filter((p) => p.crop_type === "Poultry").slice(0, 2);
-    return [...crops, ...poultry];
+    const meat = DEMO_PRODUCTS.filter((p) => p.crop_type === "Beef" || p.crop_type === "Goat" || p.crop_type === "Poultry");
+    const crops = DEMO_PRODUCTS.filter((p) => !meat.includes(p)).slice(0, 3);
+    return [...crops, ...meat];
   });
 
   useEffect(() => {
@@ -18,9 +18,9 @@ export default function FeaturedProducts() {
     (async () => {
       const data = await fetchProducts({ status: "available" });
       if (!active || !data.length) return;
-      const crops = data.filter((p) => p.crop_type !== "Poultry").slice(0, 4);
-      const poultry = data.filter((p) => p.crop_type === "Poultry").slice(0, 2);
-      setProducts(poultry.length ? [...crops, ...poultry] : data.slice(0, 6));
+      const meat = data.filter((p) => p.crop_type === "Beef" || p.crop_type === "Goat" || p.crop_type === "Poultry");
+      const crops = data.filter((p) => p.crop_type !== "Beef" && p.crop_type !== "Goat" && p.crop_type !== "Poultry").slice(0, 3);
+      setProducts(meat.length ? [...crops, ...meat] : data.slice(0, 6));
     })();
     return () => {
       active = false;

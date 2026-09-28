@@ -21,26 +21,29 @@ const CROPS = [
   "Pepper",
   "Onion",
   "Groundnut",
-  "Vegetables",
+  "Poultry",
+  "Beef",
+  "Goat",
+  "Chicken",
   "Other",
 ];
 
 const BENEFITS = [
   {
-    title: "Reach city buyers",
-    desc: "Your produce listed on agro Bridge — visible to buyers across Ghana.",
+    title: "In-person registration",
+    desc: "An Agrobridge agent visits you and registers your whole group in one session.",
   },
   {
-    title: "Payment before dispatch",
-    desc: "Buyer pays into escrow before produce leaves the farm.",
+    title: "1% leader commission",
+    desc: "FBO leaders earn a 1% commission on every completed deal from their members.",
   },
   {
-    title: "FBO leader commission",
-    desc: "Group leaders earn 1% on every completed member deal.",
+    title: "Guaranteed escrow payout",
+    desc: "Buyers pay before dispatch. Money is released to the farmer when delivery is confirmed.",
   },
   {
-    title: "We call you when ready",
-    desc: "No smartphone needed after registration — we call your number.",
+    title: "No smartphone needed",
+    desc: "Farmers without smartphones are reached by SMS, WhatsApp, or a phone call.",
   },
 ];
 
@@ -104,7 +107,7 @@ export default function RegisterFarmerPage() {
       if (!saved) throw new Error("failed");
       setDone(true);
     } catch {
-      toast("Could not submit. Please try again or WhatsApp us.", "error");
+      toast("Could not submit. Please try again or call 054 411 4198.", "error");
     } finally {
       setSubmitting(false);
     }
@@ -115,8 +118,9 @@ export default function RegisterFarmerPage() {
       <Navbar variant="solid" />
       <main className="min-h-screen">
         <PageHeader
-          title="Sell your harvest with agro Bridge"
-          subtitle="Register your FBO or farm group. We connect your produce to buyers across Ghana — before it spoils."
+          eyebrow="Farmer registration"
+          title="Register your FBO with Agrobridge"
+          subtitle="The pilot is in the Eastern Region. List expected crops and animal protein so verified buyers can pre-order before harvest."
         />
 
         <div className="grid gap-px border-y border-line bg-line md:grid-cols-2 lg:grid-cols-4">
@@ -131,13 +135,12 @@ export default function RegisterFarmerPage() {
         <div className="mx-auto max-w-2xl px-5 py-12 sm:px-6">
           {done ? (
             <div className="rounded-2xl border border-line bg-white p-10 text-center shadow-soft">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-pale text-green">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-leaf-pale text-leaf">
                 <Icon name="check" size="2xl" />
               </div>
               <h2 className="mb-2 text-[1.7rem] font-extrabold">Registration received</h2>
               <p className="mx-auto mb-6 max-w-md text-[0.95rem] leading-relaxed text-muted">
-                Ibrahim will review your details and contact you within 48 hours to confirm your
-                partnership and list your first products.
+                An Agrobridge agent will call you on {form.phone || "your number"} to arrange an in-person visit and register your members. For urgent questions, call or WhatsApp 054 411 4198.
               </p>
               <div className="flex flex-col justify-center gap-3 sm:flex-row">
                 <Link href="/farmer-portal" className="btn btn-primary">
@@ -150,9 +153,9 @@ export default function RegisterFarmerPage() {
             </div>
           ) : (
             <div className="rounded-2xl border border-line bg-white p-6 shadow-soft sm:p-8">
-              <h2 className="mb-1 text-[1.4rem] font-extrabold">Register as a supplier</h2>
+              <h2 className="mb-1 text-[1.4rem] font-extrabold">Register your farmer group</h2>
               <p className="mb-8 text-[0.9rem] leading-relaxed text-muted">
-                Fill in your details below. We will contact you within 48 hours.
+                Fill in your details below. An Agrobridge agent will call you back on 054 411 4198 to arrange the in-person visit.
               </p>
 
               <div className="mb-8">
@@ -162,8 +165,8 @@ export default function RegisterFarmerPage() {
                 <div className="grid gap-3 sm:grid-cols-2">
                   {(
                     [
-                      ["fbo", "FBO / Farmer group", "I represent a cooperative with multiple members."],
-                      ["individual", "Individual farmer", "I supply my own produce directly."],
+                      ["fbo", "FBO / Group leader", "I lead an FBO and want to register our members."],
+                      ["individual", "Individual farmer", "I farm independently and want to supply produce."],
                     ] as const
                   ).map(([id, title, desc]) => (
                     <button
@@ -173,8 +176,8 @@ export default function RegisterFarmerPage() {
                       className={[
                         "rounded-xl border-2 p-4 text-left transition",
                         type === id
-                          ? "border-green bg-green-pale"
-                          : "border-line bg-white hover:border-green/40",
+                          ? "border-brand bg-brand-pale"
+                          : "border-line bg-white hover:border-brand/40",
                       ].join(" ")}
                     >
                       <div className="mb-1 font-bold text-ink">{title}</div>
@@ -194,7 +197,7 @@ export default function RegisterFarmerPage() {
                       FBO / Group name <span className="req">*</span>
                     </label>
                     <input
-                      className={["field", errors.fbo_name ? "border-[#c0392b]" : ""].join(" ")}
+                      className={["field", errors.fbo_name ? "border-accent" : ""].join(" ")}
                       value={form.fbo_name}
                       onChange={(e) => set("fbo_name", e.target.value)}
                       placeholder="e.g. Ejisu Farmers Cooperative"
@@ -208,7 +211,7 @@ export default function RegisterFarmerPage() {
                       <span className="req">*</span>
                     </label>
                     <input
-                      className={["field", errors.name ? "border-[#c0392b]" : ""].join(" ")}
+                      className={["field", errors.name ? "border-accent" : ""].join(" ")}
                       value={form.name}
                       onChange={(e) => set("name", e.target.value)}
                       placeholder="e.g. Kwame Boateng"
@@ -219,7 +222,7 @@ export default function RegisterFarmerPage() {
                       Phone number <span className="req">*</span>
                     </label>
                     <input
-                      className={["field", errors.phone ? "border-[#c0392b]" : ""].join(" ")}
+                      className={["field", errors.phone ? "border-accent" : ""].join(" ")}
                       value={form.phone}
                       onChange={(e) => set("phone", e.target.value)}
                       placeholder="024 123 4567"
@@ -235,7 +238,7 @@ export default function RegisterFarmerPage() {
                       Region <span className="req">*</span>
                     </label>
                     <select
-                      className={["field", errors.region ? "border-[#c0392b]" : ""].join(" ")}
+                      className={["field", errors.region ? "border-accent" : ""].join(" ")}
                       value={form.region}
                       onChange={(e) => set("region", e.target.value)}
                     >
@@ -292,8 +295,8 @@ export default function RegisterFarmerPage() {
                       className={[
                         "rounded-lg border px-3 py-2.5 text-left text-[0.84rem] font-semibold transition",
                         crops.includes(c)
-                          ? "border-green bg-green-pale text-green"
-                          : "border-line text-ink hover:border-green/40",
+                          ? "border-brand bg-brand-pale text-brand"
+                          : "border-line text-ink hover:border-brand/40",
                       ].join(" ")}
                     >
                       {c}
@@ -301,7 +304,7 @@ export default function RegisterFarmerPage() {
                   ))}
                 </div>
                 {errors.crops && (
-                  <p className="mt-2 text-[0.74rem] text-[#c0392b]">Select at least one crop.</p>
+                  <p className="mt-2 text-[0.74rem] text-accent">Select at least one crop.</p>
                 )}
                 <div className="mt-4">
                   <label className="field-label">Typical quantity per season</label>
@@ -332,7 +335,7 @@ export default function RegisterFarmerPage() {
               </button>
               <p className="mt-4 text-center text-[0.84rem] text-muted">
                 Looking to buy?{" "}
-                <Link href="/register/buyer" className="font-semibold text-green">
+                <Link href="/register/buyer" className="font-semibold text-brand">
                   Register as a buyer
                 </Link>
               </p>

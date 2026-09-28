@@ -1,35 +1,36 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Chatbot from "@/components/Chatbot";
 import PageViewTracker from "@/components/PageViewTracker";
 
+export const viewport: Viewport = {
+  themeColor: "#7A3E2B",
+};
+
 export const metadata: Metadata = {
   title: {
-    default: "Agro Bridge — Connecting Farmers to Customers",
-    template: "%s — Agro Bridge",
+    default: "Agrobridge — Match the harvest before it is picked",
+    template: "Agrobridge — %s",
   },
   description:
-    "Order fresh produce and poultry directly from verified FBO farmers across Ghana. Secure escrow payment. Nationwide delivery.",
+    "Agrobridge connects farmer-based organisations to verified bulk buyers. FBOs list expected supply. Buyers pre-order. Payment is held until delivery. Pilot in the Eastern Region.",
   keywords: [
     "Ghana farm produce",
     "poultry Ghana",
-    "buy fresh vegetables Ghana",
-    "agricultural marketplace Ghana",
-    "FBO farmers Ghana",
-    "Agro Bridge",
-    "farm to table Ghana",
+    "FBO Ghana",
+    "Eastern Region agriculture Ghana",
+    "Agrobridge",
   ],
-  authors: [{ name: "Ibrahim Mohammed Lotsu" }],
-  metadataBase: new URL("https://harvestgh.vercel.app"),
+  metadataBase: new URL("https://agrobridge.gh"),
   openGraph: {
     type: "website",
-    siteName: "Agro Bridge",
-    title: "Agro Bridge — Connecting Farmers to Customers",
+    siteName: "Agrobridge",
+    title: "Agrobridge — Match the harvest before it is picked",
     description:
-      "Order fresh produce and poultry directly from verified farms across Ghana. Secure payment. Nationwide delivery.",
-    images: ["/images/market.jpg"],
+      "Farmer-based organisations list expected crops and animal protein. Verified buyers pre-order. Escrow holds payment until delivery. Pilot in the Eastern Region.",
+    images: ["/images/hero.jpg"],
   },
-  icons: { icon: "/logo.png" },
+  icons: { icon: "/images/logo.jpeg" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

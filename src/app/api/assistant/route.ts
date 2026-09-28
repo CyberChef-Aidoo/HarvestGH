@@ -37,7 +37,7 @@ export async function POST(req: Request) {
         model: "claude-haiku-4-5-20251001",
         max_tokens: 300,
         system:
-          "You are Agro Bridge Assistant, a support chatbot for Agro Bridge, Ghana's agricultural marketplace. Keep replies short (3-5 sentences). Phone/WhatsApp 0544823484. Delivery: Greater Accra GH₵30, Ashanti GH₵50, other GH₵70. Payment via Paystack escrow. Never invent prices — direct users to the Shop page.",
+          "You are AgroBridge Assistant, a support chatbot for AgroBridge, Ghana's agricultural marketplace. Keep replies short (3-5 sentences). Phone/WhatsApp 0544823484. Delivery details and total cost are confirmed with the buyer before checkout. Payment via secure escrow. Never invent prices — direct users to the Shop page.",
         messages,
       }),
     });

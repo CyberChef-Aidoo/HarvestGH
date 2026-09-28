@@ -194,3 +194,126 @@ class PageView(models.Model):
 
     def __str__(self):
         return f"{self.path} ({self.viewed_on})"
+
+
+class TractionCounter(models.Model):
+    label = models.CharField(max_length=120)
+    value = models.CharField(max_length=80, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["id"]
+
+    def __str__(self):
+        return self.label
+
+
+class Partner(models.Model):
+    class Category(models.TextChoices):
+        FBO = "fbo", "FBO"
+        LOGISTICS = "logistics", "Logistics"
+        PAYMENT = "payment", "Payment"
+        ANCHOR_BUYER = "anchor_buyer", "Anchor buyer"
+
+    name = models.CharField(max_length=160)
+    logo = models.ImageField(upload_to="partners/", blank=True)
+    category = models.CharField(max_length=30, choices=Category.choices)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["order", "name"]
+
+    def __str__(self):
+        return self.name
+
+
+class Testimonial(models.Model):
+    class Audience(models.TextChoices):
+        FARMER = "farmer", "Farmer"
+        BUYER = "buyer", "Buyer"
+
+    name = models.CharField(max_length=160)
+    role = models.CharField(max_length=160, blank=True)
+    organisation = models.CharField(max_length=160, blank=True)
+    location = models.CharField(max_length=160, blank=True)
+    crop = models.CharField(max_length=100, blank=True)
+    photo = models.ImageField(upload_to="testimonials/", blank=True)
+    quote = models.TextField()
+    audience = models.CharField(max_length=20, choices=Audience.choices)
+
+    class Meta:
+        ordering = ["id"]
+
+    def __str__(self):
+        return self.name
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=220)
+    slug = models.SlugField(unique=True)
+    date = models.DateField(default=timezone.localdate)
+    category = models.CharField(max_length=80)
+    featured_image = models.ImageField(upload_to="posts/", blank=True)
+    excerpt = models.TextField()
+    body = models.TextField()
+    author = models.CharField(max_length=160)
+
+    class Meta:
+        ordering = ["-date", "-id"]
+
+    def __str__(self):
+        return self.title
+
+
+class Crop(models.Model):
+    name = models.CharField(max_length=120)
+    availability_window_start = models.CharField(max_length=40)
+    availability_window_end = models.CharField(max_length=40)
+    grade_notes = models.TextField(blank=True)
+    pilot = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
+
+class TeamMember(models.Model):
+    name = models.CharField(max_length=160)
+    role = models.CharField(max_length=160)
+    background = models.CharField(max_length=240)
+    photo = models.ImageField(upload_to="team/", blank=True)
+    linkedin_url = models.URLField(blank=True)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["order", "name"]
+
+    def __str__(self):
+        return self.name
+
+
+class FAQ(models.Model):
+    question = models.CharField(max_length=220)
+    answer = models.TextField()
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["order", "id"]
+
+    def __str__(self):
+        return self.question
+
+
+class RoadmapStage(models.Model):
+    label = models.CharField(max_length=120)
+    period = models.CharField(max_length=80)
+    is_current = models.BooleanField(default=False)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["order", "id"]
+
+    def __str__(self):
+        return self.label

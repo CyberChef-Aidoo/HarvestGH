@@ -17,30 +17,30 @@ const SHOP_DEMO: Product[] = [
   ...DEMO_PRODUCTS,
   {
     id: "d-yam",
-    name: "Puna Yam — Export Quality",
+    name: "Yam, Puna",
     crop_type: "Yam",
-    price_per_unit: 220,
-    unit: "bag",
+    price_per_unit: 1800,
+    unit: "100 tubers",
     quantity_available: 45,
     sold_quantity: 5,
-    min_order: 3,
-    region: "Northern",
-    fbo_source: "Tamale FBO",
+    min_order: 1,
+    region: "Eastern",
+    fbo_source: "FBO onboarding — Eastern",
     status: "available",
     is_preorder: false,
-    image_url: "/images/market.jpg",
+    image_url: "/images/tomatoes.jpg",
   },
   {
     id: "d-mango-out",
-    name: "Mango — Julie Variety",
+    name: "Mango, Julie",
     crop_type: "Mango",
-    price_per_unit: 65,
-    unit: "crate",
+    price_per_unit: 85,
+    unit: "box",
     quantity_available: 0,
     sold_quantity: 120,
     min_order: 10,
-    region: "Volta",
-    fbo_source: "Ho FBO",
+    region: "Eastern",
+    fbo_source: "FBO onboarding — Eastern",
     status: "out_of_stock",
     is_preorder: false,
     image_url: "/images/mango.jpg",
@@ -53,6 +53,7 @@ function fmtDate(d?: string | null) {
 }
 
 function ShopCard({ p }: { p: Product }) {
+  const [imgError, setImgError] = useState(false);
   const remaining = Math.max(0, Number(p.quantity_available) - Number(p.sold_quantity || 0));
   const isOut = p.status === "out_of_stock" || remaining <= 0;
   const isPre = p.is_preorder || p.status === "preorder";
@@ -61,20 +62,26 @@ function ShopCard({ p }: { p: Product }) {
 
   return (
     <div className="flex flex-col overflow-hidden rounded-2xl border border-line bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-soft">
-      <div className="relative h-44 overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={p.image_url}
-          alt={p.name}
-          className="h-full w-full object-cover"
-          onError={(e) => ((e.target as HTMLImageElement).src = "/images/market.jpg")}
-          loading="lazy"
-        />
+      <div className="relative h-44 overflow-hidden bg-brand-pale">
+        {imgError || !p.image_url ? (
+          <div className="flex h-full w-full items-center justify-center p-4 text-center font-display text-sm font-bold text-brand">
+            {p.name}
+          </div>
+        ) : (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={p.image_url}
+            alt={p.name}
+            className="h-full w-full object-cover"
+            onError={() => setImgError(true)}
+            loading="lazy"
+          />
+        )}
         <div className="absolute left-2.5 top-2.5 flex flex-wrap gap-1.5">
-          {isPre && <span className="rounded-full bg-gold-pale px-2.5 py-1 text-[0.68rem] font-bold text-gold-deep">Preorder</span>}
+          {isPre && <span className="rounded-full bg-accent-pale px-2.5 py-1 text-[0.68rem] font-bold text-accent-deep">Preorder</span>}
           {isOut && <span className="rounded-full bg-black/10 px-2.5 py-1 text-[0.68rem] font-bold text-muted">Out of stock</span>}
-          {isLow && <span className="rounded-full bg-[#fdecea] px-2.5 py-1 text-[0.68rem] font-bold text-[#c0392b]">Low stock</span>}
-          {!isPre && !isOut && !isLow && <span className="rounded-full bg-green-pale px-2.5 py-1 text-[0.68rem] font-bold text-green">In stock</span>}
+          {isLow && <span className="rounded-full bg-accent-pale px-2.5 py-1 text-[0.68rem] font-bold text-accent-deep">Low stock</span>}
+          {!isPre && !isOut && !isLow && <span className="rounded-full bg-leaf-pale px-2.5 py-1 text-[0.68rem] font-bold text-leaf">In stock</span>}
         </div>
       </div>
       <div className="flex flex-1 flex-col p-4">
@@ -87,7 +94,7 @@ function ShopCard({ p }: { p: Product }) {
           {p.fbo_source ? ` · ${p.fbo_source}` : ""}
         </div>
         <div className="mb-2.5 flex items-end justify-between">
-          <div className="font-display text-[1.4rem] font-extrabold leading-none text-green">
+          <div className="font-display text-[1.4rem] font-extrabold leading-none text-brand">
             GH₵{Number(p.price_per_unit).toFixed(2)}
             <span className="block font-sans text-[0.72rem] font-medium text-muted">per {p.unit}</span>
           </div>
@@ -99,18 +106,18 @@ function ShopCard({ p }: { p: Product }) {
           </div>
         </div>
         <div className="mb-3 flex flex-wrap gap-1.5">
-          <span className="rounded-md bg-[#f0f4f1] px-2.5 py-1 text-[0.72rem] font-semibold text-muted">
+          <span className="rounded-md bg-surface px-2.5 py-1 text-[0.72rem] font-semibold text-muted">
             Min: {min} {p.unit}
             {min > 1 ? "s" : ""}
           </span>
           {isPre && p.available_date && (
-            <span className="rounded-md bg-[#f0f4f1] px-2.5 py-1 text-[0.72rem] font-semibold text-muted">
+            <span className="rounded-md bg-surface px-2.5 py-1 text-[0.72rem] font-semibold text-muted">
               {fmtDate(p.available_date)}
             </span>
           )}
         </div>
         {isPre && (
-          <div className="mb-3 rounded-lg bg-gold-pale px-3 py-2 text-[0.78rem] font-medium text-gold-deep">
+          <div className="mb-3 rounded-lg bg-accent-pale px-3 py-2 text-[0.78rem] font-medium text-accent-deep">
             Preorder now — available {fmtDate(p.available_date)}. Pay a deposit to reserve stock.
           </div>
         )}
@@ -118,12 +125,12 @@ function ShopCard({ p }: { p: Product }) {
           {isOut ? (
             <button
               disabled
-              className="btn btn-block cursor-not-allowed bg-[#f0f0f0] text-[#aaa]"
+              className="btn btn-block cursor-not-allowed bg-surface text-faint"
             >
               Out of stock
             </button>
           ) : isPre ? (
-            <Link href={`/checkout?id=${p.id}&type=preorder`} className="btn btn-block btn-gold">
+            <Link href={`/checkout?id=${p.id}&type=preorder`} className="btn btn-block btn-accent">
               Preorder
             </Link>
           ) : (
@@ -179,21 +186,21 @@ function ShopInner() {
     <>
       <header
         className="px-[5%] pb-12 pt-[calc(68px+40px)] text-white"
-        style={{ background: "linear-gradient(120deg, rgba(12,26,17,0.88), rgba(26,107,60,0.72)), url('/images/market.jpg') center/cover" }}
+        style={{ background: "linear-gradient(120deg, rgba(42,26,20,0.90), rgba(92,46,32,0.78)), url('/images/shop-header.jpg') center/cover" }}
       >
         <div className="mx-auto max-w-content">
-          <p className="text-xs font-bold uppercase tracking-[0.12em] text-gold">Marketplace</p>
+          <p className="text-xs font-bold uppercase tracking-[0.12em] text-accent">Marketplace</p>
           <h1 className="mb-3 mt-3 font-display text-[clamp(1.9rem,4vw,2.7rem)] font-extrabold leading-[1.12] tracking-tight text-white">
-            Fresh farm produce
+            What is on the board
           </h1>
           <p className="max-w-[36rem] leading-relaxed text-white/70">
-            Browse verified crops from FBO farmers across Ghana. Order for delivery or preorder next
-            season&apos;s harvest.
+            Expected supply from verified FBOs, plus lots already in stock. Pilot trades are in the
+            Eastern Region. To order by phone, call or WhatsApp 054 411 4198.
           </p>
           <p className="mt-3.5 text-[0.9rem] font-semibold text-white/90">
             Order by phone:{" "}
-            <a href={`tel:${config.supportPhone}`} className="text-gold underline underline-offset-4">
-              {config.supportPhone}
+            <a href="tel:+233544114198" className="text-accent underline underline-offset-4">
+              054 411 4198
             </a>
           </p>
         </div>
@@ -256,17 +263,17 @@ function ShopInner() {
       </div>
 
       {/* How it works */}
-      <section className="bg-dark px-6 py-14 text-white">
+      <section className="bg-brand-deep px-6 py-14 text-white">
         <div className="mx-auto grid max-w-3xl gap-8 sm:grid-cols-3">
           {[
-            ["01", "Choose your produce", "Browse what is available now. Each listing shows exact quantity, price, and source region."],
-            ["02", "Place your order", "Select quantity, enter delivery details, and pay securely. Your money is held until delivery."],
-            ["03", "Receive fresh produce", "We coordinate pickup from the farm and deliver to your location. Track your order anytime."],
+            ["01", "Choose your produce", "Browse the board. Each listing shows exact price, unit, quantity and source region."],
+            ["02", "Pay into escrow", "Select your quantity and pay by Paystack or MoMo. Funds are held until you receive the produce."],
+            ["03", "Delivered, then recorded", "We collect from the farm after the match. The farmer is paid when you confirm, and the trade is stored."],
           ].map(([n, t, d]) => (
             <div key={n} className="text-center">
               <div className="font-display text-[2rem] font-extrabold text-white/10">{n}</div>
               <div className="mb-1.5 font-bold text-white">{t}</div>
-              <div className="text-[0.8rem] leading-relaxed text-white/50">{d}</div>
+              <div className="text-[0.8rem] leading-relaxed text-white/70">{d}</div>
             </div>
           ))}
         </div>

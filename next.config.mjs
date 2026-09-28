@@ -1,5 +1,8 @@
+import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig = (phase) => ({
+  distDir: phase === PHASE_DEVELOPMENT_SERVER ? ".next-dev" : ".next",
   reactStrictMode: true,
   images: {
     remotePatterns: [{ protocol: "https", hostname: "**" }],
@@ -22,6 +25,6 @@ const nextConfig = {
       { source: "/agent-portal.html", destination: "/agent-portal", permanent: true },
     ];
   },
-};
+});
 
 export default nextConfig;

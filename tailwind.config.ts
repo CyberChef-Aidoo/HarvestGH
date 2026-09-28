@@ -5,24 +5,27 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        green: {
-          DEFAULT: "#123524",
-          mid: "#1a4a32",
-          pale: "#e8f0eb",
+        brand: {
+          DEFAULT: "#7A3E2B",
+          deep: "#5C2E20",
+          pale: "#F1E4DD",
         },
-        gold: {
-          DEFAULT: "#D4A017",
-          deep: "#a67c12",
-          pale: "#f8efd6",
+        accent: {
+          DEFAULT: "#C8391F",
+          deep: "#9E2C17",
+          pale: "#F8E3DE",
         },
-        dark: "#123524",
-        charcoal: "#1F1F1F",
-        ink: "#1F1F1F",
-        muted: "#5a5a5a",
-        faint: "#6b6b6b",
-        cream: "#FAF8F3",
-        line: "rgba(18,53,36,0.12)",
-        "line-strong": "rgba(18,53,36,0.22)",
+        leaf: {
+          DEFAULT: "#3F5A36",
+          pale: "#E5EAE1",
+        },
+        charcoal: "#1C1A17",
+        ink: "#1C1A17",
+        muted: "#6E665B",
+        faint: "#8A8276",
+        surface: "#F4EFE4",
+        line: "rgba(28,26,23,0.12)",
+        "line-strong": "rgba(28,26,23,0.22)",
       },
       fontFamily: {
         display: ["var(--font-display)", "system-ui", "sans-serif"],
@@ -30,26 +33,32 @@ const config: Config = {
         body: ["var(--font-body)", "system-ui", "-apple-system", "Segoe UI", "sans-serif"],
       },
       borderRadius: {
-        DEFAULT: "6px",
-        sm: "6px",
-        md: "6px",
-        lg: "10px",
-        xl: "10px",
-        "2xl": "10px",
+        xl: "12px",
+        "2xl": "16px",
       },
       boxShadow: {
-        soft: "none",
-        card: "none",
+        soft: "0 12px 40px rgba(28,26,23,0.08)",
+        card: "0 8px 32px rgba(28,26,23,0.10)",
       },
       maxWidth: {
         content: "1120px",
       },
       keyframes: {
+        fadeUp: {
+          "0%": { opacity: "0", transform: "translateY(18px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        heroZoom: {
+          "0%": { transform: "scale(1.08)" },
+          "100%": { transform: "scale(1)" },
+        },
         spin: {
           to: { transform: "rotate(360deg)" },
         },
       },
       animation: {
+        fadeUp: "fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both",
+        heroZoom: "heroZoom 12s cubic-bezier(0.22,1,0.36,1) forwards",
         spin: "spin 0.7s linear infinite",
       },
     },

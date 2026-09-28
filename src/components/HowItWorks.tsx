@@ -1,32 +1,30 @@
 /**
  * How-it-works process band.
- * Note: fixed-position widgets (chatbot left, WhatsApp right) are outside this section —
- * keep them at a high z-index with bottom offset so they do not cover step card content.
  */
 
 const STEPS = [
   {
     num: "01",
-    title: "FBO partners with Agro Bridge",
-    desc: "An FBO leader registers their group — often 15 to 50 farmers — in a single session.",
+    title: "List expected supply",
+    desc: "The FBO records grade, quantity, location, and harvest date before the crop is picked.",
     icon: IconPeople,
   },
   {
     num: "02",
-    title: "Produce is listed",
-    desc: "Crops go live with photos, prices, and quantities so buyers can order immediately.",
+    title: "Match a buyer",
+    desc: "Hotels, shops, and processors pre-order from a verified group.",
     icon: IconCrate,
   },
   {
     num: "03",
-    title: "Buyer pays into escrow",
-    desc: "Payment via Paystack or MoMo is held securely until delivery is confirmed.",
+    title: "Hold the payment",
+    desc: "Bank or Mobile Money keeps the funds until delivery is confirmed.",
     icon: IconEscrow,
   },
   {
     num: "04",
-    title: "Delivery and payout",
-    desc: "Produce is picked up and delivered. The farmer is paid when the buyer confirms receipt.",
+    title: "Deliver and record",
+    desc: "Goods move, the farmer is paid, and the trade is stored as farm-to-buyer history.",
     icon: IconTruck,
   },
 ] as const;
@@ -115,7 +113,7 @@ export default function HowItWorks() {
     <section className="how-it-works">
       <div className="how-it-works__container">
         <p className="how-it-works__eyebrow">How it works</p>
-        <h2 className="how-it-works__title">Four steps from farm to buyer</h2>
+        <h2 className="how-it-works__title">From expected harvest to a recorded trade</h2>
 
         <ol className="how-it-works__steps">
           {STEPS.map((step, i) => {

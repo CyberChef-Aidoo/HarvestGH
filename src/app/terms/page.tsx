@@ -13,7 +13,7 @@ export default function TermsPage() {
       title="Terms of Service"
       subtitle="The rules and agreements that govern your use of the agro Bridge platform."
       updated="January 2026 · Effective immediately"
-      intro="agro Bridge connects farmers to buyers — we are a marketplace, not a party to any transaction. Registration and listing are free; we charge a 1–2% fee on completed deals. You are responsible for the accuracy of your listings."
+      intro="Agrobridge matches farmer groups to verified buyers before harvest. Registration and listing are free. A 2% buyer fee applies only when a trade clears, and the FBO leader is paid 1% on qualifying group volume."
       sections={TERMS_SECTIONS}
     />
   );

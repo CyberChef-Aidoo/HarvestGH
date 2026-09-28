@@ -1,6 +1,6 @@
-# Agro Bridge — Next.js
+# AgroBridge — Next.js
 
-Ghana's agricultural marketplace. **Next.js 14** frontend and **Django** backend (admin + REST API). Connecting farmers to customers.
+Ghana's B2B agricultural marketplace. **Next.js 14** frontend and **Django** backend (admin + REST API), connecting verified FBO supply with recurring buyers in Greater Accra.
 
 ## Folder structure
 
@@ -34,10 +34,10 @@ HarvestGH/
 
 ## Fonts (uniform site-wide)
 
-Loaded once via `next/font` in `src/app/layout.tsx` (self-hosted by Next):
+Loaded from the repository's self-hosted font files in `public/fonts`:
 
-- **Display:** Bricolage Grotesque (`font-display`) — headings, brand, prices
-- **Body:** Figtree (`font-body` / `font-sans`) — UI text, forms, nav
+- **Display:** Plus Jakarta Sans (`font-display`) — headings, brand, prices
+- **Body:** Inter (`font-body` / `font-sans`) — UI text, forms, nav
 
 Do not import Google Fonts in page CSS. Use `font-display` / `font-body` Tailwind classes only.
 
@@ -69,6 +69,10 @@ npm run build
 npm start
 ```
 
+## Editing content
+
+Marketing content is managed in the Django admin. Start the backend, sign in at `/admin/`, and edit products, counters, partners, testimonials, posts, crops, team members, FAQs, and roadmap stages there. The frontend falls back to demo content only when the API is unavailable.
+
 ## Environment
 
 See `.env.example`.
@@ -96,5 +100,5 @@ See `DESIGN.md` for the design audit, image assignment, and rationale.
 - Reusing `/images/market.jpg` as a section background
 - Gradients as primary section backgrounds; card lift / `translate-y` hover
 - Browser-exposed Anthropic keys (`NEXT_PUBLIC_ANTHROPIC_*`)
-- Brand spelling other than **Agro Bridge**
-- Mixing display fonts (stick to Bricolage Grotesque + Figtree)
+- Brand spelling other than **AgroBridge**
+- Mixing display fonts (stick to Plus Jakarta Sans + Inter)

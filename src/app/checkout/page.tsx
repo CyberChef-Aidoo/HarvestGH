@@ -23,19 +23,19 @@ declare global {
 
 const DEMO_PRODUCT = (id: string, preorder: boolean): Product => ({
   id,
-  name: "Fresh Tomatoes — Grade A",
+  name: "Tomatoes — Grade A",
   crop_type: "Tomato",
-  price_per_unit: 120,
+  price_per_unit: 145,
   unit: "crate",
-  quantity_available: 80,
-  sold_quantity: 12,
-  min_order: 5,
-  region: "Ashanti",
-  fbo_source: "Ejisu FBO",
+  quantity_available: 60,
+  sold_quantity: 8,
+  min_order: 3,
+  region: "Eastern",
+  fbo_source: "FBO onboarding — Eastern",
   is_preorder: preorder,
   available_date: "2026-10-15",
   status: "available",
-  image_url: "/images/tomatoes.jpg",
+  image_url: "",
 });
 
 function fmtDate(d?: string | null) {
@@ -155,8 +155,8 @@ function CheckoutInner() {
 
   function startPayment() {
     if (!validate()) return;
-    const ref = "HGH-" + new Date().getFullYear() + "-" + String(Math.floor(Math.random() * 9000) + 1000);
-    const email = form.email.trim() || `${form.phone.replace(/\s/g, "")}@harvestgh.com`;
+    const ref = "AGB-" + new Date().getFullYear() + "-" + String(Math.floor(Math.random() * 9000) + 1000);
+    const email = form.email.trim() || `${form.phone.replace(/\s/g, "")}@agrobridge.gh`;
     setPaying(true);
 
     if (window.PaystackPop && !config.paystackKey.includes("YOUR_")) {
@@ -188,18 +188,18 @@ function CheckoutInner() {
     return (
       <div className="flex min-h-[70vh] items-center justify-center px-6 py-16">
         <div className="w-full max-w-md rounded-2xl border border-line bg-white p-9 text-center shadow-card">
-          <div className="mx-auto mb-4 flex h-[76px] w-[76px] items-center justify-center rounded-full bg-green-pale text-green">
+          <div className="mx-auto mb-4 flex h-[76px] w-[76px] items-center justify-center rounded-full bg-leaf-pale text-leaf">
             <Icon name="check" size="2xl" />
           </div>
-          <h2 className="mb-2 font-display text-[1.6rem] font-extrabold">Order placed!</h2>
+          <h2 className="mb-2 font-display text-[1.6rem] font-extrabold">Order placed</h2>
           <p className="mb-4 text-muted">
-            Thank you for your order. We will contact you to confirm delivery details.
+            Thank you for your order. An Agrobridge agent will contact you to confirm delivery for the Eastern Region pilot.
           </p>
-          <div className="mb-4 rounded-xl border border-line bg-cream px-5 py-4">
+          <div className="mb-4 rounded-xl border border-line bg-surface px-5 py-4">
             <div className="text-[0.72rem] font-bold uppercase tracking-[0.06em] text-muted">
               Your order reference
             </div>
-            <div className="font-display text-[1.3rem] font-extrabold text-green">{orderRef}</div>
+            <div className="font-display text-[1.3rem] font-extrabold text-brand">{orderRef}</div>
           </div>
           <p className="mb-5 text-[0.8rem] text-muted">Save this reference to track your order.</p>
           <div className="flex flex-col justify-center gap-3 sm:flex-row">
@@ -218,20 +218,25 @@ function CheckoutInner() {
 
   return (
     <div className="mx-auto max-w-4xl px-[5%] pb-16 pt-[calc(68px+24px)]">
-      <Link href="/shop" className="mb-4 inline-flex items-center gap-2 text-[0.84rem] font-semibold text-green">
+      <Link href="/shop" className="mb-4 inline-flex items-center gap-2 text-[0.84rem] font-semibold text-brand">
         <Icon name="arrow-left" size="sm" />
         Back to shop
       </Link>
       <div className="grid items-start gap-6 lg:grid-cols-[1fr_1.3fr]">
         {/* Summary */}
         <aside className="rounded-2xl border border-line bg-white p-5 lg:sticky lg:top-24">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={product.image_url}
-            alt={product.name}
-            className="mb-3.5 h-40 w-full rounded-xl object-cover"
-            onError={(e) => ((e.target as HTMLImageElement).src = "/images/market.jpg")}
-          />
+          {product.image_url ? (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={product.image_url}
+              alt={product.name}
+              className="mb-3.5 h-40 w-full rounded-xl object-cover"
+            />
+          ) : (
+            <div className="mb-3.5 flex h-40 w-full items-center justify-center rounded-xl bg-brand-pale">
+              <span className="font-display text-lg font-bold text-brand">{product.crop_type}</span>
+            </div>
+          )}
           <div className="text-[0.72rem] font-bold uppercase tracking-[0.07em] text-muted">
             {product.crop_type}
           </div>
@@ -241,7 +246,7 @@ function CheckoutInner() {
             {product.fbo_source ? ` · ${product.fbo_source}` : ""}
           </div>
           {isPre && (
-            <div className="mb-3 rounded-lg border border-gold bg-gold-pale px-3 py-2.5 text-[0.8rem] leading-snug text-gold-deep">
+            <div className="mb-3 rounded-lg border border-accent bg-accent-pale px-3 py-2.5 text-[0.8rem] leading-snug text-accent-deep">
               This is a preorder. Available from {fmtDate(product.available_date)}. You pay a deposit
               now to reserve your stock.
             </div>
@@ -260,7 +265,7 @@ function CheckoutInner() {
           ))}
           <div className="mt-1.5 flex items-center justify-between border-t-2 border-line py-3">
             <span className="text-[0.95rem] font-bold">Total</span>
-            <span className="font-display text-[1.5rem] font-extrabold tabular price text-green">
+            <span className="font-display text-[1.5rem] font-extrabold tabular price text-brand">
               GH₵{total.toFixed(2)}
             </span>
           </div>
@@ -278,7 +283,7 @@ function CheckoutInner() {
           <div className="mb-3.5">
             <label className="field-label">Quantity ({product.unit}s) *</label>
             <div className="flex max-w-[180px] overflow-hidden rounded-[10px] border-[1.5px] border-line-strong">
-              <button onClick={() => changeQty(-1)} className="h-11 w-11 bg-[#f0f4f1] text-xl font-bold">
+              <button onClick={() => changeQty(-1)} className="h-11 w-11 bg-surface text-xl font-bold">
                 −
               </button>
               <input
@@ -289,7 +294,7 @@ function CheckoutInner() {
                 onChange={(e) => setQty(parseInt(e.target.value) || min)}
                 className="w-full border-none text-center text-base font-bold outline-none"
               />
-              <button onClick={() => changeQty(1)} className="h-11 w-11 bg-[#f0f4f1] text-xl font-bold">
+              <button onClick={() => changeQty(1)} className="h-11 w-11 bg-surface text-xl font-bold">
                 +
               </button>
             </div>
@@ -332,7 +337,7 @@ function CheckoutInner() {
 
           <div className="mt-3">
             <label className="field-label">Delivery address *</label>
-            <input className="field" value={form.address} onChange={(e) => setField("address", e.target.value)} placeholder="e.g. Near Kaneshie Market, Accra" />
+            <input className="field" value={form.address} onChange={(e) => setField("address", e.target.value)} placeholder="e.g. Near Koforidua market" />
             {errors.address && <p className="mt-1 text-[0.74rem] text-[#c0392b]">{errors.address}</p>}
           </div>
 

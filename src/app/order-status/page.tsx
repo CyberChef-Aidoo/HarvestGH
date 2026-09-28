@@ -75,7 +75,7 @@ function TrackInner() {
   async function lookupByRef(value: string) {
     const cleaned = value.trim().toUpperCase();
     if (cleaned.length < 6) {
-      setError("Enter a valid order reference (e.g. HGH-2026-4721)");
+      setError("Enter a valid order reference (e.g. AGB-2026-4721)");
       return;
     }
     setError("");
@@ -118,8 +118,8 @@ function TrackInner() {
   return (
     <div className="lookup-shell">
       <div className="lookup-card">
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-pale text-xl font-bold text-green">
-          H
+        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-brand-pale text-xl font-bold text-brand">
+          A
         </div>
         <h1>Track your order</h1>
         <p>Enter your order reference to see delivery status and order details.</p>
@@ -129,7 +129,7 @@ function TrackInner() {
             className="field text-center font-semibold tracking-wide sm:text-left"
             value={ref}
             onChange={(e) => setRef(e.target.value.toUpperCase())}
-            placeholder="e.g. HGH-2026-4721"
+            placeholder="e.g. AGB-2026-4721"
             maxLength={20}
             onKeyDown={(e) => e.key === "Enter" && lookupByRef(ref)}
           />
@@ -142,13 +142,13 @@ function TrackInner() {
           </button>
         </div>
 
-        {error && <p className="mt-3 text-left text-[0.82rem] text-[#c0392b]">{error}</p>}
+        {error && <p className="mt-3 text-left text-[0.82rem] text-accent">{error}</p>}
 
         <p className="mt-4 text-center text-[0.78rem] text-muted">
           Reference was sent by SMS after ordering. You can also{" "}
           <button
             type="button"
-            className="font-semibold text-green underline-offset-2 hover:underline"
+            className="font-semibold text-brand underline-offset-2 hover:underline"
             onClick={() => setShowPhone(true)}
           >
             search by phone number
@@ -195,14 +195,14 @@ function TrackInner() {
                   <div className="text-[0.72rem] font-bold uppercase tracking-wide text-muted">
                     Order reference
                   </div>
-                  <div className="font-display text-xl font-extrabold order-id tabular text-green">
+                  <div className="font-display text-xl font-extrabold order-id tabular text-brand">
                     {o.order_ref || "—"}
                   </div>
                 </div>
                 <span
                   className={[
                     "rounded-full px-3 py-1 text-[0.75rem] font-bold",
-                    cancelled ? "bg-[#fdecea] text-[#c0392b]" : "bg-green-pale text-green",
+                    cancelled ? "bg-accent-pale text-accent" : "bg-brand-pale text-brand",
                   ].join(" ")}
                 >
                   {STATUS_LABELS[o.status || "pending"] || o.status}
@@ -217,9 +217,9 @@ function TrackInner() {
                         className={[
                           "z-[1] flex h-7 w-7 items-center justify-center rounded-full border-2 text-[0.7rem] font-bold",
                           i < idx
-                            ? "border-green bg-green text-white"
+                            ? "border-leaf bg-leaf text-white"
                             : i === idx
-                              ? "border-gold bg-gold text-dark"
+                              ? "border-accent bg-accent text-dark"
                               : "border-line bg-white text-muted",
                         ].join(" ")}
                       >
@@ -229,14 +229,14 @@ function TrackInner() {
                         <div
                           className={[
                             "absolute left-1/2 top-[13px] h-0.5 w-full",
-                            i < idx ? "bg-green" : "bg-line",
+                            i < idx ? "bg-leaf" : "bg-line",
                           ].join(" ")}
                         />
                       )}
                       <div
                         className={[
                           "mt-1.5 text-center text-[0.62rem] font-medium",
-                          i === idx ? "font-bold text-gold" : i < idx ? "text-green" : "text-muted",
+                          i === idx ? "font-bold text-accent" : i < idx ? "text-leaf" : "text-muted",
                         ].join(" ")}
                       >
                         {STATUS_LABELS[step]}
@@ -256,7 +256,7 @@ function TrackInner() {
                   ["Phone", o.buyer_phone],
                 ].map(([label, val]) =>
                   val ? (
-                    <div key={String(label)} className="rounded-lg bg-cream px-3 py-2.5">
+                    <div key={String(label)} className="rounded-lg bg-surface px-3 py-2.5">
                       <div className="text-[0.68rem] font-bold uppercase tracking-wide text-muted">
                         {label}
                       </div>
@@ -268,11 +268,11 @@ function TrackInner() {
 
               <p className="mt-4 text-[0.8rem] text-muted">
                 Need help? Call{" "}
-                <a className="font-semibold text-green" href={`tel:${config.supportPhone}`}>
+                <a className="font-semibold text-brand" href={`tel:${config.supportPhone}`}>
                   {config.supportPhone}
                 </a>{" "}
                 or{" "}
-                <Link href="/contact" className="font-semibold text-green">
+                <Link href="/contact" className="font-semibold text-brand">
                   contact us
                 </Link>
                 .
@@ -288,7 +288,7 @@ export default function OrderStatusPage() {
   return (
     <>
       <Navbar variant="solid" />
-      <main className="min-h-screen bg-cream">
+      <main className="min-h-screen bg-surface">
         <Suspense
           fallback={
             <div className="lookup-shell">

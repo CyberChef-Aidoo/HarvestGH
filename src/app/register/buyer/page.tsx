@@ -11,7 +11,9 @@ import { createBuyer } from "@/lib/api";
 
 const BUYER_TYPES = [
   "Restaurant / hotel",
+  "Chop bar / food vendor",
   "Trader / market seller",
+  "School-feeding contractor",
   "School / institution",
   "Supermarket / retailer",
   "Processor / factory",
@@ -79,13 +81,13 @@ export default function RegisterBuyerPage() {
         <div className="w-full max-w-lg">
           {done ? (
             <div className="rounded-2xl border border-line bg-white p-10 text-center shadow-soft">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-pale text-green">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-leaf-pale text-leaf">
                 <Icon name="check" size="2xl" />
               </div>
               <h1 className="mb-2 text-[1.65rem] font-extrabold">You&apos;re registered</h1>
               <p className="mx-auto mb-6 max-w-sm text-[0.95rem] leading-relaxed text-muted">
-                Browse available produce and place your first order. Payment is held in escrow until
-                delivery is confirmed.
+                Browse expected supply and place a pre-order. Your payment is held in escrow until
+                you confirm delivery. The pilot runs in the Eastern Region.
               </p>
               <Link href="/shop" className="btn btn-primary">
                 Shop produce
@@ -93,12 +95,12 @@ export default function RegisterBuyerPage() {
             </div>
           ) : (
             <div className="rounded-2xl border border-line bg-white p-6 shadow-soft sm:p-8">
-              <div className="mb-1 text-center font-display text-[1.3rem] font-extrabold text-green">
-                agro Bridge
+              <div className="mb-1 text-center font-display text-[1.3rem] font-extrabold text-brand">
+                Agrobridge
               </div>
               <h1 className="mb-1 text-center text-[1.5rem] font-extrabold">Register as a buyer</h1>
               <p className="mb-7 text-center text-[0.9rem] leading-relaxed text-muted">
-                Free to join. Order directly from verified FBO farms across Ghana.
+                Free to join. Pre-order from a verified farmer group. A 2% fee applies only when the trade clears.
               </p>
 
               <div className="space-y-4 text-left">
@@ -107,7 +109,7 @@ export default function RegisterBuyerPage() {
                     Full name <span className="req">*</span>
                   </label>
                   <input
-                    className={["field", errors.name ? "border-[#c0392b]" : ""].join(" ")}
+                    className={["field", errors.name ? "border-accent" : ""].join(" ")}
                     value={form.name}
                     onChange={(e) => set("name", e.target.value)}
                     placeholder="Your full name"
@@ -128,7 +130,7 @@ export default function RegisterBuyerPage() {
                       Phone <span className="req">*</span>
                     </label>
                     <input
-                      className={["field", errors.phone ? "border-[#c0392b]" : ""].join(" ")}
+                      className={["field", errors.phone ? "border-accent" : ""].join(" ")}
                       value={form.phone}
                       onChange={(e) => set("phone", e.target.value)}
                       placeholder="024 123 4567"
@@ -151,7 +153,7 @@ export default function RegisterBuyerPage() {
                       Region <span className="req">*</span>
                     </label>
                     <select
-                      className={["field", errors.region ? "border-[#c0392b]" : ""].join(" ")}
+                      className={["field", errors.region ? "border-accent" : ""].join(" ")}
                       value={form.region}
                       onChange={(e) => set("region", e.target.value)}
                     >
@@ -168,7 +170,7 @@ export default function RegisterBuyerPage() {
                       Buyer type <span className="req">*</span>
                     </label>
                     <select
-                      className={["field", errors.buyer_type ? "border-[#c0392b]" : ""].join(" ")}
+                      className={["field", errors.buyer_type ? "border-accent" : ""].join(" ")}
                       value={form.buyer_type}
                       onChange={(e) => set("buyer_type", e.target.value)}
                     >
@@ -201,7 +203,7 @@ export default function RegisterBuyerPage() {
               </button>
               <p className="mt-4 text-center text-[0.84rem] text-muted">
                 Looking to sell?{" "}
-                <Link href="/register/farmer" className="font-semibold text-green">
+                <Link href="/register/farmer" className="font-semibold text-brand">
                   Register as a farmer
                 </Link>
               </p>

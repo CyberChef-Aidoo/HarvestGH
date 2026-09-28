@@ -1,6 +1,7 @@
 {
-  "name": "harvestgh",
+  "name": "agrobridge",
   "version": "2.0.0",
+  "description": "Agrobridge — marketplace matching Ghana's farmer-based organisations to verified buyers before harvest. Pilot in the Greater Eastern Region.",
   "private": true,
   "scripts": {
     "dev": "next dev",

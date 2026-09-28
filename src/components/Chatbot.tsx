@@ -11,32 +11,32 @@ interface Msg {
 }
 
 const FAQS: { keys: string[]; ans: string }[] = [
-  { keys: ["order", "buy", "purchase", "how to get", "i want to buy"], ans: 'To order: go to our Shop page, pick your crop, click "Order Now", enter your quantity and delivery details, then pay via Paystack or MoMo. Your money is held in escrow until you receive your produce. You will get an SMS with your order reference (e.g. HGH-2026-XXXX).' },
-  { keys: ["delivery", "shipping", "how long", "when will i", "get it"], ans: "Delivery fees: Greater Accra GH₵30 · Ashanti GH₵50 · All other regions GH₵70.\n\nDelivery usually takes 24–48 hours after we confirm your order. Track anytime on our Track Order page using your reference number." },
-  { keys: ["payment", "pay", "momo", "paystack", "mobile money", "card", "bank"], ans: "We accept Paystack (card & mobile money) and MTN MoMo. Your payment goes into secure escrow — nobody touches it until you confirm delivery. If something goes wrong, you get a full refund." },
-  { keys: ["refund", "cancel", "wrong", "problem", "complaint", "issue", "return", "bad"], ans: "We are sorry to hear that. Contact us within 24 hours of delivery:\nCall: 0544823484\nWhatsApp: tap the button below\n\nWe will investigate and arrange a refund or replacement within 48 hours." },
-  { keys: ["track", "order status", "where is my", "my order", "reference", "hgh-"], ans: "To track your order:\n1. Go to our Track Order page\n2. Enter your order reference (e.g. HGH-2026-4721) or phone number\n3. See your full order status and delivery timeline\n\nYour reference was sent to you by SMS when you ordered." },
-  { keys: ["preorder", "pre-order", "future", "next season", "reserve", "coming soon"], ans: "Yes! You can preorder produce before it is harvested — perfect for restaurants, schools, and bulk buyers who want to lock in price and supply early. Look for the Preorder badge on our Shop page." },
-  { keys: ["price", "cost", "how much", "rate", "ghc", "cedi", "cheap", "expensive"], ans: "Prices vary by crop and season. Examples:\nTomatoes — GH₵120/crate\nMaize — GH₵85/bag\nYam — GH₵220/bag\nPlantain — GH₵55/bunch\n\nVisit our Shop page for live prices." },
-  { keys: ["crop", "what do you have", "available", "sell", "tomato", "maize", "yam", "cassava", "mango", "rice", "plantain", "pepper", "onion", "groundnut"], ans: "We currently stock: Tomatoes · Maize · Yam · Cassava · Mango · Rice · Groundnut · Plantain · Pepper · Onion\n\nAll sourced from verified FBO farmers across Ghana. Visit our Shop page to see what is available today!" },
-  { keys: ["farmer", "supplier", "fbo", "sell my", "list my crop", "register farm", "become a supplier", "supply"], ans: 'To sell your produce on agro Bridge:\n1. Visit our "Become a Supplier" page\n2. Fill in your farm / FBO details\n3. Ibrahim will call you within 48 hours\n\nRegistration is FREE.' },
-  { keys: ["buyer", "register", "create account", "sign up", "join", "new account"], ans: "To join as a buyer:\n1. Visit our Register as Buyer page\n2. Fill in your details (takes 2 minutes)\n3. Browse and order immediately\n\nRegistration is completely FREE." },
-  { keys: ["agent", "commission", "earn", "fbo leader", "1%", "referral", "make money"], ans: "FBO leaders can become agro Bridge Agents and earn 1% commission on every deal their members complete through the platform.\n\nTo become an agent, WhatsApp Ibrahim directly: 0544823484" },
-  { keys: ["safe", "secure", "trust", "scam", "fake", "legit", "real"], ans: "agro Bridge is a legitimate Ghanaian platform:\nEscrow payment — money held until delivery confirmed\nVerified FBO suppliers only\nSMS tracking every step\nDispute resolution within 48 hours\n\nFounded by Ibrahim Mohammed Lotsu, ATU Accra." },
-  { keys: ["contact", "phone", "call", "whatsapp", "reach", "email", "talk"], ans: "You can reach agro Bridge:\nPhone: 0544823484\nWhatsApp: 0544823484\nHours: Mon–Fri 7am–8pm · Sat 8am–6pm\nBased in Accra, Ghana" },
-  { keys: ["hours", "open", "when", "support", "available", "respond"], ans: "agro Bridge Support Hours:\nMonday–Friday: 7:00 AM – 8:00 PM\nSaturday: 8:00 AM – 6:00 PM\nSunday: Messages answered Monday AM" },
-  { keys: ["hello", "hi", "hey", "morning", "afternoon", "evening", "good day", "greet"], ans: "Hello! Welcome to agro Bridge.\n\nI can help you with ordering produce, becoming a supplier or FBO agent, tracking your order, prices, and delivery info. What would you like to know?" },
-  { keys: ["who are you", "what is harvestgh", "what is agro", "agro bridge", "tell me about", "what do you do", "about"], ans: "agro Bridge is Ghana's agricultural marketplace. We connect FBO farmers across all 16 regions directly to bulk buyers — traders, restaurants, schools, supermarkets, and individuals. Founded by Ibrahim Mohammed Lotsu, ATU Accra." },
-  { keys: ["thank", "thanks", "ok great", "perfect", "nice", "awesome", "wonderful", "good"], ans: "You are welcome! Is there anything else I can help you with? You can also reach us anytime on WhatsApp at 0544823484." },
+  { keys: ["order", "buy", "purchase", "how to get", "i want to buy"], ans: "To order: open the Shop board, choose a lot or a pre-order, and pay into escrow by bank or Mobile Money. Funds stay held until you confirm delivery. The pilot is in the Eastern Region." },
+  { keys: ["delivery", "shipping", "how long", "when will i", "get it"], ans: "Pilot deliveries are in the Eastern Region. We collect from the farm after the match and deliver to the address you give. You get an SMS or WhatsApp update when goods are on the way." },
+  { keys: ["payment", "pay", "momo", "paystack", "mobile money", "card", "bank"], ans: "Payment is held in escrow by bank or Mobile Money until you confirm delivery. Agrobridge charges a 2% buyer fee only when the trade clears. Call or WhatsApp 054 411 4198 if you need help paying." },
+  { keys: ["refund", "cancel", "wrong", "problem", "complaint", "issue", "return", "bad"], ans: "If there is an issue with your delivery, contact an Agrobridge agent within 24 hours on 054 411 4198 or via WhatsApp. We investigate and resolve the issue before releasing funds." },
+  { keys: ["track", "order status", "where is my", "my order", "reference", "agb-"], ans: "To track your order, visit our Track Order page and enter your reference number (e.g. AGB-2026-1001) or phone number. You receive an SMS at each step." },
+  { keys: ["preorder", "pre-order", "future", "next season", "reserve", "coming soon", "before harvest"], ans: "FBOs list expected supply before harvest. Buyers pre-order grade, quantity, location, and date. Payment is held until delivery." },
+  { keys: ["price", "cost", "how much", "rate", "ghc", "cedi", "cheap", "expensive"], ans: "Prices are set per bag, crate, bunch, or bird at farm-gate plus transport. Examples: Tomatoes GH₵380/crate, Maize GH₵420/100kg bag, Plantain GH₵65/bunch. Visit the Shop page for current listings." },
+  { keys: ["crop", "what do you have", "available", "sell", "tomato", "maize", "yam", "cassava", "mango", "rice", "plantain", "pepper", "onion", "groundnut", "beef", "goat", "chicken", "meat"], ans: "Listings are from the Eastern Region. Crops include tomatoes, maize, yam, and plantain. Protein is sold as meat: beef, goat, and chicken — not live animals. Check the Shop page." },
+  { keys: ["farmer", "supplier", "fbo", "sell my", "list my crop", "register farm", "become a supplier", "supply"], ans: "FBO leaders can register the group on the Register your FBO page. Joining is free. The leader is paid 1% on qualifying group volume. Farmers without smartphones use SMS, WhatsApp, or a phone call. Call 054 411 4198." },
+  { keys: ["buyer", "register", "create account", "sign up", "join", "new account"], ans: "Buyers join free on the Register as Buyer page, or order from the Shop board. A 2% fee applies only when the trade clears. The pilot is in the Eastern Region." },
+  { keys: ["agent", "commission", "earn", "fbo leader", "1%", "referral", "make money", "fee", "2%"], ans: "Joining is free. Agrobridge keeps 2% of a cleared trade (GHS 500 on a GHS 25,000 order). The FBO leader is paid 1% on qualifying group volume." },
+  { keys: ["safe", "secure", "trust", "scam", "fake", "legit", "real"], ans: "Payment stays in escrow until delivery is confirmed. Groups are verified before they list. Each cleared trade keeps a farm-to-buyer record and a transaction ID." },
+  { keys: ["contact", "phone", "call", "whatsapp", "reach", "email", "talk"], ans: "Call or WhatsApp 054 411 4198. The pilot is in the Eastern Region." },
+  { keys: ["hours", "open", "when", "support", "available", "respond"], ans: "Contact us on 054 411 4198 [TBD]. // TODO: operating hours" },
+  { keys: ["hello", "hi", "hey", "morning", "afternoon", "evening", "good day", "greet"], ans: "Hello. I am the Agrobridge assistant. Ask me about pre-orders, the Eastern Region pilot, escrow, fees, or registering an FBO. To speak with a person, call 054 411 4198." },
+  { keys: ["who are you", "what is agro", "agro bridge", "agrobridge", "tell me about", "what do you do", "about"], ans: "Agrobridge connects farmer-based organisations to verified bulk buyers and matches the harvest before it is picked. Joining is free. A 2% buyer fee applies only when a trade clears. The pilot is in the Eastern Region." },
+  { keys: ["thank", "thanks", "ok great", "perfect", "nice", "awesome", "wonderful", "good"], ans: "You are welcome. You can also reach us directly on 054 411 4198." },
 ];
 
 const QUICK_REPLIES = [
   { label: "How to Order", msg: "How do I place an order?" },
-  { label: "Delivery Info", msg: "How does delivery work and what are the fees?" },
-  { label: "Our Crops", msg: "What crops do you have available?" },
-  { label: "Payments", msg: "How do I pay for my order?" },
+  { label: "Eastern Region pilot", msg: "Where is the Agrobridge pilot?" },
+  { label: "What is Listed", msg: "What crops do you have available?" },
+  { label: "Escrow Payment", msg: "How does escrow payment work?" },
   { label: "Track Order", msg: "How do I track my order?" },
-  { label: "Become Supplier", msg: "How do I register as a supplier?" },
+  { label: "Register FBO", msg: "How does an FBO register?" },
 ];
 
 const now = () =>
@@ -58,7 +58,7 @@ export default function Chatbot() {
     {
       role: "bot",
       text:
-        "Hello! I am the agro Bridge Assistant.\n\nI can answer questions about ordering produce, delivery, payments, prices, becoming a supplier, and more.\n\nHow can I help you today?",
+        "Hello. I am the Agrobridge assistant.\n\nI can answer questions about pre-orders, the Eastern Region pilot, escrow, and FBO registration.\n\nFor a person, call or WhatsApp 054 411 4198.",
       time: now(),
     },
   ]);
@@ -77,7 +77,7 @@ export default function Chatbot() {
         setTyping(false);
         push({
           role: "bot",
-          text: `I am not sure about that specific question. For the best answer, please call Ibrahim: ${config.supportPhone}, or tap WhatsApp below. We respond within 1 hour on business days!`,
+          text: `For detailed inquiries, call or WhatsApp an Agrobridge agent on 054 411 4198.`,
           time: now(),
         });
       }, 800);
@@ -96,14 +96,14 @@ export default function Chatbot() {
           model: "claude-haiku-4-5-20251001",
           max_tokens: 300,
           system:
-            "You are agro Bridge Assistant, a friendly support chatbot for agro Bridge, Ghana's agricultural marketplace. Keep replies short (3-5 sentences). Phone/WhatsApp 0544823484. Delivery: Greater Accra GH₵30, Ashanti GH₵50, other GH₵70. Payment via Paystack escrow. Never invent prices — direct to the Shop page.",
+            "You are Agrobridge assistant, a support chatbot for Agrobridge, a Ghana marketplace that matches farmer groups to verified buyers before harvest. Keep replies short (3-5 sentences). Pilot is in the Eastern Region. Payment is held in escrow by bank or Mobile Money until delivery. Buyer fee is 2% only when a trade clears. FBO leaders are paid 1% on qualifying group volume. Joining is free. Farmers without smartphones use SMS or WhatsApp. Phone / WhatsApp 054 411 4198. Do not name staff. Never invent prices or partners — direct users to the Shop page.",
           messages: historyRef.current.slice(-6),
         }),
       });
       const data = await res.json();
       const reply =
         data?.content?.[0]?.text ||
-        "I am not sure about that. Please WhatsApp us at 0544823484 for help!";
+        "I am not sure about that. Please call or WhatsApp us on 054 411 4198 for assistance.";
       setTyping(false);
       push({ role: "bot", text: reply, time: now() });
       historyRef.current.push({ role: "assistant", content: reply });
@@ -111,7 +111,7 @@ export default function Chatbot() {
       setTyping(false);
       push({
         role: "bot",
-        text: `For that question, please WhatsApp Ibrahim directly at ${config.supportPhone} — we respond within 1 hour!`,
+        text: `For that question, please call or WhatsApp an Agrobridge agent on 054 411 4198.`,
         time: now(),
       });
     }
@@ -145,28 +145,28 @@ export default function Chatbot() {
           setOpen((o) => !o);
           setShowBadge(false);
         }}
-        title="Chat with Agro Bridge Assistant"
+        title="Chat with Agrobridge Assistant"
         aria-label={open ? "Close chat" : "Open chat"}
-        className="fixed bottom-6 right-6 z-[8888] flex h-14 w-14 items-center justify-center rounded-full bg-green text-white shadow-[0_4px_18px_rgba(26,107,60,0.42)] transition-transform hover:scale-110"
+        className="fixed bottom-6 right-6 z-[8888] flex h-14 w-14 items-center justify-center rounded-full bg-brand text-white shadow-[0_4px_18px_rgba(92,46,32,0.42)] transition-transform hover:scale-110"
       >
         {open ? <Icon name="x" size="lg" /> : <Icon name="message-circle" size="lg" />}
         {showBadge && (
-          <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-white bg-gold text-[0.65rem] font-extrabold text-dark">
+          <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-white bg-accent text-[0.65rem] font-extrabold text-white">
             1
           </span>
         )}
       </button>
 
       {open && (
-        <div className="fixed bottom-[90px] right-6 z-[8887] flex max-h-[520px] w-[min(340px,calc(100vw-20px))] flex-col overflow-hidden rounded-[18px] border border-line bg-white shadow-[0_12px_48px_rgba(0,0,0,0.18)]">
-          <div className="flex flex-shrink-0 items-center gap-3 bg-green px-4 py-3.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-[var(--ab-gold,#D9A825)]">
+        <div className="fixed bottom-[90px] right-6 z-[8887] flex max-h-[520px] w-[min(340px,calc(100vw-20px))] flex-col overflow-hidden rounded-[18px] border border-line bg-white shadow-[0_12px_48px_rgba(28,26,23,0.18)]">
+          <div className="flex flex-shrink-0 items-center gap-3 bg-brand px-4 py-3.5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-accent">
               <Icon name="wheat" size="md" />
             </div>
             <div className="flex-1">
-              <div className="text-[0.9rem] font-bold text-white">agro Bridge Assistant</div>
+              <div className="text-[0.9rem] font-bold text-white">Agrobridge Assistant</div>
               <div className="mt-0.5 flex items-center gap-1.5 text-[0.72rem] text-white/70">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#4ade80]" /> Online — responds instantly
+                <span className="h-1.5 w-1.5 rounded-full bg-leaf" /> Online
               </div>
             </div>
             <button
@@ -180,7 +180,7 @@ export default function Chatbot() {
 
           <div
             ref={msgsRef}
-            className="flex flex-1 flex-col gap-2 overflow-y-auto bg-[#f8fbf9] px-3 py-3.5"
+            className="flex flex-1 flex-col gap-2 overflow-y-auto bg-surface px-3 py-3.5"
           >
             {messages.map((m, i) => (
               <div
@@ -188,7 +188,7 @@ export default function Chatbot() {
                 className={[
                   "max-w-[82%] whitespace-pre-line rounded-xl px-3 py-2 text-[0.84rem] leading-snug",
                   m.role === "user"
-                    ? "self-end rounded-br-sm bg-green text-white"
+                    ? "self-end rounded-br-sm bg-brand text-white"
                     : "self-start rounded-bl-sm border border-line bg-white text-ink shadow-sm",
                 ].join(" ")}
               >
@@ -196,7 +196,7 @@ export default function Chatbot() {
                 <div
                   className={[
                     "mt-1 text-[0.64rem]",
-                    m.role === "user" ? "text-right text-white/60" : "text-[#aaa]",
+                    m.role === "user" ? "text-right text-white/60" : "text-faint",
                   ].join(" ")}
                 >
                   {m.time}
@@ -208,7 +208,7 @@ export default function Chatbot() {
                 {[0, 1, 2].map((d) => (
                   <span
                     key={d}
-                    className="h-1.5 w-1.5 animate-bounce rounded-full bg-[#aac8b5]"
+                    className="h-1.5 w-1.5 animate-bounce rounded-full bg-brand/40"
                     style={{ animationDelay: `${d * 0.15}s` }}
                   />
                 ))}
@@ -222,7 +222,7 @@ export default function Chatbot() {
                 <button
                   key={q.label}
                   onClick={() => send(q.msg)}
-                  className="whitespace-nowrap rounded-full border border-line bg-green-pale px-2.5 py-1 text-[0.74rem] font-semibold text-green transition hover:bg-green hover:text-white"
+                  className="whitespace-nowrap rounded-full border border-line bg-brand-pale px-2.5 py-1 text-[0.74rem] font-semibold text-brand transition hover:bg-brand hover:text-white"
                 >
                   {q.label}
                 </button>
@@ -240,28 +240,28 @@ export default function Chatbot() {
                   send();
                 }
               }}
-              placeholder="Ask me anything about agro Bridge…"
+              placeholder="Ask a question about Agrobridge…"
               rows={1}
-              className="max-h-20 flex-1 resize-none rounded-[22px] border-[1.5px] border-line-strong px-3.5 py-2 text-[0.85rem] outline-none focus:border-green"
+              className="max-h-20 flex-1 resize-none rounded-[22px] border-[1.5px] border-line-strong px-3.5 py-2 text-[0.85rem] outline-none focus:border-brand"
             />
             <button
               onClick={() => send()}
-              className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-green text-white transition hover:bg-green-mid"
+              className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-brand text-white transition hover:bg-brand-deep"
               aria-label="Send message"
             >
               <Icon name="send" size="md" />
             </button>
           </div>
 
-          <div className="flex flex-shrink-0 items-center justify-between border-t border-line bg-[#f0f9f2] px-3 py-2">
+          <div className="flex flex-shrink-0 items-center justify-between border-t border-line bg-brand-pale px-3 py-2">
             <span className="text-[0.73rem] text-muted">Need a human?</span>
             <a
-              href={whatsappLink("Hi agro Bridge, I need help.")}
+              href={whatsappLink("Hi Agrobridge, I would like to speak with an agent.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 rounded-[9px] bg-[#25d366] px-3 py-1.5 text-[0.74rem] font-bold text-white"
+              className="flex items-center gap-1.5 rounded-[9px] bg-leaf px-3 py-1.5 text-[0.74rem] font-bold text-white transition hover:opacity-90"
             >
-              WhatsApp Us
+              WhatsApp 054 411 4198
             </a>
           </div>
         </div>

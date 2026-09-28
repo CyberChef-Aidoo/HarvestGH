@@ -1,6 +1,65 @@
 from rest_framework import serializers
 
-from .models import Buyer, ContactMessage, FarmerRegistration, Order, Product
+from .models import (
+    Buyer,
+    ContactMessage,
+    Crop,
+    FAQ,
+    FarmerRegistration,
+    Order,
+    Partner,
+    Post,
+    Product,
+    RoadmapStage,
+    TeamMember,
+    Testimonial,
+    TractionCounter,
+)
+
+
+class ReadOnlyContentSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = "__all__"
+
+
+class TractionCounterSerializer(ReadOnlyContentSerializer):
+    class Meta(ReadOnlyContentSerializer.Meta):
+        model = TractionCounter
+
+
+class PartnerSerializer(ReadOnlyContentSerializer):
+    class Meta(ReadOnlyContentSerializer.Meta):
+        model = Partner
+
+
+class TestimonialSerializer(ReadOnlyContentSerializer):
+    class Meta(ReadOnlyContentSerializer.Meta):
+        model = Testimonial
+
+
+class PostSerializer(ReadOnlyContentSerializer):
+    class Meta(ReadOnlyContentSerializer.Meta):
+        model = Post
+
+
+class CropSerializer(ReadOnlyContentSerializer):
+    class Meta(ReadOnlyContentSerializer.Meta):
+        model = Crop
+
+
+class TeamMemberSerializer(ReadOnlyContentSerializer):
+    class Meta(ReadOnlyContentSerializer.Meta):
+        model = TeamMember
+
+
+class FAQSerializer(ReadOnlyContentSerializer):
+    class Meta(ReadOnlyContentSerializer.Meta):
+        model = FAQ
+
+
+class RoadmapStageSerializer(ReadOnlyContentSerializer):
+    class Meta(ReadOnlyContentSerializer.Meta):
+        model = RoadmapStage
 
 
 class ProductSerializer(serializers.ModelSerializer):
