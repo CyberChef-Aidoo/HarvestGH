@@ -8,7 +8,7 @@ export default function NotFound() {
       <Navbar variant="solid" />
       <main className="flex min-h-[70vh] items-center justify-center px-6 py-24 text-center">
         <div className="max-w-md">
-          <div className="font-display text-[clamp(6rem,20vw,10rem)] font-extrabold leading-none text-green-pale">
+          <div className="font-display text-[clamp(6rem,20vw,10rem)] font-extrabold leading-none text-brand-100">
             404
           </div>
           <h1 className="mb-2.5 mt-2 font-display text-[1.9rem] font-extrabold">

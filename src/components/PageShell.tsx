@@ -18,7 +18,7 @@ export function PageHeader({ eyebrow, title, subtitle }: PageHeaderProps) {
     >
       <div className="mx-auto max-w-content text-left">
         {eyebrow && (
-          <p className="mb-3 text-xs font-bold uppercase tracking-[0.12em] text-red-600">{eyebrow}</p>
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.12em] text-accent-300">{eyebrow}</p>
         )}
         <h1 className="mb-2.5 max-w-[20ch] font-display text-[clamp(1.9rem,4vw,2.7rem)] font-extrabold leading-[1.12] tracking-tight text-white text-balance">
           {title}

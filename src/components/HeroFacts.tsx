@@ -22,7 +22,7 @@ export default function HeroFacts({ updated }: { updated: string }) {
           <div key={f.label}>
             <dt className="sr-only">{f.label}</dt>
             <dd className="m-0">
-              <span className="font-display text-[1.6rem] font-bold leading-none tracking-tight text-red-600 tabular-nums">
+              <span className="font-display text-[1.6rem] font-bold leading-none tracking-tight text-accent-300 tabular-nums">
                 {f.value}
               </span>
               <p className="m-0 mt-1 max-w-none text-[0.75rem] leading-snug text-white/70">{f.label}</p>

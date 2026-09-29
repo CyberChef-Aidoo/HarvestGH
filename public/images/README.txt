@@ -19,9 +19,9 @@ Place the image files directly in public/images/ using the exact filenames liste
    - smoked-fish.webp, tilapia.webp, honey.webp, mutton.webp
 
 4. Brand Mark:
-   - /images/logo.jpeg
-   - Purpose: Navigation brand mark and footer branding.
-   - Recommended Dimensions: 512 x 512 px (or vector SVG).
+   - /images/Agrobridge_logo.png
+   - Purpose: Navigation, footer, favicon, and Open Graph.
+   - Format: Transparent PNG wordmark.
 
 Note: If a product image fails to load or is missing, ProductCard and ShopCard automatically render a solid brand-pale terracotta block with the crop name as a fallback instead of defaulting to a generic stock photo.
 

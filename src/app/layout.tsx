@@ -30,8 +30,9 @@ export const metadata: Metadata = {
     title: "Agrobridge — Match the harvest before it is picked",
     description:
       "Farmer-based organisations list expected crops and animal protein. Verified buyers pre-order. Escrow holds payment until delivery. Pilot in the Eastern Region.",
+    images: ["/images/Agrobridge_logo.png"],
   },
-  icons: { icon: "/images/logo.jpeg" },
+  icons: { icon: "/images/Agrobridge_logo.png" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

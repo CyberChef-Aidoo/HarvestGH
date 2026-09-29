@@ -112,7 +112,7 @@ export default function AboutPage() {
               ["1%", "paid to the FBO leader on qualifying volume"],
             ].map(([v, l]) => (
               <div key={l} className="rounded-2xl border border-white/[0.08] bg-white/[0.05] p-5">
-                <div className="font-display text-[2.2rem] font-extrabold leading-none text-red-600">
+                <div className="font-display text-[2.2rem] font-extrabold leading-none text-accent-300">
                   {v}
                 </div>
                 <div className="mt-2 text-[0.85rem] leading-snug text-white/55">{l}</div>

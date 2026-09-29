@@ -30,7 +30,7 @@ export default function HarvestCalendarPage() {
 
         <div className="mx-auto max-w-content px-5 py-10 sm:px-6">
           <div className="mb-6 flex items-center gap-2 rounded-xl border border-brand-100 bg-white px-4 py-3 text-sm text-ink-muted">
-            <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-green-mid" />
+            <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-brand-500" />
             Showing seasons for{" "}
             <strong className="text-ink">
               {MONTHS[currentMonth]} {now.getFullYear()}
@@ -76,7 +76,7 @@ export default function HarvestCalendarPage() {
                       key={m}
                       className={[
                         "px-1.5 py-3 text-center text-[0.72rem] font-bold uppercase tracking-wide",
-                        i === currentMonth ? "text-green" : "text-ink-muted",
+                        i === currentMonth ? "text-brand-700" : "text-ink-muted",
                       ].join(" ")}
                     >
                       {m}
@@ -88,7 +88,7 @@ export default function HarvestCalendarPage() {
                 {rows.map((crop) => (
                   <tr key={crop.name} className="border-b border-brand-100 last:border-b-0">
                     <td className="sticky left-0 bg-white px-4 py-3 font-semibold text-ink">
-                      <span className="mr-2 inline-flex text-green" aria-hidden>
+                      <span className="mr-2 inline-flex text-brand-700" aria-hidden>
                         <Icon name={crop.icon} size="md" />
                       </span>
                       {crop.name}
@@ -100,7 +100,7 @@ export default function HarvestCalendarPage() {
                           className={[
                             "mx-auto block h-7 w-7 rounded-md",
                             SEASON_META[status].className,
-                            i === currentMonth ? "ring-2 ring-gold ring-offset-1" : "",
+                            i === currentMonth ? "ring-2 ring-accent-500 ring-offset-1" : "",
                           ].join(" ")}
                         />
                       </td>
@@ -111,7 +111,7 @@ export default function HarvestCalendarPage() {
             </table>
           </div>
 
-          <div className="mt-10 rounded-2xl bg-green px-6 py-10 text-center text-white">
+          <div className="mt-10 rounded-2xl bg-brand-700 px-6 py-10 text-center text-white">
             <h2 className="mb-2 text-[1.5rem] font-extrabold text-white">Ready to buy or list?</h2>
             <p className="mx-auto mb-6 max-w-md text-[0.95rem] text-white/70">
               Use the calendar to time your orders and harvest listings with the seasons.

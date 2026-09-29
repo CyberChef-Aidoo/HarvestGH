@@ -22,11 +22,11 @@ type Listing = {
 };
 
 const BADGE: Record<string, string> = {
-  available: "bg-green-pale text-green",
-  matched: "bg-gold-pale text-gold-deep",
+  available: "bg-brand-100 text-brand-700",
+  matched: "bg-accent-50 text-brand-700",
   sold: "bg-brand-100 text-brand-700",
   managed: "bg-black/5 text-ink-muted",
-  pending: "bg-gold-pale text-gold-deep",
+  pending: "bg-accent-50 text-brand-700",
 };
 
 export default function FarmerPortalPage() {
@@ -89,7 +89,7 @@ export default function FarmerPortalPage() {
       <main className="min-h-screen bg-surface">
         <div className="lookup-shell">
           <div className="lookup-card">
-            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-pale text-lg font-bold text-green">
+            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-brand-100 text-lg font-bold text-brand-700">
               GH
             </div>
             <h1>Check my listing</h1>
@@ -109,7 +109,7 @@ export default function FarmerPortalPage() {
             {error && <p className="mt-3 text-left text-[0.82rem] text-red-600">{error}</p>}
             <p className="mt-3 text-[0.78rem] text-ink-muted">
               Not registered yet?{" "}
-              <Link href="/register/farmer" className="font-semibold text-green">
+              <Link href="/register/farmer" className="font-semibold text-brand-700">
                 Become a supplier
               </Link>
             </p>
@@ -196,7 +196,7 @@ export default function FarmerPortalPage() {
                     </div>
                     <a
                       href={`tel:${r.buyer_phone}`}
-                      className="mt-3 flex w-full items-center justify-center rounded-lg bg-white py-2.5 text-sm font-bold text-green"
+                      className="mt-3 flex w-full items-center justify-center rounded-lg bg-white py-2.5 text-sm font-bold text-brand-700"
                     >
                       Call buyer
                     </a>
@@ -205,7 +205,7 @@ export default function FarmerPortalPage() {
 
                 <p className="mt-4 text-[0.8rem] text-ink-muted">
                   Questions? Call{" "}
-                  <a className="font-semibold text-green" href={`tel:${config.supportPhone}`}>
+                  <a className="font-semibold text-brand-700" href={`tel:${config.supportPhone}`}>
                     {config.supportPhone}
                   </a>
                 </p>

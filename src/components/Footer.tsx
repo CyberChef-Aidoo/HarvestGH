@@ -38,12 +38,12 @@ export default function Footer() {
     <footer className="bg-brand-900 px-6 pt-16 text-white">
       <div className="mx-auto grid max-w-content gap-9 border-b border-white/[0.07] pb-12 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_1.2fr]">
         <div>
-          <div className="mb-3 inline-block rounded-lg bg-white px-2.5 py-1.5">
+          <div className="mb-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/logo.jpeg"
+              src="/images/Agrobridge_logo.png"
               alt="Agrobridge"
-              className="h-9 w-auto object-contain"
+              className="h-14 w-auto max-w-[220px] object-contain object-left"
               loading="lazy"
               decoding="async"
             />

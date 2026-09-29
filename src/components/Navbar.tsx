@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { NAV_LINKS } from "@/lib/data";
-import { BrandLink, BrandWordmark } from "@/components/BrandMark";
+import { BrandLink } from "@/components/BrandMark";
 import Icon from "@/components/Icon";
 
 interface NavbarProps {
@@ -44,7 +44,7 @@ export default function Navbar({ variant = "solid", hideSupplierCta = false }: N
             : "border-b border-brand-100 bg-white",
         ].join(" ")}
       >
-        <BrandLink size="md" withText />
+        <BrandLink size="md" />
 
         <ul className="hidden list-none items-center gap-0.5 md:flex">
           {NAV_LINKS.map((l) => (
@@ -93,7 +93,7 @@ export default function Navbar({ variant = "solid", hideSupplierCta = false }: N
         ].join(" ")}
       >
         <div className="flex items-center justify-between border-b border-white/10 p-5">
-          <BrandWordmark light className="text-xl" />
+          <BrandLink size="sm" light />
           <button
             className="flex h-10 w-10 items-center justify-center text-white/50"
             onClick={() => setOpen(false)}

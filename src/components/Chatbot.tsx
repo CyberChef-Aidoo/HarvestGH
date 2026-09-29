@@ -147,18 +147,22 @@ export default function Chatbot() {
       {open && (
         <div className="fixed bottom-[90px] right-6 z-[8887] flex max-h-[520px] w-[min(340px,calc(100vw-20px))] flex-col overflow-hidden rounded-[18px] border border-brand-100 bg-white shadow-[0_12px_48px_rgba(26,31,20,0.18)]">
           <div className="flex flex-shrink-0 items-center gap-3 bg-accent-500 px-4 py-3.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-red-600">
-              <Icon name="wheat" size="md" />
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/Agrobridge_logo.png"
+              alt=""
+              className="h-8 w-auto max-w-[120px] object-contain object-left"
+              decoding="async"
+            />
             <div className="flex-1">
-              <div className="text-[0.9rem] font-bold text-white">Agrobridge Assistant</div>
-              <div className="mt-0.5 flex items-center gap-1.5 text-[0.72rem] text-white/70">
-                <span className="h-1.5 w-1.5 rounded-full bg-brand-600" /> Online
+              <div className="text-[0.9rem] font-bold text-ink">Agrobridge Assistant</div>
+              <div className="mt-0.5 flex items-center gap-1.5 text-[0.72rem] text-ink/70">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand-700" /> Online
               </div>
             </div>
             <button
               onClick={() => setOpen(false)}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-ink/10 text-ink"
               aria-label="Close chat"
             >
               <Icon name="x" size="md" />

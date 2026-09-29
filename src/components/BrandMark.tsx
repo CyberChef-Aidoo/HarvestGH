@@ -3,58 +3,33 @@ import Link from "next/link";
 interface BrandMarkProps {
   size?: "sm" | "md" | "lg" | "hero";
   light?: boolean;
-  withText?: boolean;
   className?: string;
 }
 
 const SIZE = {
-  sm: "h-7",
-  md: "h-9",
-  lg: "h-11",
+  sm: "h-8",
+  md: "h-11",
+  lg: "h-14",
   hero: "h-[clamp(3.5rem,12vw,5.5rem)]",
 } as const;
 
-/** Logo mark; optionally paired with bold brand wordmark. */
+const LOGO_SRC = "/images/Agrobridge_logo.png";
+
+/** Full Agrobridge wordmark (leaf + agro Bridge). */
 export default function BrandMark({
   size = "md",
   light = false,
-  withText = false,
   className = "",
 }: BrandMarkProps) {
   return (
-    <span className={`inline-flex items-center gap-2.5 ${className}`}>
+    <span className={`inline-flex items-center ${className}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/images/logo.jpeg"
-        alt=""
-        className={`${SIZE[size]} w-auto object-contain ${light ? "brightness-0 invert" : ""}`}
+        src={LOGO_SRC}
+        alt="Agrobridge"
+        className={`${SIZE[size]} w-auto max-w-[min(220px,55vw)] object-contain object-left ${light ? "brightness-110" : ""}`}
         decoding="async"
       />
-      {withText ? (
-        <span
-          className={[
-            "font-display font-extrabold tracking-tight leading-none text-brand-700",
-            size === "sm" ? "text-[1.05rem]" : "text-[1.25rem]",
-            light ? "!text-white" : "",
-          ].join(" ")}
-        >
-          Agrobridge
-        </span>
-      ) : null}
-    </span>
-  );
-}
-
-export function BrandWordmark({ light = false, className = "" }: { light?: boolean; className?: string }) {
-  return (
-    <span
-      className={[
-        "font-display font-extrabold tracking-tight text-brand-700",
-        light ? "!text-white" : "",
-        className,
-      ].join(" ")}
-    >
-      Agrobridge
     </span>
   );
 }
@@ -62,17 +37,15 @@ export function BrandWordmark({ light = false, className = "" }: { light?: boole
 export function BrandLink({
   size = "md",
   light = false,
-  withText = false,
   className = "",
 }: {
   size?: "sm" | "md" | "lg";
   light?: boolean;
-  withText?: boolean;
   className?: string;
 }) {
   return (
     <Link href="/" className={`inline-flex items-center ${className}`} aria-label="Agrobridge home">
-      <BrandMark size={size} light={light} withText={withText} />
+      <BrandMark size={size} light={light} />
     </Link>
   );
 }

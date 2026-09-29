@@ -189,7 +189,7 @@ function ShopInner() {
           aria-hidden
         />
         <div className="relative z-10 mx-auto max-w-content">
-          <p className="text-xs font-bold uppercase tracking-[0.12em] text-red-600">Marketplace</p>
+          <p className="text-xs font-bold uppercase tracking-[0.12em] text-accent-300">Marketplace</p>
           <h1 className="mb-3 mt-3 font-display text-[clamp(1.9rem,4vw,2.7rem)] font-extrabold leading-[1.12] tracking-tight text-white">
             What is on the board
           </h1>
@@ -199,7 +199,7 @@ function ShopInner() {
           </p>
           <p className="mt-3.5 text-[0.9rem] font-semibold text-white/90">
             Order by phone:{" "}
-            <a href="tel:+233544114198" className="text-red-600 underline underline-offset-4">
+            <a href="tel:+233544114198" className="text-accent-300 underline underline-offset-4">
               054 411 4198
             </a>
           </p>
