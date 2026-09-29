@@ -145,11 +145,14 @@ function ShopInner() {
       if (type === "available") params.status = "available";
       if (search.trim()) params.search = search.trim();
       void fetchProducts(params).then((data) => {
-        if (!active || data === null) return;
-        setProducts(data);
-        if (!crop && !region && !type && !search.trim()) {
-          setCropOptions(Array.from(new Set(data.map((p) => p.crop_type))).sort());
-        }
+        if (!active) return;
+        const apiList = data ?? [];
+        const source = apiList.length ? apiList : SHOP_DEMO;
+        const names = new Set(source.map((p) => p.name));
+        const extra = SHOP_DEMO.filter((p) => !names.has(p.name));
+        const next = extra.length ? [...source, ...extra] : source;
+        setProducts(next);
+        setCropOptions(Array.from(new Set(next.map((p) => p.crop_type))).sort());
       });
     }, search.trim() ? 300 : 0);
     return () => {

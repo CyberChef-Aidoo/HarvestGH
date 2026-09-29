@@ -17,6 +17,7 @@ Place the image files directly in public/images/ using the exact filenames liste
    - tomatoes.webp, maize.webp, mango.webp, plantain.webp, yam.webp, eggs.webp
    - beef.webp, goat-meat.webp, chicken-meat.webp, pork.webp, guinea-fowl.webp
    - smoked-fish.webp, tilapia.webp, honey.webp, mutton.webp
+   - coconut.webp, pepper.webp, pineapple.webp, orange.webp, pawpaw.webp, banana.webp, watermelon.webp
 
 4. Brand Mark:
    - /images/Agrobridge_logo.png

@@ -17,6 +17,12 @@ const CROPS = [
   "Cassava",
   "Plantain",
   "Mango",
+  "Coconut",
+  "Pineapple",
+  "Orange",
+  "Pawpaw",
+  "Banana",
+  "Watermelon",
   "Rice",
   "Pepper",
   "Onion",
@@ -34,8 +40,8 @@ const BENEFITS = [
     desc: "An Agrobridge agent visits you and registers your whole group in one session.",
   },
   {
-    title: "1% leader commission",
-    desc: "FBO leaders earn a 1% commission on every completed deal from their members.",
+    title: "Match before harvest",
+    desc: "Buyers lock grade, quantity, and price from your group before the crop is picked.",
   },
   {
     title: "Guaranteed escrow payout",

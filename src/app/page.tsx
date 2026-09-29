@@ -58,15 +58,18 @@ export default function HomePage() {
       <section className="px-5 py-12 sm:px-6 md:py-14">
         <div className="mx-auto max-w-content">
           <p className="eyebrow">Listed on the board</p>
-          <h2 className="mb-2">Available crops and meat</h2>
+          <h2 className="mb-2">Crops, fruit preorders, and meat</h2>
           <p className="mb-6 max-w-[34rem] text-ink-muted">
-            Expected lots from verified farmer groups. Pre-order what is coming, or buy what is
-            already listed.
+            Expected lots from verified farmer groups. Pre-order coconut, pepper, pineapple, and
+            other fruit, or buy what is already listed.
           </p>
           <FeaturedProducts />
-          <div className="mt-6 text-center">
+          <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link href="/shop" className="btn btn-primary">
               View all on the board
+            </Link>
+            <Link href="/shop?type=preorder" className="btn btn-accent">
+              Preorder harvests
             </Link>
           </div>
         </div>
@@ -77,7 +80,7 @@ export default function HomePage() {
           <h2 className="mb-4">Built for Ghana&apos;s Farmers and Buyers</h2>
           <p className="m-0 max-w-[65ch] text-ink-muted">
             Joining is free. Agrobridge takes a 2% buyer fee only when a trade clears — GHS 500 on a
-            GHS 25,000 order — and the FBO leader is paid 1% on qualifying group volume. Farmers
+            GHS 25,000 order. Farmers
             without smartphones are reached by SMS, WhatsApp, or phone. Every completed trade stores
             a farm-to-buyer record, with a transaction ID such as AGB-TOM-2026-00041.
           </p>

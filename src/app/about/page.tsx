@@ -54,15 +54,13 @@ export default function AboutPage() {
             </p>
             <p className="mb-5 leading-relaxed text-ink-muted">
               FBOs list expected supply. Anchor buyers pre-order. Payment is held until delivery.
-              Joining is free. Agrobridge keeps 2% of a cleared trade, and the FBO leader is paid 1%
-              on qualifying group volume. Farmers without smartphones are reached by SMS, WhatsApp,
-              or a phone call.
+              Joining is free. Agrobridge keeps 2% of a cleared trade. Farmers without smartphones
+              are reached by SMS, WhatsApp, or a phone call.
             </p>
             <ul className="flex flex-col gap-3">
               {[
                 "Free for farmer groups and buyers to join",
                 "No smartphone required — SMS, WhatsApp, or a phone call",
-                "FBO leaders are paid 1% on qualifying group volume",
                 "2% buyer fee only when the trade clears",
                 "Pilot in the Eastern Region",
               ].map((v) => (
@@ -109,7 +107,7 @@ export default function AboutPage() {
               ["30%+", "fresh produce can spoil before a buyer is found"],
               ["$3bn+", "Ghana farm value lost or left idle"],
               ["2%", "buyer fee only when a trade clears"],
-              ["1%", "paid to the FBO leader on qualifying volume"],
+              ["GHS 0", "to join, for farmers and buyers"],
             ].map(([v, l]) => (
               <div key={l} className="rounded-2xl border border-white/[0.08] bg-white/[0.05] p-5">
                 <div className="font-display text-[2.2rem] font-extrabold leading-none text-accent-300">
@@ -177,7 +175,7 @@ export default function AboutPage() {
                   ["Eastern Region", "Pilot geography"],
                   ["Bank / MoMo", "Escrow until delivery"],
                   ["2%", "Buyer fee at clear"],
-                  ["1%", "FBO leader share"],
+                  ["GHS 0", "Fee to join"],
                 ].map(([v, l]) => (
                   <div key={l} className="rounded-[10px] bg-surface px-3.5 py-3">
                     <div className="font-display text-[1.3rem] font-extrabold text-brand-700">{v}</div>

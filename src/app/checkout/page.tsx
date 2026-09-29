@@ -11,6 +11,7 @@ import { fetchProduct, createOrder } from "@/lib/api";
 import { config } from "@/lib/config";
 import { saveTrackedOrder } from "@/lib/tracked-orders";
 import { REGIONS, deliveryFeeFor } from "@/lib/data";
+import { DEMO_PRODUCTS } from "@/lib/demo-products";
 import type { Product } from "@/lib/types";
 
 declare global {
@@ -20,23 +21,6 @@ declare global {
     };
   }
 }
-
-const DEMO_PRODUCT = (id: string, preorder: boolean): Product => ({
-  id,
-  name: "Tomatoes — Grade A",
-  crop_type: "Tomato",
-  price_per_unit: 145,
-  unit: "crate",
-  quantity_available: 60,
-  sold_quantity: 8,
-  min_order: 3,
-  region: "Eastern",
-  fbo_source: "FBO onboarding — Eastern",
-  is_preorder: preorder,
-  available_date: "2026-10-15",
-  status: "available",
-  image_url: "",
-});
 
 function loadPaystack() {
   if (typeof window === "undefined" || window.PaystackPop) return Promise.resolve();
@@ -83,18 +67,17 @@ function CheckoutInner() {
     }
     (async () => {
       const data = await fetchProduct(id);
-      if (data) {
-        setProduct(data);
-        setQty(data.min_order ?? 1);
-        setStatus("ok");
+      const demo = DEMO_PRODUCTS.find((p) => p.id === id);
+      const next = data ?? demo ?? null;
+      if (!next) {
+        setStatus("error");
         return;
       }
-      const demo = DEMO_PRODUCT(id, orderType === "preorder");
-      setProduct(demo);
-      setQty(demo.min_order ?? 1);
+      setProduct(next);
+      setQty(next.min_order ?? 1);
       setStatus("ok");
     })();
-  }, [id, orderType]);
+  }, [id]);
 
   if (status === "loading") {
     return <div className="flex min-h-[60vh] items-center justify-center text-ink-muted">Loading product…</div>;

@@ -157,10 +157,9 @@ export const TERMS_SECTIONS: LegalSection[] = [
           ["Listing crops on the board", "Free"],
           ["SMS updates", "Free"],
           ["Platform fee on completed deal", "2% of order value, charged to the buyer when the trade clears"],
-          ["FBO leader share", "1% on qualifying group volume"],
         ],
       },
-      { type: "p", text: "Buyer payment is held in escrow (bank or Mobile Money). When the buyer confirms delivery, payment is released to the farmer, less the 2% buyer fee and the 1% FBO leader share." },
+      { type: "p", text: "Buyer payment is held in escrow (bank or Mobile Money). When the buyer confirms delivery, payment is released to the farmer, less the 2% buyer fee." },
     ],
   },
   {

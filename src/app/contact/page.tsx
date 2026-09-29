@@ -24,7 +24,7 @@ const FAQS = [
   },
   {
     q: "What are the platform fees?",
-    a: "Joining is free. Agrobridge charges a 2% buyer fee only when a trade clears — GHS 500 on a GHS 25,000 order. The FBO leader is paid 1% on qualifying group volume.",
+    a: "Joining is free. Agrobridge charges a 2% buyer fee only when a trade clears — GHS 500 on a GHS 25,000 order.",
   },
   {
     q: "How does escrow payment work?",

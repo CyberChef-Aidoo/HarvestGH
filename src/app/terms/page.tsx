@@ -13,7 +13,7 @@ export default function TermsPage() {
       title="Terms of Service"
       subtitle="The rules and agreements that govern your use of the agro Bridge platform."
       updated="January 2026 · Effective immediately"
-      intro="Agrobridge matches farmer groups to verified buyers before harvest. Registration and listing are free. A 2% buyer fee applies only when a trade clears, and the FBO leader is paid 1% on qualifying group volume."
+      intro="Agrobridge matches farmer groups to verified buyers before harvest. Registration and listing are free. A 2% buyer fee applies only when a trade clears."
       sections={TERMS_SECTIONS}
     />
   );
