@@ -127,18 +127,12 @@ class OrderViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.Gene
     queryset = Order.objects.all()
 
     def get_queryset(self):
-        qs = Order.objects.all()
-        ref = self.request.query_params.get("ref")
-        phone = self.request.query_params.get("phone")
-        if ref:
-            qs = qs.filter(order_ref__iexact=ref.strip())
-        if phone:
-            digits = "".join(c for c in phone if c.isdigit())[-9:]
-            if digits:
-                qs = qs.filter(buyer_phone__icontains=digits)
-        if not ref and not phone:
+        ref = (self.request.query_params.get("ref") or "").strip()
+        phone = self.request.query_params.get("phone") or ""
+        digits = "".join(c for c in phone if c.isdigit())[-9:]
+        if not ref or len(digits) < 9:
             return Order.objects.none()
-        return qs
+        return Order.objects.filter(order_ref__iexact=ref, buyer_phone__icontains=digits)
 
 
 class FarmerRegistrationViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):

@@ -14,7 +14,7 @@ export default function NotFound() {
           <h1 className="mb-2.5 mt-2 font-display text-[1.9rem] font-extrabold">
             This field is empty
           </h1>
-          <p className="mb-7 leading-relaxed text-muted">
+          <p className="mb-7 leading-relaxed text-ink-muted">
             The page you are looking for could not be found. Let&apos;s get you back to fresh
             produce.
           </p>

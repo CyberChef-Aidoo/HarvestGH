@@ -11,7 +11,7 @@ export default function HeroFacts({ updated }: { updated: string }) {
   return (
     <aside
       aria-label="Agrobridge at a glance"
-      className="w-full max-w-[420px] shrink-0 rounded-[10px] border border-white/15 bg-[#3A241C]/85 p-5 text-white backdrop-blur-[2px] md:w-[400px]"
+      className="w-full max-w-[420px] shrink-0 rounded-[10px] border border-white/15 bg-brand-800/85 p-5 text-white backdrop-blur-[2px] md:w-[400px]"
     >
       <div className="mb-4 flex items-baseline justify-between border-b border-white/10 pb-3">
         <span className="text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-white/70">At a glance</span>
@@ -22,7 +22,7 @@ export default function HeroFacts({ updated }: { updated: string }) {
           <div key={f.label}>
             <dt className="sr-only">{f.label}</dt>
             <dd className="m-0">
-              <span className="font-display text-[1.6rem] font-bold leading-none tracking-tight text-accent tabular-nums">
+              <span className="font-display text-[1.6rem] font-bold leading-none tracking-tight text-red-600 tabular-nums">
                 {f.value}
               </span>
               <p className="m-0 mt-1 max-w-none text-[0.75rem] leading-snug text-white/70">{f.label}</p>

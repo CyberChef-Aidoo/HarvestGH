@@ -77,15 +77,15 @@ export default function RegisterBuyerPage() {
   return (
     <>
       <Navbar variant="solid" />
-      <main className="flex min-h-screen items-start justify-center bg-cream px-5 pb-16 pt-[calc(68px+32px)] sm:px-6">
+      <main className="flex min-h-screen items-start justify-center bg-surface px-5 pb-16 pt-[calc(68px+32px)] sm:px-6">
         <div className="w-full max-w-lg">
           {done ? (
-            <div className="rounded-2xl border border-line bg-white p-10 text-center shadow-soft">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-leaf-pale text-leaf">
+            <div className="rounded-2xl border border-brand-100 bg-white p-10 text-center shadow-soft">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-brand-100 text-brand-700">
                 <Icon name="check" size="2xl" />
               </div>
               <h1 className="mb-2 text-[1.65rem] font-extrabold">You&apos;re registered</h1>
-              <p className="mx-auto mb-6 max-w-sm text-[0.95rem] leading-relaxed text-muted">
+              <p className="mx-auto mb-6 max-w-sm text-[0.95rem] leading-relaxed text-ink-muted">
                 Browse expected supply and place a pre-order. Your payment is held in escrow until
                 you confirm delivery. The pilot runs in the Eastern Region.
               </p>
@@ -94,12 +94,12 @@ export default function RegisterBuyerPage() {
               </Link>
             </div>
           ) : (
-            <div className="rounded-2xl border border-line bg-white p-6 shadow-soft sm:p-8">
-              <div className="mb-1 text-center font-display text-[1.3rem] font-extrabold text-brand">
+            <div className="rounded-2xl border border-brand-100 bg-white p-6 shadow-soft sm:p-8">
+              <div className="mb-1 text-center font-display text-[1.3rem] font-extrabold text-brand-700">
                 Agrobridge
               </div>
               <h1 className="mb-1 text-center text-[1.5rem] font-extrabold">Register as a buyer</h1>
-              <p className="mb-7 text-center text-[0.9rem] leading-relaxed text-muted">
+              <p className="mb-7 text-center text-[0.9rem] leading-relaxed text-ink-muted">
                 Free to join. Pre-order from a verified farmer group. A 2% fee applies only when the trade clears.
               </p>
 
@@ -109,7 +109,7 @@ export default function RegisterBuyerPage() {
                     Full name <span className="req">*</span>
                   </label>
                   <input
-                    className={["field", errors.name ? "border-accent" : ""].join(" ")}
+                    className={["field", errors.name ? "border-accent-500" : ""].join(" ")}
                     value={form.name}
                     onChange={(e) => set("name", e.target.value)}
                     placeholder="Your full name"
@@ -130,7 +130,7 @@ export default function RegisterBuyerPage() {
                       Phone <span className="req">*</span>
                     </label>
                     <input
-                      className={["field", errors.phone ? "border-accent" : ""].join(" ")}
+                      className={["field", errors.phone ? "border-accent-500" : ""].join(" ")}
                       value={form.phone}
                       onChange={(e) => set("phone", e.target.value)}
                       placeholder="024 123 4567"
@@ -153,7 +153,7 @@ export default function RegisterBuyerPage() {
                       Region <span className="req">*</span>
                     </label>
                     <select
-                      className={["field", errors.region ? "border-accent" : ""].join(" ")}
+                      className={["field", errors.region ? "border-accent-500" : ""].join(" ")}
                       value={form.region}
                       onChange={(e) => set("region", e.target.value)}
                     >
@@ -170,7 +170,7 @@ export default function RegisterBuyerPage() {
                       Buyer type <span className="req">*</span>
                     </label>
                     <select
-                      className={["field", errors.buyer_type ? "border-accent" : ""].join(" ")}
+                      className={["field", errors.buyer_type ? "border-accent-500" : ""].join(" ")}
                       value={form.buyer_type}
                       onChange={(e) => set("buyer_type", e.target.value)}
                     >
@@ -201,9 +201,9 @@ export default function RegisterBuyerPage() {
               >
                 {submitting ? <span className="spinner" /> : "Register as buyer"}
               </button>
-              <p className="mt-4 text-center text-[0.84rem] text-muted">
+              <p className="mt-4 text-center text-[0.84rem] text-ink-muted">
                 Looking to sell?{" "}
-                <Link href="/register/farmer" className="font-semibold text-brand">
+                <Link href="/register/farmer" className="font-semibold text-brand-700">
                   Register as a farmer
                 </Link>
               </p>

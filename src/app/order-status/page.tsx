@@ -6,84 +6,50 @@ import { useSearchParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Icon from "@/components/Icon";
-import { fetchOrders } from "@/lib/api";
 import { config, whatsappLink } from "@/lib/config";
-
-const STATUS_STEPS = ["pending", "confirmed", "processing", "dispatched", "delivered"] as const;
-const STATUS_LABELS: Record<string, string> = {
-  pending: "Order placed",
-  confirmed: "Confirmed",
-  processing: "Processing",
-  dispatched: "On the way",
-  delivered: "Delivered",
-  cancelled: "Cancelled",
-};
-
-type Order = {
-  id?: string;
-  order_ref?: string;
-  status?: string;
-  order_status?: string;
-  buyer_name?: string;
-  buyer_phone?: string;
-  product_name?: string;
-  quantity?: number;
-  unit?: string;
-  product_unit?: string;
-  total_amount?: number;
-  total_price?: number;
-  delivery_region?: string;
-  created_at?: string;
-};
-
-function normalizeOrder(row: Record<string, unknown>): Order {
-  return {
-    id: String(row.id ?? ""),
-    order_ref: String(row.order_ref ?? ""),
-    status: String(row.order_status ?? row.status ?? "pending"),
-    order_status: String(row.order_status ?? row.status ?? "pending"),
-    buyer_name: String(row.buyer_name ?? ""),
-    buyer_phone: String(row.buyer_phone ?? ""),
-    product_name: String(row.product_name ?? ""),
-    quantity: Number(row.quantity ?? 0),
-    unit: String(row.product_unit ?? row.unit ?? ""),
-    total_amount: Number(row.total_price ?? row.total_amount ?? 0),
-    total_price: Number(row.total_price ?? 0),
-    delivery_region: String(row.delivery_region ?? ""),
-    created_at: String(row.created_at ?? ""),
-  };
-}
+import {
+  escrowLabel,
+  formatWhen,
+  lookupOrders,
+  maskPhone,
+  orderTimeline,
+  STATUS_LABELS,
+  type TrackedOrder,
+} from "@/lib/tracked-orders";
 
 function TrackInner() {
   const params = useSearchParams();
   const [ref, setRef] = useState("");
   const [phone, setPhone] = useState("");
-  const [showPhone, setShowPhone] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [orders, setOrders] = useState<Order[] | null>(null);
+  const [orders, setOrders] = useState<TrackedOrder[] | null>(null);
 
   useEffect(() => {
-    const r = params.get("ref");
-    if (r) {
-      setRef(r.toUpperCase());
-      void lookupByRef(r.toUpperCase());
-    }
+    const r = params.get("ref") || "";
+    const p = params.get("phone") || "";
+    if (r) setRef(r.toUpperCase());
+    if (p) setPhone(p);
+    if (r && p) void lookup(r, p);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
-  async function lookupByRef(value: string) {
-    const cleaned = value.trim().toUpperCase();
-    if (cleaned.length < 6) {
-      setError("Enter a valid order reference (e.g. AGB-2026-4721)");
+  async function lookup(refValue: string, phoneValue: string) {
+    const cleanedRef = refValue.trim().toUpperCase();
+    const cleanedPhone = phoneValue.replace(/\D/g, "");
+    if (cleanedRef.length < 6) {
+      setError("Enter a valid order reference (e.g. AGB-2026-1002)");
+      return;
+    }
+    if (cleanedPhone.length < 9) {
+      setError("Enter the phone number used at checkout");
       return;
     }
     setError("");
     setLoading(true);
     setOrders(null);
     try {
-      const data = await fetchOrders({ ref: cleaned });
-      setOrders(data.map((row) => normalizeOrder(row)));
+      setOrders(await lookupOrders({ ref: cleanedRef, phone: cleanedPhone }));
     } catch {
       setError("Could not look up that order. Try again or contact support.");
     } finally {
@@ -91,91 +57,65 @@ function TrackInner() {
     }
   }
 
-  async function lookupByPhone() {
-    const cleaned = phone.replace(/\D/g, "");
-    if (cleaned.length < 9) {
-      setError("Enter a valid phone number");
-      return;
-    }
-    setError("");
-    setLoading(true);
-    setOrders(null);
-    try {
-      const data = await fetchOrders({ phone: cleaned });
-      setOrders(data.map((row) => normalizeOrder(row)));
-    } catch {
-      setError("Could not find orders for that number.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  function statusIndex(status?: string) {
-    const i = STATUS_STEPS.indexOf((status || "pending") as (typeof STATUS_STEPS)[number]);
-    return i < 0 ? 0 : i;
-  }
-
   return (
-    <div className="lookup-shell">
+    <div className="lookup-shell !max-w-3xl">
       <div className="lookup-card">
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-brand-pale text-xl font-bold text-brand">
-          A
+        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-brand-100 text-brand-700">
+          <Icon name="package" size="lg" />
         </div>
         <h1>Track your order</h1>
-        <p>Enter your order reference to see delivery status and order details.</p>
+        <p>Enter the order reference and the phone number used at checkout.</p>
 
-        <div className="flex flex-col gap-2 sm:flex-row">
+        <div className="flex flex-col gap-2">
           <input
             className="field text-center font-semibold tracking-wide sm:text-left"
             value={ref}
             onChange={(e) => setRef(e.target.value.toUpperCase())}
-            placeholder="e.g. AGB-2026-4721"
+            placeholder="e.g. AGB-2026-1002"
             maxLength={20}
-            onKeyDown={(e) => e.key === "Enter" && lookupByRef(ref)}
+            aria-label="Order reference"
+            onKeyDown={(e) => e.key === "Enter" && lookup(ref, phone)}
+          />
+          <input
+            className="field"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="024 433 3444"
+            aria-label="Phone number"
+            onKeyDown={(e) => e.key === "Enter" && lookup(ref, phone)}
           />
           <button
             className="btn btn-primary shrink-0"
             disabled={loading}
-            onClick={() => lookupByRef(ref)}
+            onClick={() => lookup(ref, phone)}
           >
             {loading ? <span className="spinner" /> : "Track"}
           </button>
         </div>
 
-        {error && <p className="mt-3 text-left text-[0.82rem] text-accent">{error}</p>}
+        {error && <p className="mt-3 text-left text-[0.82rem] text-red-600">{error}</p>}
 
-        <p className="mt-4 text-center text-[0.78rem] text-muted">
-          Reference was sent by SMS after ordering. You can also{" "}
+        <p className="mt-4 text-center text-[0.78rem] text-ink-muted">
+          Try{" "}
           <button
             type="button"
-            className="font-semibold text-brand underline-offset-2 hover:underline"
-            onClick={() => setShowPhone(true)}
+            className="font-semibold text-brand-700"
+            onClick={() => {
+              setRef("AGB-2026-1002");
+              setPhone("0244333444");
+              void lookup("AGB-2026-1002", "0244333444");
+            }}
           >
-            search by phone number
-          </button>
-          .
+            AGB-2026-1002
+          </button>{" "}
+          and 0244333444 to see a delivery that is on the way.
         </p>
-
-        {showPhone && (
-          <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-            <input
-              className="field"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="024 123 4567"
-              onKeyDown={(e) => e.key === "Enter" && lookupByPhone()}
-            />
-            <button className="btn btn-primary shrink-0" disabled={loading} onClick={lookupByPhone}>
-              Search
-            </button>
-          </div>
-        )}
       </div>
 
       {orders && orders.length === 0 && (
-        <div className="mt-5 rounded-2xl border border-line bg-white p-8 text-center">
+        <div className="mt-5 rounded-2xl border border-brand-100 bg-white p-8 text-center">
           <h3 className="mb-2 text-[1.2rem] font-extrabold">No order found</h3>
-          <p className="mb-4 text-[0.9rem] text-muted">
+          <p className="mb-4 text-[0.9rem] text-ink-muted">
             Double-check the reference, or message us on WhatsApp with your phone number.
           </p>
           <a href={whatsappLink("Hi, I need help tracking my order")} className="btn btn-primary" target="_blank" rel="noreferrer">
@@ -184,102 +124,119 @@ function TrackInner() {
         </div>
       )}
 
-      {orders &&
-        orders.map((o) => {
-          const idx = statusIndex(o.status);
-          const cancelled = o.status === "cancelled";
-          return (
-            <div key={o.id || o.order_ref} className="mt-5 rounded-2xl border border-line bg-white p-6 text-left shadow-soft">
-              <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
-                <div>
-                  <div className="text-[0.72rem] font-bold uppercase tracking-wide text-muted">
-                    Order reference
-                  </div>
-                  <div className="font-display text-xl font-extrabold order-id tabular text-brand">
-                    {o.order_ref || "—"}
-                  </div>
+      {orders?.map((order) => {
+        const cancelled = order.order_status === "cancelled";
+        const steps = orderTimeline(order);
+        return (
+          <article key={order.id || order.order_ref} className="mt-5 rounded-2xl border border-brand-100 bg-white p-6 text-left shadow-soft">
+            <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <div className="text-[0.72rem] font-bold uppercase tracking-wide text-ink-muted">
+                  Order reference
                 </div>
-                <span
-                  className={[
-                    "rounded-full px-3 py-1 text-[0.75rem] font-bold",
-                    cancelled ? "bg-accent-pale text-accent" : "bg-brand-pale text-brand",
-                  ].join(" ")}
-                >
-                  {STATUS_LABELS[o.status || "pending"] || o.status}
-                </span>
-              </div>
-
-              {!cancelled && (
-                <div className="mb-5 flex items-center">
-                  {STATUS_STEPS.map((step, i) => (
-                    <div key={step} className="relative flex flex-1 flex-col items-center">
-                      <div
-                        className={[
-                          "z-[1] flex h-7 w-7 items-center justify-center rounded-full border-2 text-[0.7rem] font-bold",
-                          i < idx
-                            ? "border-leaf bg-leaf text-white"
-                            : i === idx
-                              ? "border-accent bg-accent text-dark"
-                              : "border-line bg-white text-muted",
-                        ].join(" ")}
-                      >
-                        {i < idx ? <Icon name="check" size="sm" /> : i + 1}
-                      </div>
-                      {i < STATUS_STEPS.length - 1 && (
-                        <div
-                          className={[
-                            "absolute left-1/2 top-[13px] h-0.5 w-full",
-                            i < idx ? "bg-leaf" : "bg-line",
-                          ].join(" ")}
-                        />
-                      )}
-                      <div
-                        className={[
-                          "mt-1.5 text-center text-[0.62rem] font-medium",
-                          i === idx ? "font-bold text-accent" : i < idx ? "text-leaf" : "text-muted",
-                        ].join(" ")}
-                      >
-                        {STATUS_LABELS[step]}
-                      </div>
-                    </div>
-                  ))}
+                <div className="font-display text-xl font-extrabold tabular text-brand-700">
+                  {order.order_ref}
                 </div>
-              )}
-
-              <div className="grid gap-2 sm:grid-cols-2">
-                {[
-                  ["Product", o.product_name],
-                  ["Quantity", o.quantity != null ? `${o.quantity} ${o.unit || ""}` : null],
-                  ["Total", o.total_amount != null ? `GH₵${Number(o.total_amount).toFixed(2)}` : null],
-                  ["Region", o.delivery_region],
-                  ["Buyer", o.buyer_name],
-                  ["Phone", o.buyer_phone],
-                ].map(([label, val]) =>
-                  val ? (
-                    <div key={String(label)} className="rounded-lg bg-surface px-3 py-2.5">
-                      <div className="text-[0.68rem] font-bold uppercase tracking-wide text-muted">
-                        {label}
-                      </div>
-                      <div className="text-[0.9rem] font-semibold text-ink">{val}</div>
-                    </div>
-                  ) : null,
-                )}
+                <div className="mt-1 text-[0.78rem] text-ink-muted">
+                  Placed {formatWhen(order.created_at)}
+                  {order.order_type === "preorder" ? " · Preorder" : ""}
+                </div>
               </div>
-
-              <p className="mt-4 text-[0.8rem] text-muted">
-                Need help? Call{" "}
-                <a className="font-semibold text-brand" href={`tel:${config.supportPhone}`}>
-                  {config.supportPhone}
-                </a>{" "}
-                or{" "}
-                <Link href="/contact" className="font-semibold text-brand">
-                  contact us
-                </Link>
-                .
-              </p>
+              <span
+                className={[
+                  "rounded-full px-3 py-1 text-[0.75rem] font-bold",
+                  cancelled ? "bg-accent-50 text-red-600" : "bg-brand-100 text-brand-700",
+                ].join(" ")}
+              >
+                {STATUS_LABELS[order.order_status] || order.order_status}
+              </span>
             </div>
-          );
-        })}
+
+            <p className="mb-5 rounded-xl bg-brand-100 px-4 py-3 text-[0.86rem] leading-relaxed text-brand-700">
+              {escrowLabel(order)}
+            </p>
+
+            {!cancelled && (
+              <ol className="mb-6 space-y-0">
+                {steps.map((step, i) => (
+                  <li key={step.key} className="relative flex gap-3 pb-4 last:pb-0">
+                    {i < steps.length - 1 && (
+                      <span
+                        className={[
+                          "absolute left-[13px] top-7 h-[calc(100%-12px)] w-0.5",
+                          step.state === "done" ? "bg-brand-600" : "bg-brand-100",
+                        ].join(" ")}
+                      />
+                    )}
+                    <span
+                      className={[
+                        "z-[1] flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 text-[0.7rem] font-bold",
+                        step.state === "done"
+                          ? "border-brand-600 bg-brand-600 text-white"
+                          : step.state === "current"
+                            ? "border-accent-500 bg-accent-500 text-ink"
+                            : "border-brand-100 bg-white text-ink-muted",
+                      ].join(" ")}
+                    >
+                      {step.state === "done" ? <Icon name="check" size="sm" /> : i + 1}
+                    </span>
+                    <div className="min-w-0 pt-0.5">
+                      <div className="flex flex-wrap items-baseline justify-between gap-x-3">
+                        <span
+                          className={[
+                            "text-[0.9rem] font-semibold",
+                            step.state === "upcoming" ? "text-ink-muted" : "text-ink",
+                          ].join(" ")}
+                        >
+                          {step.label}
+                        </span>
+                        {step.at && (
+                          <span className="text-[0.72rem] text-ink-muted">{formatWhen(step.at)}</span>
+                        )}
+                      </div>
+                      {step.state !== "upcoming" && (
+                        <p className="m-0 mt-0.5 text-[0.8rem] leading-snug text-ink-muted">{step.detail}</p>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            )}
+
+            <div className="grid gap-2 sm:grid-cols-2">
+              {[
+                ["Product", order.product_name],
+                ["Quantity", `${order.quantity} ${order.product_unit}`.trim()],
+                ["Total", `GH₵${Number(order.total_price).toFixed(2)}`],
+                ["Delivery", order.delivery_fee ? `GH₵${Number(order.delivery_fee).toFixed(2)}` : "Included"],
+                ["Deliver to", order.delivery_address],
+                ["Region", order.delivery_region],
+                ["Buyer", order.buyer_name],
+                ["Phone", maskPhone(order.buyer_phone)],
+              ].map(([label, val]) =>
+                val ? (
+                  <div key={label} className="rounded-lg bg-surface px-3 py-2.5">
+                    <div className="text-[0.68rem] font-bold uppercase tracking-wide text-ink-muted">{label}</div>
+                    <div className="text-[0.9rem] font-semibold text-ink">{val}</div>
+                  </div>
+                ) : null,
+              )}
+            </div>
+
+            <p className="mt-4 text-[0.8rem] text-ink-muted">
+              Need help? Call{" "}
+              <a className="font-semibold text-brand-700" href={config.supportPhoneHref}>
+                {config.supportPhone}
+              </a>{" "}
+              or{" "}
+              <Link href="/contact" className="font-semibold text-brand-700">
+                contact us
+              </Link>
+              .
+            </p>
+          </article>
+        );
+      })}
     </div>
   );
 }

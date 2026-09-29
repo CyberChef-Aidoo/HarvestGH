@@ -17,9 +17,9 @@ export default function AgentPortalPage() {
           subtitle="Agent login and commission dashboard will live here. For now, contact agro Bridge to manage your FBO group."
         />
         <div className="mx-auto max-w-lg px-5 py-14 text-center sm:px-6">
-          <div className="rounded-2xl border border-line bg-white p-8 shadow-soft">
+          <div className="rounded-2xl border border-brand-100 bg-white p-8 shadow-soft">
             <h2 className="mb-2 text-[1.35rem] font-extrabold">Manage your FBO partnership</h2>
-            <p className="mb-6 text-[0.95rem] leading-relaxed text-muted">
+            <p className="mb-6 text-[0.95rem] leading-relaxed text-ink-muted">
               Contact the Agro Bridge team to manage listings, check commissions, and get support
               for your farmer group.
             </p>

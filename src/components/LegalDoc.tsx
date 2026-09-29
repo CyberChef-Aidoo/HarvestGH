@@ -31,12 +31,12 @@ interface LegalDocProps {
 function BlockView({ block }: { block: Block }) {
   switch (block.type) {
     case "p":
-      return <p className="mb-3 leading-relaxed text-muted">{block.text}</p>;
+      return <p className="mb-3 leading-relaxed text-ink-muted">{block.text}</p>;
     case "h3":
       return <h3 className="mb-2 mt-5 font-display text-[1.05rem] font-bold text-ink">{block.text}</h3>;
     case "ul":
       return (
-        <ul className="mb-3 flex list-disc flex-col gap-2 pl-5 leading-relaxed text-muted marker:text-brand">
+        <ul className="mb-3 flex list-disc flex-col gap-2 pl-5 leading-relaxed text-ink-muted marker:text-brand-700">
           {block.items.map((it, i) => (
             <li key={i}>{it}</li>
           ))}
@@ -44,7 +44,7 @@ function BlockView({ block }: { block: Block }) {
       );
     case "ol":
       return (
-        <ol className="mb-3 flex list-decimal flex-col gap-2 pl-5 leading-relaxed text-muted marker:font-bold marker:text-brand">
+        <ol className="mb-3 flex list-decimal flex-col gap-2 pl-5 leading-relaxed text-ink-muted marker:font-bold marker:text-brand-700">
           {block.items.map((it, i) => (
             <li key={i}>{it}</li>
           ))}
@@ -52,7 +52,7 @@ function BlockView({ block }: { block: Block }) {
       );
     case "note":
       return (
-        <div className="my-4 rounded-xl border border-accent/40 bg-accent-pale px-5 py-3.5 text-[0.9rem] font-medium leading-relaxed text-accent-deep">
+        <div className="my-4 rounded-xl border border-accent-500/40 bg-accent-50 px-5 py-3.5 text-[0.9rem] font-medium leading-relaxed text-brand-700">
           {block.text}
         </div>
       );
@@ -63,7 +63,7 @@ function BlockView({ block }: { block: Block }) {
             <thead>
               <tr>
                 {block.head.map((h) => (
-                  <th key={h} className="border-b border-line bg-brand-pale px-3.5 py-2.5 font-bold text-brand">
+                  <th key={h} className="border-b border-brand-100 bg-brand-100 px-3.5 py-2.5 font-bold text-brand-700">
                     {h}
                   </th>
                 ))}
@@ -71,9 +71,9 @@ function BlockView({ block }: { block: Block }) {
             </thead>
             <tbody>
               {block.rows.map((r, i) => (
-                <tr key={i} className="border-b border-line">
+                <tr key={i} className="border-b border-brand-100">
                   {r.map((c, j) => (
-                    <td key={j} className="px-3.5 py-2.5 text-muted">
+                    <td key={j} className="px-3.5 py-2.5 text-ink-muted">
                       {c}
                     </td>
                   ))}
@@ -111,7 +111,7 @@ export default function LegalDoc({ title, subtitle, updated, intro, sections }: 
       <main className="min-h-screen">
         <header
           className="px-[5%] pb-12 pt-[calc(68px+40px)] text-white"
-          style={{ background: "linear-gradient(120deg, rgba(42,26,20,0.92), rgba(92,46,32,0.78)), url('/images/shop-header.jpg') center/cover" }}
+          style={{ background: "linear-gradient(120deg, #2B4419, #436A27)" }}
         >
           <div className="mx-auto max-w-content">
             <h1 className="mb-2.5 font-display text-[clamp(1.8rem,4vw,2.6rem)] font-extrabold tracking-tight text-white">
@@ -125,14 +125,14 @@ export default function LegalDoc({ title, subtitle, updated, intro, sections }: 
           {/* TOC */}
           <aside className="hidden lg:block">
             <div className="sticky top-24">
-              <Link href="/" className="mb-4 inline-flex items-center gap-2 text-[0.82rem] font-semibold text-brand">
+              <Link href="/" className="mb-4 inline-flex items-center gap-2 text-[0.82rem] font-semibold text-brand-700">
                 <Icon name="arrow-left" size="sm" />
                 Back to home
               </Link>
-              <div className="mb-3 text-[0.72rem] font-bold uppercase tracking-[0.1em] text-muted">
+              <div className="mb-3 text-[0.72rem] font-bold uppercase tracking-[0.1em] text-ink-muted">
                 On this page
               </div>
-              <ul className="flex flex-col gap-1 border-l border-line">
+              <ul className="flex flex-col gap-1 border-l border-brand-100">
                 {sections.map((s) => (
                   <li key={s.id}>
                     <a
@@ -140,8 +140,8 @@ export default function LegalDoc({ title, subtitle, updated, intro, sections }: 
                       className={[
                         "-ml-px block border-l-2 py-1 pl-3 text-[0.83rem] transition-colors",
                         active === s.id
-                          ? "border-brand font-semibold text-brand"
-                          : "border-transparent text-muted hover:text-ink",
+                          ? "border-brand-500 font-semibold text-brand-700"
+                          : "border-transparent text-ink-muted hover:text-ink",
                       ].join(" ")}
                     >
                       {s.title}
@@ -154,14 +154,14 @@ export default function LegalDoc({ title, subtitle, updated, intro, sections }: 
 
           {/* DOCUMENT */}
           <article className="min-w-0">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-lg bg-brand-pale px-4 py-2 text-[0.82rem] font-medium text-brand">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-lg bg-brand-100 px-4 py-2 text-[0.82rem] font-medium text-brand-700">
               Last updated: {updated}
             </div>
-            <div className="mb-6 rounded-xl border border-line bg-white px-5 py-4 text-[0.95rem] leading-relaxed text-ink">
+            <div className="mb-6 rounded-xl border border-brand-100 bg-white px-5 py-4 text-[0.95rem] leading-relaxed text-ink">
               {intro}
             </div>
             {sections.map((s) => (
-              <section key={s.id} id={s.id} className="scroll-mt-24 border-t border-line py-7 first:border-t-0">
+              <section key={s.id} id={s.id} className="scroll-mt-24 border-t border-brand-100 py-7 first:border-t-0">
                 <h2 className="mb-3.5 font-display text-[1.4rem] font-bold text-ink">{s.title}</h2>
                 {s.blocks.map((b, i) => (
                   <BlockView key={i} block={b} />

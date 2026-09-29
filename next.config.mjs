@@ -4,9 +4,6 @@ import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
 const nextConfig = (phase) => ({
   distDir: phase === PHASE_DEVELOPMENT_SERVER ? ".next-dev" : ".next",
   reactStrictMode: true,
-  images: {
-    remotePatterns: [{ protocol: "https", hostname: "**" }],
-  },
   async redirects() {
     return [
       { source: "/listings.html", destination: "/shop", permanent: true },
@@ -23,6 +20,18 @@ const nextConfig = (phase) => ({
       { source: "/privacy.html", destination: "/privacy", permanent: true },
       { source: "/terms.html", destination: "/terms", permanent: true },
       { source: "/agent-portal.html", destination: "/agent-portal", permanent: true },
+    ];
+  },
+  async headers() {
+    return [
+      {
+        source: "/images/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+      {
+        source: "/fonts/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
     ];
   },
 });

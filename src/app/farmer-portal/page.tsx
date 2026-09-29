@@ -24,8 +24,8 @@ type Listing = {
 const BADGE: Record<string, string> = {
   available: "bg-green-pale text-green",
   matched: "bg-gold-pale text-gold-deep",
-  sold: "bg-[#e8f0fe] text-[#1a56db]",
-  managed: "bg-black/5 text-muted",
+  sold: "bg-brand-100 text-brand-700",
+  managed: "bg-black/5 text-ink-muted",
   pending: "bg-gold-pale text-gold-deep",
 };
 
@@ -46,6 +46,10 @@ export default function FarmerPortalPage() {
     setResults(null);
     try {
       const products = await fetchProducts({ phone: cleaned });
+      if (products === null) {
+        setError("Could not look up listings. Please try again.");
+        return;
+      }
       if (products.length) {
         setResults(
           products.map((p) => ({
@@ -82,7 +86,7 @@ export default function FarmerPortalPage() {
   return (
     <>
       <Navbar variant="solid" />
-      <main className="min-h-screen bg-cream">
+      <main className="min-h-screen bg-surface">
         <div className="lookup-shell">
           <div className="lookup-card">
             <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-pale text-lg font-bold text-green">
@@ -102,8 +106,8 @@ export default function FarmerPortalPage() {
                 {loading ? <span className="spinner" /> : "Look up"}
               </button>
             </div>
-            {error && <p className="mt-3 text-left text-[0.82rem] text-[#c0392b]">{error}</p>}
-            <p className="mt-3 text-[0.78rem] text-muted">
+            {error && <p className="mt-3 text-left text-[0.82rem] text-red-600">{error}</p>}
+            <p className="mt-3 text-[0.78rem] text-ink-muted">
               Not registered yet?{" "}
               <Link href="/register/farmer" className="font-semibold text-green">
                 Become a supplier
@@ -112,9 +116,9 @@ export default function FarmerPortalPage() {
           </div>
 
           {results && results.length === 0 && (
-            <div className="mt-5 rounded-2xl border border-line bg-white p-8 text-center">
+            <div className="mt-5 rounded-2xl border border-brand-100 bg-white p-8 text-center">
               <h3 className="mb-2 text-[1.2rem] font-extrabold">No listings found</h3>
-              <p className="mb-4 text-[0.9rem] text-muted">
+              <p className="mb-4 text-[0.9rem] text-ink-muted">
                 We could not find a listing for that number. Register as a supplier or contact us.
               </p>
               <div className="flex flex-col justify-center gap-3 sm:flex-row">
@@ -139,12 +143,12 @@ export default function FarmerPortalPage() {
             return (
               <div
                 key={r.id || title}
-                className="mt-4 rounded-2xl border border-line bg-white p-6 text-left shadow-soft"
+                className="mt-4 rounded-2xl border border-brand-100 bg-white p-6 text-left shadow-soft"
               >
                 <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
                   <div>
                     <h3 className="font-display text-[1.15rem] font-bold">{title}</h3>
-                    <p className="mt-1 text-[0.8rem] text-muted">{r.region || "Ghana"}</p>
+                    <p className="mt-1 text-[0.8rem] text-ink-muted">{r.region || "Ghana"}</p>
                   </div>
                   <span
                     className={[
@@ -158,16 +162,16 @@ export default function FarmerPortalPage() {
 
                 <div className="mb-4 grid grid-cols-2 gap-2">
                   {r.crop_type && (
-                    <div className="rounded-lg bg-cream px-3 py-2.5">
-                      <div className="text-[0.68rem] font-bold uppercase tracking-wide text-muted">
+                    <div className="rounded-lg bg-surface px-3 py-2.5">
+                      <div className="text-[0.68rem] font-bold uppercase tracking-wide text-ink-muted">
                         Crop
                       </div>
                       <div className="text-[0.9rem] font-semibold">{r.crop_type}</div>
                     </div>
                   )}
                   {r.quantity != null && (
-                    <div className="rounded-lg bg-cream px-3 py-2.5">
-                      <div className="text-[0.68rem] font-bold uppercase tracking-wide text-muted">
+                    <div className="rounded-lg bg-surface px-3 py-2.5">
+                      <div className="text-[0.68rem] font-bold uppercase tracking-wide text-ink-muted">
                         Quantity
                       </div>
                       <div className="text-[0.9rem] font-semibold">
@@ -199,7 +203,7 @@ export default function FarmerPortalPage() {
                   </div>
                 )}
 
-                <p className="mt-4 text-[0.8rem] text-muted">
+                <p className="mt-4 text-[0.8rem] text-ink-muted">
                   Questions? Call{" "}
                   <a className="font-semibold text-green" href={`tel:${config.supportPhone}`}>
                     {config.supportPhone}

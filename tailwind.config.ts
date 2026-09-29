@@ -6,26 +6,34 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          DEFAULT: "#7A3E2B",
-          deep: "#5C2E20",
-          pale: "#F1E4DD",
+          50: "#F3F7F1",
+          100: "#E7F0E2",
+          300: "#B7D0A6",
+          500: "#5F9838",
+          600: "#518130",
+          700: "#436A27",
+          800: "#375820",
+          900: "#2B4419",
+          DEFAULT: "#5F9838",
         },
         accent: {
-          DEFAULT: "#C8391F",
-          deep: "#9E2C17",
-          pale: "#F8E3DE",
+          50: "#FDFAEA",
+          300: "#FFDC84",
+          400: "#FFD259",
+          500: "#FFCA42",
+          600: "#D9AC38",
+          DEFAULT: "#FFCA42",
         },
-        leaf: {
-          DEFAULT: "#3F5A36",
-          pale: "#E5EAE1",
+        surface: {
+          DEFAULT: "#FEFFDD",
+          muted: "#F5F5EB",
         },
-        charcoal: "#1C1A17",
-        ink: "#1C1A17",
-        muted: "#6E665B",
-        faint: "#8A8276",
-        surface: "#F4EFE4",
-        line: "rgba(28,26,23,0.12)",
-        "line-strong": "rgba(28,26,23,0.22)",
+        ink: {
+          DEFAULT: "#1A1F14",
+          muted: "#4A5342",
+          faint: "#6B7462",
+          inverted: "#FEFFDD",
+        },
       },
       fontFamily: {
         display: ["var(--font-display)", "system-ui", "sans-serif"],
@@ -37,8 +45,8 @@ const config: Config = {
         "2xl": "16px",
       },
       boxShadow: {
-        soft: "0 12px 40px rgba(28,26,23,0.08)",
-        card: "0 8px 32px rgba(28,26,23,0.10)",
+        soft: "0 12px 40px rgba(26,31,20,0.08)",
+        card: "0 8px 32px rgba(26,31,20,0.10)",
       },
       maxWidth: {
         content: "1120px",

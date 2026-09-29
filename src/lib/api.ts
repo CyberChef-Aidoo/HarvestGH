@@ -8,6 +8,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T | null> {
   try {
     const res = await fetch(`${API}/api/v1${path}`, {
       ...init,
+      signal: init?.signal ?? AbortSignal.timeout(8000),
       headers: {
         "Content-Type": "application/json",
         ...(init?.headers || {}),
@@ -28,11 +29,13 @@ function unwrapList<T>(data: T[] | { results: T[] } | null): T[] {
   return [];
 }
 
-export async function fetchProducts(params?: Record<string, string>): Promise<Product[]> {
+export async function fetchProducts(params?: Record<string, string>): Promise<Product[] | null> {
   const qs = params
     ? "?" + new URLSearchParams(Object.entries(params).filter(([, v]) => Boolean(v))).toString()
     : "";
-  return unwrapList<Product>(await request<Product[] | { results: Product[] }>(`/products/${qs}`));
+  const data = await request<Product[] | { results: Product[] }>(`/products/${qs}`);
+  if (data === null) return null;
+  return unwrapList<Product>(data);
 }
 
 export async function fetchProduct(id: string): Promise<Product | null> {

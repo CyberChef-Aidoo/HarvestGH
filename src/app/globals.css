@@ -50,11 +50,13 @@
 :root {
   --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --surface: #f4efe4;
-  --brand-deep: #5c2e20;
-  --accent: #c8391f;
-  --charcoal: #1c1a17;
-  --hero-sub: #f4efe4;
+  --surface: #FEFFDD;
+  --brand-500: #5F9838;
+  --brand-700: #436A27;
+  --brand-900: #2B4419;
+  --accent-500: #FFCA42;
+  --ink: #1A1F14;
+  --ink-inverted: #FEFFDD;
 }
 
 @layer base {
@@ -85,7 +87,7 @@
     font-size: clamp(2.25rem, 5vw, 3.75rem);
     line-height: 1.05;
     letter-spacing: -0.02em;
-    color: var(--charcoal);
+    color: var(--ink);
     text-wrap: balance;
   }
 
@@ -95,7 +97,7 @@
     font-size: clamp(1.75rem, 3.5vw, 2.5rem);
     letter-spacing: -0.01em;
     line-height: 1.15;
-    color: var(--charcoal);
+    color: var(--ink);
     text-wrap: balance;
   }
 
@@ -108,7 +110,7 @@
     font-size: 1.25rem;
     line-height: 1.3;
     letter-spacing: -0.01em;
-    color: var(--charcoal);
+    color: var(--ink);
     text-wrap: balance;
   }
 
@@ -122,7 +124,7 @@
   }
 
   ::selection {
-    background: rgba(122, 62, 43, 0.18);
+    background: rgba(95, 152, 56, 0.22);
   }
 }
 
@@ -133,7 +135,9 @@
 
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3
-           text-center leading-none transition-all duration-200 ease-out;
+           text-center leading-none transition-all duration-200 ease-out
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2 focus-visible:ring-offset-surface
+           disabled:opacity-60 disabled:pointer-events-none;
     font-family: var(--font-body);
     font-weight: 600;
     font-size: 1rem;
@@ -144,18 +148,18 @@
     font-size: 0.9375rem;
   }
   .btn-primary {
-    @apply bg-brand text-white hover:bg-brand-deep hover:-translate-y-0.5
-           hover:shadow-[0_8px_24px_rgba(92,46,32,0.25)];
+    @apply bg-accent-500 text-ink hover:bg-accent-600 hover:-translate-y-0.5
+           hover:shadow-[0_8px_24px_rgba(43,68,25,0.25)];
   }
   .btn-accent,
   .btn-gold {
-    @apply bg-accent text-white hover:bg-accent-deep hover:-translate-y-0.5;
+    @apply bg-accent-500 text-ink hover:bg-accent-600 hover:-translate-y-0.5;
   }
   .btn-ghost {
-    @apply border-[1.5px] border-line-strong text-ink hover:border-brand hover:text-brand;
+    @apply border-[1.5px] border-brand-500 text-brand-700 hover:bg-brand-50;
   }
   .btn-ghost-light {
-    @apply border-[1.5px] border-white/40 bg-transparent text-white hover:bg-white/10;
+    @apply border-[1.5px] border-ink-inverted/40 bg-transparent text-ink-inverted hover:bg-ink-inverted/10;
   }
   .btn-block {
     @apply w-full;
@@ -163,7 +167,7 @@
 
   .eyebrow {
     @apply mb-3 inline-flex items-center gap-2.5 text-left text-xs font-semibold
-           uppercase tracking-[0.12em] text-brand;
+           uppercase tracking-[0.12em] text-brand-700;
     font-family: var(--font-body);
   }
   .eyebrow::before {
@@ -171,10 +175,11 @@
     @apply block h-0.5 w-[18px] shrink-0 bg-current;
   }
   .eyebrow-light {
-    @apply text-white/70;
+    @apply text-ink-inverted/70;
   }
+  /* accent-300 keeps ≥4.5:1 on brand-700; accent-500 is only 4.14:1 */
   .eyebrow-gold {
-    @apply text-accent;
+    @apply text-accent-300;
   }
 
   .section {
@@ -186,11 +191,11 @@
   }
 
   .section-lede {
-    @apply mb-9 max-w-[34rem] text-left text-muted;
+    @apply mb-9 max-w-[34rem] text-left text-ink-muted;
   }
 
   .surface {
-    @apply rounded-xl border border-line bg-white;
+    @apply rounded-xl border border-brand-100 bg-white;
   }
 
   .field-label {
@@ -201,9 +206,10 @@
     font-variant-numeric: tabular-nums;
   }
   .field {
-    @apply w-full rounded-[10px] border-[1.5px] border-line-strong bg-white px-3.5 py-3
+    @apply w-full rounded-[10px] border-[1.5px] border-brand-300 bg-white px-3.5 py-3
            text-left text-ink outline-none transition
-           placeholder:text-faint focus:border-brand focus:ring-4 focus:ring-brand/10;
+           placeholder:text-ink-faint
+           focus:border-brand-500 focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-surface;
     font-family: var(--font-body);
     font-size: 0.9375rem;
     font-weight: 500;
@@ -215,18 +221,18 @@
   }
 
   .req {
-    @apply text-accent;
+    @apply text-red-600;
   }
 
   .spinner {
-    @apply inline-block h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white;
+    @apply inline-block h-4 w-4 animate-spin rounded-full border-2 border-ink-inverted/40 border-t-ink-inverted;
   }
 
   .stat-number {
     font-family: var(--font-display);
     font-weight: 800;
     font-size: clamp(2rem, 4vw, 2.75rem);
-    color: var(--accent);
+    color: var(--brand-700);
     font-variant-numeric: tabular-nums;
     letter-spacing: -0.02em;
     line-height: 1;
@@ -242,7 +248,7 @@
     font-family: var(--font-body);
     font-weight: 400;
     font-size: 0.875rem;
-    color: #6e665b; /* ≥4.5:1 on surface #F4EFE4 */
+    color: #4A5342; /* ink-muted; ≈7:1 on surface #FEFFDD */
   }
 
   .nav-link {
@@ -257,7 +263,7 @@
   }
 
   .lookup-card {
-    @apply rounded-2xl border border-line bg-white p-8 text-center shadow-soft;
+    @apply rounded-2xl border border-brand-100 bg-white p-8 text-center shadow-soft;
   }
 
   .lookup-card h1 {
@@ -266,7 +272,7 @@
   }
 
   .lookup-card > p {
-    @apply mx-auto mb-6 max-w-sm text-center text-muted;
+    @apply mx-auto mb-6 max-w-sm text-center text-ink-muted;
   }
 }
 
@@ -293,13 +299,13 @@
 }
 
 .how-it-works {
-  --ab-green-900: #2A1A14;
-  --ab-green-800: #3A241C;
-  --ab-green-700: #4E3128;
-  --ab-gold: #C8391F;
-  --ab-white: #ffffff;
-  --ab-sage: #D9CFC3;
-  --ab-sage-muted: #A69A8C;
+  --ab-green-900: #2B4419;
+  --ab-green-800: #375820;
+  --ab-green-700: #436A27;
+  --ab-gold: #FFCA42;
+  --ab-white: #FEFFDD;
+  --ab-sage: #B7D0A6;
+  --ab-sage-muted: #E7F0E2;
   --radius: 14px;
 
   background: var(--ab-green-900);
@@ -542,13 +548,13 @@
   .hero-overlay {
     background: linear-gradient(
       90deg,
-      rgba(28, 26, 23, 0.78) 0%,
-      rgba(28, 26, 23, 0.42) 60%,
+      rgba(43, 68, 25, 0.78) 0%,
+      rgba(43, 68, 25, 0.42) 60%,
       transparent 100%
     );
   }
   .header-overlay {
-    background: linear-gradient(120deg, rgba(42, 26, 20, 0.9), rgba(92, 46, 32, 0.65));
+    background: linear-gradient(120deg, rgba(43, 68, 25, 0.9), rgba(67, 106, 39, 0.65));
   }
 }
 
@@ -556,9 +562,9 @@
   width: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(92, 46, 32, 0.25);
+  background: rgba(67, 106, 39, 0.25);
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(92, 46, 32, 0.4);
+  background: rgba(67, 106, 39, 0.4);
 }

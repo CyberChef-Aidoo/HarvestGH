@@ -29,7 +29,7 @@ export default function HarvestCalendarPage() {
         />
 
         <div className="mx-auto max-w-content px-5 py-10 sm:px-6">
-          <div className="mb-6 flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-3 text-sm text-muted">
+          <div className="mb-6 flex items-center gap-2 rounded-xl border border-brand-100 bg-white px-4 py-3 text-sm text-ink-muted">
             <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-green-mid" />
             Showing seasons for{" "}
             <strong className="text-ink">
@@ -37,7 +37,7 @@ export default function HarvestCalendarPage() {
             </strong>
           </div>
 
-          <div className="mb-8 flex flex-wrap gap-4 rounded-xl border border-line bg-white px-5 py-4 text-[0.82rem] font-medium">
+          <div className="mb-8 flex flex-wrap gap-4 rounded-xl border border-brand-100 bg-white px-5 py-4 text-[0.82rem] font-medium">
             {(Object.keys(SEASON_META) as SeasonStatus[]).map((k) => (
               <div key={k} className="flex items-center gap-2">
                 <span className={`h-4 w-4 rounded ${SEASON_META[k].className}`} />
@@ -64,11 +64,11 @@ export default function HarvestCalendarPage() {
             </select>
           </div>
 
-          <div className="overflow-x-auto rounded-2xl border border-line bg-white">
+          <div className="overflow-x-auto rounded-2xl border border-brand-100 bg-white">
             <table className="w-full min-w-[720px] border-collapse text-left text-sm">
               <thead>
-                <tr className="border-b border-line bg-cream/80">
-                  <th className="sticky left-0 bg-cream/95 px-4 py-3 font-display text-[0.9rem] font-bold">
+                <tr className="border-b border-brand-100 bg-surface/80">
+                  <th className="sticky left-0 bg-surface/95 px-4 py-3 font-display text-[0.9rem] font-bold">
                     Crop
                   </th>
                   {MONTHS.map((m, i) => (
@@ -76,7 +76,7 @@ export default function HarvestCalendarPage() {
                       key={m}
                       className={[
                         "px-1.5 py-3 text-center text-[0.72rem] font-bold uppercase tracking-wide",
-                        i === currentMonth ? "text-green" : "text-muted",
+                        i === currentMonth ? "text-green" : "text-ink-muted",
                       ].join(" ")}
                     >
                       {m}
@@ -86,7 +86,7 @@ export default function HarvestCalendarPage() {
               </thead>
               <tbody>
                 {rows.map((crop) => (
-                  <tr key={crop.name} className="border-b border-line last:border-b-0">
+                  <tr key={crop.name} className="border-b border-brand-100 last:border-b-0">
                     <td className="sticky left-0 bg-white px-4 py-3 font-semibold text-ink">
                       <span className="mr-2 inline-flex text-green" aria-hidden>
                         <Icon name={crop.icon} size="md" />

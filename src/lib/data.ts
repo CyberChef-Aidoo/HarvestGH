@@ -95,8 +95,8 @@ export const CROP_CALENDAR: CropCalendar[] = [
 export const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
 export const SEASON_META: Record<SeasonStatus, { label: string; className: string }> = {
-  peak: { label: "Peak harvest", className: "bg-brand text-white" },
-  harvest: { label: "Harvest available", className: "bg-brand-pale text-brand" },
-  plant: { label: "Planting season", className: "bg-accent-pale text-accent-deep" },
-  off: { label: "Off season", className: "bg-black/5 text-faint" },
+  peak: { label: "Peak harvest", className: "bg-accent-500 text-ink" },
+  harvest: { label: "Harvest available", className: "bg-brand-100 text-brand-700" },
+  plant: { label: "Planting season", className: "bg-accent-50 text-brand-700" },
+  off: { label: "Off season", className: "bg-black/5 text-ink-faint" },
 };

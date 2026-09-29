@@ -17,7 +17,11 @@ export default function FeaturedProducts() {
     let active = true;
     (async () => {
       const data = await fetchProducts({ status: "available" });
-      if (!active || !data.length) return;
+      if (!active || data === null) return;
+      if (!data.length) {
+        setProducts([]);
+        return;
+      }
       const meat = data.filter((p) => p.crop_type === "Beef" || p.crop_type === "Goat" || p.crop_type === "Poultry");
       const crops = data.filter((p) => p.crop_type !== "Beef" && p.crop_type !== "Goat" && p.crop_type !== "Poultry").slice(0, 3);
       setProducts(meat.length ? [...crops, ...meat] : data.slice(0, 6));

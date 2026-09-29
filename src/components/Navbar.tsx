@@ -40,8 +40,8 @@ export default function Navbar({ variant = "solid", hideSupplierCta = false }: N
         className={[
           "fixed inset-x-0 top-0 z-[200] flex h-[68px] items-center justify-between px-[5%] transition-all duration-300",
           glass
-            ? "border-b border-white/40 bg-white/55 shadow-[0_8px_32px_rgba(28,26,23,0.08)] backdrop-blur-xl backdrop-saturate-150"
-            : "border-b border-line bg-white",
+            ? "border-b border-white/40 bg-white/55 shadow-[0_8px_32px_rgba(26,31,20,0.08)] backdrop-blur-xl backdrop-saturate-150"
+            : "border-b border-brand-100 bg-white",
         ].join(" ")}
       >
         <BrandLink size="md" withText />
@@ -51,7 +51,7 @@ export default function Navbar({ variant = "solid", hideSupplierCta = false }: N
             <li key={l.href}>
               <Link
                 href={l.href}
-                className="nav-link rounded-lg px-3.5 py-2 text-ink transition-colors hover:bg-brand-pale hover:text-brand"
+                className="nav-link rounded-lg px-3.5 py-2 text-ink transition-colors hover:bg-brand-100 hover:text-brand-700"
               >
                 {l.label}
               </Link>
@@ -88,7 +88,7 @@ export default function Navbar({ variant = "solid", hideSupplierCta = false }: N
       />
       <aside
         className={[
-          "fixed left-0 top-0 z-[300] flex h-full w-[min(300px,88vw)] flex-col overflow-y-auto bg-brand-deep transition-transform duration-300 md:hidden",
+          "fixed left-0 top-0 z-[300] flex h-full w-[min(300px,88vw)] flex-col overflow-y-auto bg-brand-700 transition-transform duration-300 md:hidden",
           open ? "translate-x-0" : "-translate-x-full",
         ].join(" ")}
       >
@@ -131,7 +131,7 @@ export default function Navbar({ variant = "solid", hideSupplierCta = false }: N
         <div className="flex flex-col gap-2.5 border-t border-white/10 p-4">
           <Link
             href="/shop"
-            className="rounded-[10px] bg-accent py-3 text-center text-sm font-bold text-white"
+            className="rounded-[10px] bg-accent-500 py-3 text-center text-sm font-bold text-ink"
             onClick={() => setOpen(false)}
           >
             Shop Produce

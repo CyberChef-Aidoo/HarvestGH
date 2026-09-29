@@ -28,11 +28,12 @@ export default function BrandMark({
         src="/images/logo.jpeg"
         alt=""
         className={`${SIZE[size]} w-auto object-contain ${light ? "brightness-0 invert" : ""}`}
+        decoding="async"
       />
       {withText ? (
         <span
           className={[
-            "font-display font-extrabold tracking-tight leading-none text-brand",
+            "font-display font-extrabold tracking-tight leading-none text-brand-700",
             size === "sm" ? "text-[1.05rem]" : "text-[1.25rem]",
             light ? "!text-white" : "",
           ].join(" ")}
@@ -48,7 +49,7 @@ export function BrandWordmark({ light = false, className = "" }: { light?: boole
   return (
     <span
       className={[
-        "font-display font-extrabold tracking-tight text-brand",
+        "font-display font-extrabold tracking-tight text-brand-700",
         light ? "!text-white" : "",
         className,
       ].join(" ")}

@@ -79,7 +79,6 @@ class ProductSerializer(serializers.ModelSerializer):
             "min_order",
             "region",
             "fbo_source",
-            "farmer_phone",
             "status",
             "is_preorder",
             "available_date",

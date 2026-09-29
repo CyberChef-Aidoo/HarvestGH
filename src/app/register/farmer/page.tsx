@@ -123,23 +123,23 @@ export default function RegisterFarmerPage() {
           subtitle="The pilot is in the Eastern Region. List expected crops and animal protein so verified buyers can pre-order before harvest."
         />
 
-        <div className="grid gap-px border-y border-line bg-line md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-px border-y border-brand-100 bg-brand-100 md:grid-cols-2 lg:grid-cols-4">
           {BENEFITS.map((b) => (
             <div key={b.title} className="bg-white px-5 py-6 text-left">
               <h3 className="mb-1.5 text-[0.95rem] font-bold">{b.title}</h3>
-              <p className="text-[0.84rem] leading-relaxed text-muted">{b.desc}</p>
+              <p className="text-[0.84rem] leading-relaxed text-ink-muted">{b.desc}</p>
             </div>
           ))}
         </div>
 
         <div className="mx-auto max-w-2xl px-5 py-12 sm:px-6">
           {done ? (
-            <div className="rounded-2xl border border-line bg-white p-10 text-center shadow-soft">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-leaf-pale text-leaf">
+            <div className="rounded-2xl border border-brand-100 bg-white p-10 text-center shadow-soft">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-brand-100 text-brand-700">
                 <Icon name="check" size="2xl" />
               </div>
               <h2 className="mb-2 text-[1.7rem] font-extrabold">Registration received</h2>
-              <p className="mx-auto mb-6 max-w-md text-[0.95rem] leading-relaxed text-muted">
+              <p className="mx-auto mb-6 max-w-md text-[0.95rem] leading-relaxed text-ink-muted">
                 An Agrobridge agent will call you on {form.phone || "your number"} to arrange an in-person visit and register your members. For urgent questions, call or WhatsApp 054 411 4198.
               </p>
               <div className="flex flex-col justify-center gap-3 sm:flex-row">
@@ -152,14 +152,14 @@ export default function RegisterFarmerPage() {
               </div>
             </div>
           ) : (
-            <div className="rounded-2xl border border-line bg-white p-6 shadow-soft sm:p-8">
+            <div className="rounded-2xl border border-brand-100 bg-white p-6 shadow-soft sm:p-8">
               <h2 className="mb-1 text-[1.4rem] font-extrabold">Register your farmer group</h2>
-              <p className="mb-8 text-[0.9rem] leading-relaxed text-muted">
+              <p className="mb-8 text-[0.9rem] leading-relaxed text-ink-muted">
                 Fill in your details below. An Agrobridge agent will call you back on 054 411 4198 to arrange the in-person visit.
               </p>
 
               <div className="mb-8">
-                <div className="mb-3 text-xs font-bold uppercase tracking-[0.08em] text-muted">
+                <div className="mb-3 text-xs font-bold uppercase tracking-[0.08em] text-ink-muted">
                   Registration type
                 </div>
                 <div className="grid gap-3 sm:grid-cols-2">
@@ -176,19 +176,19 @@ export default function RegisterFarmerPage() {
                       className={[
                         "rounded-xl border-2 p-4 text-left transition",
                         type === id
-                          ? "border-brand bg-brand-pale"
-                          : "border-line bg-white hover:border-brand/40",
+                          ? "border-brand-500 bg-brand-100"
+                          : "border-brand-100 bg-white hover:border-brand-500/40",
                       ].join(" ")}
                     >
                       <div className="mb-1 font-bold text-ink">{title}</div>
-                      <div className="text-[0.8rem] leading-relaxed text-muted">{desc}</div>
+                      <div className="text-[0.8rem] leading-relaxed text-ink-muted">{desc}</div>
                     </button>
                   ))}
                 </div>
               </div>
 
               <div className="mb-6 space-y-4">
-                <div className="text-xs font-bold uppercase tracking-[0.08em] text-muted">
+                <div className="text-xs font-bold uppercase tracking-[0.08em] text-ink-muted">
                   Your details
                 </div>
                 {type === "fbo" && (
@@ -197,7 +197,7 @@ export default function RegisterFarmerPage() {
                       FBO / Group name <span className="req">*</span>
                     </label>
                     <input
-                      className={["field", errors.fbo_name ? "border-accent" : ""].join(" ")}
+                      className={["field", errors.fbo_name ? "border-accent-500" : ""].join(" ")}
                       value={form.fbo_name}
                       onChange={(e) => set("fbo_name", e.target.value)}
                       placeholder="e.g. Ejisu Farmers Cooperative"
@@ -211,7 +211,7 @@ export default function RegisterFarmerPage() {
                       <span className="req">*</span>
                     </label>
                     <input
-                      className={["field", errors.name ? "border-accent" : ""].join(" ")}
+                      className={["field", errors.name ? "border-accent-500" : ""].join(" ")}
                       value={form.name}
                       onChange={(e) => set("name", e.target.value)}
                       placeholder="e.g. Kwame Boateng"
@@ -222,12 +222,12 @@ export default function RegisterFarmerPage() {
                       Phone number <span className="req">*</span>
                     </label>
                     <input
-                      className={["field", errors.phone ? "border-accent" : ""].join(" ")}
+                      className={["field", errors.phone ? "border-accent-500" : ""].join(" ")}
                       value={form.phone}
                       onChange={(e) => set("phone", e.target.value)}
                       placeholder="024 123 4567"
                     />
-                    <p className="form-hint mt-1 text-[0.74rem] text-muted">
+                    <p className="form-hint mt-1 text-[0.74rem] text-ink-muted">
                       This is the number we will call you on.
                     </p>
                   </div>
@@ -238,7 +238,7 @@ export default function RegisterFarmerPage() {
                       Region <span className="req">*</span>
                     </label>
                     <select
-                      className={["field", errors.region ? "border-accent" : ""].join(" ")}
+                      className={["field", errors.region ? "border-accent-500" : ""].join(" ")}
                       value={form.region}
                       onChange={(e) => set("region", e.target.value)}
                     >
@@ -280,7 +280,7 @@ export default function RegisterFarmerPage() {
               </div>
 
               <div className="mb-6">
-                <div className="mb-3 text-xs font-bold uppercase tracking-[0.08em] text-muted">
+                <div className="mb-3 text-xs font-bold uppercase tracking-[0.08em] text-ink-muted">
                   What you grow
                 </div>
                 <label className="field-label">
@@ -295,8 +295,8 @@ export default function RegisterFarmerPage() {
                       className={[
                         "rounded-lg border px-3 py-2.5 text-left text-[0.84rem] font-semibold transition",
                         crops.includes(c)
-                          ? "border-brand bg-brand-pale text-brand"
-                          : "border-line text-ink hover:border-brand/40",
+                          ? "border-brand-500 bg-brand-100 text-brand-700"
+                          : "border-brand-100 text-ink hover:border-brand-500/40",
                       ].join(" ")}
                     >
                       {c}
@@ -304,7 +304,7 @@ export default function RegisterFarmerPage() {
                   ))}
                 </div>
                 {errors.crops && (
-                  <p className="mt-2 text-[0.74rem] text-accent">Select at least one crop.</p>
+                  <p className="mt-2 text-[0.74rem] text-red-600">Select at least one crop.</p>
                 )}
                 <div className="mt-4">
                   <label className="field-label">Typical quantity per season</label>
@@ -333,9 +333,9 @@ export default function RegisterFarmerPage() {
               >
                 {submitting ? <span className="spinner" /> : "Submit registration"}
               </button>
-              <p className="mt-4 text-center text-[0.84rem] text-muted">
+              <p className="mt-4 text-center text-[0.84rem] text-ink-muted">
                 Looking to buy?{" "}
-                <Link href="/register/buyer" className="font-semibold text-brand">
+                <Link href="/register/buyer" className="font-semibold text-brand-700">
                   Register as a buyer
                 </Link>
               </p>

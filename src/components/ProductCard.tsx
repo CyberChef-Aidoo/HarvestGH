@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { memo, useState } from "react";
 import Link from "next/link";
 import type { Product } from "@/lib/types";
 
-export default function ProductCard({ product }: { product: Product }) {
+function ProductCard({ product }: { product: Product }) {
   const [imgError, setImgError] = useState(false);
   const isPre = product.is_preorder;
   const href = `/checkout?id=${product.id}${isPre ? "&type=preorder" : ""}`;
@@ -12,11 +12,11 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={href}
-      className="card-hover group flex flex-col overflow-hidden rounded-2xl border border-line bg-white"
+      className="card-hover group flex flex-col overflow-hidden rounded-2xl border border-brand-100 bg-white"
     >
-      <div className="relative h-44 overflow-hidden bg-brand-pale">
+      <div className="relative h-44 overflow-hidden bg-brand-100">
         {imgError || !product.image_url ? (
-          <div className="flex h-full w-full items-center justify-center p-4 text-center font-display text-sm font-bold text-brand">
+          <div className="flex h-full w-full items-center justify-center p-4 text-center font-display text-sm font-bold text-brand-700">
             {product.name}
           </div>
         ) : (
@@ -25,15 +25,18 @@ export default function ProductCard({ product }: { product: Product }) {
             src={product.image_url}
             alt={product.name}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            width={800}
+            height={600}
             onError={() => setImgError(true)}
             loading="lazy"
+            decoding="async"
           />
         )}
         <div className="absolute left-2.5 top-2.5">
           <span
             className={[
               "rounded-full px-2.5 py-1 text-[0.68rem] font-bold",
-              isPre ? "bg-accent-pale text-accent-deep" : "bg-leaf-pale text-leaf",
+              isPre ? "bg-accent-50 text-brand-700" : "bg-brand-100 text-brand-700",
             ].join(" ")}
           >
             {isPre ? "Preorder" : "In stock"}
@@ -41,15 +44,15 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
       </div>
       <div className="flex flex-1 flex-col p-4">
-        <div className="mb-1.5 text-[0.7rem] font-bold uppercase tracking-[0.06em] text-brand">
+        <div className="mb-1.5 text-[0.7rem] font-bold uppercase tracking-[0.06em] text-brand-700">
           {product.crop_type} · {product.region}
         </div>
         <h3 className="mb-1 leading-tight">{product.name}</h3>
-        <div className="mb-3 text-[0.78rem] text-muted">{product.fbo_source}</div>
+        <div className="mb-3 text-[0.78rem] text-ink-muted">{product.fbo_source}</div>
         <div className="mt-auto flex items-center justify-between">
-          <div className="font-display text-[1.15rem] font-extrabold tabular text-brand price">
+          <div className="font-display text-[1.15rem] font-extrabold tabular text-brand-700 price">
             GH₵{Number(product.price_per_unit).toFixed(2)}
-            <span className="font-body text-[0.7rem] font-medium text-muted"> / {product.unit}</span>
+            <span className="font-body text-[0.7rem] font-medium text-ink-muted"> / {product.unit}</span>
           </div>
           <span className="btn btn-sm btn-primary">{isPre ? "Preorder" : "Order"}</span>
         </div>
@@ -57,3 +60,5 @@ export default function ProductCard({ product }: { product: Product }) {
     </Link>
   );
 }
+
+export default memo(ProductCard);

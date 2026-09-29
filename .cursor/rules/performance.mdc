@@ -1,0 +1,20 @@
+---
+description: Keep the frontend small by using native APIs, lazy-loading, and narrow imports
+alwaysApply: true
+---
+
+# Frontend performance
+
+- Prefer a native browser API when it does the same job as a library (`fetch`, `AbortSignal.timeout`, `IntersectionObserver`, `document.createElement("script")`).
+- Lazy-load every image below the first screen: `loading="lazy"` and `decoding="async"`. Do not lazy-load the navbar logo or a hero image.
+- Load non-critical UI after the page (`next/dynamic` with `ssr: false` for the chatbot and page-view tracker). Do not put those in the first JavaScript chunk.
+- Import only the function you use. Never import a whole library for one helper.
+- Before adding a dependency or a large asset, say so in the reply and state whether the first-load bundle gets bigger. Prefer no new dependency.
+
+```tsx
+// Below the fold
+<img src={src} alt={name} loading="lazy" decoding="async" />
+
+// Non-critical widget
+const Chatbot = dynamic(() => import("@/components/Chatbot"), { ssr: false });
+```

@@ -2,7 +2,6 @@
 
 import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
-import Script from "next/script";
 import { useSearchParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -10,6 +9,7 @@ import Icon from "@/components/Icon";
 import { useToast } from "@/components/Toast";
 import { fetchProduct, createOrder } from "@/lib/api";
 import { config } from "@/lib/config";
+import { saveTrackedOrder } from "@/lib/tracked-orders";
 import { REGIONS, deliveryFeeFor } from "@/lib/data";
 import type { Product } from "@/lib/types";
 
@@ -37,6 +37,25 @@ const DEMO_PRODUCT = (id: string, preorder: boolean): Product => ({
   status: "available",
   image_url: "",
 });
+
+function loadPaystack() {
+  if (typeof window === "undefined" || window.PaystackPop) return Promise.resolve();
+  return new Promise<void>((resolve, reject) => {
+    const existing = document.querySelector<HTMLScriptElement>("script[data-paystack]");
+    if (existing) {
+      existing.addEventListener("load", () => resolve(), { once: true });
+      existing.addEventListener("error", () => reject(new Error("Paystack failed to load")), { once: true });
+      return;
+    }
+    const script = document.createElement("script");
+    script.src = "https://js.paystack.co/v1/inline.js";
+    script.async = true;
+    script.dataset.paystack = "true";
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error("Paystack failed to load"));
+    document.body.appendChild(script);
+  });
+}
 
 function fmtDate(d?: string | null) {
   if (!d) return "a future date";
@@ -78,18 +97,18 @@ function CheckoutInner() {
   }, [id, orderType]);
 
   if (status === "loading") {
-    return <div className="flex min-h-[60vh] items-center justify-center text-muted">Loading product…</div>;
+    return <div className="flex min-h-[60vh] items-center justify-center text-ink-muted">Loading product…</div>;
   }
 
   if (status === "error" || !product) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center px-6">
-        <div className="w-full max-w-md rounded-2xl border border-line bg-white p-9 text-center">
-          <div className="mb-3 flex justify-center text-[var(--ab-gold,#D9A825)]">
+        <div className="w-full max-w-md rounded-2xl border border-brand-100 bg-white p-9 text-center">
+          <div className="mb-3 flex justify-center text-red-600">
             <Icon name="alert-triangle" size="2xl" />
           </div>
           <h2 className="mb-2 font-display text-[1.4rem] font-extrabold">Product not found</h2>
-          <p className="mb-5 text-muted">
+          <p className="mb-5 text-ink-muted">
             This product may no longer be available. Browse our marketplace for other options.
           </p>
           <Link href="/shop" className="btn btn-primary">
@@ -149,18 +168,39 @@ function CheckoutInner() {
     } catch {
       /* demo mode — ignore */
     }
+    saveTrackedOrder({
+      id: ref,
+      order_ref: ref,
+      order_status: "pending",
+      payment_status: order.payment_status,
+      buyer_name: order.buyer_name,
+      buyer_phone: order.buyer_phone,
+      product_name: order.product_name,
+      product_unit: order.product_unit,
+      quantity: order.quantity,
+      total_price: order.total_price,
+      delivery_fee: order.delivery_fee,
+      delivery_address: order.delivery_address,
+      delivery_region: order.delivery_region,
+      order_type: order.order_type,
+      created_at: new Date().toISOString(),
+      notes: order.notes,
+    });
+    setPaying(false);
     setOrderRef(ref);
     setStatus("success");
   }
 
-  function startPayment() {
+  async function startPayment() {
     if (!validate()) return;
     const ref = "AGB-" + new Date().getFullYear() + "-" + String(Math.floor(Math.random() * 9000) + 1000);
     const email = form.email.trim() || `${form.phone.replace(/\s/g, "")}@agrobridge.gh`;
     setPaying(true);
 
-    if (window.PaystackPop && !config.paystackKey.includes("YOUR_")) {
+    if (!config.paystackKey.includes("YOUR_")) {
       try {
+        await loadPaystack();
+        if (!window.PaystackPop) throw new Error("Paystack missing");
         const handler = window.PaystackPop.setup({
           key: config.paystackKey,
           email,
@@ -187,21 +227,21 @@ function CheckoutInner() {
   if (status === "success") {
     return (
       <div className="flex min-h-[70vh] items-center justify-center px-6 py-16">
-        <div className="w-full max-w-md rounded-2xl border border-line bg-white p-9 text-center shadow-card">
-          <div className="mx-auto mb-4 flex h-[76px] w-[76px] items-center justify-center rounded-full bg-leaf-pale text-leaf">
+        <div className="w-full max-w-md rounded-2xl border border-brand-100 bg-white p-9 text-center shadow-card">
+          <div className="mx-auto mb-4 flex h-[76px] w-[76px] items-center justify-center rounded-full bg-brand-100 text-brand-700">
             <Icon name="check" size="2xl" />
           </div>
           <h2 className="mb-2 font-display text-[1.6rem] font-extrabold">Order placed</h2>
-          <p className="mb-4 text-muted">
+          <p className="mb-4 text-ink-muted">
             Thank you for your order. An Agrobridge agent will contact you to confirm delivery for the Eastern Region pilot.
           </p>
-          <div className="mb-4 rounded-xl border border-line bg-surface px-5 py-4">
-            <div className="text-[0.72rem] font-bold uppercase tracking-[0.06em] text-muted">
+          <div className="mb-4 rounded-xl border border-brand-100 bg-surface px-5 py-4">
+            <div className="text-[0.72rem] font-bold uppercase tracking-[0.06em] text-ink-muted">
               Your order reference
             </div>
-            <div className="font-display text-[1.3rem] font-extrabold text-brand">{orderRef}</div>
+            <div className="font-display text-[1.3rem] font-extrabold text-brand-700">{orderRef}</div>
           </div>
-          <p className="mb-5 text-[0.8rem] text-muted">Save this reference to track your order.</p>
+          <p className="mb-5 text-[0.8rem] text-ink-muted">Save this reference to track your order.</p>
           <div className="flex flex-col justify-center gap-3 sm:flex-row">
             <Link href={`/order-status?ref=${orderRef}`} className="btn btn-primary">
               Track my order
@@ -218,40 +258,43 @@ function CheckoutInner() {
 
   return (
     <div className="mx-auto max-w-4xl px-[5%] pb-16 pt-[calc(68px+24px)]">
-      <Link href="/shop" className="mb-4 inline-flex items-center gap-2 text-[0.84rem] font-semibold text-brand">
+      <Link href="/shop" className="mb-4 inline-flex items-center gap-2 text-[0.84rem] font-semibold text-brand-700">
         <Icon name="arrow-left" size="sm" />
         Back to shop
       </Link>
       <div className="grid items-start gap-6 lg:grid-cols-[1fr_1.3fr]">
         {/* Summary */}
-        <aside className="rounded-2xl border border-line bg-white p-5 lg:sticky lg:top-24">
+        <aside className="rounded-2xl border border-brand-100 bg-white p-5 lg:sticky lg:top-24">
           {product.image_url ? (
             /* eslint-disable-next-line @next/next/no-img-element */
             <img
               src={product.image_url}
               alt={product.name}
               className="mb-3.5 h-40 w-full rounded-xl object-cover"
+              width={800}
+              height={600}
+              decoding="async"
             />
           ) : (
-            <div className="mb-3.5 flex h-40 w-full items-center justify-center rounded-xl bg-brand-pale">
-              <span className="font-display text-lg font-bold text-brand">{product.crop_type}</span>
+            <div className="mb-3.5 flex h-40 w-full items-center justify-center rounded-xl bg-brand-100">
+              <span className="font-display text-lg font-bold text-brand-700">{product.crop_type}</span>
             </div>
           )}
-          <div className="text-[0.72rem] font-bold uppercase tracking-[0.07em] text-muted">
+          <div className="text-[0.72rem] font-bold uppercase tracking-[0.07em] text-ink-muted">
             {product.crop_type}
           </div>
           <h2 className="mb-1.5 font-display text-[1.15rem] font-bold leading-tight">{product.name}</h2>
-          <div className="mb-3.5 text-[0.8rem] text-muted">
+          <div className="mb-3.5 text-[0.8rem] text-ink-muted">
             {product.region}
             {product.fbo_source ? ` · ${product.fbo_source}` : ""}
           </div>
           {isPre && (
-            <div className="mb-3 rounded-lg border border-accent bg-accent-pale px-3 py-2.5 text-[0.8rem] leading-snug text-accent-deep">
+            <div className="mb-3 rounded-lg border border-accent-500 bg-accent-50 px-3 py-2.5 text-[0.8rem] leading-snug text-brand-700">
               This is a preorder. Available from {fmtDate(product.available_date)}. You pay a deposit
               now to reserve your stock.
             </div>
           )}
-          <div className="my-3.5 h-px bg-line" />
+          <div className="my-3.5 h-px bg-brand-100" />
           {[
             [`Price per ${product.unit}`, `GH₵${Number(product.price_per_unit).toFixed(2)}`],
             ["Quantity", `${qty} ${product.unit}${qty !== 1 ? "s" : ""}`],
@@ -259,30 +302,30 @@ function CheckoutInner() {
             ["Delivery fee", form.region ? `GH₵${delivery.toFixed(2)}` : "Select region"],
           ].map(([l, v]) => (
             <div key={l} className="mb-2 flex items-center justify-between text-[0.9375rem] font-medium">
-              <span className="text-muted">{l}</span>
+              <span className="text-ink-muted">{l}</span>
               <span className="font-semibold tabular price">{v}</span>
             </div>
           ))}
-          <div className="mt-1.5 flex items-center justify-between border-t-2 border-line py-3">
+          <div className="mt-1.5 flex items-center justify-between border-t-2 border-brand-100 py-3">
             <span className="text-[0.95rem] font-bold">Total</span>
-            <span className="font-display text-[1.5rem] font-extrabold tabular price text-brand">
+            <span className="font-display text-[1.5rem] font-extrabold tabular price text-brand-700">
               GH₵{total.toFixed(2)}
             </span>
           </div>
         </aside>
 
         {/* Form */}
-        <div className="rounded-2xl border border-line bg-white p-6">
+        <div className="rounded-2xl border border-brand-100 bg-white p-6">
           <h2 className="mb-1 font-display text-[1.2rem] font-bold">
             {isPre ? "Place your preorder" : "Complete your order"}
           </h2>
-          <p className="mb-5 text-[0.84rem] text-muted">
+          <p className="mb-5 text-[0.84rem] text-ink-muted">
             Enter your details below. Your payment is held securely until you receive your produce.
           </p>
 
           <div className="mb-3.5">
             <label className="field-label">Quantity ({product.unit}s) *</label>
-            <div className="flex max-w-[180px] overflow-hidden rounded-[10px] border-[1.5px] border-line-strong">
+            <div className="flex max-w-[180px] overflow-hidden rounded-[10px] border-[1.5px] border-brand-300">
               <button onClick={() => changeQty(-1)} className="h-11 w-11 bg-surface text-xl font-bold">
                 −
               </button>
@@ -298,24 +341,24 @@ function CheckoutInner() {
                 +
               </button>
             </div>
-            <div className="mt-1 text-[0.74rem] text-muted">
+            <div className="mt-1 text-[0.74rem] text-ink-muted">
               Minimum order: {min} {product.unit}
               {min > 1 ? "s" : ""}. Available: {remaining} {product.unit}
               {remaining !== 1 ? "s" : ""}.
             </div>
-            {errors.qty && <p className="mt-1 text-[0.74rem] text-[#c0392b]">{errors.qty}</p>}
+            {errors.qty && <p className="mt-1 text-[0.74rem] text-red-600">{errors.qty}</p>}
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
               <label className="field-label">Your full name *</label>
               <input className="field" value={form.name} onChange={(e) => setField("name", e.target.value)} placeholder="e.g. Kofi Mensah" />
-              {errors.name && <p className="mt-1 text-[0.74rem] text-[#c0392b]">{errors.name}</p>}
+              {errors.name && <p className="mt-1 text-[0.74rem] text-red-600">{errors.name}</p>}
             </div>
             <div>
               <label className="field-label">Phone number *</label>
               <input className="field" value={form.phone} onChange={(e) => setField("phone", e.target.value)} placeholder="024 123 4567" />
-              {errors.phone && <p className="mt-1 text-[0.74rem] text-[#c0392b]">{errors.phone}</p>}
+              {errors.phone && <p className="mt-1 text-[0.74rem] text-red-600">{errors.phone}</p>}
             </div>
           </div>
 
@@ -332,13 +375,13 @@ function CheckoutInner() {
                 <option key={r}>{r}</option>
               ))}
             </select>
-            {errors.region && <p className="mt-1 text-[0.74rem] text-[#c0392b]">{errors.region}</p>}
+            {errors.region && <p className="mt-1 text-[0.74rem] text-red-600">{errors.region}</p>}
           </div>
 
           <div className="mt-3">
             <label className="field-label">Delivery address *</label>
             <input className="field" value={form.address} onChange={(e) => setField("address", e.target.value)} placeholder="e.g. Near Koforidua market" />
-            {errors.address && <p className="mt-1 text-[0.74rem] text-[#c0392b]">{errors.address}</p>}
+            {errors.address && <p className="mt-1 text-[0.74rem] text-red-600">{errors.address}</p>}
           </div>
 
           <div className="mt-3">
@@ -349,7 +392,7 @@ function CheckoutInner() {
           <button onClick={startPayment} disabled={paying} className="btn btn-primary btn-block mt-4 disabled:opacity-60">
             {paying ? <span className="spinner" /> : `Pay GH₵ ${total.toFixed(2)} securely`}
           </button>
-          <p className="mt-2.5 text-center text-[0.76rem] leading-relaxed text-muted">
+          <p className="mt-2.5 text-center text-[0.76rem] leading-relaxed text-ink-muted">
             Payment is processed by Paystack and held until your produce is delivered. To pay via
             MoMo, call <strong>{config.supportPhone}</strong>.
           </p>
@@ -363,10 +406,9 @@ function CheckoutInner() {
 export default function CheckoutPage() {
   return (
     <>
-      <Script src="https://js.paystack.co/v1/inline.js" strategy="afterInteractive" />
       <Navbar variant="solid" />
-      <main className="min-h-screen bg-[#f0f4f1]">
-        <Suspense fallback={<div className="pt-[120px] text-center text-muted">Loading…</div>}>
+      <main className="min-h-screen bg-brand-50">
+        <Suspense fallback={<div className="pt-[120px] text-center text-ink-muted">Loading…</div>}>
           <CheckoutInner />
         </Suspense>
       </main>
